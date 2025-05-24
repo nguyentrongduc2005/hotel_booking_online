@@ -1,0 +1,22 @@
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.sidebar {
+    transition: transform 0.3s ease-in-out;
+}
+
+.sidebar-hidden {
+    transform: translateX(-100%);
+}
+
+.nav-links {
+    transition: all 0.3s ease-in-out;
+}
+
+@media (max-width: 768px) {
+    .nav-links-hidden {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
