@@ -7,7 +7,7 @@
     <title>Web Layout Đẹp</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="http://localhost:8888/Hotel_booking/public/assets/css/style.css">
+    <link rel="stylesheet" href="http://localhost/Bookinghotel/hotel_booking_online/public/assets/css/style.css">
     <!-- <style>
         body {
             font-family: 'Inter', sans-serif;
