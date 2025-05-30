@@ -10,31 +10,34 @@ use app\core\Registry;
 class Router
 {
 
-    private static $routes = [];
+    public static $routes = [];
     function __contrust()
     {
 
         // Initialize the router
     }
 
-    private static function addRoute($method, $path, $callback)
+    private static function addRoute($method, $path, $callback, $middleware = null)
     {
-        self::$routes[$method][$path] = $callback;
+        if ($callback == null) {
+            throw new AppException("Callback cannot be null", 500);
+        }
+        self::$routes[$method][$path] = $middleware ? [$callback, $middleware] : [$callback, null];
     }
 
-    static function get($path, $callback)
+    static function get($path, $callback, $middleware = null)
     {
-        self::addRoute('GET', $path, $callback);
+        self::addRoute('GET', $path, $callback, $middleware);
     }
 
-    static function post($path, $callback)
+    static function post($path, $callback, $middleware = null)
     {
-        self::addRoute('POST', $path, $callback);
+        self::addRoute('POST', $path, $callback, $middleware);
     }
 
-    static function any($path, $callback)
+    static function any($path, $callback, $middleware = null)
     {
-        self::addRoute('ANY', $path, $callback);
+        self::addRoute('ANY', $path, $callback, $middleware);
     }
 
     function callAction($callback, $request, $response)
@@ -43,6 +46,23 @@ class Router
             return call_user_func_array($callback, [$request, $response]);
         } elseif (is_string($callback)) {
             $this->compieRoute($callback, $request, $response);
+        }
+    }
+
+    private function handlerMiddleware($middleware, $request, $response)
+    {
+        [$middlewareName, $method] = explode('@', $middleware);
+        $middleware = "app\\middlewares\\" . $middlewareName;
+
+        if (class_exists($middleware)) {
+            $object = new $middleware;
+            if (method_exists($middleware, $method)) {
+                return call_user_func_array([$object, $method], [$request, $response]);
+            } else {
+                throw new AppException("$method not found", 500);
+            }
+        } else {
+            throw new AppException("$middleware not found", 500);
         }
     }
 
@@ -78,9 +98,10 @@ class Router
         $pathSegments = explode('/', trim($path, '/'));
 
         if (isset(self::$routes[$method])) {
-            $match = true;
-            foreach (self::$routes[$method] as $route => $callback) {
-                $route = '/' . trim($route, '/');
+
+            foreach (self::$routes[$method] as $route => [$callback, $middleware]) {
+                $match = true;
+
                 $routeSegments = explode('/', trim($route, '/'));
 
                 if (count($pathSegments) !== count($routeSegments)) {
@@ -107,23 +128,33 @@ class Router
                         $match = true;
                     }
                 }
-                if ($match) {
 
+                if ($match) {
+                    if (isset($middleware)) {
+                        if (!is_array($middleware)) {
+                            if (!$this->handlerMiddleware($middleware, $request, $response)) {
+                                throw new AppException("Middleware $middleware faild", 500);
+                            }
+                        } else {
+                            foreach ($middleware as $mid) {
+                                if (!$this->handlerMiddleware($mid, $request, $response)) {
+                                    throw new AppException("Middleware $mid faild", 500);
+                                }
+                            }
+                        }
+                    }
                     $request->setParams($params);
                     // Gán params vào Request
                     return  $this->callAction($callback, $request, $response);
-                } else {
-
-                    return throw new AppException("Not Found", 404);
                 }
             }
+
             if (!$match) {
 
                 return throw new AppException("Not Found", 404);
             }
         }
     }
-
 
 
 

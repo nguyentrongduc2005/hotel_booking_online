@@ -16,6 +16,7 @@ class App
 
         new Autoload($config);
         // Initialize the application
+
         $this->router = new Router();
         Registry::getInstance()->config = $config;
     }

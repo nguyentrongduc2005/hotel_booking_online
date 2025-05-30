@@ -12,7 +12,10 @@ class NewsController extends Controller
         parent::__construct();
     }
 
-    function show($req, $res) {}
+    function show($req, $res)
+    {
+        echo 'news show is running';
+    }
 
     function index($req, $res)
     {
