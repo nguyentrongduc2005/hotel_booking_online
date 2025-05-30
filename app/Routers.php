@@ -11,11 +11,14 @@ Router::get('/home/news', function () {
     echo 'home news is running';
 }, []);
 
-Router::get('/about/{id}', 'HomeController@show');
-Router::get(
-    '/about',
-    'HomeController@show'
-);
+Router::get('/about/{id}', 'HomeController@show', [
+    'AuthenMiddleware@show',
+    'AuthenMiddleware@show2'
+]);
+Router::get('/about', 'HomeController@show', [
+    'AuthenMiddleware@show',
+    'AuthenMiddleware@show2'
+]);
 
 Router::post('/user', 'NewsController@show', [
     'AuthenMiddleware@show',
