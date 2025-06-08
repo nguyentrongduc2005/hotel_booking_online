@@ -14,7 +14,7 @@ class NewsController extends Controller
 
     function show($req, $res)
     {
-        echo 'news show is running';
+        $this->render('show');
     }
 
     function index($req, $res)
