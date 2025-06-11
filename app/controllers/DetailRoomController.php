@@ -3,9 +3,9 @@
 namespace app\controllers;
 
 use app\core\Controller;
+use app\models\DetailRoomModel;
 
-
-class NewsController extends Controller
+class DetailRoomController extends Controller
 {
     function __construct()
     {

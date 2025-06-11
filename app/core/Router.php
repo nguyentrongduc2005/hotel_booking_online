@@ -151,7 +151,7 @@ class Router
 
             if (!$match) {
 
-                return throw new AppException("Not Found", 404);
+                throw new AppException("Not Found", 404);
             }
         }
     }
