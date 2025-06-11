@@ -3,12 +3,12 @@
 namespace app\controllers;
 
 use app\core\Controller;
-use app\models\Room;
+
 
 
 class HomeController extends Controller
 {
-    
+
     function __construct()
     {
         parent::__construct();
@@ -18,5 +18,4 @@ class HomeController extends Controller
     {
         $this->render('index');
     }
-    
 }

@@ -5,7 +5,7 @@ namespace app\core;
 use PDO;
 use PDOException;
 
-class Database
+class db
 {
     private static ?PDO $connection = null;
 

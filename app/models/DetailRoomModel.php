@@ -1,19 +1,21 @@
 <?php
+
 namespace app\models;
+
+use app\core\db;
 use PDO;
 
 
 
-class Room
+class DetailRoomModel
 {
-    /** @var \PDO */
+
     private $db;
 
     public function __construct()
     {
-        
-        require_once __DIR__ . '/../core/db.php';
-        $this->db = connectDB();
+
+        $this->db = db::connect();
     }
 
     public function getAllRooms()
@@ -21,9 +23,8 @@ class Room
         $sql = "SELECT * FROM room";
         $stmt = $this->db->query($sql);
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
+
         return $data ?: [];
-       
     }
 
     public function getRoomById($id)

@@ -8,26 +8,7 @@ Router::get('/', 'HomeController@show', [
     'AuthenMiddleware@show2'
 ]);
 
-Router::get('/news/{id}', 'NewsController@show', [
-    'AuthenMiddleware@show',
-    'AuthenMiddleware@show2'
-]);
-
-Router::get('/home/news', function () {
-    echo 'home news is running';
-}, []);
-
-Router::get('/about/{id}', 'HomeController@show', [
-    'AuthenMiddleware@show',
-    'AuthenMiddleware@show2'
-]);
-
-Router::get('/about', 'HomeController@show', [
-    'AuthenMiddleware@show',
-    'AuthenMiddleware@show2'
-]);
-
-Router::post('/user', 'NewsController@show', [
+Router::get('/detailroom/{id}', 'DetailRoomController@show', [
     'AuthenMiddleware@show',
     'AuthenMiddleware@show2'
 ]);

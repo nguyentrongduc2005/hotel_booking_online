@@ -5,5 +5,5 @@ return [
     "rootDir" => dirname(__DIR__),
     "viewPath" => dirname(__DIR__) . '/app/views',
     "layoutPath" => 'layouts/main',
-    "pathAssets" => "http://localhost:80/hotel_booking_online\public",
+    "pathAssets" => "http://localhost:8888/hotel_booking_online/public/assets/",
 ];
