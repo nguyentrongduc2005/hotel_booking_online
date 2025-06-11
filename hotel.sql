@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 11, 2025 at 05:27 PM
+-- Generation Time: Jun 11, 2025 at 07:11 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -156,56 +156,56 @@ CREATE TABLE `image_room` (
 --
 
 INSERT INTO `image_room` (`id_image`, `path`, `id_room`) VALUES
-(1, '/img/a(1).jpg', 1),
-(2, '/img/a(2).jpg', 1),
-(3, '/img/a(3).jpg', 1),
-(4, '/img/a(4).jpg', 1),
-(5, '/img/a(5).jpg', 1),
-(6, '/img/a(6).jpg', 1),
-(7, '/img/a(7).jpg', 1),
-(8, '/img/a(8).jpg', 1),
-(9, '/img/a(9).jpg', 1),
-(10, '/img/a(10).jpg', 1),
-(11, '/img/b(1).jpg', 2),
-(12, '/img/b(2).jpg', 2),
-(13, '/img/b(3).jpg', 2),
-(14, '/img/b(4).jpg', 2),
-(15, '/img/b(5).jpg', 2),
-(16, '/img/b(6).jpg', 2),
-(17, '/img/b(7).jpg', 2),
-(18, '/img/c(1).jpg', 3),
-(19, '/img/c(2).jpg', 3),
-(20, '/img/c(3).jpg', 3),
-(21, '/img/c(4).jpg', 3),
-(22, '/img/c(5).jpg', 3),
-(23, '/img/c(6).jpg', 3),
-(24, '/img/c(7).jpg', 3),
-(25, '/img/c(8).jpg', 3),
-(26, '/img/c(9).jpg', 3),
-(27, '/img/d(1).jpg', 4),
-(28, '/img/d(2).jpg', 4),
-(29, '/img/d(3).jpg', 4),
-(30, '/img/d(4).jpg', 4),
-(31, '/img/d(5).jpg', 4),
-(32, '/img/d(6).jpg', 4),
-(33, '/img/d(7).jpg', 4),
-(34, '/img/d(8).jpg', 4),
-(35, '/img/e(1).jpg', 5),
-(36, '/img/e(2).jpg', 5),
-(37, '/img/e(3).jpg', 5),
-(38, '/img/e(4).jpg', 5),
-(39, '/img/e(5).jpg', 5),
-(40, '/img/e(6).jpg', 5),
-(41, '/img/e(7).jpg', 5),
-(42, '/img/e(8).jpg', 5),
-(43, '/img/e(9).jpg', 5),
-(44, '/img/e(10).jpg', 5),
-(45, '/img/e(11).jpg', 5),
-(46, '/img/f(1).jpg', 6),
-(47, '/img/f(2).jpg', 6),
-(48, '/img/f(3).jpg', 6),
-(49, '/img/f(4).jpg', 6),
-(50, '/img/f(5).jpg', 6),
+(1, '/img/room/a(1).jpg', 1),
+(2, '/img/room/a(2).jpg', 1),
+(3, '/img/room/a(3).jpg', 1),
+(4, '/img/room/a(4).jpg', 1),
+(5, '/img/room/a(5).jpg', 1),
+(6, '/img/room/a(6).jpg', 1),
+(7, '/img/room/a(7).jpg', 1),
+(8, '/img/room/a(8).jpg', 1),
+(9, '/img/room/a(9).jpg', 1),
+(10, '/img/room/a(10).jpg', 1),
+(11, '/img/room/b(1).jpg', 2),
+(12, '/img/room/b(2).jpg', 2),
+(13, '/img/room/b(3).jpg', 2),
+(14, '/img/room/b(4).jpg', 2),
+(15, '/img/room/b(5).jpg', 2),
+(16, '/img/room/b(6).jpg', 2),
+(17, '/img/room/b(7).jpg', 2),
+(18, '/img/room/c(1).jpg', 3),
+(19, '/img/room/c(2).jpg', 3),
+(20, '/img/room/c(3).jpg', 3),
+(21, '/img/room/c(4).jpg', 3),
+(22, '/img/room/c(5).jpg', 3),
+(23, '/img/room/c(6).jpg', 3),
+(24, '/img/room/c(7).jpg', 3),
+(25, '/img/room/c(8).jpg', 3),
+(26, '/img/room/c(9).jpg', 3),
+(27, '/img/room/d(1).jpg', 4),
+(28, '/img/room/d(2).jpg', 4),
+(29, '/img/room/d(3).jpg', 4),
+(30, '/img/room/d(4).jpg', 4),
+(31, '/img/room/d(5).jpg', 4),
+(32, '/img/room/d(6).jpg', 4),
+(33, '/img/room/d(7).jpg', 4),
+(34, '/img/room/d(8).jpg', 4),
+(35, '/img/room/e(1).jpg', 5),
+(36, '/img/room/e(2).jpg', 5),
+(37, '/img/room/e(3).jpg', 5),
+(38, '/img/room/e(4).jpg', 5),
+(39, '/img/room/e(5).jpg', 5),
+(40, '/img/room/e(6).jpg', 5),
+(41, '/img/room/e(7).jpg', 5),
+(42, '/img/room/e(8).jpg', 5),
+(43, '/img/room/e(9).jpg', 5),
+(44, '/img/room/e(10).jpg', 5),
+(45, '/img/room/e(11).jpg', 5),
+(46, '/img/room/f(1).jpg', 6),
+(47, '/img/room/f(2).jpg', 6),
+(48, '/img/room/f(3).jpg', 6),
+(49, '/img/room/f(4).jpg', 6),
+(50, '/img/room/f(5).jpg', 6),
 (51, '/img/f(6).jpg', 6);
 
 -- --------------------------------------------------------
@@ -312,12 +312,12 @@ CREATE TABLE `services` (
 --
 
 INSERT INTO `services` (`id_service`, `name`, `description`, `created_at`, `Path_img`) VALUES
-(1, 'Spa Service', 'Relaxing spa treatments with professional massage therapy, facial and body care.', '2025-06-08 09:00:00', '/img/SpaService.jpg'),
-(2, 'Dining Service', 'Buffet restaurant offering a variety of Asian and European dishes, available 24/7.', '2025-06-08 09:00:00', '/img/DiningService.jpg'),
-(3, 'Room Service', 'In-room food and beverage delivery.', '2025-06-08 09:00:00', '/img/RoomService.jpg'),
-(4, 'Laundry Service', 'Fast and high-quality laundry service, available same day.', '2025-06-08 09:00:00', '/img/LaundryService.jpg'),
-(5, 'Airport Transfer', 'Convenient airport pick-up/drop-off service with private or shared vehicles.', '2025-06-08 09:00:00', '/img/AirportTransfer.jpg'),
-(6, 'Car Rental', 'Car rental service with various options for travel or business use.', '2025-06-08 09:00:00', '/img/CarRental.jpg');
+(1, 'Spa Service', 'Relaxing spa treatments with professional massage therapy, facial and body care.', '2025-06-08 09:00:00', '/img/service/SpaService.jpg'),
+(2, 'Dining Service', 'Buffet restaurant offering a variety of Asian and European dishes, available 24/7.', '2025-06-08 09:00:00', '/img/service/DiningService.jpg'),
+(3, 'Room Service', 'In-room food and beverage delivery.', '2025-06-08 09:00:00', '/img/service/RoomService.jpg'),
+(4, 'Laundry Service', 'Fast and high-quality laundry service, available same day.', '2025-06-08 09:00:00', '/img/service/LaundryService.jpg'),
+(5, 'Airport Transfer', 'Convenient airport pick-up/drop-off service with private or shared vehicles.', '2025-06-08 09:00:00', '/img/service/AirportTransfer.jpg'),
+(6, 'Car Rental', 'Car rental service with various options for travel or business use.', '2025-06-08 09:00:00', '/img/service/CarRental.jpg');
 
 -- --------------------------------------------------------
 
@@ -511,7 +511,7 @@ ALTER TABLE `historybooking`
 -- AUTO_INCREMENT for table `image_room`
 --
 ALTER TABLE `image_room`
-  MODIFY `id_image` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id_image` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `room`
