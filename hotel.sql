@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 11, 2025 at 07:11 PM
+-- Generation Time: Jun 12, 2025 at 09:12 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -226,20 +226,21 @@ CREATE TABLE `room` (
   `slug` varchar(255) NOT NULL,
   `area` int(11) DEFAULT NULL,
   `name` varchar(100) NOT NULL,
-  `id_room_type` int(11) DEFAULT NULL
+  `id_room_type` int(11) DEFAULT NULL,
+  `thumb` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `room`
 --
 
-INSERT INTO `room` (`id_room`, `capacity`, `amount_bed`, `price`, `floor_number`, `status`, `created_at`, `description`, `slug`, `area`, `name`, `id_room_type`) VALUES
-(1, 2, 1, 600000.00, 2, 'available', '2025-06-08 17:21:49', 'A minimalist, modern, and economical room. Fully equipped with Wi-Fi, cable TV, air conditioning, work desk, wardrobe, private bathroom with shower and toiletries. Glossy floor, neutral tones, double-layer curtains for comfort and hygiene.', 'standard-room', 22, 'Standard Room', 1),
-(2, 3, 1, 750000.00, 3, 'available', '2025-06-08 17:21:49', 'An upgrade from Standard with minibar, Smart TV, safe, large work desk, full-length mirror, daily housekeeping. Modern wooden interior, warm tones. Ideal for long business stays or leisure.', 'superior-room', 27, 'Superior Room', 2),
-(3, 3, 1, 1200000.00, 4, 'available', '2025-06-08 17:21:49', 'Luxurious space with high-end furniture: natural wood, velvet, bathtub, minibar, electronic safe, hairdryer, and quiet air conditioning. Good natural light and views. Suitable for business or leisure travelers.', 'deluxe-room', 32, 'Deluxe Room', 3),
-(4, 4, 2, 2500000.00, 5, 'available', '2025-06-08 17:21:49', 'A high-end mini-apartment style suite: separate living room, coffee machine, premium sofa, work desk. Natural wood interior, granite, blackout curtains. Large bathtub and luxurious robes. For families, special occasions, or VIPs.', 'suite-room', 50, 'Suite Room', 4),
-(5, 4, 2, 1800000.00, 3, 'available', '2025-06-08 17:21:49', 'Common living space, dining area, microwave, fridge—ideal for families. Large tub for children, full family amenities like Wi-Fi, cable TV. Child-friendly and safe design.', 'family-room', 42, 'Family Room', 5),
-(6, 1, 1, 650000.00, 1, 'available', '2025-06-08 17:21:49', 'A neat room for solo travelers or short business stays. Includes work desk, Wi-Fi, air conditioning, TV, private bathroom. Prioritizes privacy and space-saving convenience.', 'single-room', 17, 'Single Room', NULL);
+INSERT INTO `room` (`id_room`, `capacity`, `amount_bed`, `price`, `floor_number`, `status`, `created_at`, `description`, `slug`, `area`, `name`, `id_room_type`, `thumb`) VALUES
+(1, 2, 1, 600000.00, 2, 'available', '2025-06-08 17:21:49', 'A minimalist, modern, and economical room. Fully equipped with Wi-Fi, cable TV, air conditioning, work desk, wardrobe, private bathroom with shower and toiletries. Glossy floor, neutral tones, double-layer curtains for comfort and hygiene.', 'standard-room', 22, 'Standard Room', 1, '/img/room/a(1).jpg'),
+(2, 3, 1, 750000.00, 3, 'available', '2025-06-08 17:21:49', 'An upgrade from Standard with minibar, Smart TV, safe, large work desk, full-length mirror, daily housekeeping. Modern wooden interior, warm tones. Ideal for long business stays or leisure.', 'superior-room', 27, 'Superior Room', 2, '/img/room/b(1).jpg'),
+(3, 3, 1, 1200000.00, 4, 'available', '2025-06-08 17:21:49', 'Luxurious space with high-end furniture: natural wood, velvet, bathtub, minibar, electronic safe, hairdryer, and quiet air conditioning. Good natural light and views. Suitable for business or leisure travelers.', 'deluxe-room', 32, 'Deluxe Room', 3, '/img/room/c(1).jpg'),
+(4, 4, 2, 2500000.00, 5, 'available', '2025-06-08 17:21:49', 'A high-end mini-apartment style suite: separate living room, coffee machine, premium sofa, work desk. Natural wood interior, granite, blackout curtains. Large bathtub and luxurious robes. For families, special occasions, or VIPs.', 'suite-room', 50, 'Suite Room', 4, '/img/room/d(1).jpg'),
+(5, 4, 2, 1800000.00, 3, 'available', '2025-06-08 17:21:49', 'Common living space, dining area, microwave, fridge—ideal for families. Large tub for children, full family amenities like Wi-Fi, cable TV. Child-friendly and safe design.', 'family-room', 42, 'Family Room', 5, '/img/room/e(1).jpg'),
+(6, 1, 1, 650000.00, 1, 'available', '2025-06-08 17:21:49', 'A neat room for solo travelers or short business stays. Includes work desk, Wi-Fi, air conditioning, TV, private bathroom. Prioritizes privacy and space-saving convenience.', 'single-room', 17, 'Single Room', NULL, '/img/room/f(1).jpg');
 
 -- --------------------------------------------------------
 
