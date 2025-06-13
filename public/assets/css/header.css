@@ -1,0 +1,129 @@
+/* Header/navbar trong suốt */
+.header {
+    background: rgba(0, 0, 0, 0.1); /* nền đen trong suốt */
+    backdrop-filter: blur(8px);      /* hiệu ứng mờ */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: none;
+}
+
+.navbar {
+    padding: 1.2rem 0;
+     font-family: 'inter';
+    font-weight: 300;
+  
+
+}
+
+.navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.navbar-brand img {
+    height: 40px;
+    padding-left: 40px;
+}
+
+.navbar-nav {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    justify-content: space-between;
+}
+
+.nav-item {
+    margin: 0 1.5rem;
+     font-size: 24px;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 300;
+    font-size: 1.3rem;
+    position: relative;
+    transition: color 0.3s;
+}
+
+
+.nav-link.active::after,
+.nav-link:hover::after {
+    content: '';
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+    height: auto;
+    border-bottom: 2px solid #ffffff;
+}
+
+.navbar-auth {
+    display: flex;
+    justify-items: center;
+}
+
+
+.user_icon{
+    width: 20px;
+    height: 20px;
+}
+.btn-login {
+    color: #fff;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid #fff;
+    width: 150px;
+    height: fit-content;
+    display: flex;
+    justify-content: space-around;
+    border-radius: 30px;
+    padding: 10px 5px 10px;
+    align-items: center;
+    border-radius: 31px;
+border: 1px solid rgba(51, 47, 30, 0.46);
+background: rgba(228, 228, 228, 0.35);
+}   
+
+.btn-login:hover {
+    background: rgba(124, 119, 119, 0.35);
+}
+
+.content_btn{
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding-right: 10px;
+}
+@media (max-width: 900px) {
+    .navbar-nav {
+        gap: 0.5rem;
+    }
+    .nav-item {
+        margin: 0 0.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .navbar-auth {
+        margin-top: 1rem;
+    }
+    .navbar-nav {
+        flex-direction: column;
+        width: 100%;
+    }
+    .nav-item {
+        margin: 0.5rem 0;
+    }
+} 
