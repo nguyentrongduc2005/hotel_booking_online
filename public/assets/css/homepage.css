@@ -1,0 +1,473 @@
+.welcome-container {
+
+  background-color: #0C0B0E;
+}
+.welcome-hotel{
+   display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 1100px;
+  margin: 0 auto;
+  gap: 100px;
+  font-family: 'inter';
+  justify-content: center;
+  min-height: 450px;
+  margin-top: 20%;
+  margin-bottom: 2%;
+}
+.welcome-text h1 {
+  font-size: 2.2rem;
+  line-height: 1.3;
+  margin: 0;
+  color: #ffffff;
+  font-weight: 500;
+  text-align: center;
+}
+
+.description {
+  max-width: 600px;
+  font-size: 1.15rem;
+  line-height: 1.6;
+color: #FFE6B7;
+
+text-align: center;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+.welcome-image img {
+  width: 250px;
+  height: auto;
+  border-radius: 50% / 25%; /* bo góc kiểu oval như ảnh mẫu */
+  object-fit: cover;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.4);
+}
+
+
+
+
+
+
+
+/* Our service */
+
+
+
+
+
+.services-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  
+}
+.service-box2,
+.service-box5 {
+  margin-top: 40px;
+}
+
+#our-services {
+  width: 1100px;
+  min-height: 100vh;
+  padding: 110px;
+  box-sizing: border-box;
+  color: white;
+  margin: 0 auto;
+}
+
+#our-services h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 32px;
+  font-family: 'inter';
+  font-weight: 500;
+}
+
+.service-box1{
+  width: 270px;
+  height: 240px;
+  display: flex;
+  align-items: flex-end;
+  background-size: contain;
+  border: 1px solid #fff;
+   background: 
+                linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 40%, rgba(255, 255, 255, 0) 100%),
+                url('../img/ourservice/gym.png') center/cover;
+}
+.service-box2{
+  width: 270px;
+  height: 240px;
+   border: 1px solid #fff;
+  display: flex;
+  align-items: flex-end;
+  background: 
+                linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, rgba(255, 255, 255, 0) 100%),
+                url('../img/ourservice/laundry.jpg') center/cover;
+  
+}
+.service-box3{
+  width: 270px;
+  height: 240px;
+   border: 1px solid #fff;
+  display: flex;
+  align-items: flex-end;
+   background: 
+                linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, rgba(255, 255, 255, 0) 100%),
+                url('../img/ourservice/pool.png') center/cover;
+}
+.service-box4{
+  width: 270px;
+  height: 240px;
+   border: 1px solid #fff;
+  display: flex;
+  align-items: flex-end;
+  background: 
+                linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, rgba(255, 255, 255, 0) 100%),
+                url('../img/ourservice/buffet.png') center/cover;
+  
+}
+.service-box5{
+  width: 270px;
+  height: 240px;
+   border: 1px solid #fff;
+  display: flex;
+  align-items: flex-end;
+   background: 
+                linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, rgba(255, 255, 255, 0) 100%),
+                url('../img/ourservice/wedding.png') center/cover;
+}
+.service-box6{
+  width: 270px;
+  height: 240px;
+   border: 1px solid #fff;
+  display: flex;
+  align-items: flex-end;
+   background: 
+                linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, rgba(255, 255, 255, 0) 100%),
+                url('../img/ourservice/spa.png') center/cover;
+}
+
+.service-text {
+ 
+  width: 100%;
+  font-family: 'inter';
+ text-align: start;
+ padding-left: 15%;
+ padding-bottom: 2%;
+}
+
+.service-text strong {
+  display: block;
+  font-size: 16px;
+  color: white;
+  text-align: start;
+  font-weight: 600;
+
+}
+
+.service-text span {
+  font-size: 16px;
+  color: #FFFFFF;
+  font-weight: 400;
+
+
+}
+#btn-explore{
+  
+  width: 100%;
+  text-align: center;
+  margin-top: 45px;
+}
+#btn-explore span{
+  background-color: #FFFFFF;
+    color: #161010;
+    font-family: "inter";
+    font-weight: 600;
+    padding: 7px;
+    border-radius: 14px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* <!-- Rooms Container --> */
+
+
+
+
+
+
+#rooms-section{
+  width:  85%;
+  margin: 0 auto;
+  color: #FFFFFF;
+  font-family: 'inter';
+  min-height: 75vh;
+}
+
+
+  .section-header{
+   width: 100%;
+   text-align: center;
+   height: fit-content;
+   font-weight: 700;
+ line-height: normal;
+}
+.section-title{
+  margin: 0;
+   font-weight: 700;
+ line-height: normal;
+ font-size: 32px;
+}
+.section-subtitle{
+  margin: 0;
+  color: #FFE6B7;
+  font-weight: 400;
+ font-size: 30px;
+
+
+}
+.rooms-container{
+    position: relative;
+    height: 480px;
+    display: flex;
+    justify-content: center;
+}
+.nav-arrow {
+  position: absolute;
+  top: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.6;
+  background: transparent;
+  border-radius: 50%;
+  width: 40px;
+  height: 70px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.nav-arrow:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.nav-arrow-left {
+  left: 6%;
+}
+
+.nav-arrow-right {
+  right: 7%;
+}
+
+.arrow-icon {
+  opacity: 1;
+  color: white;
+  font-size: 27px;
+  font-weight: bold;
+  line-height: 1;
+}
+.rooms-grid{
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  
+
+}
+.room-card{
+  background-color: #110d0d;
+  height: 350px;
+  width: 280px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+background: 
+                linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(255, 255, 255, 0) 100%),
+                url('../img/ourservice/Mock_list_card_home_page.png') center/cover;
+
+  display: flex;
+  align-items: flex-end;
+}
+
+
+.room-overlay{
+
+}
+.room-content{
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    padding: 20px;
+    padding-bottom: 20px;
+  cursor: pointer;
+
+}
+.btn-view-detail{
+  margin: 0;
+  background-color: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  border-radius: 10px;
+  width: 100px;
+}
+.room-title{
+  margin: 0;
+}
+.room-price{
+  margin: 0;
+  display: flex;
+  color: #EADE6E;
+  font-weight: 300;
+
+}
+.room-card-standard{
+  margin-bottom: 80px;
+}
+.room-card-family{
+
+}
+.room-card-deluxe{
+
+}
+.room-card-superior{
+  margin-bottom: 80px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*   */
+
+
+
+
+
+
+#testimonials-section{
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background: 
+   linear-gradient(to top, rgba(255, 255, 255, 0) 0%, rgba(0,0,0,0.7) 50%, rgba(255, 255, 255, 0) 100%),
+   url('../img/guestsay/bg.png') center/cover;
+
+}
+
+.guest-say{
+  height: 80vh;
+  width: 1100px;
+  margin: 0 auto;
+  font-family: 'inter';
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+.guest-say .title{
+  color: #fff;
+  font-size: 25px;
+}
+.comments-container{
+  display: flex;
+  flex-direction: row;
+  gap: 17px;
+  justify-content: space-around;
+
+}
+.comment-card{
+  color: #fff;
+  height: 450px;
+  background-color: #8a806d;
+  width: 30%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+background: 
+                linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 50%, rgba(255, 255, 255, 0) 100%),
+                url('../img/ourservice/bg-card.png') center/cover;
+  display: flex;
+  border-radius: 5px;
+
+}
+.comment-card-1{
+
+}
+.comment-content{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: flex-end; 
+  padding: 27px;
+}
+.comment-title{
+  margin: 0;
+  }
+.comment-text{
+  margin: 10px 0;
+  font-style: italic;
+  font-weight: 300;
+  color: #ffffffa2;
+}
+.comment-author{
+ display: flex;
+ flex-direction: column;
+}
+.author-name{
+  font-weight: 600;
+
+}
+.author-role{
+  font-weight: 400;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+  

@@ -1,59 +1,133 @@
+
+body {
+    padding: 0;
+    margin: 0;
+    background-color: #0C0B0E;
+}
+
 #khung {
-    width: 1200px;
+    background-image: url('/hotel_booking_online/public/assets/img/Background.png');
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    background-size: contain;
+    min-height: 100vh;
+    background-position: top center;
+}
+#main {
+    flex: 1;
+    min-height: 130vh;
+}
+
+#hero-section {
+    min-height: 95vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.hero-logo img {
+    width: 100px;
+    height: 70px;
+    filter: drop-shadow(0 2px 16px rgba(0,0,0,0.18));
+}
+
+.hero-title {
+     font-family: "Cormorant Garamond", serif;
+    font-size: 5rem;
+    color: #fff;
+    letter-spacing: 0.2rem;
+    font-weight: 100;
+    margin-bottom: 2.5rem;
+    text-shadow: 0 2px 16px rgba(0,0,0,0.18);
+
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background: rgba(255,255,255,0.12);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+    gap: 145px;
     margin: 0 auto;
+    width: 1100px;
+    backdrop-filter: blur(2px);
+    border: 1px solid #FFF;
 }
 
-#header {
-    background-color: aqua;
-    height: 100px;
+.search-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 145px;
+    border-left: 2px solid #f2c2c2;
+    padding-left:10px ;
+    cursor: pointer;
 }
-
-#left {
-    background-color: rgb(178, 224, 62);
-    width: 200px;
-    min-height: 300px;
-    float: left;
-    margin-top: 5px;
-
+.search-group:first-child {
+      border-left: 0px;
 }
-
-#right {
-    background-color: rgb(209, 62, 143);
-    min-height: 300px;
-    margin-top: 5px;
-    width: 200px;
-    float: right;
-}
-
-#center {
-    background-color: rgb(225, 219, 125);
-    min-height: 300px;
-    margin: 5px 205px 0px 205px;
-
+.search-group label {
+    color: #fff;
+    font-size: 1.05rem;
+    font-weight: 400;
+    margin-bottom: 0.2rem;
+    cursor: pointer;
+    height: 100%;
+    text-align:start;
 
 }
 
-#right2 {
-    background-color: rgb(79, 25, 229);
-    min-height: 300px;
-    margin-top: 5px;
-    width: 200px;
-    float: right;
-}
-
-#center2 {
-    background-color: rgb(164, 241, 188);
-    min-height: 300px;
-    margin: 5px 205px 0px 205px;
-
+.search-date {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
 
 }
 
+.search-btn {
+    border: 1px solid #FFF;
+    background: rgba(211, 198, 198, 0.25);
+    border: none;
+    padding: 0.75rem 2rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background 0.2s;
+    color: #FFF;
+    min-height: 80px;
+}
 
+.search-btn:hover {
+      background: rgba(244, 240, 240, 0.25);
+}
 
+.search-icon {
+    font-size: 1.2rem;
+}
 
-#foo {
-    background-color: rgb(232, 146, 53);
-    min-height: 100px;
-    clear: both;
+@media (max-width: 700px) {
+    .hero-title {
+        font-size: 2.2rem;
+    }
+    .search-bar {
+        flex-direction: column;
+        gap: 0.7rem;
+        padding: 1rem;
+    }
+    .search-group {
+        min-width: 100px;
+        width: 100%;
+    }
+    .hero-logo img {
+        width: 60px;
+        height: 60px;
+    }
 }
