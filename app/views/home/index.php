@@ -195,4 +195,37 @@
 
     </div>
   </div>
-</div>
+  <div id="ig-container">
+
+    <div id="ig-section">
+      <!-- DIV 1: TITLE CARD SECTION -->
+      <div class="title-card">
+        <h1 class="main-title">Stay Connected With Us</h1>
+
+        <div class="gallery-container">
+          <div class="gallery-item">
+
+          </div>
+
+          <div class="gallery-item instagram">
+
+          </div>
+
+          <div class="gallery-item">
+
+          </div>
+        </div>
+
+        <div class="view-gallery">View Gallery</div>
+      </div>
+
+      <!-- DIV 2: CONTENT & BOOK NOW SECTION -->
+      <div class="content-section">
+        <h2 class="content-title">Make your stay unforgettable</h2>
+        <p class="content-description">
+          Book your stay at Diamond Hotel – comfort, style, and service await.
+        </p>
+        <button class="book-now-btn">Book Now</button>
+      </div>
+    </div>
+  </div>

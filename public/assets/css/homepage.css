@@ -388,7 +388,13 @@ background:
   background-repeat: no-repeat;
   background-position: center;
   background: 
-   linear-gradient(to top, rgba(255, 255, 255, 0) 0%, rgba(0,0,0,0.7) 50%, rgba(255, 255, 255, 0) 100%),
+ linear-gradient(to top, 
+                    rgba(0, 0, 0, 0.8) 0%, 
+                    rgba(0, 0, 0, 0.2) 30%,
+                    rgba(255, 255, 255, 0) 50%, 
+                    rgba(0, 0, 0, 0.2) 70%,
+                    rgba(0, 0, 0, 0.8) 100%
+                ),
    url('../img/guestsay/bg.png') center/cover;
 
 }
@@ -470,9 +476,170 @@ background:
 
 
 
+/*  */
 
 
 
+
+
+
+
+
+ /* Main Container */
+
+ #ig-container{
+  background: 
+                linear-gradient(to bottom, 
+                    rgba(23, 21, 21, 0.568) 2%, 
+                    rgba(0, 0, 0, 0.5) 30%,
+                    rgba(40, 38, 38, 0.8) 50%, 
+                    rgba(0, 0, 0, 0.8) 70%,
+                    rgba(0, 0, 0, 0.9) 100%
+                );
+ }
+        #ig-section {
+            padding:  40px;
+            width: 1100px;
+            margin: 0 auto;
+            color: white;
+            font-family: 'inter';
+            padding-top: 0;
+          
+        }
+        
+        /* DIV 1: Title Card Section */
+        .title-card {
+            text-align: center;
+            margin-bottom: 50px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #ffffff;
+            font-weight: 500;
+        }
+        
+        .gallery-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            
+        }
+        
+        .gallery-item {
+            width: 350px;
+            height: 350px;
+            overflow: hidden;
+            position: relative;
+            background: #333;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            background-image: url('../img/ourservice/card-ig.png');
+            border: 1px solid #fff;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .gallery-item.instagram {
+          
+        }
+        
+        .instagram-icon {
+            width: 60px;
+            height: 60px;
+            border: 3px solid white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .view-gallery {
+            text-decoration: underline;
+            color: #ccc;
+            font-style: italic;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .view-gallery:hover {
+            color: #fff;
+        }
+        
+        /* DIV 2: Content & Book Now Section */
+        .content-section {
+            text-align: center;
+        }
+        
+        .content-title {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #ffffff;
+            margin: 3px;
+        }
+        
+        .content-description {
+            font-size: 1.1rem;
+            color: #cccccc;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            margin: 3px;
+
+        }
+        
+        .book-now-btn {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 18px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.7rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-transform: uppercase;
+            margin-top: 20px;
+
+        }
+        
+        .book-now-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            #ig-section {
+                padding: 40px 20px;
+            }
+            
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .content-title {
+                font-size: 1.8rem;
+            }
+            
+            .gallery-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .gallery-item {
+                width: 100%;
+                max-width: 350px;
+            }
 
 
   
