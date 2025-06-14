@@ -79,7 +79,7 @@
         </div>
       </div>
     </div>
-    <div id="btn-explore"><span>EXPLORE ALL</span></div>
+    <div id="btn-explore" class="btn-explore1"><span>EXPLORE ALL</span></div>
   </div>
   <div id="rooms-section">
     <!-- Section Header -->

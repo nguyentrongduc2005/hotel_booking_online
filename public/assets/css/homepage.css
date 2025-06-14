@@ -179,6 +179,10 @@ line-height: normal;
   text-align: center;
   margin-top: 45px;
 }
+#btn-explore,.btn-explore1{
+  margin-bottom: 40px;
+  margin-top: 10px;
+}
 #btn-explore span{
   background-color: #FFFFFF;
     color: #161010;
@@ -398,6 +402,7 @@ background:
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-top: 40px;
 
 }
 .guest-say .title{
