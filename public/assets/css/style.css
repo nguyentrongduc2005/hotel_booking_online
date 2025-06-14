@@ -16,10 +16,10 @@ body {
 }
 #main {
     flex: 1;
-
+    min-height: 130vh;
 }
 
-.hero-section {
+#hero-section {
     min-height: 95vh;
     display: flex;
     flex-direction: column;
