@@ -63,7 +63,7 @@
     width: 80%;
     margin: 0 auto;
     height: auto;
-    border-bottom: 2px solid #ffffff;
+    font-weight: 800;
 }
 
 .navbar-auth {

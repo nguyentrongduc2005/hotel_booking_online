@@ -43,36 +43,42 @@
     <h2>Our Services</h2>
     <div class="services-wrapper">
       <div class="service-box1">
-        <div class=" service-text">
+        <img src="<?= $this->configs->config['pathAssets'] ?>img/ourservice/gym.png" alt="Gym">
+        <div class="service-text">
           <strong>Gym</strong>
           <span>Fitness Center Access</span>
         </div>
       </div>
       <div class="service-box2">
+        <img src="<?= $this->configs->config['pathAssets'] ?>img/ourservice/laundry.jpg" alt="Laundry">
         <div class="service-text">
           <strong>Laundry</strong>
           <span>Daily Laundry Service</span>
         </div>
       </div>
       <div class="service-box3">
+        <img src="<?= $this->configs->config['pathAssets'] ?>img/ourservice/pool.png" alt="Pool">
         <div class="service-text">
           <strong>Pool</strong>
           <span>Rooftop Swimming Pool</span>
         </div>
       </div>
       <div class="service-box4">
+        <img src="<?= $this->configs->config['pathAssets'] ?>img/ourservice/buffet.png" alt="Buffet">
         <div class="service-text">
           <strong>Buffet</strong>
           <span>All-Day Dining</span>
         </div>
       </div>
       <div class="service-box5">
+        <img src="<?= $this->configs->config['pathAssets'] ?>img/ourservice/wedding.png" alt="Wedding">
         <div class="service-text">
           <strong>Wedding/Event</strong>
           <span>Private Events & Weddings</span>
         </div>
       </div>
       <div class="service-box6">
+        <img src="<?= $this->configs->config['pathAssets'] ?>img/ourservice/spa.png" alt="Spa">
         <div class="service-text">
           <strong>Spa</strong>
           <span>In-room Spa Treatments</span>
@@ -81,6 +87,7 @@
     </div>
     <div id="btn-explore" class="btn-explore1"><span>EXPLORE ALL</span></div>
   </div>
+
   <div id="rooms-section">
     <!-- Section Header -->
     <div class="section-header">
@@ -102,6 +109,8 @@
       <div class="rooms-grid">
         <!-- Room Card 1 - Standard Room -->
         <div class="room-card room-card-standard">
+          <img src="<?= $this->configs->config['pathAssets'] ?>img/ourservice/Mock_list_card_home_page.png"
+            alt="Standard Room">
           <div class="room-content">
             <button class="btn-view-detail">View Details</button>
             <h3 class="room-title">Standard Room</h3>
@@ -111,7 +120,8 @@
 
         <!-- Room Card 2 - Family Room -->
         <div class="room-card room-card-family">
-
+          <img src="<?= $this->configs->config['pathAssets'] ?>img/ourservice/Mock_list_card_home_page.png"
+            alt="Family Room">
           <div class="room-content">
             <button class="btn-view-detail">View Details</button>
             <h3 class="room-title">Family Room</h3>
@@ -121,7 +131,8 @@
 
         <!-- Room Card 3 - Deluxe Room -->
         <div class="room-card room-card-deluxe">
-
+          <img src="<?= $this->configs->config['pathAssets'] ?>img/ourservice/Mock_list_card_home_page.png"
+            alt="Deluxe Room">
           <div class="room-content">
             <button class="btn-view-detail">View Details</button>
             <h3 class="room-title">Deluxe Room</h3>
@@ -131,7 +142,8 @@
 
         <!-- Room Card 4 - Superior Room -->
         <div class="room-card room-card-superior">
-
+          <img src="<?= $this->configs->config['pathAssets'] ?>img/ourservice/Mock_list_card_home_page.png"
+            alt="Superior Room">
           <div class="room-content">
             <button class="btn-view-detail">View Details</button>
             <h3 class="room-title">Superior Room</h3>
@@ -145,6 +157,8 @@
   </div>
 
   <div id="testimonials-section">
+    <img class="testimonials-bg" src="<?= $this->configs->config['pathAssets'] ?>img/guestsay/bg.png"
+      alt="Testimonials Background">
     <div class="guest-say">
       <div class="title">
         <h2>What Our Guests Say</h2>
@@ -152,6 +166,8 @@
       <div class="comments-container">
         <!-- Comment Card 1 -->
         <div class="comment-card comment-card-1">
+          <img src="<?= $this->configs->config['pathAssets'] ?>img/ourservice/bg-card.png"
+            alt="Comment Card Background">
           <div class="comment-content">
             <h3 class="comment-title">A very good place!</h3>
             <p class="comment-text">Lorem ipsum dolor sit amet, nam quis nostrud exercitation ullamco laboris nisi ut
@@ -165,7 +181,8 @@
 
         <!-- Comment Card 2 -->
         <div class="comment-card comment-card-2">
-
+          <img src="<?= $this->configs->config['pathAssets'] ?>img/ourservice/bg-card.png"
+            alt="Comment Card Background">
           <div class="comment-content">
             <h3 class="comment-title">A very good place!</h3>
             <p class="comment-text">Lorem ipsum dolor sit amet, nam quis nostrud exercitation ullamco laboris nisi ut
@@ -177,10 +194,10 @@
           </div>
         </div>
 
-
         <!-- Comment Card 3 -->
         <div class="comment-card comment-card-3">
-
+          <img src="<?= $this->configs->config['pathAssets'] ?>img/ourservice/bg-card.png"
+            alt="Comment Card Background">
           <div class="comment-content">
             <h3 class="comment-title">A very good place!</h3>
             <p class="comment-text">Lorem ipsum dolor sit amet, nam quis nostrud exercitation ullamco laboris nisi ut
@@ -192,7 +209,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
   <div id="ig-container">
@@ -201,18 +217,16 @@
       <!-- DIV 1: TITLE CARD SECTION -->
       <div class="title-card">
         <h1 class="main-title">Stay Connected With Us</h1>
-
         <div class="gallery-container">
           <div class="gallery-item">
-
+            <img src="<?= $this->configs->config['pathAssets'] ?>img/ourservice/card-ig.png" alt="Gallery 1">
           </div>
-
           <div class="gallery-item instagram">
-
+            <img src="<?= $this->configs->config['pathAssets'] ?>img/ourservice/card-ig.png" alt="Gallery 2">
           </div>
-
           <div class="gallery-item">
 
+            <img src="<?= $this->configs->config['pathAssets'] ?>img/ourservice/card-ig.png" alt="Gallery 3">
           </div>
         </div>
 
