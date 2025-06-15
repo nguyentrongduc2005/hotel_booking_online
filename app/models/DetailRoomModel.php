@@ -10,28 +10,21 @@ use PDO;
 class DetailRoomModel
 {
 
-    private $db;
+
 
     public function __construct()
     {
 
-        $this->db = db::connect();
+        db::connect();
     }
 
-    public function getAllRooms()
-    {
-        $sql = "SELECT * FROM room";
-        $stmt = $this->db->query($sql);
-        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        return $data ?: [];
-    }
-
-    public function getRoomById($id)
+    public function getRoomBySlug($slug)
     {
-        $sql = "SELECT * FROM room WHERE id_room = :id";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute(['id' => $id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $sql = "SELECT * FROM room WHERE room.slug = :slug";
+        $data = db::getOne($sql, [
+            'slug' => $slug
+        ]);
+        return $data ? $data : [];
     }
 }

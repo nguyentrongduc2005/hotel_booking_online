@@ -7,7 +7,7 @@ use app\models\DetailRoomModel;
 
 class DetailRoomController extends Controller
 {
-    private DetailRoomModel $model;
+    private  $model;
 
     public function __construct()
     {
@@ -15,28 +15,13 @@ class DetailRoomController extends Controller
         $this->model = new DetailRoomModel();
     }
 
-    public function show($req, $res)
-    {
-
-        $id = $req->get('id'); 
-        $rooms = $this->model->getAllRooms();
-        $roomDetail = null;
-
-        if ($id && is_numeric($id)) {
-            $roomDetail = $this->model->getRoomById((int)$id);
-        }
-
-        return $res->view('show', [
-            'rooms' => $rooms,
-            'roomDetail' => $roomDetail
-        ]);
-
-        $this->render('index');
-
-    }
 
     public function index($req, $res)
     {
-        return $res->error('User does not exist')->send();
+        $slug = $req->params()['slug'];
+
+
+        $data =  $this->model->getRoomBySlug($slug);
+        $this->render('index', $data);
     }
 }

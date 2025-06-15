@@ -11,11 +11,8 @@ Router::get('/listroom', 'ListRoomController@show', [
     // 'AuthenMiddleware@show2'
 ]);
 
-Router::get('/detailroom/{id}', 'DetailRoomController@show', [
-    'AuthenMiddleware@show',
-    'AuthenMiddleware@show2'
-]);
-Router::get('/detailroom', 'DetailRoomController@show', [
+
+Router::get('/detailroom/{slug}', 'DetailRoomController@index', [
     // 'AuthenMiddleware@show',
     // 'AuthenMiddleware@show2'
 ]);

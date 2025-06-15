@@ -1,4 +1,5 @@
     <link rel="stylesheet" href="<?= $this->configs->config['pathAssets'] ?>css/detailRoom.css" />
+
     <main class="room-details">
         <div class="left-info">
             <!-- Thêm ảnh vô đây -->

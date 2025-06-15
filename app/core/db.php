@@ -50,7 +50,7 @@ class db
 
     public static function getOne($sql, $param = [])
     {
-        $sql = "$sql WHERE id = :id";
+        $sql = "$sql";
         $stmt = self::connect()->prepare($sql);
         $stmt->execute($param);
         return $stmt->fetch(PDO::FETCH_ASSOC);
