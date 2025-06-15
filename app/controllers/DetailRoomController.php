@@ -17,6 +17,7 @@ class DetailRoomController extends Controller
 
     public function show($req, $res)
     {
+
         $id = $req->get('id'); 
         $rooms = $this->model->getAllRooms();
         $roomDetail = null;
@@ -29,6 +30,9 @@ class DetailRoomController extends Controller
             'rooms' => $rooms,
             'roomDetail' => $roomDetail
         ]);
+
+        $this->render('index');
+
     }
 
     public function index($req, $res)
