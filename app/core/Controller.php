@@ -57,7 +57,7 @@ class Controller
         } else {
             $data = $data;
         }
-        $viewPath = $this->configs->config['viewPath'] . '/' . $folderView . '/' . $view . '.php';
+        $viewPath = $this->configs->config['viewpathComponent'] . '/' . $folderView . '/' . $view . '.php';
         if (file_exists($viewPath)) {
             ob_start();
             require($viewPath);
