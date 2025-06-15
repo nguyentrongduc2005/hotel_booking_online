@@ -1,4 +1,17 @@
 <link rel="stylesheet" href="<?= $this->configs->config['pathAssets'] ?>css/homepage.css?v=<?= time() ?>">
+
+<?php
+echo '<pre>';
+print_r($data);
+
+?>
+
+
+
+
+
+
+
 <div id="homepage-container">
   <div id="hero-section">
     <div class="hero-logo">
@@ -26,11 +39,14 @@
         <h1>Welcome to <br><strong>Diamond Hotel</strong></h1>
 
         <div class="description">
-          <p>Diamond Hotel is a cozy hideaway in the heart of the city, where comfort meets charm. With just 40 rooms
+          <p>Diamond Hotel is a cozy hideaway in the heart of the city, where comfort meets charm. With just
+            40 rooms
             for
             solo guests to small groups (1–4 people), we offer a quiet, personal retreat.</p>
-          <p>Every guest is treated like a gem — unique, valued, and warmly welcomed. Whether you're here for work or a
-            quick getaway, our friendly team is always ready to help, from local tips to midnight snacks.</p>
+          <p>Every guest is treated like a gem — unique, valued, and warmly welcomed. Whether you're here for
+            work or a
+            quick getaway, our friendly team is always ready to help, from local tips to midnight snacks.
+          </p>
         </div>
 
       </div>
@@ -170,7 +186,8 @@
             alt="Comment Card Background">
           <div class="comment-content">
             <h3 class="comment-title">A very good place!</h3>
-            <p class="comment-text">Lorem ipsum dolor sit amet, nam quis nostrud exercitation ullamco laboris nisi ut
+            <p class="comment-text">Lorem ipsum dolor sit amet, nam quis nostrud exercitation ullamco
+              laboris nisi ut
               aliquip ex ea commodo consequat.</p>
             <div class="comment-author">
               <span class="author-name">Taylor Swift</span>
@@ -185,7 +202,8 @@
             alt="Comment Card Background">
           <div class="comment-content">
             <h3 class="comment-title">A very good place!</h3>
-            <p class="comment-text">Lorem ipsum dolor sit amet, nam quis nostrud exercitation ullamco laboris nisi ut
+            <p class="comment-text">Lorem ipsum dolor sit amet, nam quis nostrud exercitation ullamco
+              laboris nisi ut
               aliquip ex ea commodo consequat.</p>
             <div class="comment-author">
               <span class="author-name">Taylor Swift</span>
@@ -200,7 +218,8 @@
             alt="Comment Card Background">
           <div class="comment-content">
             <h3 class="comment-title">A very good place!</h3>
-            <p class="comment-text">Lorem ipsum dolor sit amet, nam quis nostrud exercitation ullamco laboris nisi ut
+            <p class="comment-text">Lorem ipsum dolor sit amet, nam quis nostrud exercitation ullamco
+              laboris nisi ut
               aliquip ex ea commodo consequat.</p>
             <div class="comment-author">
               <span class="author-name">Taylor Swift</span>

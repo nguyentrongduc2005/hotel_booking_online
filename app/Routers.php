@@ -15,3 +15,7 @@ Router::get('/detailroom/{id}', 'DetailRoomController@show', [
     'AuthenMiddleware@show',
     'AuthenMiddleware@show2'
 ]);
+Router::get('/detailRoom', 'DetailRoomController@show', [
+    // 'AuthenMiddleware@show',
+    // 'AuthenMiddleware@show2'
+]);

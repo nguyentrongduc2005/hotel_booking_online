@@ -13,6 +13,8 @@ class ListRoomController extends Controller
 
     function show($req, $res)
     {
+
+
         $this->render('index');
     }
 

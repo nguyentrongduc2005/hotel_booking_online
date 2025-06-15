@@ -14,7 +14,7 @@ class DetailRoomController extends Controller
 
     function show($req, $res)
     {
-        $this->render('show');
+        $this->render('index');
     }
 
     function index($req, $res)

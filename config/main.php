@@ -5,5 +5,9 @@ return [
     "rootDir" => dirname(__DIR__),
     "viewPath" => dirname(__DIR__) . '/app/views',
     "layoutPath" => 'layouts/main',
-    "pathAssets" => "http://localhost/hotel_booking_online/public/assets/",
+    "pathAssets" => "http://localhost:8888/hotel_booking_online/public/assets/",
+    "host" => 'localhost',
+    "dbname" => 'hotel',
+    "user" => 'root',
+    "pass" => ''
 ];
