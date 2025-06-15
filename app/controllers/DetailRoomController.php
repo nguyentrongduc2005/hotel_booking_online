@@ -7,18 +7,36 @@ use app\models\DetailRoomModel;
 
 class DetailRoomController extends Controller
 {
-    function __construct()
+    private DetailRoomModel $model;
+
+    public function __construct()
     {
         parent::__construct();
+        $this->model = new DetailRoomModel();
     }
 
-    function show($req, $res)
+    public function show($req, $res)
     {
+
+        $id = $req->get('id'); 
+        $rooms = $this->model->getAllRooms();
+        $roomDetail = null;
+
+        if ($id && is_numeric($id)) {
+            $roomDetail = $this->model->getRoomById((int)$id);
+        }
+
+        return $res->view('show', [
+            'rooms' => $rooms,
+            'roomDetail' => $roomDetail
+        ]);
+
         $this->render('index');
+
     }
 
-    function index($req, $res)
+    public function index($req, $res)
     {
-        return $res->error('user isnt exits')->send();
+        return $res->error('User does not exist')->send();
     }
 }
