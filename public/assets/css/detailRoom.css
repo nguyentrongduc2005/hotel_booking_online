@@ -1,0 +1,262 @@
+h1 {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: 'inter', sans-serif;
+  margin: 0;
+  padding: 0;
+
+}
+
+.room-details {
+  display: flex;
+  padding: 2rem;
+  gap: 15px;
+  min-width: 1100px;
+
+  align-items: stretch;
+  padding-top: 200px;
+}
+
+.left-info {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.left-info .main-image {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.left-info h1 {
+  font-size: 2rem;
+  margin-top: 1rem;
+}
+
+.left-info .desc {
+  margin-top: 1rem;
+  line-height: 1.6;
+}
+
+.right-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  gap: 0;
+}
+
+.placeholder-16-9 {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #bbb;
+  border-radius: 10px;
+}
+
+.placeholder-1-1 {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #bbb;
+  border-radius: 10px;
+  position: relative;
+}
+
+.image-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.image-gallery img {
+  width: 100%;
+  border-radius: 10px;
+  height: px;
+  object-fit: cover;
+}
+
+.gallery-more {
+  position: relative;
+  overflow: hidden;
+  background: #999;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+.gallery-more span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #333;
+  font-weight: bold;
+  font-size: 1.2rem;
+  z-index: 2;
+}
+
+.gallery-more::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.7);
+  z-index: 1;
+}
+
+.price-book {
+  margin-top: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.book-btn {
+  background: #f7931e;
+  color: white;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.amenities {
+  margin-top: 1rem;
+  /*dcm sao ma loi hoai z huhuhuhuhuhu */
+}
+
+.amenities h3 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  padding-left: 0;
+}
+
+.amenities ul {
+  list-style: none;
+  padding: 0;
+}
+
+.amenities li {
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.container {
+  margin-left: 250px;
+  margin-right: 250px;
+  max-width: calc(100vw - 500px);
+  position: relative;
+  z-index: 10;
+  color: white;
+}
+
+.divider {
+  width: 1px;
+  height: 100%;
+  background: #fff;
+  margin: 0;
+}
+
+.background-wrapper {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.background-image {
+  width: 100vw;
+  height: 100vh;
+  filter: blur(8px);
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.background-image img {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  display: block;
+}
+
+.background-overlay {
+  position: absolute;
+  inset: 0;
+  background: #1A1919;
+  mix-blend-mode: multiply;
+  opacity: 0.5;
+  z-index: 2;
+}
+
+.desc {
+  background: rgba(255, 255, 255, 0.35);
+  padding: 20px 20px;
+}
+
+.info-box {
+  background: #fff;
+  color: #333;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.08);
+  padding: 2rem 2.5rem;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.info-box h1 {
+  color: #222;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+
+.info-box.amenities {
+  padding: 1.5rem 2rem;
+  margin-top: 2rem;
+}
+
+.info-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 32px;
+  align-items: start;
+  margin-top: 2rem;
+}
+
+.info-row .info-box {
+  margin: 0;
+  padding: 2rem 2.5rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.info-row .info-box.amenities {
+  padding: 2rem 2.5rem;
+}
+
+
+ul {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.35);
+  width: 100%;
+  box-sizing: border-box;
+  margin: 25px 0 0 0;
+}

@@ -2,8 +2,9 @@
 
   background-color: #0C0B0E;
 }
-.welcome-hotel{
-   display: flex;
+
+.welcome-hotel {
+  display: flex;
   align-items: center;
   box-sizing: border-box;
   width: 1100px;
@@ -15,6 +16,7 @@
   margin-top: 20%;
   margin-bottom: 2%;
 }
+
 .welcome-text h1 {
   font-size: 2.2rem;
   line-height: 1.3;
@@ -28,18 +30,19 @@
   max-width: 600px;
   font-size: 1.15rem;
   line-height: 1.6;
-color: #FFE6B7;
+  color: #FFE6B7;
 
-text-align: center;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
+  text-align: center;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .welcome-image img {
   width: 250px;
   height: auto;
-  border-radius: 50% / 25%; /* bo góc kiểu oval như ảnh mẫu */
+  border-radius: 50% / 25%;
+  /* bo góc kiểu oval như ảnh mẫu */
   object-fit: cover;
   box-shadow: 0 0 16px rgba(0, 0, 0, 0.4);
 }
@@ -57,104 +60,45 @@ line-height: normal;
 
 
 .services-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  
-}
-.service-box2,
-.service-box5 {
-  margin-top: 40px;
-}
-
-#our-services {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
   width: 1100px;
-  min-height: 100vh;
-  padding: 110px;
-  box-sizing: border-box;
-  color: white;
   margin: 0 auto;
 }
 
-#our-services h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 32px;
-  font-family: 'inter';
-  font-weight: 500;
+.service-box {
+  height: 240px;
+  display: flex;
+  align-items: flex-end;
+  border: 1px solid #fff;
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s ease;
 }
 
-.service-box1{
-  width: 270px;
-  height: 240px;
-  display: flex;
-  align-items: flex-end;
-  background-size: contain;
-  border: 1px solid #fff;
-   background: 
-                linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 40%, rgba(255, 255, 255, 0) 100%),
-                url('../img/ourservice/gym.png') center/cover;
+.service-box:hover {
+  transform: scale(1.05);
 }
-.service-box2{
-  width: 270px;
-  height: 240px;
-   border: 1px solid #fff;
-  display: flex;
-  align-items: flex-end;
-  background: 
-                linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, rgba(255, 255, 255, 0) 100%),
-                url('../img/ourservice/laundry.jpg') center/cover;
-  
-}
-.service-box3{
-  width: 270px;
-  height: 240px;
-   border: 1px solid #fff;
-  display: flex;
-  align-items: flex-end;
-   background: 
-                linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, rgba(255, 255, 255, 0) 100%),
-                url('../img/ourservice/pool.png') center/cover;
-}
-.service-box4{
-  width: 270px;
-  height: 240px;
-   border: 1px solid #fff;
-  display: flex;
-  align-items: flex-end;
-  background: 
-                linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, rgba(255, 255, 255, 0) 100%),
-                url('../img/ourservice/buffet.png') center/cover;
-  
-}
-.service-box5{
-  width: 270px;
-  height: 240px;
-   border: 1px solid #fff;
-  display: flex;
-  align-items: flex-end;
-   background: 
-                linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, rgba(255, 255, 255, 0) 100%),
-                url('../img/ourservice/wedding.png') center/cover;
-}
-.service-box6{
-  width: 270px;
-  height: 240px;
-   border: 1px solid #fff;
-  display: flex;
-  align-items: flex-end;
-   background: 
-                linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, rgba(255, 255, 255, 0) 100%),
-                url('../img/ourservice/spa.png') center/cover;
+
+.service-box img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
 }
 
 .service-text {
- 
+  position: relative;
+  z-index: 3;
   width: 100%;
   font-family: 'inter';
- text-align: start;
- padding-left: 15%;
- padding-bottom: 2%;
+  text-align: start;
+  padding: 20px;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
 }
 
 .service-text strong {
@@ -163,35 +107,35 @@ line-height: normal;
   color: white;
   text-align: start;
   font-weight: 600;
-
+  margin-bottom: 5px;
 }
 
 .service-text span {
-  font-size: 16px;
+  font-size: 14px;
   color: #FFFFFF;
   font-weight: 400;
-
-
+  opacity: 0.9;
 }
+
 #btn-explore{
   
   width: 100%;
   text-align: center;
-  margin-top: 45px;
 }
 #btn-explore,.btn-explore1{
-  margin-bottom: 40px;
-  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-top: 40px;
 }
-#btn-explore span{
+
+#btn-explore span {
   background-color: #FFFFFF;
-    color: #161010;
-    font-family: "inter";
-    font-weight: 600;
-    padding: 7px;
-    border-radius: 14px;
-    font-size: 20px;
-    cursor: pointer;
+  color: #161010;
+  font-family: "inter";
+  font-weight: 600;
+  padding: 7px;
+  border-radius: 14px;
+  font-size: 20px;
+  cursor: pointer;
 }
 
 
@@ -214,151 +158,172 @@ line-height: normal;
 
 
 
-  /* <!-- Rooms Container --> */
+/* <!-- Rooms Container --> */
 
 
 
 
 
 
-#rooms-section{
-  width:  85%;
+#rooms-section {
+  width: 85%;
   margin: 0 auto;
   color: #FFFFFF;
   font-family: 'inter';
   min-height: 75vh;
+  margin-top: 50px;
 }
 
 
-  .section-header{
-   width: 100%;
-   text-align: center;
-   height: fit-content;
-   font-weight: 700;
- line-height: normal;
+.section-header {
+  width: 100%;
+  text-align: center;
+  height: fit-content;
+  font-weight: 700;
+  line-height: normal;
 }
-.section-title{
+
+.section-title {
   margin: 0;
-   font-weight: 700;
- line-height: normal;
- font-size: 32px;
+  font-weight: 700;
+  line-height: normal;
+  font-size: 32px;
 }
-.section-subtitle{
+
+.section-subtitle {
   margin: 0;
   color: #FFE6B7;
   font-weight: 400;
- font-size: 30px;
+  font-size: 30px;
 
 
 }
-.rooms-container{
+
+.room-container {
     position: relative;
-    height: 480px;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.rooms-grid {
+    display: flex;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    gap: 30px;
+    padding: 30px;
+    width: 1100px;
+    margin: 0 auto;
+    flex-wrap: nowrap;
+}
+
+.room-card {
+    flex: 0 0 calc((100% - (3 * 30px)) / 4); /* 4 cards + 3 gaps */
+    position: relative;
+    height: 300px;
+    border-radius: 4px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.room-card:hover {
+    transform: translateY(-10px) scale(1.02);
+}
+
+/* New style for elevated cards at the edges */
+.room-card.elevated {
+    transform: translateY(-20px) scale(1.05);
+    opacity: 0.7;
+    z-index: 1;
+}
+
+.nav-arrow {
+    position: absolute;
+    top: 30%;
     display: flex;
     justify-content: center;
-}
-.nav-arrow {
-  position: absolute;
-  top: 40%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0.6;
-  background: transparent;
-  border-radius: 50%;
-  width: 40px;
-  height: 70px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: none;
+    align-items: center;
+    opacity: 0.6;
+    background: transparent;
+    border-radius: 50%;
+    width: 40px;
+    height: 70px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    z-index: 4;
 }
 
 .nav-arrow:hover {
-  opacity: 1;
-  transform: scale(1.05);
+    opacity: 1;
+    transform: scale(1.05);
 }
 
 .nav-arrow-left {
-  left: 6%;
+    left: 0;
 }
 
 .nav-arrow-right {
-  right: 7%;
+    right: 0;
 }
 
 .arrow-icon {
-  opacity: 1;
+    opacity: 1;
+    color: white;
+    font-size: 27px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.room-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
   color: white;
-  font-size: 27px;
-  font-weight: bold;
-  line-height: 1;
-}
-.rooms-grid{
-  text-align: center;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  
-
-}
-.room-card{
-  background-color: #110d0d;
-  height: 350px;
-  width: 280px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-background: 
-                linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(255, 255, 255, 0) 100%),
-                url('../img/ourservice/Mock_list_card_home_page.png') center/cover;
-
-  display: flex;
-  align-items: flex-end;
 }
 
-
-.room-overlay{
-
-}
-.room-content{
-    display: flex;
-    flex-direction: column;
-    justify-content:flex-start;
-    padding: 20px;
-    padding-bottom: 20px;
-  cursor: pointer;
-
-}
-.btn-view-detail{
-  margin: 0;
-  background-color: transparent;
+.btn-view-detail {
+  display: inline-block;
+  padding: 3px 8px  ;
+  color: #fff7f7;
+  text-decoration: none;
+  border-radius: 20px;
+  font-weight: 400;
+  transition: background-color 0.3s ease;
   border: 1px solid #fff;
-  color: #fff;
-  border-radius: 10px;
-  width: 100px;
+  font-size: 0.75rem;
 }
-.room-title{
-  margin: 0;
-}
-.room-price{
-  margin: 0;
-  display: flex;
-  color: #EADE6E;
-  font-weight: 300;
 
+.btn-view-detail:hover {
+  background-color: #e6cca3a7;
 }
-.room-card-standard{
+
+.room-title {
+  font-size: 1.2rem;
+  margin: 10px 0;
+  font-weight: 600;
+}
+
+.room-price {
+  font-size: 1.1rem;
+  color: #FFE6B7;
+  font-weight: 500;
+}
+
+.room-card-standard {
   margin-bottom: 80px;
 }
-.room-card-family{
 
-}
-.room-card-deluxe{
+.room-card-family {}
 
-}
-.room-card-superior{
+.room-card-deluxe {}
+
+.room-card-superior {
   margin-bottom: 80px;
 
 }
@@ -381,25 +346,27 @@ background:
 
 
 
-#testimonials-section{
+#testimonials-section {
   width: 100%;
   height: 100vh;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  background: 
- linear-gradient(to top, 
-                    rgba(0, 0, 0, 0.8) 0%, 
-                    rgba(0, 0, 0, 0.2) 30%,
-                    rgba(255, 255, 255, 0) 50%, 
-                    rgba(0, 0, 0, 0.2) 70%,
-                    rgba(0, 0, 0, 0.8) 100%
-                ),
-   url('../img/guestsay/bg.png') center/cover;
-
+  position: relative;
+  overflow: hidden;
 }
 
-.guest-say{
+.testimonials-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.guest-say {
+  position: relative;
+  z-index: 2;
   height: 80vh;
   width: 1100px;
   margin: 0 auto;
@@ -409,65 +376,72 @@ background:
   justify-content: center;
   align-items: center;
   padding-top: 40px;
-
+  color: #fff;
 }
-.guest-say .title{
+
+.guest-say .title {
   color: #fff;
   font-size: 25px;
 }
-.comments-container{
+
+.comments-container {
   display: flex;
   flex-direction: row;
   gap: 17px;
   justify-content: space-around;
-
 }
-.comment-card{
+
+.comment-card {
+  position: relative;
   color: #fff;
   height: 450px;
-  background-color: #8a806d;
   width: 30%;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-background: 
-                linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 50%, rgba(255, 255, 255, 0) 100%),
-                url('../img/ourservice/bg-card.png') center/cover;
   display: flex;
   border-radius: 5px;
-
+  overflow: hidden;
+  background: none;
 }
-.comment-card-1{
 
+.comment-card img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  pointer-events: none;
 }
-.comment-content{
+
+.comment-content {
+  position: relative;
+  z-index: 2;
   flex: 1;
   display: flex;
   flex-direction: column;
   width: 100%;
-  justify-content: flex-end; 
+  justify-content: flex-end;
   padding: 27px;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 50%, rgba(255, 255, 255, 0) 100%);
+  border-radius: 5px;
 }
-.comment-title{
+
+.comment-title {
   margin: 0;
-  }
-.comment-text{
+}
+.comment-text {
   margin: 10px 0;
   font-style: italic;
   font-weight: 300;
   color: #ffffffa2;
 }
-.comment-author{
- display: flex;
- flex-direction: column;
+.comment-author {
+  display: flex;
+  flex-direction: column;
 }
-.author-name{
+.author-name {
   font-weight: 600;
-
 }
-.author-role{
+.author-role {
   font-weight: 400;
-
 }
 
 
@@ -485,7 +459,7 @@ background:
 
 
 
- /* Main Container */
+/* Main Container */
 
  #ig-container{
   background: 
@@ -529,24 +503,27 @@ background:
             justify-content: center;
             margin-bottom: 20px;
             flex-wrap: wrap;
+            flex-direction: row;
             
         }
         
         .gallery-item {
-            width: 350px;
-            height: 350px;
+            width: 300px;
+            height: 300px;
             overflow: hidden;
             position: relative;
-            background: #333;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            background-image: url('../img/ourservice/card-ig.png');
             border: 1px solid #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #333;
         }
         
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
         }
         
         .gallery-item.instagram {
@@ -595,51 +572,51 @@ background:
             line-height: 1.6;
             margin: 3px;
 
-        }
-        
-        .book-now-btn {
-            background: linear-gradient(45deg, #ff6b35, #f7931e);
-            color: white;
-            padding: 18px 30px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.7rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-transform: uppercase;
-            margin-top: 20px;
+#ig-section {
+  padding: 40px;
+  width: 1100px;
+  margin: 0 auto;
+  color: white;
+  font-family: 'inter';
+  padding-top: 0;
 
-        }
-        
-        .book-now-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            #ig-section {
-                padding: 40px 20px;
-            }
-            
-            .main-title {
-                font-size: 2rem;
-            }
-            
-            .content-title {
-                font-size: 1.8rem;
-            }
-            
-            .gallery-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .gallery-item {
-                width: 100%;
-                max-width: 350px;
-            }
+}
 
+/* DIV 1: Title Card Section */
+.title-card {
+  text-align: center;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+}
 
-  
+          }
+
+.service-box2 {
+  width: 270px;
+  height: 240px;
+  border: 1px solid #fff;
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-box2 img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.service-box2::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, rgba(255, 255, 255, 0) 100%);
+  z-index: 2;
+}

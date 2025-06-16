@@ -7,18 +7,21 @@ use app\models\DetailRoomModel;
 
 class DetailRoomController extends Controller
 {
-    function __construct()
+    private  $model;
+
+    public function __construct()
     {
         parent::__construct();
+        $this->model = new DetailRoomModel();
     }
 
-    function show($req, $res)
-    {
-        $this->render('show');
-    }
 
-    function index($req, $res)
+    public function index($req, $res)
     {
-        return $res->error('user isnt exits')->send();
+        $slug = $req->params()['slug'];
+
+
+        $data =  $this->model->getRoomBySlug($slug);
+        $this->render('index', $data);
     }
 }

@@ -20,7 +20,7 @@
             <a href="<?= $this->configs->config['basePath'] ?>listroom" class="nav-link">Rooms</a>
           </li>
           <li class="nav-item">
-            <a href="<?= $this->configs->config['basePath'] ?>about" class="nav-link">Our services</a>
+            <a href="<?= $this->configs->config['basePath'] ?>" class="nav-link">Our services</a>
           </li>
           <li class="nav-item">
             <a href="<?= $this->configs->config['basePath'] ?>contact" class="nav-link">Contact us</a>
