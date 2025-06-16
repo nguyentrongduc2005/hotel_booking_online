@@ -54,42 +54,14 @@
     <div id="our-services">
         <h2>Our Services</h2>
         <div class="services-wrapper">
-            <div class="service-box1">
-                <div class=" service-text">
-                    <strong>Gym</strong>
-                    <span>Fitness Center Access</span>
-                </div>
-            </div>
-            <div class="service-box2">
+            <?php foreach ($services as $service): ?>
+            <div class="service-box" style="background-image: url('<?= $this->configs->config['pathAssets'] . $service['Path_img'] ?>')">
                 <div class="service-text">
-                    <strong>Laundry</strong>
-                    <span>Daily Laundry Service</span>
+                    <strong><?= htmlspecialchars($service['name']) ?></strong>
+                    <span><?= htmlspecialchars($service['description'] ?? '') ?></span>
                 </div>
             </div>
-            <div class="service-box3">
-                <div class="service-text">
-                    <strong>Pool</strong>
-                    <span>Rooftop Swimming Pool</span>
-                </div>
-            </div>
-            <div class="service-box4">
-                <div class="service-text">
-                    <strong>Buffet</strong>
-                    <span>All-Day Dining</span>
-                </div>
-            </div>
-            <div class="service-box5">
-                <div class="service-text">
-                    <strong>Wedding/Event</strong>
-                    <span>Private Events & Weddings</span>
-                </div>
-            </div>
-            <div class="service-box6">
-                <div class="service-text">
-                    <strong>Spa</strong>
-                    <span>In-room Spa Treatments</span>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
         <div id="btn-explore" class="btn-explore1"><span>EXPLORE ALL</span></div>
     </div>
@@ -101,55 +73,26 @@
         </div>
 
         <!-- Rooms Container -->
-        <div class="rooms-container">
+        <div class="room-container">
             <!-- Navigation Arrows -->
-            <button class="nav-arrow nav-arrow-left">
+            <button class="prev-btn nav-arrow nav-arrow-left">
                 <span class="arrow-icon">&lt;</span>
             </button>
-            <button class="nav-arrow nav-arrow-right">
+            <button class="next-btn nav-arrow nav-arrow-right">
                 <span class="arrow-icon">&gt;</span>
             </button>
 
             <!-- Rooms Grid -->
             <div class="rooms-grid">
-                <!-- Room Card 1 - Standard Room -->
-                <div class="room-card room-card-standard">
+                <?php foreach ($rooms as $room): ?>
+                <div class="room-card" style="background-image: url('<?= $this->configs->config['pathAssets'] . $room['thumb'] ?>')">
                     <div class="room-content">
-                        <button class="btn-view-detail">View Details</button>
-                        <h3 class="room-title">Standard Room</h3>
-                        <p class="room-price">$55/night</p>
+                        <a href="/hotel_booking_online/public/detailroom/<?= htmlspecialchars($room['slug']) ?>" class="btn-view-detail">View Details</a>
+                        <h3 class="room-title"><?= htmlspecialchars($room['name']) ?></h3>
+                        <p class="room-price">$<?= number_format($room['price'], 2) ?>/night</p>
                     </div>
                 </div>
-
-                <!-- Room Card 2 - Family Room -->
-                <div class="room-card room-card-family">
-
-                    <div class="room-content">
-                        <button class="btn-view-detail">View Details</button>
-                        <h3 class="room-title">Family Room</h3>
-                        <p class="room-price">$85/night</p>
-                    </div>
-                </div>
-
-                <!-- Room Card 3 - Deluxe Room -->
-                <div class="room-card room-card-deluxe">
-
-                    <div class="room-content">
-                        <button class="btn-view-detail">View Details</button>
-                        <h3 class="room-title">Deluxe Room</h3>
-                        <p class="room-price">$150/night</p>
-                    </div>
-                </div>
-
-                <!-- Room Card 4 - Superior Room -->
-                <div class="room-card room-card-superior">
-
-                    <div class="room-content">
-                        <button class="btn-view-detail">View Details</button>
-                        <h3 class="room-title">Superior Room</h3>
-                        <p class="room-price">$250/night</p>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
 
@@ -244,3 +187,8 @@
             </div>
         </div>
     </div>
+</div>
+
+<script src="<?= $this->configs->config['pathAssets'] ?>js/main.js"></script>
+</body>
+</html>
