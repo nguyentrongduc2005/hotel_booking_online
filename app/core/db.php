@@ -37,10 +37,10 @@ class db
 
 
 
-    public static function getAll($sql)
+    public static function getAll($sql, $params = [])
     {
         $stmt = self::connect()->prepare($sql);
-        $stmt->execute();
+        $stmt->execute($params);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
