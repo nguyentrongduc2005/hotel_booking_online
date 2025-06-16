@@ -19,9 +19,10 @@ class db
             $dbname = Registry::getInstance()->config['dbname'];
             $user = Registry::getInstance()->config['user'];
             $pass = Registry::getInstance()->config['pass'];
+            $port = Registry::getInstance()->config['port'];
 
             try {
-                self::$connection = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
+                self::$connection = new PDO("mysql:host=$host;port=$port;dbname=$dbname", $user, $pass);
                 self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();

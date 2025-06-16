@@ -27,7 +27,7 @@
       <?= $this->renderPartial('layouts/footer'); ?>
     </div>
   </div>
-  <script src="<?= $this->configs->config['pathAssets'] ?>js/home.js?v=<?= time() ?>"></script>
+  <script src="<?= $this->configs->config['pathAssets'] ?>js/homepage.js?v=<?= time() ?>"></script>
 
 </body>
 

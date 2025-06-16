@@ -60,52 +60,30 @@
 
 
 .services-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-
-}
-
-.service-box2,
-.service-box5 {
-  margin-top: 40px;
-}
-
-#our-services {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
   width: 1100px;
-  min-height: 100vh;
-  padding: 110px;
-  box-sizing: border-box;
-  color: white;
   margin: 0 auto;
 }
 
-#our-services h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 32px;
-  font-family: 'inter';
-  font-weight: 500;
-}
-
-/* Common styles for all service boxes */
-.service-box1,
-.service-box2,
-.service-box3,
-.service-box4,
-.service-box5,
-.service-box6 {
-  width: 270px;
+.service-box {
   height: 240px;
   display: flex;
   align-items: flex-end;
   border: 1px solid #fff;
   position: relative;
   overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s ease;
 }
 
-/* Service Box 1 - Gym */
-.service-box1 img {
+.service-box:hover {
+  transform: scale(1.05);
+}
+
+.service-box img {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -113,69 +91,14 @@
   z-index: 1;
 }
 
-/* Service Box 2 - Laundry */
-.service-box2 {
-  margin-top: 40px;
-}
-
-.service-box2 img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
-}
-
-/* Service Box 3 - Pool */
-.service-box3 img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
-}
-
-/* Service Box 4 - Buffet */
-.service-box4 img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
-}
-
-/* Service Box 5 - Wedding */
-.service-box5 {
-  margin-top: 40px;
-}
-
-.service-box5 img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
-  
-}
-
-/* Service Box 6 - Spa */
-.service-box6 img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
-}
-
-/* Common styles for service text */
 .service-text {
   position: relative;
   z-index: 3;
   width: 100%;
   font-family: 'inter';
   text-align: start;
-  padding-left: 15%;
-  padding-bottom: 2%;
+  padding: 20px;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
 }
 
 .service-text strong {
@@ -184,19 +107,20 @@
   color: white;
   text-align: start;
   font-weight: 600;
+  margin-bottom: 5px;
 }
 
 .service-text span {
-  font-size: 16px;
+  font-size: 14px;
   color: #FFFFFF;
   font-weight: 400;
+  opacity: 0.9;
 }
 
 #btn-explore{
   
   width: 100%;
   text-align: center;
-  margin-top: 45px;
 }
 #btn-explore,.btn-explore1{
   margin-bottom: 10px;
@@ -247,6 +171,7 @@
   color: #FFFFFF;
   font-family: 'inter';
   min-height: 75vh;
+  margin-top: 50px;
 }
 
 
@@ -274,110 +199,120 @@
 
 }
 
-.rooms-container {
-  position: relative;
-  height: 480px;
-  display: flex;
-  justify-content: center;
-}
-
-.nav-arrow {
-  position: absolute;
-  top: 40%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0.6;
-  background: transparent;
-  border-radius: 50%;
-  width: 40px;
-  height: 70px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: none;
-}
-
-.nav-arrow:hover {
-  opacity: 1;
-  transform: scale(1.05);
-}
-
-.nav-arrow-left {
-  left: 6%;
-}
-
-.nav-arrow-right {
-  right: 7%;
-}
-
-.arrow-icon {
-  opacity: 1;
-  color: white;
-  font-size: 27px;
-  font-weight: bold;
-  line-height: 1;
+.room-container {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
 }
 
 .rooms-grid {
-  text-align: center;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-
-
+    display: flex;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    gap: 30px;
+    padding: 30px;
+    width: 1100px;
+    margin: 0 auto;
+    flex-wrap: nowrap;
 }
 
 .room-card {
-  background-color: #110d0d;
-  height: 350px;
-  width: 280px;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: flex-end;
-}
-
-.room-card img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
-}
-
-.room-content{
+    flex: 0 0 calc((100% - (3 * 30px)) / 4); /* 4 cards + 3 gaps */
     position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 20px;
-    padding-bottom: 20px;
-  cursor: pointer;
+    height: 300px;
+    border-radius: 4px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
 
+.room-card:hover {
+    transform: translateY(-10px) scale(1.02);
+}
+
+/* New style for elevated cards at the edges */
+.room-card.elevated {
+    transform: translateY(-20px) scale(1.05);
+    opacity: 0.7;
+    z-index: 1;
+}
+
+.nav-arrow {
+    position: absolute;
+    top: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.6;
+    background: transparent;
+    border-radius: 50%;
+    width: 40px;
+    height: 70px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    z-index: 4;
+}
+
+.nav-arrow:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+.nav-arrow-left {
+    left: 0;
+}
+
+.nav-arrow-right {
+    right: 0;
+}
+
+.arrow-icon {
+    opacity: 1;
+    color: white;
+    font-size: 27px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.room-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  color: white;
 }
 
 .btn-view-detail {
-  margin: 0;
-  background-color: transparent;
+  display: inline-block;
+  padding: 3px 8px  ;
+  color: #fff7f7;
+  text-decoration: none;
+  border-radius: 20px;
+  font-weight: 400;
+  transition: background-color 0.3s ease;
   border: 1px solid #fff;
-  color: #fff;
-  border-radius: 10px;
-  width: 100px;
+  font-size: 0.75rem;
+}
+
+.btn-view-detail:hover {
+  background-color: #e6cca3a7;
 }
 
 .room-title {
-  margin: 0;
+  font-size: 1.2rem;
+  margin: 10px 0;
+  font-weight: 600;
 }
 
 .room-price {
-  margin: 0;
-  display: flex;
-  color: #EADE6E;
-  font-weight: 300;
-
+  font-size: 1.1rem;
+  color: #FFE6B7;
+  font-weight: 500;
 }
 
 .room-card-standard {
