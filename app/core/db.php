@@ -54,7 +54,9 @@ class db
         $sql = "$sql";
         $stmt = self::connect()->prepare($sql);
         $stmt->execute($param);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $data;
     }
 
     /**
@@ -68,10 +70,9 @@ class db
     {
         $keys = array_keys($params);
         $columns = implode(',', $keys);
-        $placeholders = implode(',:', $params);
+        $placeholders = implode(',:', array_keys($params));
         $placeholders = ':' . $placeholders;
         $sql = "INSERT INTO $tableName ($columns) VALUES ($placeholders)";
-
         $stmt = self::connect()->prepare($sql);
         $stmt->execute($params);
         return self::connect()->lastInsertId();
