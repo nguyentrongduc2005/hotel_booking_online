@@ -4,17 +4,26 @@ namespace app\core;
 
 class Controller
 {
-    private $layout = null;
+    static  $layout = null;
+    static  $componentView = null;
     private $configs;
     function __construct()
     {
         $this->configs = Registry::getInstance();
-        $this->layout = $this->configs->config['layoutPath'];
+        if (self::$layout == null && self::$componentView == null) {
+            self::$layout = $this->configs->config['layoutPath'];
+            self::$componentView = $this->configs->config['viewpathComponent'];
+        }
     }
 
-    function setLayout($layout)
+    static function setLayout($layout)
     {
-        $this->layout = $layout;
+        self::$layout = $layout;
+    }
+
+    static function setcomponent($path)
+    {
+        self::$componentView = $path;
     }
 
     function redirect($url, $isEnd = true, $resPonseCode = 302)
@@ -32,8 +41,9 @@ class Controller
         // $folderView = strtolower(str_replace('Controller', '', $controller));
 
         $content = $this->getViewContent($view, $data);
-        if ($this->layout !== null) {
-            $layoutPath = $this->configs->config['viewPath'] . '/' . $this->layout . '.php';
+        if (self::$layout !== null) {
+            $layoutPath = $this->configs->config['viewPath'] . '/' . self::$layout . '.php';
+
             if (file_exists($layoutPath)) {
                 require($layoutPath);
             } else {
@@ -57,7 +67,8 @@ class Controller
         } else {
             $data = $data;
         }
-        $viewPath = $this->configs->config['viewpathComponent'] . '/' . $folderView . '/' . $view . '.php';
+        $viewPath = $this->configs->config['viewPath'] . self::$componentView . "/" . $folderView . '/' . $view . '.php';
+
         if (file_exists($viewPath)) {
             ob_start();
             require($viewPath);
