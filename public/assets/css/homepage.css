@@ -636,3 +636,9 @@
   color: #fff;
   text-decoration: unset;
 }
+.book-now-btn:hover {
+  background-color: #e4861b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(228, 134, 27, 0.5); 
+  color: #ccc;
+}
