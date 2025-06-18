@@ -1,8 +1,7 @@
-<!-- Link CSS riêng cho login -->
+
 <link rel="stylesheet" href="<?= $this->configs->config['pathAssets'] ?>css/login.css?v=<?= time() ?>">
 
 <?php
-// Hiển thị lỗi nếu có
 $errors = $errors ?? [];
 $email = $email ?? '';
 $password = $password ?? '';
