@@ -126,4 +126,110 @@ background: rgba(228, 228, 228, 0.35);
     .nav-item {
         margin: 0.5rem 0;
     }
+}
+
+/* Popup Login */
+.login-popup {
+  position: fixed;
+  top: 70px; right: 30px;
+  background: rgba(0,0,0,0.2);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-popup-content {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.13);
+  width: 350px;
+  max-width: 95vw;
+  padding: 0 0 24px 0;
+  position: relative;
+  font-family: 'Inter', sans-serif;
+}
+.login-popup-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 0 12px 0;
+  background: #f5f5f5;
+  border-radius: 12px 12px 0 0;
+  position: relative;
+}
+.login-popup-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #e0e0e0;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+}
+.login-popup-signup {
+  background: #ff9800;
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  padding: 10px 20px;
+  font-size: 1.5rem;
+  margin: 8px 0 4px 0;
+  cursor: pointer;
+  font-family: 'inter';
+  font-weight: 500;
+}
+.login-popup-login-link {
+  font-size: 0.95rem;
+  color: #888;
+  margin-bottom: 8px;
+}
+.login-popup-login-link a {
+  color: #1976d2;
+  text-decoration: none;
+  font-size: 1rem;
+}
+.login-popup-close {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #888;
+  cursor: pointer;
+}
+.login-popup-menu {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 24px;
+}
+.login-popup-item {
+  display: flex;
+  align-items: center;
+  font-size: 1.15rem;
+  padding: 10px 0 10px 0;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: background 0.2s;
+  flex-direction: row;
+  gap: 10px
+}
+.login-popup-item:last-child {
+  border-bottom: none;
+}
+.login-popup-item:hover {
+  background: #f7f7f7;
+}
+@media (max-width: 500px) {
+  .login-popup-content {
+    width: 98vw;
+    padding: 0;
+  }
+  .login-popup-menu {
+    padding: 0 8px;
+  }
 } 

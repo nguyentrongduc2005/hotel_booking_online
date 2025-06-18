@@ -198,7 +198,7 @@
     </div>
 </div>
 
-<script src="<?= $this->configs->config['pathAssets'] ?>js/main.js"></script>
+<script src="<?= $this->configs->config['pathAssets'] ?>js/homepage.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,107 @@
+.regis-bg-overlay {
+    position: fixed;
+    inset: 0;
+    background: #696666e3;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.regis-main-container {
+    display: flex;
+    background: #fff;
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    min-width: 700px;
+    min-height: 500px;
+    max-width: 90vw;
+    max-height: 90vh;
+    font-family: 'inter';
+}
+.regis-left {
+    flex: 1;
+    padding: 40px 36px 36px 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 340px;
+}
+.regis-right {
+    flex: 1;
+    background: #e5e5e5;
+    min-width: 340px;
+    min-height: 500px;
+    background-image: url('https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=600&q=80');
+    background-size: cover;
+    background-position: center;
+}
+.regis-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 32px;
+    letter-spacing: 1px;
+    text-align: center;
+}
+.regis-form input[type="text"],
+.regis-form input[type="email"],
+.regis-form input[type="password"] {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 16px;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    background: #f7f7f7;
+    font-size: 1rem;
+}
+.regis-row-flex {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+.regis-row-flex input {
+    margin-bottom: 0;
+}
+.regis-submit-btn {
+    width: 100%;
+    background: #181511;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.regis-submit-btn:hover {
+    background: #333;
+}
+.regis-bottom-link {
+    margin-top: 32px;
+    text-align: right;
+    color: #888;
+    font-size: 1rem;
+}
+.regis-login-link {
+    color: #1976d2;
+    text-decoration: none;
+    margin-left: 4px;
+}
+.regis-login-link:hover {
+    text-decoration: underline;
+}
+@media (max-width: 900px) {
+    .regis-main-container {
+        flex-direction: column;
+        min-width: 320px;
+        min-height: 0;
+    }
+    .regis-right {
+        min-height: 180px;
+        min-width: 0;
+        height: 180px;
+    }
+} 

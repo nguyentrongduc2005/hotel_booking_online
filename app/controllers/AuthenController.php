@@ -17,13 +17,12 @@ class AuthenController extends Controller
 
     function login($req, $res)
     {
-        // $this->render('login');
-
+        $this->renderPartial('auth/login');
     }
     function regis($req, $res)
     {
 
-        // $this->render('regis');
+        $this->renderPartial('auth/regis');
     }
     function loginHandler($req, $res)
     {
