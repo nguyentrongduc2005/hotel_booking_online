@@ -55,8 +55,13 @@
 
 /* Our service */
 
-
-
+#our-services{
+  font-family: 'inter';
+  color: #ccc;
+}
+#our-services h2 {
+  text-align: center;
+}
 
 
 .services-wrapper {
@@ -532,7 +537,6 @@
   display: block;
 }
 
-.gallery-item.instagram {}
 
 .instagram-icon {
   width: 60px;

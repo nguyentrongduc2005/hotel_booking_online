@@ -37,5 +37,27 @@
   </nav>
 </header>
 
+<!-- Popup Login -->
+<div id="loginPopup" class="login-popup" style="display:none;">
+  <div class="login-popup-content">
+    <div class="login-popup-header">
+      <div class="login-popup-avatar"></div>
+      <button class="login-popup-close" id="closeLoginPopup">&times;</button>
+      <a href="<?= $this->configs->config['basePath'] ?>login" class="login-popup-signup nav-link">LOGIN</a>
+      <div class="login-popup-login-link">
+        Don't have an account?
+        <a href="<?= $this->configs->config['basePath'] ?>regis" id="registerLink">sign up</a>
+      </div>
+    </div>
+    <div class="login-popup-menu">
+      <div class="login-popup-item"> <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-user.png" alt="Diamond Hotel"> User</div>
+      <div class="login-popup-item"> <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-transaction.png" alt="Diamond Hotel"> Transaction</div>
+      <div class="login-popup-item"> <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-reservation.png" alt="Diamond Hotel"> My reservation</div>
+      <div class="login-popup-item"> <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-history.png" alt="Diamond Hotel"> My booking history</div>
+    </div>
+  </div>
+</div>
+<!-- End Popup Login -->
+
 <!-- Header JS -->
 <script src="<?= $this->configs->config['pathAssets'] ?>js/header.js?v=<?= time() ?>"></script>
