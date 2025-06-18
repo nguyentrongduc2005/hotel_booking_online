@@ -1,4 +1,4 @@
-<!-- Link CSS riêng cho regis -->
+
 <link rel="stylesheet" href="<?= $this->configs->config['pathAssets'] ?>css/regis.css?v=<?= time() ?>">
 
 <div class="regis-bg-overlay">
