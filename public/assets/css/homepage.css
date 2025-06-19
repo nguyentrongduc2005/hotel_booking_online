@@ -55,8 +55,13 @@
 
 /* Our service */
 
-
-
+#our-services{
+  font-family: 'inter';
+  color: #ccc;
+}
+#our-services h2 {
+  text-align: center;
+}
 
 
 .services-wrapper {
@@ -98,7 +103,7 @@
   font-family: 'inter';
   text-align: start;
   padding: 20px;
-  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
 }
 
 .service-text strong {
@@ -117,12 +122,14 @@
   opacity: 0.9;
 }
 
-#btn-explore{
-  
+#btn-explore {
+
   width: 100%;
   text-align: center;
 }
-#btn-explore,.btn-explore1{
+
+#btn-explore,
+.btn-explore1 {
   margin-bottom: 10px;
   margin-top: 40px;
 }
@@ -200,81 +207,82 @@
 }
 
 .room-container {
-    position: relative;
-    width: 100%;
-    margin: 0 auto;
-    overflow: hidden;
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
 }
 
 .rooms-grid {
-    display: flex;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-    gap: 30px;
-    padding: 30px;
-    width: 1100px;
-    margin: 0 auto;
-    flex-wrap: nowrap;
+  display: flex;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  gap: 30px;
+  padding: 30px;
+  width: 1100px;
+  margin: 0 auto;
+  flex-wrap: nowrap;
 }
 
 .room-card {
-    flex: 0 0 calc((100% - (3 * 30px)) / 4); /* 4 cards + 3 gaps */
-    position: relative;
-    height: 300px;
-    border-radius: 4px;
-    overflow: hidden;
-    background-size: cover;
-    background-position: center;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+  flex: 0 0 calc((100% - (3 * 30px)) / 4);
+  /* 4 cards + 3 gaps */
+  position: relative;
+  height: 300px;
+  border-radius: 4px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .room-card:hover {
-    transform: translateY(-10px) scale(1.02);
+  transform: translateY(-10px) scale(1.02);
 }
 
 /* New style for elevated cards at the edges */
 .room-card.elevated {
-    transform: translateY(-20px) scale(1.05);
-    opacity: 0.7;
-    z-index: 1;
+  transform: translateY(-20px) scale(1.05);
+  opacity: 0.7;
+  z-index: 1;
 }
 
 .nav-arrow {
-    position: absolute;
-    top: 30%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0.6;
-    background: transparent;
-    border-radius: 50%;
-    width: 40px;
-    height: 70px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: none;
-    z-index: 4;
+  position: absolute;
+  top: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.6;
+  background: transparent;
+  border-radius: 50%;
+  width: 40px;
+  height: 70px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  z-index: 4;
 }
 
 .nav-arrow:hover {
-    opacity: 1;
-    transform: scale(1.05);
+  opacity: 1;
+  transform: scale(1.05);
 }
 
 .nav-arrow-left {
-    left: 0;
+  left: 0;
 }
 
 .nav-arrow-right {
-    right: 0;
+  right: 0;
 }
 
 .arrow-icon {
-    opacity: 1;
-    color: white;
-    font-size: 27px;
-    font-weight: bold;
-    line-height: 1;
+  opacity: 1;
+  color: white;
+  font-size: 27px;
+  font-weight: bold;
+  line-height: 1;
 }
 
 .room-content {
@@ -283,13 +291,13 @@
   left: 0;
   right: 0;
   padding: 20px;
-  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
   color: white;
 }
 
 .btn-view-detail {
   display: inline-block;
-  padding: 3px 8px  ;
+  padding: 3px 8px;
   color: #fff7f7;
   text-decoration: none;
   border-radius: 20px;
@@ -399,8 +407,8 @@
   display: flex;
   border-radius: 5px;
   overflow: hidden;
-    background-size: cover;
-    background-position: center;
+  background-size: cover;
+  background-position: center;
 }
 
 .comment-card img {
@@ -422,26 +430,30 @@
   width: 100%;
   justify-content: flex-end;
   padding: 27px;
-  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 50%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 50%, rgba(255, 255, 255, 0) 100%);
   border-radius: 5px;
 }
 
 .comment-title {
   margin: 0;
 }
+
 .comment-text {
   margin: 10px 0;
   font-style: italic;
   font-weight: 300;
   color: #ffffffa2;
 }
+
 .comment-author {
   display: flex;
   flex-direction: column;
 }
+
 .author-name {
   font-weight: 600;
 }
+
 .author-role {
   font-weight: 400;
 }
@@ -463,113 +475,15 @@
 
 /* Main Container */
 
- #ig-container{
-  background: 
-                linear-gradient(to bottom, 
-                    rgba(23, 21, 21, 0.568) 2%, 
-                    rgba(0, 0, 0, 0.5) 30%,
-                    rgba(40, 38, 38, 0.8) 50%, 
-                    rgba(0, 0, 0, 0.8) 70%,
-                    rgba(0, 0, 0, 0.9) 100%
-                );
- }
-        #ig-section {
-            padding:  40px;
-            width: 1100px;
-            margin: 0 auto;
-            color: white;
-            font-family: 'inter';
-            padding-top: 0;
-          
-        }
-        
-        /* DIV 1: Title Card Section */
-        .title-card {
-            text-align: center;
-            margin-bottom: 50px;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .main-title {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 30px;
-            color: #ffffff;
-            font-weight: 500;
-        }
-        
-        .gallery-container {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            flex-direction: row;
-            
-        }
-        
-        .gallery-item {
-            width: 300px;
-            height: 300px;
-            overflow: hidden;
-            position: relative;
-            border: 1px solid #fff;
-            background-position: center;
-        }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        
-        .gallery-item.instagram {
-          
-        }
-        
-        .instagram-icon {
-            width: 60px;
-            height: 60px;
-            border: 3px solid white;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-        
-        .view-gallery {
-            text-decoration: underline;
-            color: #ccc;
-            font-style: italic;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-        
-        .view-gallery:hover {
-            color: #fff;
-        }
-        
-        /* DIV 2: Content & Book Now Section */
-        .content-section {
-            text-align: center;
-        }
-        
-        .content-title {
-            font-size: 2.2rem;
-            font-weight: bold;
-            color: #ffffff;
-            margin: 3px;
-        }
-        
-        .content-description {
-            font-size: 1.1rem;
-            color: #cccccc;
-            margin-bottom: 30px;
-            line-height: 1.6;
-            margin: 3px; }
+#ig-container {
+  background:
+    linear-gradient(to bottom,
+      rgba(23, 21, 21, 0.568) 2%,
+      rgba(0, 0, 0, 0.5) 30%,
+      rgba(40, 38, 38, 0.8) 50%,
+      rgba(0, 0, 0, 0.8) 70%,
+      rgba(0, 0, 0, 0.9) 100%);
+}
 
 #ig-section {
   padding: 40px;
@@ -589,7 +503,103 @@
   flex-direction: column;
 }
 
-          
+.main-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.gallery-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  flex-direction: row;
+
+}
+
+.gallery-item {
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #fff;
+  background-position: center;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+.instagram-icon {
+  width: 60px;
+  height: 60px;
+  border: 3px solid white;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.view-gallery {
+  text-decoration: underline;
+  color: #ccc;
+  font-style: italic;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.view-gallery:hover {
+  color: #fff;
+}
+
+/* DIV 2: Content & Book Now Section */
+.content-section {
+  text-align: center;
+}
+
+.content-title {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #ffffff;
+  margin: 3px;
+}
+
+.content-description {
+  font-size: 1.1rem;
+  color: #cccccc;
+  margin-bottom: 30px;
+  line-height: 1.6;
+  margin: 3px;
+}
+
+#ig-section {
+  padding: 40px;
+  width: 1100px;
+  margin: 0 auto;
+  color: white;
+  font-family: 'inter';
+  padding-top: 0;
+
+}
+
+/* DIV 1: Title Card Section */
+.title-card {
+  text-align: center;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+
 
 .service-box2 {
   width: 270px;
@@ -616,23 +626,31 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(255, 255, 255, 0) 100%);
   z-index: 2;
 }
-.book-now-btn{
+
+.book-now-btn {
   background-color: #F7931E;
   color: #fff;
   font-family: 'inter';
   font-size: 1.7rem;
   border-radius: 20px;
   border: none;
-  padding: 10px 30px ;
+  padding: 10px 30px;
   text-transform: uppercase;
   margin-top: 10px;
   cursor: pointer;
   text-decoration: none;
 }
-.book-now-btn a{
+
+.book-now-btn a {
   color: #fff;
   text-decoration: unset;
+}
+.book-now-btn:hover {
+  background-color: #e4861b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(228, 134, 27, 0.5); 
+  color: #ccc;
 }

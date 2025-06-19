@@ -55,13 +55,13 @@
         <h2>Our Services</h2>
         <div class="services-wrapper">
             <?php foreach ($services as $service): ?>
-                <div class="service-box"
-                    style="background-image: url('<?= $this->configs->config['pathAssets'] . $service['Path_img'] ?>')">
-                    <div class="service-text">
-                        <strong><?= htmlspecialchars($service['name']) ?></strong>
-                        <span><?= htmlspecialchars($service['description'] ?? '') ?></span>
-                    </div>
+            <div class="service-box"
+                style="background-image: url('<?= $this->configs->config['pathAssets'] . $service['Path_img'] ?>')">
+                <div class="service-text">
+                    <strong><?= htmlspecialchars($service['name']) ?></strong>
+                    <span><?= htmlspecialchars($service['description'] ?? '') ?></span>
                 </div>
+            </div>
             <?php endforeach; ?>
         </div>
         <div id="btn-explore" class="btn-explore1"><span>EXPLORE ALL</span></div>
@@ -86,15 +86,15 @@
             <!-- Rooms Grid -->
             <div class="rooms-grid">
                 <?php foreach ($rooms as $room): ?>
-                    <div class="room-card"
-                        style="background-image: url('<?= $this->configs->config['pathAssets'] . $room['thumb'] ?>')">
-                        <div class="room-content">
-                            <a href="/hotel_booking_online/public/detailroom/<?= htmlspecialchars($room['slug']) ?>"
-                                class="btn-view-detail">View Details</a>
-                            <h3 class="room-title"><?= htmlspecialchars($room['name']) ?></h3>
-                            <p class="room-price">$<?= number_format($room['price'], 2) ?>/night</p>
-                        </div>
+                <div class="room-card"
+                    style="background-image: url('<?= $this->configs->config['pathAssets'] . $room['thumb'] ?>')">
+                    <div class="room-content">
+                        <a href="/hotel_booking_online/public/detailroom/<?= htmlspecialchars($room['slug']) ?>"
+                            class="btn-view-detail">View Details</a>
+                        <h3 class="room-title"><?= htmlspecialchars($room['name']) ?></h3>
+                        <p class="room-price">$<?= number_format($room['price'], 2) ?>/night</p>
                     </div>
+                </div>
                 <?php endforeach; ?>
             </div>
         </div>
@@ -109,7 +109,8 @@
             </div>
             <div class="comments-container">
                 <!-- Comment Card 1 -->
-                <div class="comment-card comment-card-1">
+                <div class="comment-card comment-card-1"
+                    style="background-image: url('<?= $this->configs->config['pathAssets'] ?>/img/ourservice/bg-card.png')">
                     <div class="comment-content">
                         <h3 class="comment-title">A very good place!</h3>
                         <p class="comment-text">Lorem ipsum dolor sit amet, nam quis nostrud exercitation ullamco
@@ -123,7 +124,8 @@
                 </div>
 
                 <!-- Comment Card 2 -->
-                <div class="comment-card comment-card-2">
+                <div class="comment-card comment-card-2"
+                    style="background-image: url('<?= $this->configs->config['pathAssets'] ?>/img/ourservice/bg-card.png')">
 
                     <div class="comment-content">
                         <h3 class="comment-title">A very good place!</h3>
@@ -139,7 +141,8 @@
 
 
                 <!-- Comment Card 3 -->
-                <div class="comment-card comment-card-3">
+                <div class="comment-card comment-card-3"
+                    style="background-image: url('<?= $this->configs->config['pathAssets'] ?>/img/ourservice/bg-card.png')">
 
                     <div class="comment-content">
                         <h3 class="comment-title">A very good place!</h3>
@@ -164,15 +167,18 @@
                 <h1 class="main-title">Stay Connected With Us</h1>
 
                 <div class="gallery-container">
-                    <div class="gallery-item">
+                    <div class="gallery-item"
+                        style="background-image: url('<?= $this->configs->config['pathAssets'] ?>/img/ourservice/card-ig.png')">
 
                     </div>
 
-                    <div class="gallery-item instagram">
+                    <div class="gallery-item instagram"
+                        style="background-image: url('<?= $this->configs->config['pathAssets'] ?>/img/ourservice/card-ig01.png')">
 
                     </div>
 
-                    <div class="gallery-item">
+                    <div class="gallery-item"
+                        style="background-image: url('<?= $this->configs->config['pathAssets'] ?>/img/ourservice/card-ig02.png')">
 
                     </div>
                 </div>
@@ -192,7 +198,7 @@
     </div>
 </div>
 
-<script src="<?= $this->configs->config['pathAssets'] ?>js/main.js"></script>
+<script src="<?= $this->configs->config['pathAssets'] ?>js/homepage.js"></script>
 </body>
 
 </html>
