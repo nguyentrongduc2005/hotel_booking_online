@@ -8,7 +8,7 @@ use app\core\Registry;
 
 class AuthorMiddleware
 {
-    public function author()
+    public function author($req, $res)
     {
         Controller::setLayout("Adminlayouts/main");
         Controller::setcomponent('/admin');
@@ -19,3 +19,4 @@ class AuthorMiddleware
 
     public function show2() {}
 }
+  
