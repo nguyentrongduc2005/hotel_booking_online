@@ -31,22 +31,22 @@ class AuthenController extends Controller
         $user =  $this->model->findUserbyEmail($email);
         //xác thực tài khoản mật khẩu
         if (!$user) {
-            $this->render('login', ['message' => 'Invalid email or password.', 'email' => '', "password" => '']);
+            $this->renderPartial('auth/login', ['message' => 'Invalid email or password.', 'email' => '', "password" => '']);
             return;
         }
         if ($user['pass'] !== $password) {
-            $this->render('login', ['message' => 'Invalid email or password.', 'email' => '', "password" => '']);
+            $this->renderPartial('auth/login', ['message' => 'Invalid email or password.', 'email' => '', "password" => '']);
             return;
         }
         if ($this->model->findTokenbyId($user["user_id"])) {
-            $this->render('login', ['message' => "This account is already logged in on another device.", 'email' => '', "password" => '']);
+            $this->renderPartial('auth/login', ['message' => "This account is already logged in on another device.", 'email' => '', "password" => '']);
             return;
         }
 
         //tạo token và lưu vào db
         $idtoken = $this->model->generateAndInsertToken($user["user_id"]);
         if (!$idtoken) {
-            $this->render('login', ['message' => "Something went wrong. Please try again.", 'email' => '', "password" => '']);
+            $this->renderPartial('auth/login', ['message' => "Something went wrong. Please try again.", 'email' => '', "password" => '']);
             return;
         }
         //lưu vào token session để client có thể request
@@ -56,7 +56,7 @@ class AuthenController extends Controller
         }
 
 
-        $this->render('login', ['message' => "Login successful. Redirecting...", 'email' => $email, "password" => $password]);
+        $this->renderPartial('auth/login', ['message' => "Login successful. Redirecting...", 'email' => $email, "password" => $password, 'access' => true]);
 
 
         // session_unset();     // Xoá tất cả biến session
@@ -78,14 +78,14 @@ class AuthenController extends Controller
         if ($this->model->findUserbySDT($user['sdt'])) {
             $user['sdt'] = "";
             $user['message'] = "This phone number is already linked to another account.";
-            $this->render('regis', $user);
+            $this->renderPartial('auth/regis', $user);
             return;
         }
 
         if ($this->model->findUserbyCCCD($user['cccd'])) {
             $user['cccd'] = "";
             $user['message'] = "This ID card number has already been registered.";
-            $this->render('regis', $user);
+            $this->renderPartial('auth/regis', $user);
             return;
         }
 
@@ -93,22 +93,22 @@ class AuthenController extends Controller
         $idUser = $this->model->insertUser($user);
         if (!$idUser) {
             $user['message'] = "Something went wrong. Please try again.";
-            $this->render('regis', $user);
+            $this->renderPartial('auth/regis', $user);
             return;
         }
-        echo $idUser;
+
         //lưu token vào db user và session để điều hướng trang qua trang home
         $idtoken = $this->model->generateAndInsertToken($idUser);
         if (!$idtoken) {
             $user['message'] = "Something went wrong. Please try again.";
-            $this->render('regis', $user);
+            $this->renderPartial('auth/regis', $user);
             return;
         }
         $token = $this->model->findTokenbyId($idtoken);
         if ($token) {
             $_SESSION['user_token'] = $token['token'];
         }
-        $user['message'] = "Login successful. Redirecting...";
-        $this->render('login', $user);
+        $user['message'] = "Register successful. Redirecting... ";
+        $this->renderPartial('auth/regis', $user);
     }
 }
