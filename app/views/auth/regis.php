@@ -3,7 +3,8 @@
 
 <div class="regis-bg-overlay">
   <div class="regis-main-container">
-    <div class="regis-right" style="background-image: url('<?= $this->configs->config['pathAssets'] ?>/img/bg-regis.png')"></div>
+    <div class="regis-right"
+      style="background-image: url('<?= $this->configs->config['pathAssets'] ?>/img/bg-regis.png')"></div>
     <div class="regis-left">
       <div class="regis-title">CREATE YOUR ACCOUNT</div>
       <form class="regis-form" method="post" action="<?= $this->configs->config['basePath'] ?>regis">
@@ -19,6 +20,13 @@
           <div class="regis-message"><?= htmlspecialchars($message) ?></div>
         <?php endif; ?>
       </form>
+      <?php if (isset($access)) {
+        echo "  <script>
+        setTimeout(function() {
+            window.location.href = '$access'
+        },1000)
+        </script>";
+      } ?>
       <div class="regis-bottom-link">
         Already you have an account?
         <a href="<?= $this->configs->config['basePath'] ?>login" class="regis-login-link">Login</a>

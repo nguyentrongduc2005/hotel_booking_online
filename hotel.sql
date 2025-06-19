@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 12, 2025 at 09:12 AM
+-- Generation Time: Jun 19, 2025 at 01:02 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -70,7 +70,7 @@ CREATE TABLE `booking` (
   `created_at` datetime DEFAULT current_timestamp(),
   `transaction_id` int(11) NOT NULL,
   `id_room` int(11) DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `booking`
@@ -96,7 +96,7 @@ CREATE TABLE `guest` (
   `mail` varchar(255) DEFAULT NULL,
   `sdt` varchar(10) DEFAULT NULL,
   `created_at` datetime DEFAULT current_timestamp()
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `guest`
@@ -126,7 +126,7 @@ CREATE TABLE `historybooking` (
   `date_booking` date NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `guest_id` int(11) DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `historybooking`
@@ -235,12 +235,12 @@ CREATE TABLE `room` (
 --
 
 INSERT INTO `room` (`id_room`, `capacity`, `amount_bed`, `price`, `floor_number`, `status`, `created_at`, `description`, `slug`, `area`, `name`, `id_room_type`, `thumb`) VALUES
-(1, 2, 1, 600000.00, 2, 'available', '2025-06-08 17:21:49', 'A minimalist, modern, and economical room. Fully equipped with Wi-Fi, cable TV, air conditioning, work desk, wardrobe, private bathroom with shower and toiletries. Glossy floor, neutral tones, double-layer curtains for comfort and hygiene.', 'standard-room', 22, 'Standard Room', 1, '/img/room/a(1).jpg'),
-(2, 3, 1, 750000.00, 3, 'available', '2025-06-08 17:21:49', 'An upgrade from Standard with minibar, Smart TV, safe, large work desk, full-length mirror, daily housekeeping. Modern wooden interior, warm tones. Ideal for long business stays or leisure.', 'superior-room', 27, 'Superior Room', 2, '/img/room/b(1).jpg'),
-(3, 3, 1, 1200000.00, 4, 'available', '2025-06-08 17:21:49', 'Luxurious space with high-end furniture: natural wood, velvet, bathtub, minibar, electronic safe, hairdryer, and quiet air conditioning. Good natural light and views. Suitable for business or leisure travelers.', 'deluxe-room', 32, 'Deluxe Room', 3, '/img/room/c(1).jpg'),
-(4, 4, 2, 2500000.00, 5, 'available', '2025-06-08 17:21:49', 'A high-end mini-apartment style suite: separate living room, coffee machine, premium sofa, work desk. Natural wood interior, granite, blackout curtains. Large bathtub and luxurious robes. For families, special occasions, or VIPs.', 'suite-room', 50, 'Suite Room', 4, '/img/room/d(1).jpg'),
-(5, 4, 2, 1800000.00, 3, 'available', '2025-06-08 17:21:49', 'Common living space, dining area, microwave, fridge—ideal for families. Large tub for children, full family amenities like Wi-Fi, cable TV. Child-friendly and safe design.', 'family-room', 42, 'Family Room', 5, '/img/room/e(1).jpg'),
-(6, 1, 1, 650000.00, 1, 'available', '2025-06-08 17:21:49', 'A neat room for solo travelers or short business stays. Includes work desk, Wi-Fi, air conditioning, TV, private bathroom. Prioritizes privacy and space-saving convenience.', 'single-room', 17, 'Single Room', NULL, '/img/room/f(1).jpg');
+(1, 2, 1, 28.00, 2, 'available', '2025-06-08 17:21:49', 'A minimalist, modern, and economical room. Fully equipped with Wi-Fi, cable TV, air conditioning, work desk, wardrobe, private bathroom with shower and toiletries. Glossy floor, neutral tones, double-layer curtains for comfort and hygiene.', 'standard-room', 22, 'Standard Room', 1, '/img/room/a(1).jpg'),
+(2, 3, 1, 30.00, 3, 'available', '2025-06-08 17:21:49', 'An upgrade from Standard with minibar, Smart TV, safe, large work desk, full-length mirror, daily housekeeping. Modern wooden interior, warm tones. Ideal for long business stays or leisure.', 'superior-room', 27, 'Superior Room', 2, '/img/room/b(1).jpg'),
+(3, 3, 1, 48.00, 4, 'available', '2025-06-08 17:21:49', 'Luxurious space with high-end furniture: natural wood, velvet, bathtub, minibar, electronic safe, hairdryer, and quiet air conditioning. Good natural light and views. Suitable for business or leisure travelers.', 'deluxe-room', 32, 'Deluxe Room', 3, '/img/room/c(1).jpg'),
+(4, 4, 2, 100.00, 5, 'available', '2025-06-08 17:21:49', 'A high-end mini-apartment style suite: separate living room, coffee machine, premium sofa, work desk. Natural wood interior, granite, blackout curtains. Large bathtub and luxurious robes. For families, special occasions, or VIPs.', 'suite-room', 50, 'Suite Room', 4, '/img/room/d(1).jpg'),
+(5, 4, 2, 72.00, 3, 'available', '2025-06-08 17:21:49', 'Common living space, dining area, microwave, fridge—ideal for families. Large tub for children, full family amenities like Wi-Fi, cable TV. Child-friendly and safe design.', 'family-room', 42, 'Family Room', 5, '/img/room/e(1).jpg'),
+(6, 1, 1, 26.00, 1, 'available', '2025-06-08 17:21:49', 'A neat room for solo travelers or short business stays. Includes work desk, Wi-Fi, air conditioning, TV, private bathroom. Prioritizes privacy and space-saving convenience.', 'single-room', 17, 'Single Room', 6, '/img/room/f(1).jpg');
 
 -- --------------------------------------------------------
 
@@ -292,7 +292,8 @@ INSERT INTO `room_type` (`id_type_room`, `name_type_room`, `description`) VALUES
 (2, 'Superior Room', 'Superior Room of 25–30 m², accommodates 2 adults + 1 child. Modern design with minibar, mini fridge, safe, large work desk, bathroom with shower or bathtub, daily housekeeping. Suitable for guests seeking enhanced comfort.'),
 (3, 'Deluxe Room', 'Deluxe Room with an area of 30–35 m², fits 2 adults + 1 child. Features a relaxing bathtub, diverse minibar, safe, hairdryer, modern air conditioner. Luxurious space ideal for upscale leisure experiences.'),
 (4, 'Suite Room', 'Suite Room from 40–60 m², accommodates 2 adults + 2 children. Includes a private living room with sofa, coffee machine, large bathtub, safe, minibar. Offers high-end comfort, perfect for small families or business guests.'),
-(5, 'Family Room', 'Family Room of 35–50 m², suitable for 3–4 people. Cozy design with dining area, microwave, fridge, bathtub. Ideal for families on vacation with kids, fully equipped like a home.');
+(5, 'Family Room', 'Family Room of 35–50 m², suitable for 3–4 people. Cozy design with dining area, microwave, fridge, bathtub. Ideal for families on vacation with kids, fully equipped like a home.'),
+(6, 'Single Room\r\n', 'Single Room with area of 15–20 m², for 1 person. Compact and efficient, includes work desk, air conditioning, high-speed Wi-Fi. Best for solo travelers or business stays, offering privacy and convenience.\r\n');
 
 -- --------------------------------------------------------
 
@@ -345,7 +346,7 @@ CREATE TABLE `transaction` (
   `payment_status` enum('pending','completed','failed','refunded') DEFAULT 'pending',
   `payment_method` enum('cash','credit card','bank transfer','Momo','ZaloPay') NOT NULL,
   `created_at` datetime DEFAULT current_timestamp()
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `transaction`
@@ -366,7 +367,7 @@ INSERT INTO `transaction` (`transaction_id`, `total_amount`, `payment_status`, `
 
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
-  `mail` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `sdt` varchar(10) NOT NULL,
   `cccd` varchar(20) DEFAULT NULL,
   `pass` varchar(255) NOT NULL,
@@ -374,16 +375,16 @@ CREATE TABLE `user` (
   `created_at` datetime DEFAULT current_timestamp(),
   `discount` int(11) DEFAULT NULL,
   `role` enum('user','admin') DEFAULT 'user'
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `mail`, `sdt`, `cccd`, `pass`, `full_name`, `created_at`, `discount`, `role`) VALUES
+INSERT INTO `user` (`user_id`, `email`, `sdt`, `cccd`, `pass`, `full_name`, `created_at`, `discount`, `role`) VALUES
 (1, 'minhtld1451@ut.edu.vn', '0393336649', '086205001451', 'abc123', 'Trần Lê Duy Minh', '2025-06-01 10:00:00', 10, 'admin'),
 (2, 'linh2712nha@gmail.com', '0971815720', '086205001452', 'pass456', 'Nguyễn Quang Linh', '2025-06-02 09:30:00', 1, 'user'),
-(3, 'nguyentrongduc447@gmail.com', '0866225534', '086205001453', 'secret789', 'Nguyễn Trọng Đức', '2025-06-03 11:45:00', 0, 'user'),
+(3, 'nguyentrongduc447@gmail.com', '0866225534', '086205001453', '123', 'Nguyễn Trọng Đức', '2025-06-03 11:45:00', 0, 'user'),
 (4, 'huynhdaihafc@gmail.com', '0903348270', '086205001454', 'hoang321', 'Huỳnh Đại Hà', '2025-06-04 08:20:00', 2, 'user'),
 (5, 'thinhlt1681@ut.edu.vn', '0365574437', '086205001455', 'kimanh456', 'Lê Trường Thịnh', '2025-06-05 14:15:00', 3, 'user');
 
@@ -477,7 +478,7 @@ ALTER TABLE `transaction`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`),
-  ADD UNIQUE KEY `mail` (`mail`),
+  ADD UNIQUE KEY `mail` (`email`),
   ADD UNIQUE KEY `cccd` (`cccd`);
 
 --
@@ -494,19 +495,19 @@ ALTER TABLE `amenity`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `id_booking` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_booking` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `guest`
 --
 ALTER TABLE `guest`
-  MODIFY `guest_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `guest_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `historybooking`
 --
 ALTER TABLE `historybooking`
-  MODIFY `id_history` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_history` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `image_room`
@@ -524,7 +525,7 @@ ALTER TABLE `room`
 -- AUTO_INCREMENT for table `room_type`
 --
 ALTER TABLE `room_type`
-  MODIFY `id_type_room` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_type_room` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `services`
@@ -536,19 +537,19 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT for table `token`
 --
 ALTER TABLE `token`
-  MODIFY `id_token` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_token` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables

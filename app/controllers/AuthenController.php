@@ -50,13 +50,21 @@ class AuthenController extends Controller
             return;
         }
         //lưu vào token session để client có thể request
-        $token = $this->model->findTokenbyId($idtoken);
+        $token = $this->model->findTokenByToken($idtoken);
         if ($token) {
             $_SESSION['user_token'] = $token['token'];
+            $now = time();               // thời gian hiện tại (timestamp)
+            $after30Min = $now + 1800;
+            $_SESSION['timer'] = $after30Min;
         }
 
 
-        $this->renderPartial('auth/login', ['message' => "Login successful. Redirecting...", 'email' => $email, "password" => $password, 'access' => true]);
+        $this->renderPartial('auth/login', [
+            'message' => "Login successful. Redirecting...",
+            'email' => $email,
+            "password" => $password,
+            "access" => $this->getConfig('basePath')
+        ]);
 
 
         // session_unset();     // Xoá tất cả biến session
@@ -104,11 +112,46 @@ class AuthenController extends Controller
             $this->renderPartial('auth/regis', $user);
             return;
         }
-        $token = $this->model->findTokenbyId($idtoken);
+        $token = $this->model->findTokenByToken($idtoken);
         if ($token) {
             $_SESSION['user_token'] = $token['token'];
+            $now = time();               // thời gian hiện tại (timestamp)
+            $after30Min = $now + 1800;
+            $_SESSION['timer'] = $after30Min;
         }
         $user['message'] = "Register successful. Redirecting... ";
+        $user['access'] =  $this->getConfig('basePath');
         $this->renderPartial('auth/regis', $user);
+    }
+
+
+    function logoutHandler($req, $res)
+    {
+        if (isset($_SESSION["user_token"])) {
+            if (!$this->model->findTokenByToken($_SESSION["user_token"])) {
+                session_unset();
+                session_destroy();
+                $this->renderPartial('auth/login', ['email' => '', 'password' => '', 'message' => '']);
+            }
+
+            if ($this->model->deleteToken($_SESSION["user_token"])) {
+                session_unset();
+                session_destroy();
+                $this->renderPartial('auth/login', ['email' => '', 'password' => '', 'message' => '']);
+            }
+        } else {
+            $this->renderPartial('auth/login', ['email' => '', 'password' => '', 'message' => '']);
+        }
+    }
+
+
+    function refeshToken($req, $res)
+    {
+        if (isset($_SESSION['timer'])) {
+            $now = time();               // thời gian hiện tại (timestamp)
+            $after30Min = $now + 1800;
+            $_SESSION['timer'] = $after30Min;
+            return $res->json(['refreshToken' => true])->send();
+        }
     }
 }

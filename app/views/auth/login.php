@@ -9,7 +9,8 @@ $password = $password ?? '';
 <div class="login-bg-overlay">
   <div class="login-main-container">
     <div class="login-left">
-      <button class="login-signup-btn" onclick="window.location.href='<?= $this->configs->config['basePath'] ?>regis'">Sign up</button>
+      <button class="login-signup-btn"
+        onclick="window.location.href='<?= $this->configs->config['basePath'] ?>regis'">Sign up</button>
       <div class="login-title">WELCOME TO DIAMOND!</div>
       <div class="login-sub">Sign in your account</div>
       <form class="login-form" method="post" action="<?= $this->configs->config['basePath'] ?>login">
@@ -27,7 +28,7 @@ $password = $password ?? '';
 
   </div>
   <?php if (!empty($errors['password'])): ?>
-    <div class="error">
+    <div class=" error">
       <?= implode('<br>', array_map('htmlspecialchars', $errors['password'])) ?>
     </div>
   <?php endif; ?>
@@ -41,12 +42,19 @@ $password = $password ?? '';
     <div class="login-message"><?= htmlspecialchars($message) ?></div>
   <?php endif; ?>
   <?php if (isset($access)) {
-    $this->redirect($this->configs->config['basePath']);
+    echo "  <script>
+        setTimeout(function() {
+            window.location.href = '$access'
+        },1000)
+        </script>";
   } ?>
+
+
 
   </form>
   </div>
-  <div class="login-right" style="background-image: url('<?= $this->configs->config['pathAssets'] ?>/img/bg-login.png')"></div>
+  <div class="login-right"
+    style="background-image: url('<?= $this->configs->config['pathAssets'] ?>/img/bg-login.png')"></div>
 </div>
 </div>
 
