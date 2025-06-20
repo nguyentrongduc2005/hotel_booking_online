@@ -93,7 +93,7 @@ CREATE TABLE `guest` (
   `guest_id` int(11) NOT NULL,
   `full_name` varchar(100) NOT NULL,
   `cccd` varchar(20) DEFAULT NULL,
-  `mail` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
   `sdt` varchar(10) DEFAULT NULL,
   `created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -102,7 +102,7 @@ CREATE TABLE `guest` (
 -- Dumping data for table `guest`
 --
 
-INSERT INTO `guest` (`guest_id`, `full_name`, `cccd`, `mail`, `sdt`, `created_at`) VALUES
+INSERT INTO `guest` (`guest_id`, `full_name`, `cccd`, `email`, `sdt`, `created_at`) VALUES
 (1, 'Trần Lê Duy Minh', '086205001451', 'minhtld1451@ut.edu.vn', '0393336649', '2025-06-01 10:30:00'),
 (2, 'Nguyễn Quang Linh', '086205001452', 'linh2712nha@gmail.com', '0971815720', '2025-06-03 14:00:00'),
 (3, 'Nguyễn Trọng Đức', '086205001453', 'nguyentrongduc447@gmail.com', '0866225534', '2025-06-05 09:45:00'),
