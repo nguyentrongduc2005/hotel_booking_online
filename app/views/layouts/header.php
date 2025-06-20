@@ -1,33 +1,34 @@
 <!-- Header CSS -->
 <link rel="stylesheet" href="<?= $this->configs->config['pathAssets'] ?>css/header.css?v=<?= time() ?>">
 <header class="header">
-  <nav class="navbar">
-    <div class="navbar-container">
-      <!-- Logo diamond -->
-      <div class="navbar-brand">
-        <a href="<?= $this->configs->config['basePath'] ?>">
-          <img src="<?= $this->configs->config['pathAssets'] ?>icon/diamond_logo_small.png"
-            alt="Diamond Hotel">
-        </a>
-      </div>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <!-- Logo diamond -->
+            <div class="navbar-brand">
+                <a href="<?= $this->configs->config['basePath'] ?>">
+                    <img src="<?= $this->configs->config['pathAssets'] ?>icon/diamond_logo_small.png"
+                        alt="Diamond Hotel">
+                </a>
+            </div>
 
-      <!-- content  chính -->
-      <div class="navbar-menu">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a href="<?= $this->configs->config['basePath'] ?>" class="nav-link">Home</a>
-          </li>
-          <li class="nav-item">
-            <a href="<?= $this->configs->config['basePath'] ?>listroom" class="nav-link">Rooms</a>
-          </li>
-          <li class="nav-item">
-            <a href="<?= $this->configs->config['basePath'] ?>" class="nav-link">Our services</a>
-          </li>
-          <li class="nav-item">
-            <a href="<?= $this->configs->config['basePath'] ?>contact" class="nav-link">Contact us</a>
-          </li>
-        </ul>
-      </div>
+            <!-- content  chính -->
+            <div class="navbar-menu">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="<?= $this->configs->config['basePath'] ?>" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= $this->configs->config['basePath'] ?>listroom" class="nav-link">Rooms</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= $this->configs->config['basePath'] ?>" class="nav-link">Our services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= $this->configs->config['basePath'] ?>contact" class="nav-link">Contact us</a>
+                    </li>
+                </ul>
+            </div>
+
 
       <!-- Phần đăng nhập-->
       <div class="btn btn-login">
@@ -42,6 +43,7 @@
 
 <!-- Popup Login -->
 <div id="loginPopup" class="login-popup" style="display:none;">
+
   <div class="login-popup-content">
     <div class="login-popup-header">
       <?php if (isset($_SESSION["user_token"])) { ?>
@@ -84,8 +86,8 @@
           <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-logout.png" alt="Diamond Hotel">Log out
         </a>
       <?php } ?>
+
     </div>
-  </div>
 </div>
 <!-- End Popup Login -->
 
