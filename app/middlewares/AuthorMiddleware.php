@@ -41,7 +41,7 @@ class AuthorMiddleware
             session_destroy();
             return true;
         }
-        if (!isset($_SESSION['user_name']) && !isset($_SESSION['role']) && !isset($_SESSION['user_email']) && !isset($_SESSION['level'])) return true;
+        if (isset($_SESSION['user_name']) && isset($_SESSION['role']) && isset($_SESSION['user_email']) && isset($_SESSION['level'])) return true;
         // set thông tin user vào token lấy role
         $_SESSION['user_name'] = isset($user['full_name']) ? $user['full_name'] : '';
         $_SESSION['role'] = isset($user['role']) ? $user['role'] : '';
@@ -82,8 +82,10 @@ class AuthorMiddleware
     public function checkRoleUser($req, $res)
     {
 
+
         if (isset($_SESSION['role'])) {
             if ($_SESSION['role'] === 'user') {
+
                 return true;
             } else if ($_SESSION['role'] === 'admin') {
                 throw new AppException("Forbidden", 403);

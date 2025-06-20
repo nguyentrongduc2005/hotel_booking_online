@@ -128,15 +128,15 @@ class AuthenController extends Controller
     function logoutHandler($req, $res)
     {
         if (isset($_SESSION["user_token"])) {
-            if (!$this->model->findTokenByidToken($_SESSION["user_token"])) {
-                session_unset();
-                session_destroy();
-                $this->renderPartial('auth/login', ['email' => '', 'password' => '', 'message' => '']);
-            }
+            $id_token = $this->model->findTokenByToken($_SESSION["user_token"]);
+            if ($id_token) {
+                if ($this->model->deleteToken($id_token['id_token'])) {
+                    session_unset();
+                    session_destroy();
+                    $this->renderPartial('auth/login', ['email' => '', 'password' => '', 'message' => '']);
+                }
+            } else {
 
-            if ($this->model->deleteToken($_SESSION["user_token"])) {
-                session_unset();
-                session_destroy();
                 $this->renderPartial('auth/login', ['email' => '', 'password' => '', 'message' => '']);
             }
         } else {
