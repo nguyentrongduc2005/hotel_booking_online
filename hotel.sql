@@ -93,7 +93,7 @@ CREATE TABLE `guest` (
   `guest_id` int(11) NOT NULL,
   `full_name` varchar(100) NOT NULL,
   `cccd` varchar(20) DEFAULT NULL,
-  `mail` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
   `sdt` varchar(10) DEFAULT NULL,
   `created_at` datetime DEFAULT current_timestamp()
 ) ;
@@ -102,7 +102,7 @@ CREATE TABLE `guest` (
 -- Dumping data for table `guest`
 --
 
-INSERT INTO `guest` (`guest_id`, `full_name`, `cccd`, `mail`, `sdt`, `created_at`) VALUES
+INSERT INTO `guest` (`guest_id`, `full_name`, `cccd`, `email`, `sdt`, `created_at`) VALUES
 (1, 'Trần Lê Duy Minh', '086205001451', 'minhtld1451@ut.edu.vn', '0393336649', '2025-06-01 10:30:00'),
 (2, 'Nguyễn Quang Linh', '086205001452', 'linh2712nha@gmail.com', '0971815720', '2025-06-03 14:00:00'),
 (3, 'Nguyễn Trọng Đức', '086205001453', 'nguyentrongduc447@gmail.com', '0866225534', '2025-06-05 09:45:00'),
@@ -366,7 +366,7 @@ INSERT INTO `transaction` (`transaction_id`, `total_amount`, `payment_status`, `
 
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
-  `mail` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `sdt` varchar(10) NOT NULL,
   `cccd` varchar(20) DEFAULT NULL,
   `pass` varchar(255) NOT NULL,
@@ -380,7 +380,7 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `mail`, `sdt`, `cccd`, `pass`, `full_name`, `created_at`, `discount`, `role`) VALUES
+INSERT INTO `user` (`user_id`, `email`, `sdt`, `cccd`, `pass`, `full_name`, `created_at`, `discount`, `role`) VALUES
 (1, 'minhtld1451@ut.edu.vn', '0393336649', '086205001451', 'abc123', 'Trần Lê Duy Minh', '2025-06-01 10:00:00', 10, 'admin'),
 (2, 'linh2712nha@gmail.com', '0971815720', '086205001452', 'pass456', 'Nguyễn Quang Linh', '2025-06-02 09:30:00', 1, 'user'),
 (3, 'nguyentrongduc447@gmail.com', '0866225534', '086205001453', 'secret789', 'Nguyễn Trọng Đức', '2025-06-03 11:45:00', 0, 'user'),
