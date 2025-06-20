@@ -55,3 +55,28 @@ class ListRoomModel
         return $data ?: [];
     }
 }
+// get,lọc, ngày tháng,trả về view, phân trang
+// Lấy danh sách phòng, lọc theo loại phòng,lọc theo giá, phân trang, lọc theo trạng thái đã checkout hay chưa checkout
+// Lấy danh sách loại phòng, trả về view
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
