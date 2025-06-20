@@ -63,7 +63,7 @@ class AuthenController extends Controller
             'message' => "Login successful. Redirecting...",
             'email' => $email,
             "password" => $password,
-            "access" => $this->getConfig('basePath')
+            "access" => $user['role'] == 'admin' ? $this->getConfig('basePath') . '/dashboard' : $this->getConfig('basePath')
         ]);
 
 

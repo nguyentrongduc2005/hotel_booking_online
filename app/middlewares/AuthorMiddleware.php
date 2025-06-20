@@ -4,15 +4,13 @@ namespace app\middlewares;
 
 use app\core\db;
 use app\core\Controller;
-
+use app\core\AppException;
 
 class AuthorMiddleware
 {
     public function checktoken($req, $res)
     {
 
-        // Controller::setLayout("Adminlayouts/main");
-        // Controller::setcomponent('/admin');
         //kiểm tra có token không 
         if (empty($_SESSION['user_token']) || empty($_SESSION['timer'])) return true;
 
@@ -34,7 +32,7 @@ class AuthorMiddleware
             return true;
         }
         //nếu khớp tìm user của token
-        $sqlUser = "SELECT discount, email, full_name, role from user where user.user_id = :id;";
+        $sqlUser = "SELECT discount, email, full_name, user.role from user where user.user_id = :id;";
         $user = db::getOne($sqlUser, ['id' => $data['user_id']]);
         //token không chủ
         if (!$user) {
@@ -43,6 +41,7 @@ class AuthorMiddleware
             session_destroy();
             return true;
         }
+        if (!isset($_SESSION['user_name']) && !isset($_SESSION['role']) && !isset($_SESSION['user_email']) && !isset($_SESSION['level'])) return true;
         // set thông tin user vào token lấy role
         $_SESSION['user_name'] = isset($user['full_name']) ? $user['full_name'] : '';
         $_SESSION['role'] = isset($user['role']) ? $user['role'] : '';
@@ -51,6 +50,7 @@ class AuthorMiddleware
 
         return true;
     }
+
     public function author($req, $res)
     {
         // Controller::setLayout("Adminlayouts/main");
@@ -60,6 +60,36 @@ class AuthorMiddleware
         if ($_SESSION['role'] === 'admin') {
             Controller::setLayout("Adminlayouts/main");
             Controller::setcomponent('/admin');
+        } else if ($_SESSION['role'] === 'user') {
+            Controller::setLayout("layouts/main");
+            Controller::setcomponent('/user');
+        }
+
+        return true;
+    }
+    public function checkRoleAdmin($req, $res)
+    {
+        if (isset($_SESSION['role'])) {
+            if ($_SESSION['role'] === 'admin') {
+                return true;
+            } else if ($_SESSION['role'] === 'user') {
+                throw new AppException("Forbidden", 403);
+            }
+        } else {
+            throw new AppException("Forbidden", 403);
+        }
+    }
+    public function checkRoleUser($req, $res)
+    {
+
+        if (isset($_SESSION['role'])) {
+            if ($_SESSION['role'] === 'user') {
+                return true;
+            } else if ($_SESSION['role'] === 'admin') {
+                throw new AppException("Forbidden", 403);
+            }
+        } else {
+            return true;
         }
     }
 }
