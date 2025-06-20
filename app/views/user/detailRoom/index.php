@@ -1,9 +1,4 @@
-   
-   <link rel="stylesheet" href="<?= $this->configs->config['pathAssets'] ?>css/detailRoom.css?v=<?= time() ?>" />
-    <!-- <?php echo '<pre>';
-
-            print_r($data);
-            ?> -->
+    <link rel="stylesheet" href="<?= $this->configs->config['pathAssets'] ?>css/detailRoom.css?v=<?= time() ?>" />
     <main class="room-details">
         <div class="left-info">
             <!-- Thêm ảnh vô đây -->
@@ -54,7 +49,7 @@
                 <ul>
                     <?php if (!empty($data['amenities'])): ?>
                         <?php foreach ($data['amenities'] as $amenity): ?>
-                            <li> <?= $amenity['name'] ?></li>
+                            <li> <i class="icon-amenity"></i> <?= $amenity['name'] ?></li>
                         <?php endforeach; ?>
                     <?php endif; ?>
                 </ul>

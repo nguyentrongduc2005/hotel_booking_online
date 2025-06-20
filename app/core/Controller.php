@@ -15,7 +15,10 @@ class Controller
             self::$componentView = $this->configs->config['viewpathComponent'];
         }
     }
-
+    public function getConfig($key)
+    {
+        return $this->configs->config[$key];
+    }
     static function setLayout($layout)
     {
         self::$layout = $layout;
