@@ -6,7 +6,8 @@
       <!-- Logo diamond -->
       <div class="navbar-brand">
         <a href="<?= $this->configs->config['basePath'] ?>">
-          <img src="<?= $this->configs->config['pathAssets'] ?>icon/diamond_logo_small.png" alt="Diamond Hotel">
+          <img src="<?= $this->configs->config['pathAssets'] ?>icon/diamond_logo_small.png"
+            alt="Diamond Hotel">
         </a>
       </div>
 
@@ -30,8 +31,10 @@
 
       <!-- Phần đăng nhập-->
       <div class="btn btn-login">
-        <img class='user_icon' src="<?= $this->configs->config['pathAssets'] ?>icon/User.png" alt="Diamond Hotel">
+        <img class='user_icon' src="<?= $this->configs->config['pathAssets'] ?>icon/User.png"
+          alt="Diamond Hotel">
         <a class='content_btn' href="<?= $this->configs->config['basePath'] ?>login">LOGIN</a>
+        <!-- <?php echo isset($_SESSION["user_name"]) ? $_SESSION['user_name'] : 'LOGIN' ?> -->
       </div>
     </div>
   </nav>
@@ -50,10 +53,16 @@
       </div>
     </div>
     <div class="login-popup-menu">
-      <div class="login-popup-item"> <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-user.png" alt="Diamond Hotel"> User</div>
-      <div class="login-popup-item"> <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-transaction.png" alt="Diamond Hotel"> Transaction</div>
-      <div class="login-popup-item"> <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-reservation.png" alt="Diamond Hotel"> My reservation</div>
-      <div class="login-popup-item"> <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-history.png" alt="Diamond Hotel"> My booking history</div>
+      <div class="login-popup-item"> <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-user.png"
+          alt="Diamond Hotel"> User</div>
+      <div class="login-popup-item"> <img
+          src="<?= $this->configs->config['pathAssets'] ?>icon/popup-transaction.png" alt="Diamond Hotel">
+        Transaction</div>
+      <div class="login-popup-item"> <img
+          src="<?= $this->configs->config['pathAssets'] ?>icon/popup-reservation.png" alt="Diamond Hotel"> My
+        reservation</div>
+      <div class="login-popup-item"> <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-history.png"
+          alt="Diamond Hotel"> My booking history</div>
     </div>
   </div>
 </div>

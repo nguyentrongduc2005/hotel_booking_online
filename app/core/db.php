@@ -103,7 +103,7 @@ class db
 
     public static function delete($tableName, $codition)
     {
-        $sql = "DELETE FROM $tableName WHERE" . $codition;
+        $sql = "DELETE FROM $tableName WHERE " . $codition;
         $stmt = self::connect()->prepare($sql);
         $stmt->execute();
         return $stmt->rowCount();

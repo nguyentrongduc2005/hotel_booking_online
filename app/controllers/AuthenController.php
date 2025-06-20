@@ -50,7 +50,7 @@ class AuthenController extends Controller
             return;
         }
         //lưu vào token session để client có thể request
-        $token = $this->model->findTokenByToken($idtoken);
+        $token = $this->model->findTokenByidToken($idtoken);
         if ($token) {
             $_SESSION['user_token'] = $token['token'];
             $now = time();               // thời gian hiện tại (timestamp)
@@ -112,7 +112,7 @@ class AuthenController extends Controller
             $this->renderPartial('auth/regis', $user);
             return;
         }
-        $token = $this->model->findTokenByToken($idtoken);
+        $token = $this->model->findTokenByidToken($idtoken);
         if ($token) {
             $_SESSION['user_token'] = $token['token'];
             $now = time();               // thời gian hiện tại (timestamp)
@@ -128,7 +128,7 @@ class AuthenController extends Controller
     function logoutHandler($req, $res)
     {
         if (isset($_SESSION["user_token"])) {
-            if (!$this->model->findTokenByToken($_SESSION["user_token"])) {
+            if (!$this->model->findTokenByidToken($_SESSION["user_token"])) {
                 session_unset();
                 session_destroy();
                 $this->renderPartial('auth/login', ['email' => '', 'password' => '', 'message' => '']);

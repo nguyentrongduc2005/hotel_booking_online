@@ -19,12 +19,19 @@ class AuthenModel
         $data = db::getOne($sql, ['user_id' => $id]);
         return $data ? $data : [];
     }
-    public function findTokenByToken($token)
+    public function findTokenByidToken($token)
     {
         $sql = "SELECT * FROM `token` WHERE token.id_token = :id_token";
         $data = db::getOne($sql, ['id_token' => $token]);
         return  $data ? $data : [];
     }
+
+    // public function findTokenByToken($token)
+    // {
+    //     $sql = "SELECT * FROM `token` WHERE token.token = :token";
+    //     $data = db::getOne($sql, ['token' => $token]);
+    //     return  $data ? $data : [];
+    // }
 
     public function deleteToken($token)
     {
