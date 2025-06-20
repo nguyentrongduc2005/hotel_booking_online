@@ -44,13 +44,29 @@
 <div id="loginPopup" class="login-popup" style="display:none;">
   <div class="login-popup-content">
     <div class="login-popup-header">
-      <div class="login-popup-avatar"></div>
-      <button class="login-popup-close" id="closeLoginPopup">&times;</button>
-      <a href="<?= $this->configs->config['basePath'] ?>login" class="login-popup-signup nav-link">LOGIN</a>
-      <div class="login-popup-login-link">
-        Don't have an account?
-        <a href="<?= $this->configs->config['basePath'] ?>regis" id="registerLink">sign up</a>
-      </div>
+      <?php if (isset($_SESSION["user_token"])) { ?>
+        <div class="login-popup-avatar" style="background-image: url('<?= $this->configs->config['pathAssets'] ?>/img/user/avatar.jpg')"></div>
+      <?php } ?>
+      <?php if (!isset($_SESSION["user_token"])) { ?>
+        <button class="login-popup-close" id="closeLoginPopup">&times;</button>
+        <a href="<?= $this->configs->config['basePath'] ?>login" class="login-popup-signup nav-link">LOGIN</a>
+      <?php } ?>
+      <?php if (!isset($_SESSION["user_token"])) { ?>
+        <div class="login-popup-login-link">
+          Don't have an account?
+          <a href="<?= $this->configs->config['basePath'] ?>regis" id="registerLink">sign up</a>
+        </div>
+      <?php } ?>
+      <?php if (isset($_SESSION["user_token"])) { ?>
+        <div class="login-popup-info">
+          <div class="login-popup-username">
+            <?= htmlspecialchars($_SESSION["user_name"] ?? '') ?>
+          </div>
+          <div class="login-popup-email">
+            <?= htmlspecialchars($_SESSION["user_email"] ?? '') ?>
+          </div>
+        </div>
+      <?php } ?>
     </div>
     <div class="login-popup-menu">
       <div class="login-popup-item"> <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-user.png"
