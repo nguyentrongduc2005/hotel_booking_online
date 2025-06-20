@@ -1,4 +1,5 @@
-    <link rel="stylesheet" href="<?= $this->configs->config['pathAssets'] ?>css/detailRoom.css?v=<?= time() ?>" />
+   
+   <link rel="stylesheet" href="<?= $this->configs->config['pathAssets'] ?>css/detailRoom.css?v=<?= time() ?>" />
     <!-- <?php echo '<pre>';
 
             print_r($data);
