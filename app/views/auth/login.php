@@ -5,57 +5,74 @@ $errors = $errors ?? [];
 $email = $email ?? '';
 $password = $password ?? '';
 ?>
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="login-bg-overlay">
-  <div class="login-main-container">
-    <div class="login-left">
-      <button class="login-signup-btn"
-        onclick="window.location.href='<?= $this->configs->config['basePath'] ?>regis'">Sign up</button>
-      <div class="login-title">WELCOME TO DIAMOND!</div>
-      <div class="login-sub">Sign in your account</div>
-      <form class="login-form" method="post" action="<?= $this->configs->config['basePath'] ?>login">
-        <label for="email">Your Email</label>
-        <input type="email" id="email" name="email" required value="<?= htmlspecialchars($email) ?>">
-        <?php if (!empty($errors['email'])): ?>
-          <div class="error"></div>
-          <?= implode('<br>', array_map('htmlspecialchars', $errors['email'])) ?>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/hotel_booking_online/public/assets/icon/diamond_logo_small.png" sizes="32x32"
+    type="image/png">
+  <title>Login</title>
+  <!-- <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet"> -->
+</head>
+
+<body>
+  <div class="login-bg-overlay">
+    <div class="login-main-container">
+      <div class="login-left">
+        <button class="login-signup-btn"
+          onclick="window.location.href='<?= $this->configs->config['basePath'] ?>regis'">Sign up</button>
+        <div class="login-title">WELCOME TO DIAMOND!</div>
+        <div class="login-sub">Sign in your account</div>
+        <form class="login-form" method="post" action="<?= $this->configs->config['basePath'] ?>login">
+          <label for="email">Your Email</label>
+          <input type="email" id="email" name="email" required value="<?= htmlspecialchars($email) ?>">
+          <?php if (!empty($errors['email'])): ?>
+            <div class="error"></div>
+            <?= implode('<br>', array_map('htmlspecialchars', $errors['email'])) ?>
+      </div>
+    <?php endif; ?>
+
+    <label for="password">Password</label>
+    <div class="login-password-row">
+      <input type="password" id="password" name="password" required>
+
     </div>
-  <?php endif; ?>
+    <?php if (!empty($errors['password'])): ?>
+      <div class=" error">
+        <?= implode('<br>', array_map('htmlspecialchars', $errors['password'])) ?>
+      </div>
+    <?php endif; ?>
 
-  <label for="password">Password</label>
-  <div class="login-password-row">
-    <input type="password" id="password" name="password" required>
-
-  </div>
-  <?php if (!empty($errors['password'])): ?>
-    <div class=" error">
-      <?= implode('<br>', array_map('htmlspecialchars', $errors['password'])) ?>
+    <div class="login-form-row">
+      <label class="login-remember"><input type="checkbox" name="remember"> Remember me</label>
+      <a href="#" class="login-forgot">Forgot password?</a>
     </div>
-  <?php endif; ?>
-
-  <div class="login-form-row">
-    <label class="login-remember"><input type="checkbox" name="remember"> Remember me</label>
-    <a href="#" class="login-forgot">Forgot password?</a>
-  </div>
-  <button type="submit" class="login-submit-btn">Login</button>
-  <?php if (!empty($message)): ?>
-    <div class="login-message"><?= htmlspecialchars($message) ?></div>
-  <?php endif; ?>
-  <?php if (isset($access)) {
-    echo "  <script>
+    <button type="submit" class="login-submit-btn">Login</button>
+    <?php if (!empty($message)): ?>
+      <div class="login-message"><?= htmlspecialchars($message) ?></div>
+    <?php endif; ?>
+    <?php if (isset($access)) {
+      echo "  <script>
         setTimeout(function() {
             window.location.href = '$access'
         },1000)
         </script>";
-  } ?>
+    } ?>
 
 
 
-  </form>
+    </form>
+    </div>
+    <div class="login-right"
+      style="background-image: url('<?= $this->configs->config['pathAssets'] ?>/img/bg-login.png')"></div>
   </div>
-  <div class="login-right"
-    style="background-image: url('<?= $this->configs->config['pathAssets'] ?>/img/bg-login.png')"></div>
-</div>
-</div>
+  </div>
 
-<script src="<?= $this->configs->config['pathAssets'] ?>js/login.js?v=<?= time() ?>"></script>
+  <script src="<?= $this->configs->config['pathAssets'] ?>js/login.js?v=<?= time() ?>"></script>
+</body>
+
+</html>

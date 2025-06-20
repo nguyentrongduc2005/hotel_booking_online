@@ -54,6 +54,7 @@
       <div class="login-popup-item"> <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-transaction.png" alt="Diamond Hotel"> Transaction</div>
       <div class="login-popup-item"> <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-reservation.png" alt="Diamond Hotel"> My reservation</div>
       <div class="login-popup-item"> <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-history.png" alt="Diamond Hotel"> My booking history</div>
+      <div class="login-popup-item"> <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-logout.png" alt="Diamond Hotel">Log out</div>
     </div>
   </div>
 </div>
