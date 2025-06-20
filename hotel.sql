@@ -414,7 +414,7 @@ ALTER TABLE `booking`
 ALTER TABLE `guest`
   ADD PRIMARY KEY (`guest_id`),
   ADD UNIQUE KEY `cccd` (`cccd`),
-  ADD UNIQUE KEY `mail` (`mail`);
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `historybooking`
