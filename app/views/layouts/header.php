@@ -1,70 +1,70 @@
 <!-- Header CSS -->
 <link rel="stylesheet" href="<?= $this->configs->config['pathAssets'] ?>css/header.css?v=<?= time() ?>">
 <header class="header">
-  <nav class="navbar">
-    <div class="navbar-container">
-      <!-- Logo diamond -->
-      <div class="navbar-brand">
-        <a href="<?= $this->configs->config['basePath'] ?>">
-          <img src="<?= $this->configs->config['pathAssets'] ?>icon/diamond_logo_small.png"
-            alt="Diamond Hotel">
-        </a>
-      </div>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <!-- Logo diamond -->
+            <div class="navbar-brand">
+                <a href="<?= $this->configs->config['basePath'] ?>">
+                    <img src="<?= $this->configs->config['pathAssets'] ?>icon/diamond_logo_small.png"
+                        alt="Diamond Hotel">
+                </a>
+            </div>
 
-      <!-- content  chính -->
-      <div class="navbar-menu">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a href="<?= $this->configs->config['basePath'] ?>" class="nav-link">Home</a>
-          </li>
-          <li class="nav-item">
-            <a href="<?= $this->configs->config['basePath'] ?>listroom" class="nav-link">Rooms</a>
-          </li>
-          <li class="nav-item">
-            <a href="<?= $this->configs->config['basePath'] ?>" class="nav-link">Our services</a>
-          </li>
-          <li class="nav-item">
-            <a href="<?= $this->configs->config['basePath'] ?>contact" class="nav-link">Contact us</a>
-          </li>
-        </ul>
-      </div>
+            <!-- content  chính -->
+            <div class="navbar-menu">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="<?= $this->configs->config['basePath'] ?>" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= $this->configs->config['basePath'] ?>listroom" class="nav-link">Rooms</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= $this->configs->config['basePath'] ?>" class="nav-link">Our services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= $this->configs->config['basePath'] ?>contact" class="nav-link">Contact us</a>
+                    </li>
+                </ul>
+            </div>
 
-      <!-- Phần đăng nhập-->
-      <div class="btn btn-login">
-        <img class='user_icon' src="<?= $this->configs->config['pathAssets'] ?>icon/User.png"
-          alt="Diamond Hotel">
-        <a class='content_btn' href="<?= $this->configs->config['basePath'] ?>login">LOGIN</a>
-        <!-- <?php echo isset($_SESSION["user_name"]) ? $_SESSION['user_name'] : 'LOGIN' ?> -->
-      </div>
-    </div>
-  </nav>
+            <!-- Phần đăng nhập-->
+            <div class="btn btn-login">
+                <img class='user_icon' src="<?= $this->configs->config['pathAssets'] ?>icon/User.png"
+                    alt="Diamond Hotel">
+                <a class='content_btn' href="<?= $this->configs->config['basePath'] ?>login">LOGIN</a>
+                <!-- <?php echo isset($_SESSION["user_name"]) ? $_SESSION['user_name'] : 'LOGIN' ?> -->
+            </div>
+        </div>
+    </nav>
 </header>
 
 <!-- Popup Login -->
 <div id="loginPopup" class="login-popup" style="display:none;">
-  <div class="login-popup-content">
-    <div class="login-popup-header">
-      <div class="login-popup-avatar"></div>
-      <button class="login-popup-close" id="closeLoginPopup">&times;</button>
-      <a href="<?= $this->configs->config['basePath'] ?>login" class="login-popup-signup nav-link">LOGIN</a>
-      <div class="login-popup-login-link">
-        Don't have an account?
-        <a href="<?= $this->configs->config['basePath'] ?>regis" id="registerLink">sign up</a>
-      </div>
+    <div class="login-popup-content">
+        <div class="login-popup-header">
+            <div class="login-popup-avatar"></div>
+            <button class="login-popup-close" id="closeLoginPopup">&times;</button>
+            <a href="<?= $this->configs->config['basePath'] ?>login" class="login-popup-signup nav-link">LOGIN</a>
+            <div class="login-popup-login-link">
+                Don't have an account?
+                <a href="<?= $this->configs->config['basePath'] ?>regis" id="registerLink">sign up</a>
+            </div>
+        </div>
+        <div class="login-popup-menu">
+            <div class="login-popup-item"> <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-user.png"
+                    alt="Diamond Hotel"> User</div>
+            <div class="login-popup-item"> <img
+                    src="<?= $this->configs->config['pathAssets'] ?>icon/popup-transaction.png" alt="Diamond Hotel">
+                Transaction</div>
+            <div class="login-popup-item"> <img
+                    src="<?= $this->configs->config['pathAssets'] ?>icon/popup-reservation.png" alt="Diamond Hotel"> My
+                reservation</div>
+            <div class="login-popup-item"> <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-history.png"
+                    alt="Diamond Hotel"> My booking history</div>
+        </div>
     </div>
-    <div class="login-popup-menu">
-      <div class="login-popup-item"> <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-user.png"
-          alt="Diamond Hotel"> User</div>
-      <div class="login-popup-item"> <img
-          src="<?= $this->configs->config['pathAssets'] ?>icon/popup-transaction.png" alt="Diamond Hotel">
-        Transaction</div>
-      <div class="login-popup-item"> <img
-          src="<?= $this->configs->config['pathAssets'] ?>icon/popup-reservation.png" alt="Diamond Hotel"> My
-        reservation</div>
-      <div class="login-popup-item"> <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-history.png"
-          alt="Diamond Hotel"> My booking history</div>
-    </div>
-  </div>
 </div>
 <!-- End Popup Login -->
 
