@@ -33,8 +33,8 @@
       <div class="btn btn-login">
         <img class='user_icon' src="<?= $this->configs->config['pathAssets'] ?>icon/User.png"
           alt="Diamond Hotel">
-        <a class='content_btn' href="<?= $this->configs->config['basePath'] ?>login">LOGIN</a>
-        <!-- <?php echo isset($_SESSION["user_name"]) ? $_SESSION['user_name'] : 'LOGIN' ?> -->
+        <a class='content_btn' href="<?= $this->configs->config['basePath'] ?>login"> <?php echo isset($_SESSION["user_name"]) ? $_SESSION['user_name'] : 'LOGIN' ?></a>
+
       </div>
     </div>
   </nav>
@@ -63,6 +63,11 @@
         reservation</div>
       <div class="login-popup-item"> <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-history.png"
           alt="Diamond Hotel"> My booking history</div>
+      <?php if (isset($_SESSION["user_token"])) { ?>
+        <a class="login-popup-item" href="<?= $this->configs->config['basePath'] ?>logout">
+          <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-logout.png" alt="Diamond Hotel">Log out
+        </a>
+      <?php } ?>
     </div>
   </div>
 </div>

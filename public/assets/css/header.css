@@ -80,7 +80,7 @@
     color: #fff;
     background: rgba(255,255,255,0.1);
     border: 1px solid #fff;
-    width: 150px;
+    min-width: 150px;
     height: fit-content;
     display: flex;
     justify-content: space-around;
@@ -99,8 +99,9 @@ background: rgba(228, 228, 228, 0.35);
 .content_btn{
     color: #fff;
     text-decoration: none;
-    font-size: 1.1rem;
-    padding-right: 10px;
+    font-size: 0.8rem;
+    margin-left: 2px;
+    margin-right: 2px;
 }
 @media (max-width: 900px) {
     .navbar-nav {
