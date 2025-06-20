@@ -7,17 +7,19 @@
     align-items: center;
     justify-content: center;
 }
+
 .login-main-container {
     display: flex;
     background: #fff;
     border-radius: 2px;
     overflow: hidden;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
     min-width: 700px;
     min-height: 500px;
     max-width: 90vw;
     max-height: 90vh;
 }
+
 .login-left {
     flex: 1;
     padding: 40px 36px 36px 36px;
@@ -27,6 +29,7 @@
     min-width: 340px;
     font-family: 'inter';
 }
+
 .login-right {
     flex: 1;
     background: #e5e5e5;
@@ -36,6 +39,7 @@
     background-size: cover;
     background-position: center;
 }
+
 .login-signup-btn {
     background: #181511;
     color: #fff;
@@ -49,6 +53,7 @@
     margin-top: 0;
     margin-left: 0;
 }
+
 .login-title {
     font-family: 'Montserrat', sans-serif;
     font-size: 1.6rem;
@@ -56,16 +61,19 @@
     margin-bottom: 8px;
     letter-spacing: 1px;
 }
+
 .login-sub {
     color: #888;
     margin-bottom: 24px;
 }
+
 .login-form label {
     color: #222;
     font-size: 1rem;
     margin-bottom: 4px;
     display: block;
 }
+
 .login-form input[type="email"],
 .login-form input[type="password"] {
     width: 100%;
@@ -76,15 +84,18 @@
     background: #f7f7f7;
     font-size: 1rem;
 }
+
 .login-password-row {
     display: flex;
     align-items: center;
     position: relative;
 }
+
 .login-password-row input[type="password"] {
     flex: 1;
     margin-bottom: 0;
 }
+
 .login-eye {
     position: absolute;
     right: 12px;
@@ -94,24 +105,29 @@
     color: #888;
     font-size: 1.1rem;
 }
+
 .login-form-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 18px;
 }
+
 .login-remember {
     color: #888;
     font-size: 0.95rem;
 }
+
 .login-forgot {
     color: #888;
     font-size: 0.95rem;
     text-decoration: none;
 }
+
 .login-forgot:hover {
     text-decoration: underline;
 }
+
 .login-submit-btn {
     width: 100%;
     background: #181511;
@@ -125,15 +141,18 @@
     cursor: pointer;
     transition: background 0.2s;
 }
+
 .login-submit-btn:hover {
     background: #333;
 }
+
 @media (max-width: 900px) {
     .login-main-container {
         flex-direction: column;
         min-width: 320px;
         min-height: 0;
     }
+
     .login-right {
         min-height: 180px;
         min-width: 0;

@@ -19,12 +19,12 @@
   flex: 2;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .left-info .main-image {
   width: 100%;
-  border-radius: 12px;
+  border-radius: 5px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -43,27 +43,27 @@
 }
 
 .left-info .desc {
-  font-size: 1.1rem;
+  font-size: 0.8rem;
   line-height: 1.8;
-  color: #fff;
+  color: #e3dfdf;
   background: transparent;
   border-radius: 12px;
   box-shadow: none;
   max-height: 350px;
-  overflow-y: auto;
+  margin: 0;
 }
 
 .right-info {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 0.1rem;
 }
 
 .image-gallery {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  gap: 0.6rem;
 }
 
 .gallery-img {
@@ -127,7 +127,7 @@
 
 .amenities {
   background: #dad1d14d;
-  padding: 1.5rem;
+  padding: 1rem;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   color: #fafafa;
@@ -147,13 +147,14 @@
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+  
 }
 
 .amenities li {
   display: flex;
   align-items: center;
   gap: 1rem;
-  font-size: 0.6rem;
+  font-size: 1.2rem;
   color: #dfd7d7;
 }
 

@@ -2,10 +2,7 @@
 
 // use app\core\Controller;
 
-Router::get('/', 'HomeController@show', [
-    // 'AuthenMiddleware@show',
-    // 'AuthenMiddleware@show2'
-]);
+Router::get('/', 'HomeController@show', ['AuthorMiddleware@author']);
 Router::get('/listroom', 'ListRoomController@show', [
     // 'AuthenMiddleware@show',
     // 'AuthenMiddleware@show2'
@@ -24,6 +21,9 @@ Router::post('/login', 'AuthenController@loginHandler');
 
 Router::get('/regis', 'AuthenController@regis');
 Router::post('/regis', 'AuthenController@regisHandler');
+Router::post('/logout', 'AuthenController@logoutHandler');
 
+//kéo dài phiên làm việc;
+Router::post('/refeshToken', "AuthenController@refeshToken");
 
-Router::get('/admin', 'DashboardController@show', ['AuthorMiddleware@author']);
+Router::get('/dashboard', 'DashboardController@show', ['AuthorMiddleware@author']);
