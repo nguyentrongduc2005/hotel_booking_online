@@ -101,7 +101,7 @@
             <div class="comments-container">
                 <!-- Comment Card 1 -->
                 <div class="comment-card comment-card-1"
-                    style="background-image: url('{<?= $this->configs->config['pathAssets'] ?>/img/ourservice/bg-card.png')">
+                    style="background-image: url('<?= $this->configs->config['pathAssets'] ?>/img/ourservice/bg-card.png')">
                     <div class="comment-content">
                         <h3 class="comment-title">A very good place!</h3>
                         <p class="comment-text">Lorem ipsum dolor sit amet, nam quis nostrud exercitation ullamco

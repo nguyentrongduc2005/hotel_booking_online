@@ -12,6 +12,17 @@ class  ServiceModel
         db::connect();
         // Initialize the model if needed
     }
+    public function getOneService($slug)
+    {
+      $sql = "SELECT * FROM services WHERE slug = :slug";
+        $data = db::getOne($sql, [
+            'slug' => $slug
+        ]);
+        return $data ? $data : [];
+    }
+
+
+      
     public function getAllServices()
     {
         $sql = "SELECT * FROM services";
