@@ -7,13 +7,13 @@
         <h1 class="hero-title">DIAMOND HOTEL</h1>
         <form class="search-bar" action="/hotel_booking_online/public/rooms" method="get">
             <div class="search-group">
-                <label>Check In<br><span class="search-date">Wed, June 18</span></label>
+                <label class="title">Check In<br><span class="search-date">Wed, June 18</span></label>
             </div>
             <div class="search-group">
-                <label>Check out<br><span class="search-date">Wed, June 18</span></label>
+                <label class="title">Check out<br><span class="search-date">Wed, June 18</span></label>
             </div>
             <div class="search-group">
-                <label>Room/Guest<br><span class="search-date">1 room, 1 guest</span></label>
+                <label class="title">Room/Guest<br><span class="search-date">1 room, 1 guest</span></label>
             </div>
             <button type="submit" class="search-btn">
                 <span class="search-icon"></span> Search Rooms
