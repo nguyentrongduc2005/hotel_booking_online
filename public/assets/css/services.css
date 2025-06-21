@@ -22,7 +22,9 @@
     font-display: swap;
 }
 
-
+a {
+    text-decoration: none;
+}
 /* Reset default styles */
 .services-container *{
     margin: 0;

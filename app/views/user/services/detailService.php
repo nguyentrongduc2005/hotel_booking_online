@@ -2,12 +2,17 @@
 <div class="gap-after-navbar"></div>
 <div class="main-container">
     <div class="center-wrapper">
-        <img class="ser-pic" src="<?= $this->configs->config['pathAssets'] ?>img/service/RoomService.jpg"
-            alt="Dịch vụ tận phòng">
-        <div class="text-container">
-            <h1>Room Service</h1>
-            <p>The discription of the room service goes here</p>
-            <p>The discription of the room service goes here</p>
-        </div>
+        <?php if (!empty($data)): ?>
+            <img class="ser-pic" src="<?= $this->configs->config['pathAssets'] . $data['Path_img'] ?>" alt="<?= htmlspecialchars($data['name']) ?>">
+            <div class="text-container">
+                <h1><?= htmlspecialchars($data['name']) ?></h1>
+                <p><?= htmlspecialchars($data['description']) ?></p>
+            </div>
+        <?php else: ?>
+            <div class="text-container">
+                <h1>Service Not Found</h1>
+                <p>The requested service could not be found.</p>
+            </div>
+        <?php endif; ?>
     </div>
 </div>

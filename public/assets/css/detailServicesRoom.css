@@ -47,8 +47,8 @@
 }
 
 .ser-pic {
-    width: 750px;
-    height: 422px;
+    width: 1100px;
+    height: 500px;
     object-fit: cover;
     border-radius: 8px;
 }
@@ -64,7 +64,7 @@
 }
 
 .center-wrapper {
-  width: 750px;
+  width: 1100px;
   display: flex;
   flex-direction: column;
   align-items: center;

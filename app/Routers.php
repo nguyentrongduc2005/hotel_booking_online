@@ -25,10 +25,12 @@ Router::get('/services', 'ServicesController@show', [
     // 'AuthenMiddleware@show',
     // 'AuthenMiddleware@show2'
 ]);
+
 Router::get('/services/{slug}', 'ServicesController@detail', [
     // 'AuthenMiddleware@show',
     // 'AuthenMiddleware@show2'
 ]);
+
 //xử lý login và regis
 Router::get('/login', 'AuthenController@login', []);
 Router::post('/login', 'AuthenController@loginHandler', []);
