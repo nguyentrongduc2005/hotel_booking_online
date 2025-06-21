@@ -14,34 +14,17 @@ class ServiceController extends Controller
         parent::__construct();
         $this->model = new ServiceModel();
     }
-   
+
     public function show($req, $res)
     {
         $data = $this->model->getAllServices();
-        if (!$data) {
-            $res->setStatusCode(404);
-            echo "Không tìm thấy dịch vụ";
-            return;
-        }
-
-        // echo "<pre>";
-        // print_r($data);
-        // $this->render('index', ['services' => $data]);
+        $this->render('index',  $data);
     }
 
     public function detail($req, $res)
     {
-        $slug = $req->params('slug'); 
+        $slug = $req->params()['slug'];
         $service = $this->model->getOneService($slug);
-
-        if (!$service) {
-            $res->setStatusCode(404);
-            echo "Không tìm thấy dịch vụ";
-            return;
-        }
-
-         echo "<pre>";
-        print_r($service);
-        // $this->render('index', ['services' => $service]);
+        $this->render('index', $service);
     }
 }

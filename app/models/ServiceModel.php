@@ -14,7 +14,7 @@ class  ServiceModel
     }
     public function getOneService($slug)
     {
-      $sql = "SELECT * FROM services WHERE slug = :slug";
+        $sql = "SELECT * FROM services WHERE slug = :slug";
         $data = db::getOne($sql, [
             'slug' => $slug
         ]);
@@ -22,7 +22,7 @@ class  ServiceModel
     }
 
 
-      
+
     public function getAllServices()
     {
         $sql = "SELECT * FROM services";
