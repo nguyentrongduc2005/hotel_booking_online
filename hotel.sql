@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 19, 2025 at 01:02 PM
+-- Generation Time: Jun 21, 2025 at 11:30 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -93,7 +93,7 @@ CREATE TABLE `guest` (
   `guest_id` int(11) NOT NULL,
   `full_name` varchar(100) NOT NULL,
   `cccd` varchar(20) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
+  `mail` varchar(255) DEFAULT NULL,
   `sdt` varchar(10) DEFAULT NULL,
   `created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -102,7 +102,7 @@ CREATE TABLE `guest` (
 -- Dumping data for table `guest`
 --
 
-INSERT INTO `guest` (`guest_id`, `full_name`, `cccd`, `email`, `sdt`, `created_at`) VALUES
+INSERT INTO `guest` (`guest_id`, `full_name`, `cccd`, `mail`, `sdt`, `created_at`) VALUES
 (1, 'Trần Lê Duy Minh', '086205001451', 'minhtld1451@ut.edu.vn', '0393336649', '2025-06-01 10:30:00'),
 (2, 'Nguyễn Quang Linh', '086205001452', 'linh2712nha@gmail.com', '0971815720', '2025-06-03 14:00:00'),
 (3, 'Nguyễn Trọng Đức', '086205001453', 'nguyentrongduc447@gmail.com', '0866225534', '2025-06-05 09:45:00'),
@@ -304,6 +304,7 @@ INSERT INTO `room_type` (`id_type_room`, `name_type_room`, `description`) VALUES
 CREATE TABLE `services` (
   `id_service` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
+  `slug` varchar(255) NOT NULL,
   `description` text DEFAULT NULL,
   `created_at` datetime DEFAULT current_timestamp(),
   `Path_img` varchar(255) DEFAULT NULL
@@ -313,13 +314,13 @@ CREATE TABLE `services` (
 -- Dumping data for table `services`
 --
 
-INSERT INTO `services` (`id_service`, `name`, `description`, `created_at`, `Path_img`) VALUES
-(1, 'Spa Service', 'Relaxing spa treatments with professional massage therapy, facial and body care.', '2025-06-08 09:00:00', '/img/service/SpaService.jpg'),
-(2, 'Dining Service', 'Buffet restaurant offering a variety of Asian and European dishes, available 24/7.', '2025-06-08 09:00:00', '/img/service/DiningService.jpg'),
-(3, 'Room Service', 'In-room food and beverage delivery.', '2025-06-08 09:00:00', '/img/service/RoomService.jpg'),
-(4, 'Laundry Service', 'Fast and high-quality laundry service, available same day.', '2025-06-08 09:00:00', '/img/service/LaundryService.jpg'),
-(5, 'Airport Transfer', 'Convenient airport pick-up/drop-off service with private or shared vehicles.', '2025-06-08 09:00:00', '/img/service/AirportTransfer.jpg'),
-(6, 'Car Rental', 'Car rental service with various options for travel or business use.', '2025-06-08 09:00:00', '/img/service/CarRental.jpg');
+INSERT INTO `services` (`id_service`, `name`, `slug`, `description`, `created_at`, `Path_img`) VALUES
+(1, 'Spa Service', 'spa-service', 'Relaxing spa treatments with professional massage therapy, facial and body care.', '2025-06-08 09:00:00', '/img/service/SpaService.jpg'),
+(2, 'Dining Service', 'dining-service', 'Buffet restaurant offering a variety of Asian and European dishes, available 24/7.', '2025-06-08 09:00:00', '/img/service/DiningService.jpg'),
+(3, 'Room Service', 'room-service', 'In-room food and beverage delivery.', '2025-06-08 09:00:00', '/img/service/RoomService.jpg'),
+(4, 'Laundry Service', 'laundry-service', 'Fast and high-quality laundry service, available same day.', '2025-06-08 09:00:00', '/img/service/LaundryService.jpg'),
+(5, 'Airport Transfer', 'airport-transfer', 'Convenient airport pick-up/drop-off service with private or shared vehicles.', '2025-06-08 09:00:00', '/img/service/AirportTransfer.jpg'),
+(6, 'Car Rental', 'car-rental', 'Car rental service with various options for travel or business use.', '2025-06-08 09:00:00', '/img/service/CarRental.jpg');
 
 -- --------------------------------------------------------
 
@@ -329,9 +330,9 @@ INSERT INTO `services` (`id_service`, `name`, `description`, `created_at`, `Path
 
 CREATE TABLE `token` (
   `id_token` int(11) NOT NULL,
-  `token` varchar(255) NOT NULL,
+  `token` varchar(500) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL
+  `created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -414,7 +415,7 @@ ALTER TABLE `booking`
 ALTER TABLE `guest`
   ADD PRIMARY KEY (`guest_id`),
   ADD UNIQUE KEY `cccd` (`cccd`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD UNIQUE KEY `mail` (`mail`);
 
 --
 -- Indexes for table `historybooking`
@@ -429,7 +430,80 @@ ALTER TABLE `historybooking`
 --
 -- Indexes for table `image_room`
 --
-ALTER TABLE `image_room` 
+ALTER TABLE `image_room`
+  ADD PRIMARY KEY (`id_image`),
+  ADD KEY `id_room` (`id_room`);
+
+--
+-- Indexes for table `room`
+--
+ALTER TABLE `room`
+  ADD PRIMARY KEY (`id_room`),
+  ADD UNIQUE KEY `slug` (`slug`),
+  ADD KEY `id_type_room_fk` (`id_room_type`);
+
+--
+-- Indexes for table `room_amenity`
+--
+ALTER TABLE `room_amenity`
+  ADD PRIMARY KEY (`id_room`,`amenity_id`),
+  ADD KEY `amenity_id` (`amenity_id`);
+
+--
+-- Indexes for table `room_type`
+--
+ALTER TABLE `room_type`
+  ADD PRIMARY KEY (`id_type_room`);
+
+--
+-- Indexes for table `services`
+--
+ALTER TABLE `services`
+  ADD PRIMARY KEY (`id_service`);
+
+--
+-- Indexes for table `token`
+--
+ALTER TABLE `token`
+  ADD PRIMARY KEY (`id_token`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `transaction`
+--
+ALTER TABLE `transaction`
+  ADD PRIMARY KEY (`transaction_id`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `mail` (`email`),
+  ADD UNIQUE KEY `cccd` (`cccd`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `amenity`
+--
+ALTER TABLE `amenity`
+  MODIFY `amenity_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `booking`
+--
+ALTER TABLE `booking`
+  MODIFY `id_booking` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `guest`
+--
+ALTER TABLE `guest`
+  MODIFY `guest_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `historybooking`
 --
@@ -464,7 +538,7 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT for table `token`
 --
 ALTER TABLE `token`
-  MODIFY `id_token` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_token` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `transaction`
