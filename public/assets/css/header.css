@@ -73,8 +73,9 @@
 
 
 .user_icon{
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
+    margin: 0 5px;
 }
 .btn-login {
     color: #fff;
@@ -101,7 +102,7 @@ background: rgba(228, 228, 228, 0.35);
     text-decoration: none;
     font-size: 1rem;
     margin-left: 2px;
-    margin-right: 2px;
+    margin-right: 5px;
 }
 @media (max-width: 900px) {
     .navbar-nav {
@@ -199,6 +200,9 @@ background: rgba(228, 228, 228, 0.35);
   color: #888;
   cursor: pointer;
 }
+.login-popup-close:hover {
+  color: #333;
+}
 .login-popup-menu {
   margin-top: 18px;
   display: flex;
@@ -219,6 +223,8 @@ background: rgba(228, 228, 228, 0.35);
 }
 .login-popup-item:last-child {
   border-bottom: none;
+  text-decoration: unset;
+  color: #202830;
 }
 .login-popup-item:hover {
   background: #f7f7f7;
@@ -244,12 +250,12 @@ background: rgba(228, 228, 228, 0.35);
   font-size: 1.15rem;
   font-weight: 600;
   color: #222;
-  margin-bottom: 2px;
+  margin-bottom: 5px;
   text-align: center;
 }
 
 .login-popup-email {
-  font-size: 0.98rem;
+  font-size: 0.85rem;
   color: #666;
   text-align: center;
   word-break: break-all;

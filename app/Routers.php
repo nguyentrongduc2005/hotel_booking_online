@@ -21,6 +21,14 @@ Router::get('/detailroom/{slug}', 'DetailRoomController@index', [
     'AuthorMiddleware@checkRoleUser'
 ]);
 
+Router::get('/service', 'ServiceController@show', [
+    // 'AuthenMiddleware@show',
+    // 'AuthenMiddleware@show2'
+]);
+Router::get('/service/{slug}', 'ServiceController@detail', [
+    // 'AuthenMiddleware@show',
+    // 'AuthenMiddleware@show2'
+]);
 //xử lý login và regis
 Router::get('/login', 'AuthenController@login', []);
 Router::post('/login', 'AuthenController@loginHandler', []);
