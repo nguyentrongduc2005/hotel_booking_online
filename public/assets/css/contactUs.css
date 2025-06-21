@@ -1,0 +1,177 @@
+/* Contact*page specific styles */
+
+.contact-page {
+    font-family: 'SVN-Gilroy';
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.main-container {
+    margin-top: 100px;
+    min-width: 600px;
+    max-width: 700px;
+    border-radius: 15px;
+    background-color: transparent;
+    backdrop-filter: blur(20px);
+    background-image: linear-gradient(
+        120deg,
+        rgba(255, 228, 196, 0.1), 
+        rgba(0, 0, 0, 0.2)
+    );
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    overflow: hidden;
+    position: relative;
+}
+
+.contact-form-container {
+    transition: all 0.5s ease;
+}
+
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    padding-right: 35px;
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.form-header h1 {
+    color: #333;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.form-header p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e1e5e9;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+    background: #f8f9fa;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    background: white;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.send-button {
+    width: 100%;
+    padding: 15px;
+    background: white;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-family: "SVN-Gilroy";
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.send-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+.send-button:active {
+    transform: translateY(0);
+}
+
+/* Thank you message styles */
+.thank-you-container {
+    padding: 5px 20px 20px 20px;
+    text-align: center;
+    display: none;
+    animation: fadeInUp 0.6s ease;
+}
+
+.thank-you-container h2 {
+    color: white;
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.thank-you-container p {
+    color: #666;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.back-button {
+    padding: 12px 30px;
+    background: white;
+    color: black;
+    font-family: "SVN-Gilroy";
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.back-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+}
+
+h1, p, label {
+    color: white !important;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+

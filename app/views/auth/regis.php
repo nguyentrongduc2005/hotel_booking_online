@@ -8,7 +8,7 @@
       style="background-image: url('<?= $this->configs->config['pathAssets'] ?>/img/bg-regis.png')"></div>
     <div class="regis-left">
       <div class="regis-title">CREATE YOUR ACCOUNT</div>
-      <form class="regis-form" method="post" action="<?= $this->configs->config['basePath'] ?>regis">
+      <form class="regis-form" method="post" action="<?= $this->configs->config['basePath'] ?>/regis">
         <input type="text" name="full_name" placeholder="Full Name" required>
         <input type="email" name="email" placeholder="Email" required>
         <div class="regis-row-flex">

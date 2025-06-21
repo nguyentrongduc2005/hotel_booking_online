@@ -12,17 +12,18 @@ $password = $password ?? '';
   <div class="login-main-container">
     <div class="login-left">
       <button class="login-signup-btn"
-        onclick="window.location.href='<?= $this->configs->config['basePath'] ?>regis'">Sign up</button>
+        onclick="window.location.href='<?= $this->configs->config['basePath'] ?>/regis'">Sign up</button>
       <div class="login-title">WELCOME TO DIAMOND!</div>
       <div class="login-sub">Sign in your account</div>
-      <form class="login-form" method="post" action="<?= $this->configs->config['basePath'] ?>login">
+      <form class="login-form" method="post" action="<?= $this->configs->config['basePath'] ?>/login">
         <label for="email">Your Email</label>
-        <input type="email" id="email" name="email" required value="<?= ($email) ?>">
+        <input type="email" id="email" name="email" required value="<?= htmlspecialchars($email) ?>">
         <?php if (!empty($errors['email'])): ?>
           <div class="error"></div>
-          <?= implode('<br>', array_map('', $errors['email'])) ?>
+          <?= implode('<br>', array_map('htmlspecialchars', $errors['email'])) ?>
     </div>
   <?php endif; ?>
+
   <label for="password">Password</label>
   <div class="login-password-row">
     <input type="password" id="password" name="password" required>
@@ -30,7 +31,7 @@ $password = $password ?? '';
   </div>
   <?php if (!empty($errors['password'])): ?>
     <div class=" error">
-      <?= implode('<br>', array_map('', $errors['password'])) ?>
+      <?= implode('<br>', array_map('htmlspecialchars', $errors['password'])) ?>
     </div>
   <?php endif; ?>
 
@@ -40,7 +41,7 @@ $password = $password ?? '';
   </div>
   <button type="submit" class="login-submit-btn">Login</button>
   <?php if (!empty($message)): ?>
-    <div class="login-message"><?= ($message) ?></div>
+    <div class="login-message"><?= htmlspecialchars($message) ?></div>
   <?php endif; ?>
   <?php if (isset($access)) {
     echo "  <script>

@@ -21,14 +21,22 @@ Router::get('/detailroom/{slug}', 'DetailRoomController@index', [
     'AuthorMiddleware@checkRoleUser'
 ]);
 
-Router::get('/service', 'ServiceController@show', [
+Router::get('/services', 'ServicesController@show', [
     // 'AuthenMiddleware@show',
     // 'AuthenMiddleware@show2'
 ]);
-Router::get('/service/{slug}', 'ServiceController@detail', [
+
+Router::get('/services/{slug}', 'ServicesController@detail', [
     // 'AuthenMiddleware@show',
     // 'AuthenMiddleware@show2'
 ]);
+
+Router::get('/contact', 'ContactController@show', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleUser',
+]);
+
 //xử lý login và regis
 Router::get('/login', 'AuthenController@login', []);
 Router::post('/login', 'AuthenController@loginHandler', []);
@@ -39,7 +47,7 @@ Router::post('/regis', 'AuthenController@regisHandler');
 Router::get('/logout', 'AuthenController@logoutHandler', []);
 
 //kéo dài phiên làm việc;
-Router::post('/refeshToken', "AuthenController@refeshToken");
+Router::get('/refeshToken', "AuthenController@refeshToken");
 
 Router::get('/dashboard', 'DashboardController@show', [
     'AuthorMiddleware@checktoken',

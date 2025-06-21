@@ -63,7 +63,7 @@ class AuthenController extends Controller
             'message' => "Login successful. Redirecting...",
             'email' => $email,
             "password" => $password,
-            "access" => $user['role'] == 'admin' ? $this->getConfig('basePath') . '/dashboard' : $this->getConfig('basePath')
+            "access" => $user['role'] == 'admin' ? $this->getConfig('basePath') . '/dashboard' : $this->getConfig('basePath') . '/'
         ]);
 
 
@@ -133,25 +133,31 @@ class AuthenController extends Controller
                 if ($this->model->deleteToken($id_token['id_token'])) {
                     session_unset();
                     session_destroy();
-                    $this->renderPartial('auth/login', ['email' => '', 'password' => '', 'message' => '']);
+                    $this->redirect($this->getConfig('basePath') . "/login");
                 }
             } else {
 
-                $this->renderPartial('auth/login', ['email' => '', 'password' => '', 'message' => '']);
+                $this->redirect($this->getConfig('basePath') . "/login");
             }
         } else {
-            $this->renderPartial('auth/login', ['email' => '', 'password' => '', 'message' => '']);
+            // $this->renderPartial('auth/login', ['email' => '', 'password' => '', 'message' => '']);
+            $this->redirect($this->getConfig('basePath'));
         }
     }
 
 
     function refeshToken($req, $res)
     {
+
         if (isset($_SESSION['timer'])) {
+
+            if ($_SESSION['timer'] < time()) {
+                return $res->json(['refreshToken' => false], 401)->send();
+            }
             $now = time();               // thời gian hiện tại (timestamp)
             $after30Min = $now + 1800;
             $_SESSION['timer'] = $after30Min;
-            return $res->json(['refreshToken' => true])->send();
+            return $res->json(['refreshToken' => true], 200)->send();
         }
     }
 }
