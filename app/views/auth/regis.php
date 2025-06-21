@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="<?= $this->configs->config['pathAssets'] ?>css/regis.css?v=<?= time() ?>">
 
-
+<link rel="icon" href="/hotel_booking_online/public/assets/icon/diamond_logo_small.png" sizes="32x32">
+<title>Sign Up</title>
 <div class="regis-bg-overlay">
   <div class="regis-main-container">
     <div class="regis-right"
