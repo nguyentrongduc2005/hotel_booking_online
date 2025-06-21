@@ -31,6 +31,12 @@ Router::get('/services/{slug}', 'ServicesController@detail', [
     // 'AuthenMiddleware@show2'
 ]);
 
+Router::get('/contact', 'ContactController@show', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleUser',
+]);
+
 //xử lý login và regis
 Router::get('/login', 'AuthenController@login', []);
 Router::post('/login', 'AuthenController@loginHandler', []);

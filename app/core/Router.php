@@ -1,4 +1,3 @@
-
 <?php
 
 use app\core\AppException;
@@ -91,8 +90,6 @@ class Router
         $response = new Response();
         $method = $request->method();
         $path = $request->path();
-
-
 
         $path = '/' . trim($path, '/');
 
