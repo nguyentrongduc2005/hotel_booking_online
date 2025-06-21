@@ -5,6 +5,8 @@ $errors = $errors ?? [];
 $email = $email ?? '';
 $password = $password ?? '';
 ?>
+<link rel="icon" href="/hotel_booking_online/public/assets/icon/diamond_logo_small.png" sizes="32x32">
+<title>Login</title>
 
 <div class="login-bg-overlay">
   <div class="login-main-container">
@@ -15,13 +17,12 @@ $password = $password ?? '';
       <div class="login-sub">Sign in your account</div>
       <form class="login-form" method="post" action="<?= $this->configs->config['basePath'] ?>login">
         <label for="email">Your Email</label>
-        <input type="email" id="email" name="email" required value="<?= htmlspecialchars($email) ?>">
+        <input type="email" id="email" name="email" required value="<?= ($email) ?>">
         <?php if (!empty($errors['email'])): ?>
           <div class="error"></div>
-          <?= implode('<br>', array_map('htmlspecialchars', $errors['email'])) ?>
+          <?= implode('<br>', array_map('', $errors['email'])) ?>
     </div>
   <?php endif; ?>
-
   <label for="password">Password</label>
   <div class="login-password-row">
     <input type="password" id="password" name="password" required>
@@ -29,7 +30,7 @@ $password = $password ?? '';
   </div>
   <?php if (!empty($errors['password'])): ?>
     <div class=" error">
-      <?= implode('<br>', array_map('htmlspecialchars', $errors['password'])) ?>
+      <?= implode('<br>', array_map('', $errors['password'])) ?>
     </div>
   <?php endif; ?>
 
@@ -39,7 +40,7 @@ $password = $password ?? '';
   </div>
   <button type="submit" class="login-submit-btn">Login</button>
   <?php if (!empty($message)): ?>
-    <div class="login-message"><?= htmlspecialchars($message) ?></div>
+    <div class="login-message"><?= ($message) ?></div>
   <?php endif; ?>
   <?php if (isset($access)) {
     echo "  <script>
@@ -55,7 +56,6 @@ $password = $password ?? '';
   </div>
   <div class="login-right"
     style="background-image: url('<?= $this->configs->config['pathAssets'] ?>/img/bg-login.png')"></div>
-</div>
 </div>
 
 <script src="<?= $this->configs->config['pathAssets'] ?>js/login.js?v=<?= time() ?>"></script>

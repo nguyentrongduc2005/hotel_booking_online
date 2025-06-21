@@ -50,7 +50,7 @@ class AuthenController extends Controller
             return;
         }
         //lưu vào token session để client có thể request
-        $token = $this->model->findTokenByToken($idtoken);
+        $token = $this->model->findTokenByidToken($idtoken);
         if ($token) {
             $_SESSION['user_token'] = $token['token'];
             $now = time();               // thời gian hiện tại (timestamp)
@@ -63,7 +63,7 @@ class AuthenController extends Controller
             'message' => "Login successful. Redirecting...",
             'email' => $email,
             "password" => $password,
-            "access" => $this->getConfig('basePath')
+            "access" => $user['role'] == 'admin' ? $this->getConfig('basePath') . '/dashboard' : $this->getConfig('basePath')
         ]);
 
 
@@ -112,7 +112,7 @@ class AuthenController extends Controller
             $this->renderPartial('auth/regis', $user);
             return;
         }
-        $token = $this->model->findTokenByToken($idtoken);
+        $token = $this->model->findTokenByidToken($idtoken);
         if ($token) {
             $_SESSION['user_token'] = $token['token'];
             $now = time();               // thời gian hiện tại (timestamp)
@@ -128,15 +128,15 @@ class AuthenController extends Controller
     function logoutHandler($req, $res)
     {
         if (isset($_SESSION["user_token"])) {
-            if (!$this->model->findTokenByToken($_SESSION["user_token"])) {
-                session_unset();
-                session_destroy();
-                $this->renderPartial('auth/login', ['email' => '', 'password' => '', 'message' => '']);
-            }
+            $id_token = $this->model->findTokenByToken($_SESSION["user_token"]);
+            if ($id_token) {
+                if ($this->model->deleteToken($id_token['id_token'])) {
+                    session_unset();
+                    session_destroy();
+                    $this->renderPartial('auth/login', ['email' => '', 'password' => '', 'message' => '']);
+                }
+            } else {
 
-            if ($this->model->deleteToken($_SESSION["user_token"])) {
-                session_unset();
-                session_destroy();
                 $this->renderPartial('auth/login', ['email' => '', 'password' => '', 'message' => '']);
             }
         } else {
