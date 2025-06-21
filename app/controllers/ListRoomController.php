@@ -26,11 +26,11 @@ class ListRoomController extends Controller
     {
         // lấy query string 
 
-        $page = $req->Query('page',1);
+        $page = $req->Query('page', 1);
         $roomType = $req->Query('room_type');
-        $priceMin =$req->Query('price_min');
+        $priceMin = $req->Query('price_min');
         $priceMax = $req->Query('price_max');
-    
+
         //lấy danh sách phòng theo lọc
         $rooms = $this->model->getRooms([
             'page' => $page,
@@ -38,10 +38,10 @@ class ListRoomController extends Controller
             'price_min' => $priceMin,
             'price_max' => $priceMax
         ]);
-        $roomType= $this->model->getAllRoomTypes();
+        $roomType = $this->model->getAllRoomTypes();
         // ra view
-        $this->render('index',[
-            'rooms'=>$rooms,
+        $this->render('index', [
+            'rooms' => $rooms,
             'filters' => [
                 'page' => $page,
                 'room_type' => $roomType,
@@ -49,6 +49,6 @@ class ListRoomController extends Controller
                 'price_max' => $priceMax
             ]
 
-            ]);
+        ]);
     }
 }
