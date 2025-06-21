@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 19, 2025 at 01:02 PM
+-- Generation Time: Jun 21, 2025 at 11:32 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -304,6 +304,7 @@ INSERT INTO `room_type` (`id_type_room`, `name_type_room`, `description`) VALUES
 CREATE TABLE `services` (
   `id_service` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
+  `slug` varchar(255) NOT NULL,
   `description` text DEFAULT NULL,
   `created_at` datetime DEFAULT current_timestamp(),
   `Path_img` varchar(255) DEFAULT NULL
@@ -313,13 +314,13 @@ CREATE TABLE `services` (
 -- Dumping data for table `services`
 --
 
-INSERT INTO `services` (`id_service`, `name`, `description`, `created_at`, `Path_img`) VALUES
-(1, 'Spa Service', 'Relaxing spa treatments with professional massage therapy, facial and body care.', '2025-06-08 09:00:00', '/img/service/SpaService.jpg'),
-(2, 'Dining Service', 'Buffet restaurant offering a variety of Asian and European dishes, available 24/7.', '2025-06-08 09:00:00', '/img/service/DiningService.jpg'),
-(3, 'Room Service', 'In-room food and beverage delivery.', '2025-06-08 09:00:00', '/img/service/RoomService.jpg'),
-(4, 'Laundry Service', 'Fast and high-quality laundry service, available same day.', '2025-06-08 09:00:00', '/img/service/LaundryService.jpg'),
-(5, 'Airport Transfer', 'Convenient airport pick-up/drop-off service with private or shared vehicles.', '2025-06-08 09:00:00', '/img/service/AirportTransfer.jpg'),
-(6, 'Car Rental', 'Car rental service with various options for travel or business use.', '2025-06-08 09:00:00', '/img/service/CarRental.jpg');
+INSERT INTO `services` (`id_service`, `name`, `slug`, `description`, `created_at`, `Path_img`) VALUES
+(1, 'Spa Service', 'spa-service', 'Relaxing spa treatments with professional massage therapy, facial and body care.', '2025-06-08 09:00:00', '/img/service/SpaService.jpg'),
+(2, 'Dining Service', 'dining-service', 'Buffet restaurant offering a variety of Asian and European dishes, available 24/7.', '2025-06-08 09:00:00', '/img/service/DiningService.jpg'),
+(3, 'Room Service', 'room-service', 'In-room food and beverage delivery.', '2025-06-08 09:00:00', '/img/service/RoomService.jpg'),
+(4, 'Laundry Service', 'laundry-service', 'Fast and high-quality laundry service, available same day.', '2025-06-08 09:00:00', '/img/service/LaundryService.jpg'),
+(5, 'Airport Transfer', 'airport-transfer', 'Convenient airport pick-up/drop-off service with private or shared vehicles.', '2025-06-08 09:00:00', '/img/service/AirportTransfer.jpg'),
+(6, 'Car Rental', 'car-rental', 'Car rental service with various options for travel or business use.', '2025-06-08 09:00:00', '/img/service/CarRental.jpg');
 
 -- --------------------------------------------------------
 
@@ -329,9 +330,9 @@ INSERT INTO `services` (`id_service`, `name`, `description`, `created_at`, `Path
 
 CREATE TABLE `token` (
   `id_token` int(11) NOT NULL,
-  `token` varchar(255) NOT NULL,
+  `token` varchar(500) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL
+  `created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -414,7 +415,7 @@ ALTER TABLE `booking`
 ALTER TABLE `guest`
   ADD PRIMARY KEY (`guest_id`),
   ADD UNIQUE KEY `cccd` (`cccd`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD UNIQUE KEY `mail` (`email`);
 
 --
 -- Indexes for table `historybooking`
@@ -537,7 +538,7 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT for table `token`
 --
 ALTER TABLE `token`
-  MODIFY `id_token` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_token` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `transaction`

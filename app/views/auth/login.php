@@ -5,15 +5,17 @@ $errors = $errors ?? [];
 $email = $email ?? '';
 $password = $password ?? '';
 ?>
+<link rel="icon" href="/hotel_booking_online/public/assets/icon/diamond_logo_small.png" sizes="32x32">
+<title>Login</title>
 
 <div class="login-bg-overlay">
   <div class="login-main-container">
     <div class="login-left">
       <button class="login-signup-btn"
-        onclick="window.location.href='<?= $this->configs->config['basePath'] ?>regis'">Sign up</button>
+        onclick="window.location.href='<?= $this->configs->config['basePath'] ?>/regis'">Sign up</button>
       <div class="login-title">WELCOME TO DIAMOND!</div>
       <div class="login-sub">Sign in your account</div>
-      <form class="login-form" method="post" action="<?= $this->configs->config['basePath'] ?>login">
+      <form class="login-form" method="post" action="<?= $this->configs->config['basePath'] ?>/login">
         <label for="email">Your Email</label>
         <input type="email" id="email" name="email" required value="<?= htmlspecialchars($email) ?>">
         <?php if (!empty($errors['email'])): ?>
@@ -55,7 +57,6 @@ $password = $password ?? '';
   </div>
   <div class="login-right"
     style="background-image: url('<?= $this->configs->config['pathAssets'] ?>/img/bg-login.png')"></div>
-</div>
 </div>
 
 <script src="<?= $this->configs->config['pathAssets'] ?>js/login.js?v=<?= time() ?>"></script>

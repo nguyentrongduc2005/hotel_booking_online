@@ -51,7 +51,7 @@ class db
 
     public static function getOne($sql, $param = [])
     {
-        $sql = "$sql";
+
         $stmt = self::connect()->prepare($sql);
         $stmt->execute($param);
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -103,9 +103,11 @@ class db
 
     public static function delete($tableName, $codition)
     {
-        $sql = "DELETE FROM $tableName WHERE " . $codition;
+        $sql = "DELETE FROM $tableName WHERE " . $codition . ";";
         $stmt = self::connect()->prepare($sql);
         $stmt->execute();
         return $stmt->rowCount();
     }
+
+    
 }

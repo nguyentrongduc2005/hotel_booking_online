@@ -21,22 +21,22 @@ class AuthenModel
     }
     public function findTokenByidToken($token)
     {
-        $sql = "SELECT * FROM `token` WHERE token.id_token = :id_token";
+        $sql = "SELECT * FROM token WHERE token.id_token = :id_token";
         $data = db::getOne($sql, ['id_token' => $token]);
         return  $data ? $data : [];
     }
 
-    // public function findTokenByToken($token)
-    // {
-    //     $sql = "SELECT * FROM `token` WHERE token.token = :token";
-    //     $data = db::getOne($sql, ['token' => $token]);
-    //     return  $data ? $data : [];
-    // }
+    public function findTokenByToken($token)
+    {
+        $sql = "SELECT * FROM token WHERE token.token = :token;";
+        $data = db::getOne($sql, ['token' => $token]);
+        return  $data ? $data : [];
+    }
 
     public function deleteToken($token)
     {
 
-        $coutrow =  db::delete('token', "id_tokenn = $token");
+        $coutrow =  db::delete('token', "token.id_token = $token");
         return $coutrow ? true : false;
     }
 
