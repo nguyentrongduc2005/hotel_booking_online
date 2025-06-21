@@ -31,7 +31,7 @@ Router::post('/regis', 'AuthenController@regisHandler');
 Router::get('/logout', 'AuthenController@logoutHandler', []);
 
 //kéo dài phiên làm việc;
-Router::post('/refeshToken', "AuthenController@refeshToken");
+Router::get('/refeshToken', "AuthenController@refeshToken");
 
 Router::get('/dashboard', 'DashboardController@show', [
     'AuthorMiddleware@checktoken',

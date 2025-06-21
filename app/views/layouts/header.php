@@ -35,7 +35,7 @@
                 <img class='user_icon' src="<?= $this->configs->config['pathAssets'] ?>icon/User.png"
                     alt="Diamond Hotel">
                 <a class='content_btn'
-                    href="<?= $this->configs->config['basePath'] ?>login"><?php echo isset($_SESSION["user_name"]) ? $_SESSION['user_name'] : 'LOGIN' ?></a>
+                    href="<?= $this->configs->config['basePath'] ?>/login"><?php echo isset($_SESSION["user_name"]) ? $_SESSION['user_name'] : 'LOGIN' ?></a>
 
             </div>
         </div>
@@ -53,12 +53,12 @@
             <?php } ?>
             <?php if (!isset($_SESSION["user_token"])) { ?>
             <button class="login-popup-close" id="closeLoginPopup">&times;</button>
-            <a href="<?= $this->configs->config['basePath'] ?>login" class="login-popup-signup nav-link">LOGIN</a>
+            <a href="<?= $this->configs->config['basePath'] ?>/login" class="login-popup-signup nav-link">LOGIN</a>
             <?php } ?>
             <?php if (!isset($_SESSION["user_token"])) { ?>
             <div class="login-popup-login-link">
                 Don't have an account?
-                <a href="<?= $this->configs->config['basePath'] ?>regis" id="registerLink">sign up</a>
+                <a href="<?= $this->configs->config['basePath'] ?>/regis" id="registerLink">sign up</a>
             </div>
             <?php } ?>
             <?php if (isset($_SESSION["user_token"])) { ?>
@@ -71,6 +71,7 @@
                 </div>
             </div>
             <?php } ?>
+
         </div>
         <div class="login-popup-menu">
             <div class="login-popup-item"> <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-user.png"
@@ -84,14 +85,29 @@
             <div class="login-popup-item"> <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-history.png"
                     alt="Diamond Hotel"> My booking history</div>
             <?php if (isset($_SESSION["user_token"])) { ?>
-            <a class="login-popup-item" href="<?= $this->configs->config['basePath'] ?>logout">
+            <a class="login-popup-item" href="<?= $this->configs->config['basePath'] ?>/logout">
                 <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-logout.png" alt="Diamond Hotel">Log out
             </a>
             <?php } ?>
         </div>
     </div>
 </div>
+
+
 <!-- End Popup Login -->
 
 <!-- Header JS -->
 <script src="<?= $this->configs->config['pathAssets'] ?>js/header.js?v=<?= time() ?>"></script>
+<?php if (isset($_SESSION["timer"])) {
+
+    $path  = $this->configs->config['basePath'];
+    $leftTime = $_SESSION["timer"] - time();
+
+    $leftTime = max(0, ($leftTime - 120) * 1000);
+    if ($leftTime > 0) {
+        echo " <script>
+   setTimeout(function() { 
+   checktokenTimer('{$path}')
+                            }, " . $leftTime . ")</script>";
+    }
+} ?>
