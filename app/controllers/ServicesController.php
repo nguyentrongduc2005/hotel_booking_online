@@ -5,7 +5,7 @@ namespace app\controllers;
 use app\core\Controller;
 use app\models\ServiceModel;
 
-class ServiceController extends Controller
+class ServicesController extends Controller
 {
     private  $model;
 
@@ -25,6 +25,6 @@ class ServiceController extends Controller
     {
         $slug = $req->params()['slug'];
         $service = $this->model->getOneService($slug);
-        $this->render('index', $service);
+        $this->render('detailService', $service);
     }
 }

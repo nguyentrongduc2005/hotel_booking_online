@@ -21,11 +21,11 @@ Router::get('/detailroom/{slug}', 'DetailRoomController@index', [
     'AuthorMiddleware@checkRoleUser'
 ]);
 
-Router::get('/service', 'ServiceController@show', [
+Router::get('/services', 'ServicesController@show', [
     // 'AuthenMiddleware@show',
     // 'AuthenMiddleware@show2'
 ]);
-Router::get('/service/{slug}', 'ServiceController@detail', [
+Router::get('/services/{slug}', 'ServicesController@detail', [
     // 'AuthenMiddleware@show',
     // 'AuthenMiddleware@show2'
 ]);
