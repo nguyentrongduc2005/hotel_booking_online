@@ -49,6 +49,8 @@ Router::get('/logout', 'AuthenController@logoutHandler', []);
 //kéo dài phiên làm việc;
 Router::get('/refeshToken', "AuthenController@refeshToken");
 
+Router::get('/payment', 'PaymentController@show', []);
+
 Router::get('/dashboard', 'DashboardController@show', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
