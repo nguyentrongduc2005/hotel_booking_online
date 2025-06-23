@@ -18,8 +18,20 @@ class DashboardController extends Controller
 
     public function show($req, $res)
     {
+        $data = [];
+        $data['listBooking'] = $this->model->getListBookingPending();
+        $data['maintenance']  = $this->model->getMaintenance();
+        $data['available']  = $this->model->getAvailable();
+        $data['total']  = $this->model->getTotal();
+        $data['checkin']  = $this->model->getNcheckin();
+        $data['checkout']  = $this->model->getNcheckout();
+        $data['bookingToday']  = $this->model->getNBookingToday();
+        echo '<pre>';
+        print_r($data);
 
-        // $this->setLayout('Adminlayouts/main');
-        $this->render('index');
+
+
+
+        // $this->render('index');
     }
 }
