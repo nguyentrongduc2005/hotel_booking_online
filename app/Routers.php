@@ -51,7 +51,29 @@ Router::get('/refeshToken', "AuthenController@refeshToken");
 
 Router::get('/payment', 'PaymentController@show', []);
 
+
+
+
+////ADMIN//////////////////////////////////////////////////////////////////////////////////
 Router::get('/dashboard', 'DashboardController@show', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+
+Router::post('/dashboard/confirm', 'DashboardController@bookingConfirm', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+
+Router::post('/dashboard/checkin', 'DashboardController@checkinHandler', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+
+Router::post('/dashboard/checkout', 'DashboardController@checkoutHandler', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',

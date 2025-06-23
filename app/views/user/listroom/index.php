@@ -1,3 +1,4 @@
+
 <link rel="stylesheet" href="<?= $this->configs->config['pathAssets'] ?>css/listroom.css?v=<?= time() ?>" />
 
 
@@ -83,6 +84,7 @@
 <script>
   const slider = document.getElementById("priceRange");
   const priceText = document.getElementById("priceValue");
+
 
   slider.addEventListener("input", () => {
     priceText.textContent = `$${slider.value}`;
