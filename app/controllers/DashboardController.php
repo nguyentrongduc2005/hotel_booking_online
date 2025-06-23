@@ -34,4 +34,7 @@ class DashboardController extends Controller
 
         // $this->render('index');
     }
+    public function bookingConfirm($req, $res) {}
+    public function checkinHandler($req, $res) {}
+    public function checkoutHandler($req, $res) {}
 }
