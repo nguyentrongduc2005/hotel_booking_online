@@ -114,4 +114,13 @@ class DashboardModel
         $data = db::getAll($sql);
         return $data ? $data : [];
     }
+
+    function updataConformBooking($id)
+    {
+        $rowSuccess = db::update('booking', [
+            "status" => 'confirmed',
+        ], $id);
+        if ($rowSuccess > 0) return true;
+        return false;
+    }
 }

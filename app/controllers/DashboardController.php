@@ -34,7 +34,16 @@ class DashboardController extends Controller
 
         // $this->render('index');
     }
-    public function bookingConfirm($req, $res) {}
+    public function bookingConfirm($req, $res)
+    {
+        $id =  $req->params()["id"];
+        $data = "false";
+        $check = $this->model->updataConformBooking($id);
+        if ($check) {
+            $data = "true";
+        }
+        $res->json($data)->send();
+    }
     public function checkinHandler($req, $res) {}
     public function checkoutHandler($req, $res) {}
 }
