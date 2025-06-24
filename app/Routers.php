@@ -50,7 +50,22 @@ Router::get('/refeshToken', "AuthenController@refeshToken");
 
 
 ///router xử lý thanh toán
-Router::get('/payment', 'PaymentController@show', []);
+//submit từ trang detail room render ra form điền thông tin có
+Router::post('/payment/{slug}', 'PaymentController@show', []);
+//submit từ trang form thông tin xử lý kiểm tra booking của người dùng và lưu vào render chọn method
+Router::post('/payment/{slug}/handler', 'PaymentController@show', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleUser',
+]);
+//submit từ trang chọn method sử lý databasse để lưu vào bảng transaction thành cồng render ra trang thanks nếu không thì render ra fail
+Router::post('/payment/{slug}/transaction', 'PaymentController@paymentMethodHandler', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleUser',
+]);
+
+
 
 
 
@@ -89,3 +104,37 @@ Router::post('/dashboard/checkout', 'DashboardController@checkoutHandler', [
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
+
+
+//////////////////////rooms///////////////////////////////////////////
+Router::get('/admin/rooms', 'AdminRoomsController@roomsShow', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+
+//filter rooms
+Router::post('/admin/rooms', 'AdminRoomsController@roomFilter', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+
+Router::post('/admin/rooms/add', 'AdminRoomsController@roomAdd', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+Router::post('/admin/rooms/edit', 'AdminRoomsController@roomEdit', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+Router::post('/admin/rooms/delete', 'AdminRoomsController@roomDelete', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+
+
+///////////////////////////////////end rooms/////////////////////////////
