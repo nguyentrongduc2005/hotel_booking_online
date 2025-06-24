@@ -113,7 +113,7 @@ Router::get('/admin/rooms', 'AdminRoomsController@roomsShow', [
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 
-//filter rooms
+// filter rooms
 Router::post('/admin/rooms', 'AdminRoomsController@roomFilter', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
