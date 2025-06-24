@@ -43,15 +43,14 @@
 
 <!-- Popup Login -->
 <div id="loginPopup" class="login-popup" style="display:none;">
-
     <div class="login-popup-content">
         <div class="login-popup-header">
             <?php if (isset($_SESSION["user_token"])) { ?>
                 <div class="login-popup-avatar"
                     style="background-image: url('<?= $this->configs->config['pathAssets'] ?>/img/user/avatar.jpg')"></div>
             <?php } ?>
+            <button class="login-popup-close" id="closeLoginPopup">&times;</button>
             <?php if (!isset($_SESSION["user_token"])) { ?>
-                <button class="login-popup-close" id="closeLoginPopup">&times;</button>
                 <a href="<?= $this->configs->config['basePath'] ?>/login" class="login-popup-signup nav-link">LOGIN</a>
             <?php } ?>
             <?php if (!isset($_SESSION["user_token"])) { ?>
