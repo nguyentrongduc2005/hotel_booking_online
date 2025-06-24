@@ -18,7 +18,8 @@ class DashboardModel
     {
         db::connect();
         $this->getinfoDashBoard();
-        $this->getInOutAndBookingTodat();
+        $this->getInOutAndBookingToday();
+
         // Initialize the model if needed
     }
     public function getTotal()
@@ -66,9 +67,9 @@ class DashboardModel
 
 
 
-    function getInOutAndBookingTodat()
+    function getInOutAndBookingToday()
     {
-        $sql = "SELECT booking.check_in, booking.check_out , booking.created_at FROM `booking` WHERE booking.status = 'confirmed';";
+        $sql = "SELECT booking.check_in,booking.status_checkout,booking.status_checkin, booking.check_out , booking.created_at FROM `booking` WHERE booking.status = 'confirmed';";
         $data = db::getAll($sql);
         $this->Ncheckin = 0;
         $this->Ncheckout = 0;
@@ -81,10 +82,10 @@ class DashboardModel
 
 
             $now = (date('Y-m-d'));
-            if ($daycheckin === $now) {
+            if ($daycheckin === $now && $item['status_checkin'] == 'pending') {
                 $this->Ncheckin++;
             }
-            if ($daycheckout == $now) {
+            if ($daycheckout == $now && $item['status_checkout'] == 'pending' && $item['status_checkin'] == 'done') {
                 $this->Ncheckout++;
             }
             if ($createdAt == $now) {
@@ -98,6 +99,7 @@ class DashboardModel
     function getListBookingPending()
     {
         $sql = "SELECT 
+         b.id_booking,
             u.full_name  AS full_name_user,
             u.email      AS full_email_user,
             g.full_name  AS full_name_guest,
@@ -119,6 +121,70 @@ class DashboardModel
     {
         $rowSuccess = db::update('booking', [
             "status" => 'confirmed',
+        ], $id);
+        if ($rowSuccess > 0) return true;
+        return false;
+    }
+
+    function getListCheckinToday()
+    {
+
+        $sql = "SELECT 
+        b.id_booking,
+            g.full_name  AS full_name_guest,
+            g.email      AS full_email_guest,
+            u.full_name  AS full_name_user,
+            u.email      AS full_email_user,
+            TIME(b.check_in) AS checkin_time,
+            r.id_room,
+            r.slug AS room_slug
+            FROM booking AS b
+            LEFT JOIN guest  AS g ON b.guest_id  = g.guest_id
+            LEFT JOIN user  AS u ON b.user_id  = u.user_id
+            LEFT JOIN room  AS r ON b.id_room  = r.id_room
+            WHERE b.status = 'confirmed' AND b.status_checkin = 'pending' AND DATE(b.check_in) = CURDATE();";
+
+        $data = db::getAll($sql);
+
+        return $data ? $data : [];
+    }
+
+    function updateCheckinBooking($id)
+    {
+        $rowSuccess = db::update('booking', [
+            "status_checkin" => 'done',
+        ], $id);
+        if ($rowSuccess > 0) return true;
+        return false;
+    }
+
+
+    function getListCheckoutToday()
+    {
+
+        $sql = "SELECT 
+         b.id_booking,
+            g.full_name  AS full_name_guest,
+            g.email      AS full_email_guest,
+            u.full_name  AS full_name_user,
+            u.email      AS full_email_user,
+            r.id_room,
+            r.slug AS room_slug
+            FROM booking AS b
+            LEFT JOIN guest  AS g ON b.guest_id  = g.guest_id
+            LEFT JOIN user  AS u ON b.user_id  = u.user_id
+            LEFT JOIN room  AS r ON b.id_room  = r.id_room
+            WHERE b.status = 'confirmed' AND b.status_checkout = 'pending' AND b.status_checkin = 'done' AND DATE(b.check_out) = CURDATE();";
+
+        $data = db::getAll($sql);
+
+        return $data ? $data : [];
+    }
+
+    function updateCheckoutBooking($id)
+    {
+        $rowSuccess = db::update('booking', [
+            "status_checkout" => 'done',
         ], $id);
         if ($rowSuccess > 0) return true;
         return false;

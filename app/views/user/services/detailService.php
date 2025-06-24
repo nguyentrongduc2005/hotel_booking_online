@@ -3,7 +3,8 @@
 <div class="main-container">
     <div class="center-wrapper">
         <?php if (!empty($data)): ?>
-            <img class="ser-pic" src="<?= $this->configs->config['pathAssets'] . $data['Path_img'] ?>" alt="<?= htmlspecialchars($data['name']) ?>">
+            <img class="ser-pic" src="<?= $this->configs->config['pathAssets'] . $data['Path_img'] ?>"
+                alt="<?= htmlspecialchars($data['name']) ?>">
             <div class="text-container">
                 <h1><?= htmlspecialchars($data['name']) ?></h1>
                 <p><?= htmlspecialchars($data['description']) ?></p>

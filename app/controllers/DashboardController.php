@@ -26,24 +26,88 @@ class DashboardController extends Controller
         $data['checkin']  = $this->model->getNcheckin();
         $data['checkout']  = $this->model->getNcheckout();
         $data['bookingToday']  = $this->model->getNBookingToday();
-        echo '<pre>';
-        print_r($data);
+        // echo '<pre>';
+        // print_r($data);
 
 
 
 
-        // $this->render('index');
+        $this->render('index', $data);
     }
     public function bookingConfirm($req, $res)
     {
-        $id =  $req->params()["id"];
+        $id =  $req->payload()["id"];
         $data = "false";
-        $check = $this->model->updataConformBooking($id);
+        $check = $this->model->updataConformBooking("id_booking = $id");
         if ($check) {
-            $data = "true";
+            $data = [
+                "statusApi" => "true"
+            ];
         }
         $res->json($data)->send();
     }
-    public function checkinHandler($req, $res) {}
-    public function checkoutHandler($req, $res) {}
+
+    public function checkinShow($req, $res)
+    {
+        $data = [];
+        $data['checkinToday'] = $this->model->getListCheckinToday();
+        $data['maintenance']  = $this->model->getMaintenance();
+        $data['available']  = $this->model->getAvailable();
+        $data['total']  = $this->model->getTotal();
+        $data['checkin']  = $this->model->getNcheckin();
+        $data['checkout']  = $this->model->getNcheckout();
+        $data['bookingToday']  = $this->model->getNBookingToday();
+        // echo '<pre>';
+        // print_r($data);
+
+
+
+
+        $this->render('checkin', $data);
+    }
+    public function checkinHandler($req, $res)
+    {
+        $id =  $req->payload()["id"];
+        $data = "false";
+        $check = $this->model->updateCheckinBooking("id_booking = $id");
+        if ($check) {
+            $data = [
+                "statusApi" => "true"
+            ];
+        }
+        $res->json($data)->send();
+    }
+
+
+
+    public function checkoutShow($req, $res)
+    {
+        $data = [];
+        $data['checkoutToday'] = $this->model->getListCheckoutToday();
+        $data['maintenance']  = $this->model->getMaintenance();
+        $data['available']  = $this->model->getAvailable();
+        $data['total']  = $this->model->getTotal();
+        $data['checkin']  = $this->model->getNcheckin();
+        $data['checkout']  = $this->model->getNcheckout();
+        $data['bookingToday']  = $this->model->getNBookingToday();
+        // echo '<pre>';
+        // print_r($data);
+
+
+
+
+        $this->render('checkout', $data);
+    }
+    public function checkoutHandler($req, $res)
+    {
+        $id =  $req->payload()["id"];
+        $data = "false";
+        $check = $this->model->updateCheckoutBooking("id_booking = $id AND status_checkin = 'done'");
+        if ($check) {
+            $data = [
+                "statusApi" => "true"
+            ];
+        }
+        $res->json($data)->send();
+    }
 }
