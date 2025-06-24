@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 21, 2025 at 11:32 AM
+-- Generation Time: Jun 24, 2025 at 09:51 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -69,19 +69,21 @@ CREATE TABLE `booking` (
   `status` enum('pending','confirmed','cancelled','completed') DEFAULT 'pending',
   `created_at` datetime DEFAULT current_timestamp(),
   `transaction_id` int(11) NOT NULL,
-  `id_room` int(11) DEFAULT NULL
+  `id_room` int(11) DEFAULT NULL,
+  `status_checkin` enum('pending','done') DEFAULT 'pending',
+  `status_checkout` enum('pending','done') DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `booking`
 --
 
-INSERT INTO `booking` (`id_booking`, `user_id`, `guest_id`, `date_booking`, `check_in`, `check_out`, `status`, `created_at`, `transaction_id`, `id_room`) VALUES
-(16, 1, NULL, '2025-06-03', '2025-06-05 00:00:00', '2025-06-07 00:00:00', 'confirmed', '2025-06-03 12:00:00', 1, NULL),
-(17, 2, NULL, '2025-06-04', '2025-06-06 00:00:00', '2025-06-08 00:00:00', 'pending', '2025-06-04 15:00:00', 2, NULL),
-(18, NULL, 4, '2025-06-01', '2025-06-05 00:00:00', '2025-06-06 00:00:00', 'cancelled', '2025-06-01 09:30:00', 3, NULL),
-(19, NULL, 1, '2025-06-05', '2025-06-10 00:00:00', '2025-06-12 00:00:00', 'confirmed', '2025-06-05 11:00:00', 4, NULL),
-(20, NULL, 5, '2025-06-06', '2025-06-09 00:00:00', '2025-06-11 00:00:00', 'confirmed', '2025-06-06 14:45:00', 5, NULL);
+INSERT INTO `booking` (`id_booking`, `user_id`, `guest_id`, `date_booking`, `check_in`, `check_out`, `status`, `created_at`, `transaction_id`, `id_room`, `status_checkin`, `status_checkout`) VALUES
+(0, 1, NULL, '2025-06-03', '2025-06-05 00:00:00', '2025-06-07 00:00:00', 'confirmed', '2025-06-03 12:00:00', 1, 1, 'pending', 'pending'),
+(17, 2, NULL, '2025-06-04', '2025-06-24 04:00:09', '2025-06-24 00:00:00', 'confirmed', '2025-06-04 15:00:00', 2, 2, 'done', 'done'),
+(18, NULL, 4, '2025-06-01', '2025-06-24 05:15:12', '2025-06-24 00:00:00', 'confirmed', '2025-06-24 09:30:00', 3, 3, 'done', 'done'),
+(19, NULL, 1, '2025-06-05', '2025-06-24 00:00:00', '2025-06-23 00:00:00', 'confirmed', '2025-06-23 11:00:00', 4, 4, 'pending', 'pending'),
+(20, NULL, 5, '2025-06-06', '2025-06-09 00:00:00', '2025-06-11 00:00:00', 'confirmed', '2025-06-23 14:45:00', 5, 5, 'pending', 'pending');
 
 -- --------------------------------------------------------
 
@@ -219,7 +221,6 @@ CREATE TABLE `room` (
   `capacity` int(11) NOT NULL,
   `amount_bed` int(11) NOT NULL,
   `price` decimal(10,2) NOT NULL,
-  `floor_number` int(11) NOT NULL,
   `status` enum('available','maintenance') DEFAULT 'available',
   `created_at` datetime DEFAULT current_timestamp(),
   `description` text DEFAULT NULL,
@@ -234,13 +235,13 @@ CREATE TABLE `room` (
 -- Dumping data for table `room`
 --
 
-INSERT INTO `room` (`id_room`, `capacity`, `amount_bed`, `price`, `floor_number`, `status`, `created_at`, `description`, `slug`, `area`, `name`, `id_room_type`, `thumb`) VALUES
-(1, 2, 1, 28.00, 2, 'available', '2025-06-08 17:21:49', 'A minimalist, modern, and economical room. Fully equipped with Wi-Fi, cable TV, air conditioning, work desk, wardrobe, private bathroom with shower and toiletries. Glossy floor, neutral tones, double-layer curtains for comfort and hygiene.', 'standard-room', 22, 'Standard Room', 1, '/img/room/a(1).jpg'),
-(2, 3, 1, 30.00, 3, 'available', '2025-06-08 17:21:49', 'An upgrade from Standard with minibar, Smart TV, safe, large work desk, full-length mirror, daily housekeeping. Modern wooden interior, warm tones. Ideal for long business stays or leisure.', 'superior-room', 27, 'Superior Room', 2, '/img/room/b(1).jpg'),
-(3, 3, 1, 48.00, 4, 'available', '2025-06-08 17:21:49', 'Luxurious space with high-end furniture: natural wood, velvet, bathtub, minibar, electronic safe, hairdryer, and quiet air conditioning. Good natural light and views. Suitable for business or leisure travelers.', 'deluxe-room', 32, 'Deluxe Room', 3, '/img/room/c(1).jpg'),
-(4, 4, 2, 100.00, 5, 'available', '2025-06-08 17:21:49', 'A high-end mini-apartment style suite: separate living room, coffee machine, premium sofa, work desk. Natural wood interior, granite, blackout curtains. Large bathtub and luxurious robes. For families, special occasions, or VIPs.', 'suite-room', 50, 'Suite Room', 4, '/img/room/d(1).jpg'),
-(5, 4, 2, 72.00, 3, 'available', '2025-06-08 17:21:49', 'Common living space, dining area, microwave, fridge—ideal for families. Large tub for children, full family amenities like Wi-Fi, cable TV. Child-friendly and safe design.', 'family-room', 42, 'Family Room', 5, '/img/room/e(1).jpg'),
-(6, 1, 1, 26.00, 1, 'available', '2025-06-08 17:21:49', 'A neat room for solo travelers or short business stays. Includes work desk, Wi-Fi, air conditioning, TV, private bathroom. Prioritizes privacy and space-saving convenience.', 'single-room', 17, 'Single Room', 6, '/img/room/f(1).jpg');
+INSERT INTO `room` (`id_room`, `capacity`, `amount_bed`, `price`, `status`, `created_at`, `description`, `slug`, `area`, `name`, `id_room_type`, `thumb`) VALUES
+(1, 2, 1, 28.00, 'available', '2025-06-08 17:21:49', 'A minimalist, modern, and economical room. Fully equipped with Wi-Fi, cable TV, air conditioning, work desk, wardrobe, private bathroom with shower and toiletries. Glossy floor, neutral tones, double-layer curtains for comfort and hygiene.', 'standard-room', 22, 'Standard Room', 1, '/img/room/a(1).jpg'),
+(2, 3, 1, 30.00, 'available', '2025-06-08 17:21:49', 'An upgrade from Standard with minibar, Smart TV, safe, large work desk, full-length mirror, daily housekeeping. Modern wooden interior, warm tones. Ideal for long business stays or leisure.', 'superior-room', 27, 'Superior Room', 2, '/img/room/b(1).jpg'),
+(3, 3, 1, 48.00, 'maintenance', '2025-06-08 17:21:49', 'Luxurious space with high-end furniture: natural wood, velvet, bathtub, minibar, electronic safe, hairdryer, and quiet air conditioning. Good natural light and views. Suitable for business or leisure travelers.', 'deluxe-room', 32, 'Deluxe Room', 3, '/img/room/c(1).jpg'),
+(4, 4, 2, 100.00, 'available', '2025-06-08 17:21:49', 'A high-end mini-apartment style suite: separate living room, coffee machine, premium sofa, work desk. Natural wood interior, granite, blackout curtains. Large bathtub and luxurious robes. For families, special occasions, or VIPs.', 'suite-room', 50, 'Suite Room', 4, '/img/room/d(1).jpg'),
+(5, 4, 2, 72.00, 'available', '2025-06-08 17:21:49', 'Common living space, dining area, microwave, fridge—ideal for families. Large tub for children, full family amenities like Wi-Fi, cable TV. Child-friendly and safe design.', 'family-room', 42, 'Family Room', 5, '/img/room/e(1).jpg'),
+(6, 1, 1, 26.00, 'available', '2025-06-08 17:21:49', 'A neat room for solo travelers or short business stays. Includes work desk, Wi-Fi, air conditioning, TV, private bathroom. Prioritizes privacy and space-saving convenience.', 'single-room', 17, 'Single Room', 6, '/img/room/f(1).jpg');
 
 -- --------------------------------------------------------
 
@@ -335,6 +336,13 @@ CREATE TABLE `token` (
   `created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `token`
+--
+
+INSERT INTO `token` (`id_token`, `token`, `user_id`, `created_at`) VALUES
+(65, '5af2b400e635c86eb1e73056dfd2f48c817b9de8e93076fbcb205d576184fd1d', 1, '2025-06-24 14:44:37');
+
 -- --------------------------------------------------------
 
 --
@@ -387,7 +395,8 @@ INSERT INTO `user` (`user_id`, `email`, `sdt`, `cccd`, `pass`, `full_name`, `cre
 (2, 'linh2712nha@gmail.com', '0971815720', '086205001452', 'pass456', 'Nguyễn Quang Linh', '2025-06-02 09:30:00', 1, 'user'),
 (3, 'nguyentrongduc447@gmail.com', '0866225534', '086205001453', '123', 'Nguyễn Trọng Đức', '2025-06-03 11:45:00', 0, 'user'),
 (4, 'huynhdaihafc@gmail.com', '0903348270', '086205001454', 'hoang321', 'Huỳnh Đại Hà', '2025-06-04 08:20:00', 2, 'user'),
-(5, 'thinhlt1681@ut.edu.vn', '0365574437', '086205001455', 'kimanh456', 'Lê Trường Thịnh', '2025-06-05 14:15:00', 3, 'user');
+(5, 'thinhlt1681@ut.edu.vn', '0365574437', '086205001455', 'kimanh456', 'Lê Trường Thịnh', '2025-06-05 14:15:00', 3, 'user'),
+(6, 'nva@gmail.com', '092422321', '0872904223544', '123', 'nguyen van a', '2025-06-21 16:51:00', NULL, 'user');
 
 --
 -- Indexes for dumped tables
@@ -538,7 +547,7 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT for table `token`
 --
 ALTER TABLE `token`
-  MODIFY `id_token` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id_token` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `transaction`
@@ -550,7 +559,7 @@ ALTER TABLE `transaction`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
