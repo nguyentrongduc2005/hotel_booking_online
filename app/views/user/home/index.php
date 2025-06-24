@@ -5,18 +5,27 @@
             <img src="<?= $this->configs->config['pathAssets'] ?>icon/diamond_logo_small.png" alt="Diamond Logo">
         </div>
         <h1 class="hero-title">DIAMOND HOTEL</h1>
-        <form class="search-bar" action="/hotel_booking_online/public/rooms" method="get">
+        <form class="search-bar" action="<?= $this->configs->config['basePath'] ?>/listroom" method="get">
             <div class="search-group">
-                <label class="title">Check In<br><span class="search-date">Wed, June 18</span></label>
+                <label class="title">Check In
+                </label>
+                <input type="date" name="Picker_search" id="checkin " class="search-date" value="2024-06-18" required>
             </div>
             <div class="search-group">
-                <label class="title">Check out<br><span class="search-date">Wed, June 18</span></label>
+                <label class="title">Check out</label>
+                <input type="date" name="Picker_search" id="checkin " class="search-date" value="2024-06-19" required>
             </div>
             <div class="search-group">
-                <label class="title">Room/Guest<br><span class="search-date">1 room, 1 guest</span></label>
+                <label class="title1" for="room_count_select">Room/Guest</label>
+                <select name="room_count" id="room_count_select" class="room-select">
+                    <option value="1">1 Guest</option>
+                    <option value="2">2 Guests</option>
+                    <option value="3">3 Guests</option>
+                    <option value="4">4 Guests</option>
+                </select>
             </div>
             <button type="submit" class="search-btn">
-                <span class="search-icon"></span> Search Rooms
+                <span class="search-icon">Search Rooms</span>
             </button>
         </form>
     </div>
