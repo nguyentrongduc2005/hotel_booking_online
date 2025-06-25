@@ -31,25 +31,25 @@ class AdminRoomsController extends Controller
     function roomFilter($req, $res)
     {
 
-        // echo "<pre>";
-        // print_r($req->file('images'));
-        // echo "<pre>";
+        $requestData = $req->post();
+        $data = $this->model->getDataByFilter($requestData);
+        $nameRoomTypes = $this->model->getNameRoomTypes();
+        $data['nameRoomTypes'] = $nameRoomTypes;
 
-        // $requestData = $req->post();
-        // $data = $this->model->getDataByFilter($requestData);
-        // $nameRoomTypes = $this->model->getNameRoomTypes();
-        // $data['nameRoomTypes'] = $nameRoomTypes;
-
-        // $amenities = $this->model->getAllAmenities();
-        // $data['amenities'] = $amenities;
-        // $this->render('rooms', $data);
+        $amenities = $this->model->getAllAmenities();
+        $data['amenities'] = $amenities;
+        $this->render('rooms', $data);
     }
     function roomAdd($req, $res)
     {
         $requestData = $req->post();
         $requestData['images'] = $req->file('images');
-        $this->model->addRoom($requestData);
-        $this->redirect(Registry::getInstance()->config['basePath'] . '/admin/rooms');
+        // $check =  $this->model->addRoom($requestData);
+        if (false) {
+            $this->redirect(Registry::getInstance()->config['basePath'] . '/admin/rooms');
+        } else {
+            $this->renderPartial("error/index", ["message" => "Failed to insert data. The record may already exist.", "next" => $this->getConfig("basePath") . "/admin/rooms", "timeout" => 5]);
+        }
     }
 
 

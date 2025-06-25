@@ -89,8 +89,6 @@ class AdminRoomsModel
             }
         }
 
-
-
         //add dữ liệu vào bảng room_image nếu có
         if (!empty($data['images'])) {
             $isFlag = false; // Biến cờ để kiểm tra xem có ảnh nào được upload hay không
@@ -114,5 +112,6 @@ class AdminRoomsModel
                 }
             }
         }
+        return true;
     }
 }

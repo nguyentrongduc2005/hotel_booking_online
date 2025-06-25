@@ -49,11 +49,15 @@ Router::get('/logout', 'AuthenController@logoutHandler', []);
 Router::get('/refeshToken', "AuthenController@refeshToken");
 
 
-///router xử lý thanh toán
+///////////////////////////PAYMENT////////////////////////////////////////////////////
 //submit từ trang detail room render ra form điền thông tin có
-Router::post('/payment/{slug}', 'PaymentController@show', []);
+Router::post('/payment/{slug}', 'PaymentController@formInfo', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleUser',
+]);
 //submit từ trang form thông tin xử lý kiểm tra booking của người dùng và lưu vào render chọn method
-Router::post('/payment/{slug}/handler', 'PaymentController@show', [
+Router::post('/payment/{slug}/handler', 'PaymentController@method', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleUser',
@@ -65,7 +69,7 @@ Router::post('/payment/{slug}/transaction', 'PaymentController@paymentMethodHand
     'AuthorMiddleware@checkRoleUser',
 ]);
 
-
+/////////////////////////////////////////////////////////////////////////////////////////////
 
 
 

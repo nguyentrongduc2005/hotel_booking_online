@@ -41,12 +41,13 @@ class AuthorMiddleware
             session_destroy();
             return true;
         }
-        if (isset($_SESSION['user_name']) && isset($_SESSION['role']) && isset($_SESSION['user_email']) && isset($_SESSION['level'])) return true;
+        if (isset($_SESSION['user_name']) && isset($_SESSION['role']) && isset($_SESSION['user_email']) && isset($_SESSION['level']) && isset($_SESSION['user_id'])) return true;
         // set thông tin user vào token lấy role
         $_SESSION['user_name'] = isset($user['full_name']) ? $user['full_name'] : '';
         $_SESSION['role'] = isset($user['role']) ? $user['role'] : '';
         $_SESSION['user_email'] = isset($user['email']) ? $user['email'] : '';
         $_SESSION['level'] = $user['discount'] >= 5 ? ($user['discount'] > 10 ? "diamond" : "gold") : "silver";
+        $_SESSION['user_id'] = $data['user_id'];
 
         return true;
     }
