@@ -1,7 +1,6 @@
     <link rel="stylesheet" href="<?= $this->configs->config['pathAssets'] ?>css/detailRoom.css?v=<?= time() ?>" />
     <main class="room-details">
         <div class="left-info">
-            <!-- Thêm ảnh vô đây -->
             <div class="main-image placeholder-16-9">
                 <img src="<?= $this->configs->config['pathAssets'] . $data['thumb'] ?>" alt="<?= $data['name'] ?>">
             </div>
@@ -18,7 +17,6 @@
 
                 <?php endforeach; ?>
             <?php endif; ?>
-
             </p>
 
         </div>

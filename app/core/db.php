@@ -94,7 +94,8 @@ class db
             $clause .= "$key = :$key, ";
         }
         $clause = rtrim($clause, ', ');
-        $sql = "UPDATE $tableName SET $clause WHERE id = $codition";
+        $sql = "UPDATE $tableName SET $clause WHERE $codition";
+        // echo $sql;
         $stmt = self::connect()->prepare($sql);
         $stmt->execute($params);
         return $stmt->rowCount();
@@ -108,6 +109,4 @@ class db
         $stmt->execute();
         return $stmt->rowCount();
     }
-
-    
 }

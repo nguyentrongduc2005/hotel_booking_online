@@ -1,0 +1,139 @@
+<?php
+
+namespace app\controllers;
+
+use app\core\Controller;
+use app\models\PaymentModel;
+
+class PaymentController extends Controller
+{
+
+    private  $model;
+    function __construct()
+    {
+        parent::__construct();
+        $this->model = new PaymentModel();
+    }
+    //submit từ trang list room
+    public function formInfo($req, $res)
+    {
+        // $requestData = $req->post(); //này checkin, checkout, 
+        $room = $this->model->getRoomInfo($req->params()["slug"]);
+        if (!$room) {
+            // Xử lý khi không tìm thấy phòng
+            $this->renderPartial('error/index', ['message' => 'Room not found', 'next' => $this->getConfig("basePath"), 'timeout' => 5]);
+        }
+        if (isset($_SESSION['user_token']) && isset($_SESSION['user_name'])) {
+            // Người dùng chưa đăng nhập, chuyển hướng đến trang đăng nhập
+            $user = $this->model->getUserbyId($_SESSION['user_id']);
+            $data["user"] = $user;
+        } else {
+            // Người dùng chưa đăng nhập, chuyển hướng đến trang đăng nhập
+            $data["user"] = [
+                'username' => '',
+                'email' => '',
+                'phone' => '',
+                'cccd' => ''
+            ];
+        }
+
+        $data["room"]  = $room;
+        if (!empty($_SESSION['level'])) {
+            if ($_SESSION['level'] == "diamond") {
+                $data['discount'] = 0.15;
+            } else if ($_SESSION['level'] == "gold") {
+                $data['discount'] = 0.1;
+            } else {
+                $data['discount'] = 0.05;
+            }
+        }
+
+        $this->render('index', $data);
+    }
+
+    //submit từ trang form
+    public function method($req, $res)
+    {
+        $requestData = $req->post(); //này checkin, checkout, username, email, phone,cccd
+        $slug = $req->params()["slug"];
+        $room = $this->model->getRoomInfo($slug);
+        $idroom = $room['id_room'];
+        if (!$idroom) {
+            // Xử lý khi không tìm thấy phòng
+            $this->renderPartial('error/index', ['message' => 'Room not found', 'next' => $this->getConfig("basePath") . '/detailroom/' . $slug, 'timeout' => 5]);
+        }
+        //xử lý người dùng là guest or user
+        $customer = "";
+        if (!isset($_SESSION['user_token']) || !isset($_SESSION['user_name']) || !isset($_SESSION['user_id'])) {
+            //insert vào bảng guest
+            $guestData = [
+                'full_name' => $requestData['full_name'],
+                'email' => $requestData['email'],
+                'sdt' => $requestData['sdt'],
+                'cccd' => $requestData['cccd']
+            ];
+            $customer = $this->model->insertGuest($guestData);
+        } else {
+            //lấy id user từ session
+            $customer = $_SESSION['user_id'];
+        }
+        //insert bảng transaction
+        $idTransaction = $this->model->insertTransaction([
+            'total_amount' => $requestData['total_amount'],
+        ]);
+        if (!$idTransaction) {
+            // Xử lý khi không tìm thấy phòng
+            $this->renderPartial('error/index', ['message' => 'Transaction not found, please call support.', 'next' => $this->getConfig("basePath") . '/detailroom/' . $slug, 'timeout' => 5]);
+        }
+        //insert bảng booking
+        $data = [
+            'id_room' => $idroom,
+            'check_in' => $requestData['check_in'],
+            'check_out' => $requestData['check_out'],
+            'customer' => $customer,
+            'id_transaction' => $idTransaction
+        ];
+        $id_booking = $this->model->insertBooking($data);
+        if (!$id_booking) {
+            // Xử lý khi không tìm thấy phòng
+            $this->renderPartial('error/index', ['message' => 'Booking not found, please call support.', 'next' => $this->getConfig("basePath") . '/detailroom/' . $slug, 'timeout' => 5]);
+        }
+
+
+        $payload = [
+            'room' => $room,
+            'check_in' => $requestData['check_in'],
+            'check_out' => $requestData['check_out'],
+            'total_amount' => $requestData['total_amount'],
+            "id_transaction" => $idTransaction,
+            "id_booking" => $id_booking,
+        ];
+
+        if (!empty($_SESSION['level'])) {
+            if ($_SESSION['level'] == "diamond") {
+                $payload['discount'] = 0.15;
+            } else if ($_SESSION['level'] == "gold") {
+                $payload['discount'] = 0.1;
+            } else {
+                $payload['discount'] = 0.05;
+            }
+        }
+
+        $this->render('paymentMethod', $payload);
+    }
+    //submit từ trang paymentMethod
+    public function paymentMethodHandler($req, $res)
+    {
+        $requestData = $req->post()['method'];
+        echo $requestData;
+        $id_transaction = $req->post()['id_transaction'];
+        echo $id_transaction;
+        $id =  $this->model->updateMethod(['payment_method' => $requestData], "transaction_id = $id_transaction");
+        if (!$id) {
+            // Xử lý khi không tìm thấy phòng
+            $this->renderPartial('error/index', ['message' => 'Payment method update failed, please call support.', 'next' => $this->getConfig("basePath") . '/detailroom/' . $req->params()["slug"], 'timeout' => 5]);
+        }
+
+        $this->render("success", []);
+    }
+}

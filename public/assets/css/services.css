@@ -25,8 +25,9 @@
 a {
     text-decoration: none !important;
 }
+
 /* Reset default styles */
-.services-container *{
+.services-container * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -66,11 +67,9 @@ a {
     border-radius: 15px;
     background-color: transparent;
     backdrop-filter: blur(20px);
-    background-image: linear-gradient(
-        120deg,
-        rgba(255, 228, 196, 0.1), 
-        rgba(0, 0, 0, 0.2)
-    );
+    background-image: linear-gradient(120deg,
+            rgba(255, 228, 196, 0.1),
+            rgba(0, 0, 0, 0.2));
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -107,7 +106,8 @@ a {
 }
 
 /* Service info section below image */
-h3, p {
+h3,
+p {
     margin: 0;
 }
 
@@ -145,16 +145,16 @@ h3, p {
         min-width: auto;
         padding: 20px;
     }
-    
+
     .services-grid {
         gap: 20px;
     }
-    
+
     .service-item {
         width: 280px;
         height: 450px;
     }
-    
+
     .service-image {
         width: 180px;
         height: 180px;
@@ -166,12 +166,12 @@ h3, p {
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(3, 1fr);
     }
-    
+
     .service-item {
         width: 250px;
         height: 400px;
     }
-    
+
     .service-image {
         width: 150px;
         height: 150px;
@@ -183,12 +183,12 @@ h3, p {
         grid-template-columns: 1fr;
         grid-template-rows: repeat(6, 1fr);
     }
-    
+
     .service-item {
         width: 280px;
         height: 350px;
     }
-    
+
     .service-image {
         width: 160px;
         height: 160px;

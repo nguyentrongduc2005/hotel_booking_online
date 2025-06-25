@@ -10,8 +10,9 @@ document.addEventListener('DOMContentLoaded', function () {
     loginBtn.addEventListener('click', function (e) {
       e.preventDefault();
       popup.style.display = 'flex';
-      console.log('popup');
     });
+  }else{
+    popup.style.display = 'none';
   }
 
   // Đóng popup khi bấm nút đóng
@@ -22,9 +23,10 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Đóng popup khi bấm ra ngoài nội dung popup
-  window.addEventListener('click', function (event) {
-    if (event.target === popup) {
+  popup.addEventListener('click', function (event) {
+    if (!event.target.closest('.login-popup-content')) {
       popup.style.display = 'none';
+      console.log('close');
     }
   });
 });

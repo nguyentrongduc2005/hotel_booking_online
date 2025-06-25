@@ -18,13 +18,13 @@
                         <a href="<?= $this->configs->config['basePath'] ?>" class="nav-link">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?= $this->configs->config['basePath'] ?>listroom" class="nav-link">Rooms</a>
+                        <a href="<?= $this->configs->config['basePath'] ?>/listroom" class="nav-link">Rooms</a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?= $this->configs->config['basePath'] ?>" class="nav-link">Our services</a>
+                        <a href="<?= $this->configs->config['basePath'] ?>/services" class="nav-link">Our services</a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?= $this->configs->config['basePath'] ?>contact" class="nav-link">Contact us</a>
+                        <a href="<?= $this->configs->config['basePath'] ?>/contact" class="nav-link">Contact us</a>
                     </li>
                 </ul>
             </div>
@@ -43,32 +43,31 @@
 
 <!-- Popup Login -->
 <div id="loginPopup" class="login-popup" style="display:none;">
-
     <div class="login-popup-content">
         <div class="login-popup-header">
             <?php if (isset($_SESSION["user_token"])) { ?>
-            <div class="login-popup-avatar"
-                style="background-image: url('<?= $this->configs->config['pathAssets'] ?>/img/user/avatar.jpg')"></div>
+                <div class="login-popup-avatar"
+                    style="background-image: url('<?= $this->configs->config['pathAssets'] ?>/img/user/avatar.jpg')"></div>
             <?php } ?>
-            <?php if (!isset($_SESSION["user_token"])) { ?>
             <button class="login-popup-close" id="closeLoginPopup">&times;</button>
-            <a href="<?= $this->configs->config['basePath'] ?>/login" class="login-popup-signup nav-link">LOGIN</a>
+            <?php if (!isset($_SESSION["user_token"])) { ?>
+                <a href="<?= $this->configs->config['basePath'] ?>/login" class="login-popup-signup nav-link">LOGIN</a>
             <?php } ?>
             <?php if (!isset($_SESSION["user_token"])) { ?>
-            <div class="login-popup-login-link">
-                Don't have an account?
-                <a href="<?= $this->configs->config['basePath'] ?>/regis" id="registerLink">sign up</a>
-            </div>
+                <div class="login-popup-login-link">
+                    Don't have an account?
+                    <a href="<?= $this->configs->config['basePath'] ?>/regis" id="registerLink">sign up</a>
+                </div>
             <?php } ?>
             <?php if (isset($_SESSION["user_token"])) { ?>
-            <div class="login-popup-info">
-                <div class="login-popup-username">
-                    <?= htmlspecialchars($_SESSION["user_name"] ?? '') ?>
+                <div class="login-popup-info">
+                    <div class="login-popup-username">
+                        <?= htmlspecialchars($_SESSION["user_name"] ?? '') ?>
+                    </div>
+                    <div class="login-popup-email">
+                        <?= htmlspecialchars($_SESSION["user_email"] ?? '') ?>
+                    </div>
                 </div>
-                <div class="login-popup-email">
-                    <?= htmlspecialchars($_SESSION["user_email"] ?? '') ?>
-                </div>
-            </div>
             <?php } ?>
 
         </div>
@@ -84,9 +83,9 @@
             <div class="login-popup-item"> <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-history.png"
                     alt="Diamond Hotel"> My booking history</div>
             <?php if (isset($_SESSION["user_token"])) { ?>
-            <a class="login-popup-item" href="<?= $this->configs->config['basePath'] ?>/logout">
-                <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-logout.png" alt="Diamond Hotel">Log out
-            </a>
+                <a class="login-popup-item" href="<?= $this->configs->config['basePath'] ?>/logout">
+                    <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-logout.png" alt="Diamond Hotel">Log out
+                </a>
             <?php } ?>
         </div>
 

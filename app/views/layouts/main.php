@@ -23,9 +23,12 @@
       <?= $content; ?>
     </div>
 
-    <div id="footer">
-      <?= $this->renderPartial('layouts/footer'); ?>
-    </div>
+    <!-- Hide footer on payment page (do bug quá) -->
+    <?php if (!str_contains($_SERVER['REQUEST_URI'], 'payment')): ?>
+      <div id="footer">
+        <?= $this->renderPartial('layouts/footer'); ?>
+      </div>
+    <?php endif; ?>
   </div>
   <script src="<?= $this->configs->config['pathAssets'] ?>js/homepage.js?v=<?= time() ?>"></script>
 
