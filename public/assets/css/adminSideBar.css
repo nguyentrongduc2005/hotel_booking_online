@@ -74,7 +74,6 @@
   border-radius: 0 4px 4px 0;
 }
 
-/* Đảm bảo Dashboard giữ nguyên kích thước, border khi hover */
 .sidebar-item.sidebar-dashboard {
   background: #191714;
   border-bottom: 1px solid #222;
@@ -82,12 +81,11 @@
   z-index: 1;
 }
 .sidebar-item.sidebar-dashboard:hover {
-  background: #222; /* hoặc #191714 nếu muốn giữ nguyên */
+  background: #222;
   color: #e6c17b;
   border-bottom: 1px solid #fff;
 }
 
-/* Submenu nhỏ hơn rõ rệt */
 .sidebar-submenu {
   display: none;
   list-style: none;
