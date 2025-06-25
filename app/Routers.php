@@ -142,3 +142,60 @@ Router::post('/admin/rooms/delete', 'AdminRoomsController@roomDelete', [
 
 
 ///////////////////////////////////end rooms/////////////////////////////
+
+///////////////////type rooms/////////////////////////////////////
+Router::get('/admin/roomtypes', 'AdminTypeRoomsController@typeRoomsShow', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+
+Router::post('/admin/roomtypes/add', 'AdminTypeRoomsController@typeRoomsAdd', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+
+Router::post('/admin/roomtypes/edit', 'AdminTypeRoomsController@typeRoomsEdit', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+
+Router::post('/admin/roomtypes/delete', 'AdminTypeRoomsController@typeRoomsDelete', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+
+
+//////////////////end type rooms/////////////////////////////////////
+
+//////////////////////amenities/////////////////////////////////////
+Router::get('/admin/amenities', 'AdminTypeRoomsController@typeRoomsShow', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+
+Router::post('/admin/amenities/add', 'AdminTypeRoomsController@typeRoomsAdd', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+
+Router::post('/admin/amenities/edit', 'AdminTypeRoomsController@typeRoomsEdit', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+
+Router::post('/admin/amenities/delete', 'AdminTypeRoomsController@typeRoomsDelete', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+
+
+
+/////////////////////end amenities/////////////////////////////////////

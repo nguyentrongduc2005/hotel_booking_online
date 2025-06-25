@@ -78,4 +78,16 @@ class PaymentModel
         $id = db::update('transaction', $data, $condition);
         return $id;
     }
+
+
+    function checkRoomBooked($idroom, $check_in, $check_out)
+    {
+        $sql = "SELECT * FROM booking WHERE id_room = :id_room AND (check_in <= :check_out AND check_out >= :check_in)";
+        $data = db::getOne($sql, [
+            'id_room' => $idroom,
+            'check_in' => $check_in,
+            'check_out' => $check_out
+        ]);
+        return $data ? true : false;
+    }
 }
