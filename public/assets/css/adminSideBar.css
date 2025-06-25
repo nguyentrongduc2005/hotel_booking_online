@@ -1,0 +1,139 @@
+.sidebar {
+  width: 220px;
+  background: #191714;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  box-shadow: 1px 0 0 #222;
+}
+
+.sidebar-logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 0 12px 0;
+  border-bottom: 1px solid #222;
+}
+
+.sidebar-logo img {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 0;
+  margin-right: 12px;
+}
+
+.sidebar-brand {
+  margin: 0;
+  padding: 0;
+  font-family: 'Balkind-Demo', sans-serif;
+  color: #fff;
+  font-size: 1.4rem;
+  text-align: left;
+  letter-spacing: 1px;
+  line-height: 1.1;
+  display: block;
+}
+
+.sidebar-nav {
+  flex: 1;
+}
+
+.sidebar-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-item {
+  color: #fff;
+  font-family: 'SVN-GilroyBold', sans-serif;
+  font-size: 1.2rem;
+  padding: 18px 0 18px 32px;
+  cursor: pointer;
+  border-bottom: 1px solid #222;
+  transition: background 0.2s, color 0.2s;
+  position: relative;
+}
+
+.sidebar-item:hover,
+.sidebar-item.active {
+  background: #2d2820;
+  border-left: 7px solid #b08d4a;
+}
+
+.sidebar-item.active::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 8px;
+  height: 100%;
+  background: #b08d4a;
+  border-radius: 0 4px 4px 0;
+}
+
+/* Đảm bảo Dashboard giữ nguyên kích thước, border khi hover */
+.sidebar-item.sidebar-dashboard {
+  background: #191714;
+  border-bottom: 1px solid #222;
+  position: relative;
+  z-index: 1;
+}
+.sidebar-item.sidebar-dashboard:hover {
+  background: #222; /* hoặc #191714 nếu muốn giữ nguyên */
+  color: #e6c17b;
+  border-bottom: 1px solid #fff;
+}
+
+/* Submenu nhỏ hơn rõ rệt */
+.sidebar-submenu {
+  display: none;
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+  margin-top: 10px;
+}
+
+.sidebar-item.sidebar-dashboard:hover > .sidebar-submenu {
+  display: block;
+  animation: fadeInSubmenu 0.2s;
+}
+
+.sidebar-subitem a {
+  margin-bottom: 5px;
+  display: block;
+  padding: 12px 12px 12px 12px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.08rem;
+  font-family: 'SVN-GilroyBold', sans-serif;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.sidebar-subitem a:hover {
+  background: #3a3227;
+  color: #e6c17b;
+  border-left: 4px solid #b08d4a;
+}
+
+@keyframes fadeInSubmenu {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@font-face {
+  font-family: 'Balkind-Demo';
+  src: url('/hotel_booking_online/public/assets/font/Balkind-Demo.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SVN-GilroyBold';
+  src: url('/hotel_booking_online/public/assets/font/SVN-GilroyBold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}

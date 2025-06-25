@@ -9,10 +9,13 @@
 </head>
 
 <body>
-    <?= $this->renderPartial('Adminlayouts/header'); ?>
-
-    <?= $content ?>
-    <?= $this->renderPartial('Adminlayouts/sidebar'); ?>
+    <div class="admin-layout">
+        <?php $this->renderPartial('AdminLayouts/sidebar'); ?>
+        <div class="admin-main">
+            <?php $this->renderPartial('AdminLayouts/header'); ?>
+            <?= $content ?>
+        </div>
+    </div>
 </body>
 
 </html>
