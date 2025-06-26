@@ -7,11 +7,10 @@
   <nav class="sidebar-nav">
     <ul class="sidebar-menu">
       <li class="sidebar-item sidebar-dashboard">
-        Dashboard
+        <a href="<?= $this->configs->config['basePath'] ?>/dashboard" style="text-decoration: none; color: #fff;">Dashboard</a>
         <ul class="sidebar-submenu">
-          <li class="sidebar-subitem"><a href="">Confirmed Booking</a></li>
-          <li class="sidebar-subitem"><a href="">Check-in</a></li>
-          <li class="sidebar-subitem"><a href="">Check-out</a></li>
+          <li class="sidebar-subitem"><a href="<?= $this->configs->config['basePath'] ?>/dashboard/checkin">Check-in</a></li>
+          <li class="sidebar-subitem"><a href="<?= $this->configs->config['basePath'] ?>/dashboard/checkout">Check-out</a></li>
         </ul>
       </li>
       <li class="sidebar-item sidebar-bookings">
@@ -21,9 +20,19 @@
           <li class="sidebar-subitem"><a href="">History Booking</a></li>
         </ul>
       </li>
-      <li class="sidebar-item sidebar-rooms">Rooms</li>
+      <li class="sidebar-item sidebar-rooms">Rooms
+        <ul class="sidebar-submenu">
+          <li class="sidebar-subitem"><a href="">Room Types</a></li>
+          <li class="sidebar-subitem"><a href="">Amenities</a></li>
+        </ul>
+      </li>
       <li class="sidebar-item sidebar-services">Services</li>
-      <li class="sidebar-item sidebar-customers">Customers</li>
+      <li class="sidebar-item sidebar-customers">Customers
+        <ul class="sidebar-submenu">
+          <li class="sidebar-subitem"><a href="">Guests</a></li>
+          <li class="sidebar-subitem"><a href="">Users</a></li>
+        </ul>
+      </li>
       <li class="sidebar-item sidebar-transactions">Transactions</li>
     </ul>
   </nav>

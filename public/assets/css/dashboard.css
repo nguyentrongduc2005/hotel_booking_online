@@ -133,10 +133,8 @@
   text-align: center;
 }
 
-.dashboard-latest-bookings {
-  margin-top: 32px;
-}
-.dashboard-latest-title {
+
+.dashboard-title {
   font-size: 1.3rem;
   font-weight: 600;
   margin-bottom: 12px;
@@ -179,6 +177,35 @@
 .dashboard-action-reject {
   color: #e05a4a;
   margin-right: 0;
+}
+
+.btn-action-checkin,
+.btn-action-checkout {
+  background: #6bbf59;
+  color: #0f0f0f;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  font-family: 'SVN-Gilroy';
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+@font-face {
+  font-family: 'SVN-Gilroy';
+  src: url('../font/SVN-Gilroy.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SVN-Gilroy';
+  src: url('../font/SVN-GilroyBold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
 
 @media (max-width: 900px) {
