@@ -15,4 +15,13 @@ class AdminTransactionsController extends Controller
         parent::__construct();
         $this->model = new AdminTransactionsModel();
     }
+
+    function transactionsShow($req, $res)
+    {
+        $data = $this->model->getAllTransactions();
+        $this->render('index', $data);
+    }
+
+
+    function transactionFilter($req, $res) {}
 }
