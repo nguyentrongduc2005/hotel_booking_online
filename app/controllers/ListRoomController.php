@@ -16,7 +16,7 @@ class ListRoomController extends Controller
         $this->model = new ListRoomModel();
     }
 
-   
+
     public function index(Request $req, $res)
     {
         // Lấy dữ liệu bộ lọc từ query string
@@ -29,8 +29,8 @@ class ListRoomController extends Controller
             'area'        => $req->query('area'),
             'bed_count'   => $req->query('bed_count'),
         ];
-   
-        
+
+
         $rooms = $this->model->getFilteredRooms($filters);
 
         //Debug

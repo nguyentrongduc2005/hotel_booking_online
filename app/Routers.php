@@ -14,6 +14,7 @@ Router::get('/listroom', 'ListRoomController@index', [
     'AuthorMiddleware@checkRoleUser',
 ]);
 
+
 //router trang detail room
 Router::get('/detailroom/{slug}', 'DetailRoomController@index', [
     'AuthorMiddleware@checktoken',
