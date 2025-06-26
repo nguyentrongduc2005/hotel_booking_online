@@ -2,7 +2,7 @@
 <aside class="sidebar">
   <div class="sidebar-logo">
     <img src="<?= $this->configs->config['pathAssets'] ?>icon/diamond_logo_small.png" alt="Diamond Hotel Logo">
-    <span class="sidebar-brand">DIAMOND<br/>HOTEL</span>
+    <span class="sidebar-brand">DIAMOND<br />HOTEL</span>
   </div>
   <nav class="sidebar-nav">
     <ul class="sidebar-menu">
@@ -14,7 +14,13 @@
           <li class="sidebar-subitem"><a href="">Check-out</a></li>
         </ul>
       </li>
-      <li class="sidebar-item sidebar-bookings">Bookings</li>
+      <li class="sidebar-item sidebar-bookings">
+        Booking
+        <ul class="sidebar-submenu">
+          <li class="sidebar-subitem"><a href="">All Bookings</a></li>
+          <li class="sidebar-subitem"><a href="">History Booking</a></li>
+        </ul>
+      </li>
       <li class="sidebar-item sidebar-rooms">Rooms</li>
       <li class="sidebar-item sidebar-services">Services</li>
       <li class="sidebar-item sidebar-customers">Customers</li>
