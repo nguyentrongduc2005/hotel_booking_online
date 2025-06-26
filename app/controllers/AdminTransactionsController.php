@@ -23,5 +23,10 @@ class AdminTransactionsController extends Controller
     }
 
 
-    function transactionFilter($req, $res) {}
+    function transactionFilter($req, $res)
+    {
+        $filter = $req->post();
+        $data = $this->model->transactionFilter($filter);
+        $this->render('index', $data);
+    }
 }

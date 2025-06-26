@@ -3,6 +3,7 @@
 namespace app\models;
 
 use app\core\db;
+use \DateTime;
 
 class AdminTransactionsModel
 {
@@ -58,5 +59,43 @@ class AdminTransactionsModel
             return $result;
         }
         return $result ? $result : [];
+    }
+
+
+    function transactionFilter($filter)
+    {
+        $filtered = array_filter($filter, function ($value) {
+            return !(
+                $value === '' ||
+                $value === null ||
+                (is_array($value) && empty($value))
+            );
+        });
+        $keys = array_keys($filtered);
+        if (!empty($filtered["created_at"])) {
+            $dt = new DateTime($filtered["created_at"]);
+            $filtered["created_at"] = $dt->format('Y-m-d H:i:s');
+        }
+
+        $condition = "";
+        foreach ($keys as $key) {
+            if ($condition != '') {
+                $condition .= " AND ";
+            }
+            $condition .= "$key = :$key";
+        }
+
+
+        $sql = "SELECT * FROM `booking` WHERE " . $condition;
+
+        $data = db::getAll($sql, $filtered);
+        if (!$data) return [];
+        foreach ($data as $key => $value) {
+            $id = $value['transaction_id'];
+            $booking = $this->getBookingByidTransaction($id);
+            $data[$key]['id_booking'] = isset($booking['id_booking']) ? $booking['id_booking'] : null;
+            $data[$key]['user'] = $this->getUserbyIdBooking($data[$key]['id_booking']);
+        }
+        return $data ? $data : [];
     }
 }

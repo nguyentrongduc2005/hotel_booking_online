@@ -208,9 +208,9 @@ Router::get('/admin/transactions', 'AdminTransactionsController@transactionsShow
 ]);
 
 Router::post('/admin/transactions', 'AdminTransactionsController@transactionFilter', [
-    'AuthorMiddleware@checktoken',
-    'AuthorMiddleware@author',
-    'AuthorMiddleware@checkRoleAdmin',
+    // 'AuthorMiddleware@checktoken',
+    // 'AuthorMiddleware@author',
+    // 'AuthorMiddleware@checkRoleAdmin',
 ]);
 
 
