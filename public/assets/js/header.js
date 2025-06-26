@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
       e.preventDefault();
       popup.style.display = 'flex';
     });
-  }else{
+  } else {
     popup.style.display = 'none';
   }
 
@@ -33,13 +33,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function checktokenTimer(access) {
 
-  let confirmExtend = confirm("Phiên của bạn sẽ hết hạn sau vài phút. Bấm OK để tiếp tục phiên.");
+  let confirmExtend = confirm("Your session will expire in a few minutes. Click OK to continue your session.");
   if (confirmExtend) {
     fetch(access + "/refeshToken", { credentials: 'include' })
       .then(res => {
 
         if (res.status === 401) {
-          alert("Phiên đã hết hạn. Vui lòng đăng nhập lại.");
+          alert("Session has expired. Please log in again.");
           window.location.href = access + "/login";
         } else {
           return res.json();
@@ -47,11 +47,11 @@ function checktokenTimer(access) {
       })
       .then(data => {
         if (data.refreshToken) {
-          alert("Phiên làm việc đã được gia hạn.");
+          alert("Session has been extended.");
         }
       })
       .catch(() => {
-        alert("Lỗi khi gia hạn phiên. Vui lòng thử lại.");
+        alert("Failed to extend the session. Please try again.");
         window.location.href = access + "/login";
       });
 

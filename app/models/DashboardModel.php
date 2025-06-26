@@ -117,8 +117,15 @@ class DashboardModel
         return $data ? $data : [];
     }
 
-    function updataConformBooking($id)
+    function updataConformBooking($id,  $status)
     {
+        if ($status == 'cancelled') {
+            $rowSuccess = db::update('booking', [
+                "status" => 'cancelled',
+            ], $id);
+            if ($rowSuccess > 0) return true;
+            return false;
+        }
         $rowSuccess = db::update('booking', [
             "status" => 'confirmed',
         ], $id);

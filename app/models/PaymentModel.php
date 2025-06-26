@@ -3,6 +3,7 @@
 namespace app\models;
 
 use app\core\db;
+use \DateTime;
 
 class PaymentModel
 {
@@ -62,6 +63,10 @@ class PaymentModel
 
             $data['user_id'] = null; // Nếu không có user_id, đặt là null
         }
+        $data['check_in'] = new DateTime($data['check_in']);
+        $data['check_in'] = $data['check_in']->format('Y-m-d H:i:s');
+        $data['check_out'] = new DateTime($data['check_out']);
+        $data['check_out'] = $data['check_out']->format('Y-m-d H:i:s');
         $idBooking = db::insert('booking', [
             'id_room' => $data['id_room'],
             'guest_id' => $data['guest_id'] ?? null,
@@ -77,5 +82,21 @@ class PaymentModel
     {
         $id = db::update('transaction', $data, $condition);
         return $id;
+    }
+
+
+    function checkRoomBooked($idroom, $check_in, $check_out)
+    {
+        $check_in = new DateTime($check_in);
+        $check_in = $check_in->format('Y-m-d H:i:s');
+        $check_out = new DateTime($check_out);
+        $check_out = $check_out->format('Y-m-d H:i:s');
+        $sql = "SELECT * FROM booking WHERE id_room = :id_room AND (check_in <= :check_out AND check_out >= :check_in)";
+        $data = db::getOne($sql, [
+            'id_room' => $idroom,
+            'check_in' => $check_in,
+            'check_out' => $check_out
+        ]);
+        return $data ? true : false;
     }
 }

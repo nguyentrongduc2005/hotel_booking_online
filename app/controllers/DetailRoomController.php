@@ -29,23 +29,22 @@ class DetailRoomController extends Controller
     // }
 
     public function index($req, $res)
-{
-    $slug = $req->params()['slug'];
+    {
+        $slug = $req->params()['slug'];
 
-    $images = $this->model->getImages($slug);
-    $amenities = $this->model->getAmenities($slug);
-    $data = $this->model->getRoomBySlug($slug);
+        $images = $this->model->getImages($slug);
+        $amenities = $this->model->getAmenities($slug);
+        $data = $this->model->getRoomBySlug($slug);
 
-    // if (!$data) {
-    //     $res->setStatusCode(404);
-    //     echo "Không tìm thấy phòng";
-    //     return;
-    // }
+        // if (!$data) {
+        //     $res->setStatusCode(404);
+        //     echo "Không tìm thấy phòng";
+        //     return;
+        // }
 
-    $data['images'] = $images;
-    $data['amenities'] = $amenities;
+        $data['images'] = $images;
+        $data['amenities'] = $amenities;
 
-    $this->render('index', $data);
-}
-
+        $this->render('index', $data);
+    }
 }

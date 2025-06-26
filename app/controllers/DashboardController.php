@@ -36,9 +36,12 @@ class DashboardController extends Controller
     }
     public function bookingConfirm($req, $res)
     {
+        // echo '<pre>';
+        // print_r($req->payload());
         $id =  $req->payload()["id"];
+        $status =  $req->payload()["status"]; //confirrmed or cancelled
         $data = "false";
-        $check = $this->model->updataConformBooking("id_booking = $id");
+        $check = $this->model->updataConformBooking("id_booking = $id",  $status);
         if ($check) {
             $data = [
                 "statusApi" => "true"

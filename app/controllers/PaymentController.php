@@ -62,6 +62,16 @@ class PaymentController extends Controller
             // Xử lý khi không tìm thấy phòng
             $this->renderPartial('error/index', ['message' => 'Room not found', 'next' => $this->getConfig("basePath") . '/detailroom/' . $slug, 'timeout' => 5]);
         }
+        //xử lý phòng có bị trung lịch không
+        $check = $this->model->checkRoomBooked($idroom, $requestData['check_in'], $requestData['check_out']);
+        if ($check) {
+            $meta = $requestData;
+            $meta['room'] = $room;
+            $meta['message'] = "Phòng đã được đặt trong khoảng thời gian này";
+            // Xử lý khi phòng đã được đặt
+            $this->render('index', $meta);
+        }
+
         //xử lý người dùng là guest or user
         $customer = "";
         if (!isset($_SESSION['user_token']) || !isset($_SESSION['user_name']) || !isset($_SESSION['user_id'])) {

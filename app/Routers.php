@@ -7,12 +7,13 @@ Router::get('/', 'HomeController@show', [
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleUser',
 ]);
-
-Router::get('/listroom', 'ListRoomController@show', [
+//router trang list room
+Router::get('/listroom', 'ListRoomController@index', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleUser',
 ]);
+
 
 //router trang detail room
 Router::get('/detailroom/{slug}', 'DetailRoomController@index', [
@@ -142,3 +143,77 @@ Router::post('/admin/rooms/delete', 'AdminRoomsController@roomDelete', [
 
 
 ///////////////////////////////////end rooms/////////////////////////////
+
+///////////////////type rooms/////////////////////////////////////
+Router::get('/admin/roomtypes', 'AdminTypeRoomsController@typeRoomsShow', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+
+Router::post('/admin/roomtypes/add', 'AdminTypeRoomsController@typeRoomsAdd', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+
+Router::post('/admin/roomtypes/edit', 'AdminTypeRoomsController@typeRoomsEdit', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+
+Router::post('/admin/roomtypes/delete', 'AdminTypeRoomsController@typeRoomsDelete', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+
+
+//////////////////end type rooms/////////////////////////////////////
+
+//////////////////////amenities/////////////////////////////////////
+Router::get('/admin/amenities', 'AdminAmenitiesController@amenitiesShow', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+
+Router::post('/admin/amenities/add', 'AdminAmenitiesController@amenitiesAdd', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+
+Router::post('/admin/amenities/edit', 'AdminAmenitiesController@amenitiesEdit', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+
+Router::post('/admin/amenities/delete', 'AdminAmenitiesController@amenitiesDelete', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+
+/////////////////////end amenities/////////////////////////////////////
+
+///////////////////////transactions/////////////////////////////////////
+
+Router::get('/admin/transactions', 'AdminTransactionsController@transactionsShow', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+
+Router::post('/admin/transactions', 'AdminTransactionsController@transactionFilter', [
+    // 'AuthorMiddleware@checktoken',
+    // 'AuthorMiddleware@author',
+    // 'AuthorMiddleware@checkRoleAdmin',
+]);
+
+
+
+
+///////////////////////end transactions/////////////////////////////////////

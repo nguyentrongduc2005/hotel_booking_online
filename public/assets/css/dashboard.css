@@ -1,0 +1,199 @@
+.dashboard-container {
+  background: #f8f8f5;
+  padding: 24px 24px 0 24px;
+  min-height: 100vh;
+  font-family: 'SVN-Gilroy', Arial, sans-serif;
+}
+
+.dashboard-status-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 32px;
+  margin-bottom: 24px;
+}
+
+.dashboard-status-card {
+  background: #fff;
+  padding: 18px 32px 12px 24px;
+  min-width: 120px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  border-left: 0;
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+}
+.dashboard-status-card:nth-child(1) {
+  border-left: 6px solid #b08d4a;
+}
+.dashboard-status-card:nth-child(2) {
+  border-left: 6px solid #b06a7a;
+}
+.dashboard-status-card:nth-child(3) {
+  border-left: 6px solid #3a8d5c;
+}
+
+.dashboard-status-number {
+  font-size: 2.6rem;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+.dashboard-status-label {
+  font-size: 1.1rem;
+  color: #888;
+  font-weight: 500;
+}
+
+.dashboard-status-card:nth-child(1) .dashboard-status-number { color: #b08d4a; }
+.dashboard-status-card:nth-child(2) .dashboard-status-number { color: #b06a7a; }
+.dashboard-status-card:nth-child(3) .dashboard-status-number { color: #3a8d5c; }
+
+.dashboard-status-flow {
+  background: transparent;
+  box-shadow: none;
+  min-width: 260px;
+  align-items: stretch;
+  padding: 0;
+}
+.dashboard-status-flow-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #222;
+  text-align: center;
+}
+.dashboard-status-flow-boxes {
+  display: flex;
+  gap: 16px;
+}
+.dashboard-status-flow-box {
+  background: #fff;
+  border-radius: 6px;
+  padding: 16px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 80px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+}
+.dashboard-status-flow-label {
+  font-size: 1rem;
+  color: #888;
+  margin-bottom: 4px;
+}
+.dashboard-status-flow-number {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #222;
+}
+
+.dashboard-status-flow-sub-label {
+  font-size: 0.95rem;
+  color: #888;
+  margin-bottom: 2px;
+  text-align: center;
+}
+
+.dashboard-status-booking {
+  background: transparent;
+  box-shadow: none;
+  min-width: 160px;
+  align-items: flex-end;
+  padding: 0 0 0 24px;
+}
+.dashboard-status-booking-title {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 8px;
+}
+.dashboard-status-booking-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.dashboard-status-booking-label {
+  font-size: 1rem;
+  color: #888;
+  margin-bottom: 4px;
+  font-weight: 500;
+  text-align: center;
+}
+.dashboard-status-booking-number {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.dashboard-latest-bookings {
+  margin-top: 32px;
+}
+.dashboard-latest-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #222;
+}
+.dashboard-table-wrapper {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  padding: 18px 18px 8px 18px;
+}
+.dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.08rem;
+}
+.dashboard-table th, .dashboard-table td {
+  padding: 10px 12px;
+  text-align: left;
+}
+.dashboard-table th {
+  font-weight: bold;
+  color: #222;
+  background: #faf9f6;
+  border-bottom: 2px solid #ecebe7;
+}
+.dashboard-table td {
+  border-bottom: 1px solid #f0f0ed;
+  color: #222;
+}
+.dashboard-action {
+  font-size: 1.4rem;
+  margin-right: 8px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+.dashboard-action-accept {
+  color: #6bbf59;
+}
+.dashboard-action-reject {
+  color: #e05a4a;
+  margin-right: 0;
+}
+
+@media (max-width: 900px) {
+  .dashboard-status-row {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .dashboard-status-card, .dashboard-status-flow, .dashboard-status-booking {
+    min-width: 0;
+    width: 100%;
+    align-items: flex-start;
+  }
+  .dashboard-status-flow-boxes {
+    flex-direction: row;
+    gap: 8px;
+  }
+}
+
