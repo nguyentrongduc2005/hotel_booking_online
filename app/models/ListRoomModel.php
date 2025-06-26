@@ -57,7 +57,7 @@ class ListRoomModel
                         break;
 
                     default:
-                        // Trường hợp khác nếu có
+                        // Trường hợp khác
                         $condition .= "room.$key = :$key";
                         $params[$key] = $value;
                 }

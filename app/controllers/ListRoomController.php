@@ -30,7 +30,7 @@ class ListRoomController extends Controller
             'bed_count'   => $req->query('bed_count'),
         ];
    
-        // Gọi model để lấy danh sách phòng đã lọc
+        
         $rooms = $this->model->getFilteredRooms($filters);
 
         //Debug
@@ -39,7 +39,7 @@ class ListRoomController extends Controller
         // print_r($rooms);
         // echo "</pre>";
 
-        //Trả về view với dữ liệu
+        //Trả về view 
         $this->render('index', [
             'rooms' => $rooms,
             'filters' => $filters
