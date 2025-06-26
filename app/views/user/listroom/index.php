@@ -1,6 +1,8 @@
 <link rel="stylesheet" href="<?= $this->configs->config['pathAssets'] ?>css/listroom.css?v=<?= time() ?>" />
 
 
+
+
 <div id="listroom-container">
   <div class="listroom-search">
     <form class="search-bar" action="<?= $this->configs->config['basePath'] ?>/listroom" method="get">
@@ -96,9 +98,11 @@
   const maxValue = document.getElementById('maxValue');
   const sliderContainer = document.querySelector('.slider-container');
 
+
   function getPercent(val, min, max) {
     return ((val - min) / (max - min)) * 100;
   }
+
 
   function updateSlider() {
     let min = parseInt(rangeMin.value);
@@ -114,21 +118,26 @@
     minValue.textContent = `$${min}`;
     maxValue.textContent = `$${max}`;
 
+
     // Tính vị trí left cho value
     const minPercent = getPercent(min, 10, 250);
     const maxPercent = getPercent(max, 10, 250);
 
-    minValue.style.left = `calc(${minPercent}% - 20px)`; 
+
+    minValue.style.left = `calc(${minPercent}% - 20px)`;
     maxValue.style.left = `calc(${maxPercent}% - 20px)`;
   }
   rangeMin.addEventListener('input', updateSlider);
   rangeMax.addEventListener('input', updateSlider);
   updateSlider();
 
-  // 
+
+  //
   const sliderArea = document.getElementById("priceRangeArea");
   const priceTextArea = document.getElementById("priceValueArea");
   sliderArea.addEventListener("input", () => {
     priceTextArea.textContent = `${sliderArea.value}m²`;
   });
 </script>
+
+

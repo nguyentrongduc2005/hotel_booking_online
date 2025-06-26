@@ -1,0 +1,29 @@
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+.sidebar {
+    width: 220px;
+    flex-shrink: 0;
+    z-index: 2;
+  }
+  
+.admin-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  
+.admin-header {
+    width: 100%;
+    height: 60px;
+    background: #eaeae6;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    border-bottom: 1px solid #d3d3cd;
+    padding: 0 32px 0 0;
+    box-sizing: border-box;
+  }

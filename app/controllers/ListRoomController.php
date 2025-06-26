@@ -8,47 +8,41 @@ use app\models\ListRoomModel;
 
 class ListRoomController extends Controller
 {
-    private listRoomModel $model;
-    function __construct()
+    private $model;
+
+    public function __construct()
     {
         parent::__construct();
         $this->model = new ListRoomModel();
     }
 
-    function show($req, $res)
+   
+    public function index(Request $req, $res)
     {
+        // Lấy dữ liệu bộ lọc từ query string
+        $filters = [
+            'price_range' => $req->query('price_range'),
+            'room_type'   => $req->query('room_type'),
+            'checkin'     => $req->query('check_in'),
+            'checkout'    => $req->query('check_out'),
+            'guest_count' => $req->query('guest'),
+            'area'        => $req->query('area'),
+            'bed_count'   => $req->query('bed_count'),
+        ];
+   
+        
+        $rooms = $this->model->getFilteredRooms($filters);
 
+        //Debug
+        // echo "<pre>";
+        // print_r($filters);
+        // print_r($rooms);
+        // echo "</pre>";
 
-        $this->render('index');
-    }
-
-    function index(Request $req, $res)
-    {
-        // lấy query string 
-
-        $page = $req->Query('page', 1);
-        $roomType = $req->Query('room_type');
-        $priceMin = $req->Query('price_min');
-        $priceMax = $req->Query('price_max');
-
-        //lấy danh sách phòng theo lọc
-        $rooms = $this->model->getRooms([
-            'page' => $page,
-            'room_type' => $roomType,
-            'price_min' => $priceMin,
-            'price_max' => $priceMax
-        ]);
-        $roomType = $this->model->getAllRoomTypes();
-        // ra view
+        //Trả về view 
         $this->render('index', [
             'rooms' => $rooms,
-            'filters' => [
-                'page' => $page,
-                'room_type' => $roomType,
-                'price_min' => $priceMin,
-                'price_max' => $priceMax
-            ]
-
+            'filters' => $filters
         ]);
     }
 }
