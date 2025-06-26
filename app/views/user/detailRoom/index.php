@@ -2,7 +2,7 @@
     <main class="room-details">
         <div class="left-info">
             <div class="main-image placeholder-16-9">
-                <img src="<?= $this->configs->config['pathAssets'] . $data['thumb'] ?>" alt="<?= $data['name'] ?>">
+                <img src="<?= $this->configs->config['basePath'] . $room['thumb'] ?>" alt="<?= $room['name_type_room'] ?>" />
             </div>
             <h1><?= $data['name'] ?></h1>
             <p class="desc">

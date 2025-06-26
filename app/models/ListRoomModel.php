@@ -11,72 +11,100 @@ class ListRoomModel
         db::connect();
     }
 
-    public function getRooms($filters = [])
+    
+    public function getFilteredRooms($filters)
     {
-        $sql = "SELECT room.*, room_type.name_type_room
-                FROM room
-                INNER JOIN room_type ON room.id_room_type = room_type.id_type_room
-                WHERE 1=1";
-
+        $condition = "";
         $params = [];
 
-        // Lọc theo loại phòng (1 loại)
-        if (!empty($filters['room_type'])) {
-            $sql .= " AND room_type.name_type_room = :room_type";
-            $params['room_type'] = $filters['room_type'];
+        foreach ($filters as $key => $value) {
+            if (!empty($value)) {
+                if ($condition !== "") {
+                    $condition .= " AND ";
+                }
+
+                switch ($key) {
+                    case 'price_range':
+                        // Lọc theo khoảng giá
+                        [$min, $max] = explode('-', $value);
+                        $condition .= "room.price BETWEEN :minPrice AND :maxPrice";
+                        $params['minPrice'] = (float)$min;
+                        $params['maxPrice'] = (float)$max;
+                        break;
+
+                    case 'room_type':
+                        // Lọc theo tên loại phòng
+                        $condition .= "room_type.name_type_room = :room_type";
+                        $params['room_type'] = $value;
+                        break;
+
+                    case 'area':
+                        // Diện tích phòng 
+                        $condition .= "room.area >= :area";
+                        $params['area'] = (int)$value;
+                        break;
+
+                    case 'guest_count':
+                       // số người
+                        $condition .= "room.capacity >= :guest_count";
+                        $params['guest_count'] = $value;
+                        break;
+
+                    case 'bed_count':
+                        // số giường
+                        $condition .= "room.amount_bed = :bed_count";
+                        $params['bed_count'] = (int)$value;
+                        break;
+
+                    default:
+                        // Trường hợp khác nếu có
+                        $condition .= "room.$key = :$key";
+                        $params[$key] = $value;
+                }
+            }
         }
 
-        // Lọc theo giá
-        if (!empty($filters['price_min'])) {
-            $sql .= " AND room.price >= :price_min";
-            $params['price_min'] = $filters['price_min'];
+        // Kiểm tra check-in/check-out để lọc phòng không bị đặt
+        if (!empty($filters['check_in']) && !empty($filters['check_out'])) {
+            if ($condition !== "") {
+                $condition .= " AND ";
+            }
+
+            $condition .= "room.id_room NOT IN (
+                SELECT id_room FROM booking 
+                WHERE (:check_in < check_out AND :check_out > check_in)
+            )";
+
+            $params['check_in'] = $filters['check_in'];
+            $params['check_out'] = $filters['check_out'];
         }
 
-        if (!empty($filters['price_max'])) {
-            $sql .= " AND room.price <= :price_max";
-            $params['price_max'] = $filters['price_max'];
+        // Nếu không có bất kỳ bộ lọc nào, trả về tất cả phòng trống hiện tại
+        if ($condition === "") {
+            $condition = "room.id_room NOT IN (
+                SELECT id_room FROM booking 
+                WHERE CURDATE() < check_out
+            )";
         }
 
-        // Phân trang
-        $limit = 5;
-        $page = max(1, (int)($filters['page'] ?? 1));
-        $offset = ($page - 1) * $limit;
+        // Truy vấn dữ liệu
+        $sql = "SELECT room.id_room, room.price, room.status, room.slug, room.area, room.thumb, 
+                room.description, room.amount_bed,
+                room_type.name_type_room
+                FROM room
+                INNER JOIN room_type ON room.id_room_type = room_type.id_type_room
+                WHERE $condition";
 
-        $sql .= " LIMIT $limit OFFSET $offset";
 
-        $rooms = db::getAll($sql, $params);
-        return $rooms ?: [];
-    }
+        // Debug SQL và tham số (bạn có thể tắt sau khi test)
+        // echo "<pre>";
+        // echo "SQL:\n" . $sql . "\n";
+        // echo "Params:\n";
+        // print_r($params);
+        // echo "</pre>";
 
-    public function getAllRoomTypes()
-    {
-        $sql = "SELECT * FROM room_type";
-        $data = db::getAll($sql);
+        $data = db::getAll($sql, $params);
+        
         return $data ?: [];
     }
 }
-// get,lọc, ngày tháng,trả về view, phân trang
-// Lấy danh sách phòng, lọc theo loại phòng,lọc theo giá, phân trang, lọc theo trạng thái đã checkout hay chưa checkout
-// Lấy danh sách loại phòng, trả về view
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

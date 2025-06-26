@@ -7,8 +7,8 @@ Router::get('/', 'HomeController@show', [
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleUser',
 ]);
-
-Router::get('/listroom', 'ListRoomController@show', [
+//router trang list room
+Router::get('/listroom', 'ListRoomController@index', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleUser',
