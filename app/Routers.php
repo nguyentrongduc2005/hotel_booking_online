@@ -14,6 +14,7 @@ Router::get('/listroom', 'ListRoomController@index', [
     'AuthorMiddleware@checkRoleUser',
 ]);
 
+
 //router trang detail room
 Router::get('/detailroom/{slug}', 'DetailRoomController@index', [
     'AuthorMiddleware@checktoken',
@@ -173,31 +174,29 @@ Router::post('/admin/roomtypes/delete', 'AdminTypeRoomsController@typeRoomsDelet
 //////////////////end type rooms/////////////////////////////////////
 
 //////////////////////amenities/////////////////////////////////////
-Router::get('/admin/amenities', 'AdminTypeRoomsController@typeRoomsShow', [
+Router::get('/admin/amenities', 'AdminAmenitiesController@amenitiesShow', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 
-Router::post('/admin/amenities/add', 'AdminTypeRoomsController@typeRoomsAdd', [
+Router::post('/admin/amenities/add', 'AdminAmenitiesController@amenitiesAdd', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 
-Router::post('/admin/amenities/edit', 'AdminTypeRoomsController@typeRoomsEdit', [
+Router::post('/admin/amenities/edit', 'AdminAmenitiesController@amenitiesEdit', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 
-Router::post('/admin/amenities/delete', 'AdminTypeRoomsController@typeRoomsDelete', [
+Router::post('/admin/amenities/delete', 'AdminAmenitiesController@amenitiesDelete', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
-
-
 
 /////////////////////end amenities/////////////////////////////////////
 

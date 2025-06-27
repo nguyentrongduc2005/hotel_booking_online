@@ -38,8 +38,8 @@
     </div>
 
     <!-- Latest Bookings -->
-    <div class="dashboard-latest-bookings">
-      <div class="dashboard-latest-title">Latest Bookings</div>
+    <div class="dashboard-pendingbookings">
+      <div class="dashboard-title">Pending Bookings</div>
       <div class="dashboard-table-wrapper">
         <table class="dashboard-table">
           <thead>

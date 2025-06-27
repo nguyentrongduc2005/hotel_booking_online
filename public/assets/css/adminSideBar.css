@@ -80,6 +80,8 @@
   position: relative;
   z-index: 1;
 }
+
+
 .sidebar-item.sidebar-dashboard:hover {
   background: #222;
   color: #e6c17b;
@@ -117,6 +119,56 @@
   border-left: 4px solid #b08d4a;
 }
 
+.sidebar-item.sidebar-bookings {
+  background: #191714;
+  border-bottom: 1px solid #222;
+  position: relative;
+  z-index: 1;
+}
+.sidebar-item.sidebar-bookings:hover {
+  background: #222;
+  color: #e6c17b;
+  border-bottom: 1px solid #fff;
+}
+
+.sidebar-item.sidebar-bookings:hover > .sidebar-submenu {
+  display: block;
+  animation: fadeInSubmenu 0.2s;
+}
+
+.sidebar-item.sidebar-rooms {
+  background: #191714;
+  border-bottom: 1px solid #222;
+  position: relative;
+  z-index: 1;
+}
+.sidebar-item.sidebar-rooms:hover {
+  background: #222;
+  color: #e6c17b;
+  border-bottom: 1px solid #fff;
+}
+
+.sidebar-item.sidebar-rooms:hover > .sidebar-submenu {
+  display: block;
+  animation: fadeInSubmenu 0.2s;
+}
+
+.sidebar-item.sidebar-customers {
+  background: #191714;
+  border-bottom: 1px solid #222;
+  position: relative;
+  z-index: 1;
+}
+.sidebar-item.sidebar-customers:hover {
+  background: #222;
+  color: #e6c17b;
+  border-bottom: 1px solid #fff;
+}
+
+.sidebar-item.sidebar-customers:hover > .sidebar-submenu {
+  display: block;
+  animation: fadeInSubmenu 0.2s;
+}
 @keyframes fadeInSubmenu {
   from { opacity: 0; transform: translateY(-8px); }
   to { opacity: 1; transform: translateY(0); }
