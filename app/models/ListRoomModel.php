@@ -14,7 +14,6 @@ class ListRoomModel
 
     public function getFilteredRooms($filters)
     {
-        
         if (!empty($filters['check_in'])) {
             $dt = new DateTime($filters['check_in']);
             $filters['check_in'] = $dt->format('Y-m-d H:i:s');
@@ -25,52 +24,56 @@ class ListRoomModel
             $filters['check_out'] = $dt->format('Y-m-d H:i:s');
         }
 
-        
-        $condition = "";
+        $where = [];
         $params = [];
 
+        $allowedRoomColumns = ['status', 'id_room_type', 'amount_bed', 'capacity', 'area', 'price'];
         foreach ($filters as $key => $value) {
             if (!empty($value)) {
-                if ($condition !== "") {
-                    $condition .= " AND ";
-                }
-
-                
-                if ($key === 'price_range') {
-                    [$min, $max] = explode('-', $value);
-                    $condition .= "room.price BETWEEN :minPrice AND :maxPrice";
-                    $params['minPrice'] = (float)$min;
-                    $params['maxPrice'] = (float)$max;
-
-                } elseif ($key === 'room_type') {
-                    $condition .= "room_type.name_type_room = :room_type";
-                    $params['room_type'] = $value;
-
-                } elseif ($key === 'area_range') {
-                    [$min, $max] = explode('-', $value);
-                    $condition .= "room.arena BETWEEN :minArena AND :maxArena";
-                    $params['minArena'] = (float)$min;
-                    $params['maxArena'] = (float)$max;
-
-                } elseif ($key === 'guest_count') {
-                    $condition .= "room.capacity >= :guest_count";
-                    $params['guest_count'] = (int)$value;
-
-                } elseif ($key === 'bed_count') {
-                    $condition .= "room.amount_bed = :bed_count";
-                    $params['bed_count'] = (int)$value;
-
-                } else {
-                    $condition .= "room.$key = :$key";
-                    $params[$key] = $value;
+                switch ($key) {
+                    case 'price_range':
+                        [$min, $max] = explode('-', $value);
+                        $where[] = "room.price BETWEEN :minPrice AND :maxPrice";
+                        $params['minPrice'] = (float)$min;
+                        $params['maxPrice'] = (float)$max;
+                        break;
+                    case 'room_type':
+                        $where[] = "room_type.name_type_room = :room_type";
+                        $params['room_type'] = $value;
+                        break;
+                    case 'area_range':
+                        [$min, $max] = explode('-', $value);
+                        $where[] = "room.area BETWEEN :minArea AND :maxArea";
+                        $params['minArea'] = (float)$min;
+                        $params['maxArea'] = (float)$max;
+                        break;
+                    case 'guest_count':
+                        $where[] = "room.capacity >= :guest_count";
+                        $params['guest_count'] = (int)$value;
+                        break;
+                    case 'bed_count':
+                        $where[] = "room.amount_bed = :bed_count";
+                        $params['bed_count'] = (int)$value;
+                        break;
+                    // Bỏ qua các key không phải cột room
+                    case 'checkin':
+                    case 'checkout':
+                    case 'check_in':
+                    case 'check_out':
+                        break;
+                    default:
+                        if (in_array($key, $allowedRoomColumns)) {
+                            $where[] = "room.$key = :$key";
+                            $params[$key] = $value;
+                        }
+                        break;
                 }
             }
         }
 
-        //lọc theo ngày check-in và check-out
+        // Lọc theo ngày check-in và check-out
         if (!empty($filters['check_in']) && !empty($filters['check_out'])) {
-            if ($condition !== "") $condition .= " AND ";
-            $condition .= "room.id_room NOT IN (
+            $where[] = "room.id_room NOT IN (
                 SELECT id_room FROM booking 
                 WHERE (:check_in < check_out AND :check_out > check_in)
             )";
@@ -78,20 +81,20 @@ class ListRoomModel
             $params['check_out'] = $filters['check_out'];
         }
 
-        // trả về all
-        if ($condition === "") {
-            $condition = "room.id_room NOT IN (
+        // Nếu không có điều kiện nào, trả về tất cả phòng không bị đặt
+        if (empty($where)) {
+            $where[] = "room.id_room NOT IN (
                 SELECT id_room FROM booking 
                 WHERE CURDATE() < check_out
             )";
         }
 
-        
+
         $sql = "SELECT room.id_room, room.price, room.status, room.slug, room.area, room.thumb, 
-                       room.description, room.amount_bed, room_type.name_type_room
+                       room.description, room.amount_bed, room.capacity, room_type.name_type_room
                 FROM room
                 INNER JOIN room_type ON room.id_room_type = room_type.id_type_room
-                WHERE $condition";
+                WHERE " . implode(" AND ", $where);
 
         $data = db::getAll($sql, $params);
         return $data ?: [];
