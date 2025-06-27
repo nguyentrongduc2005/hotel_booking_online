@@ -51,12 +51,16 @@ class AdminBookingModel
     {
         if (!empty($filter['check_in'])) {
         $dt = new \DateTime($filter['check_in']);
-        $filter['check_in'] = $dt->format('Y-m-d');
+        $filter['check_in'] = $dt->format('Y-m-d H:i:s');
+        } else {
+            $filter['check_in'] = date('Y-m-d H:i:s');
         }
 
        if (!empty($filter['check_out'])) {
        $dt = new \DateTime($filter['check_out']);
-       $filter['check_out'] = $dt->format('Y-m-d');
+       $filter['check_out'] = $dt->format('Y-m-d H:i:s');
+       } else {
+           $filter['check_out'] = date('Y-m-d H:i:s');
        }
 
     $params = [];
