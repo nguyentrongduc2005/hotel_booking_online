@@ -23,7 +23,9 @@ class ListRoomModel
             $dt = new DateTime($filters['check_out']);
             $filters['check_out'] = $dt->format('Y-m-d H:i:s');
         }
-
+        // echo "<pre>";
+        // print_r($filters);
+        // echo "</pre>";
         $where = [];
         $params = [];
 
@@ -56,10 +58,9 @@ class ListRoomModel
                         $params['bed_count'] = (int)$value;
                         break;
                     // Bỏ qua các key không phải cột room
-                    case 'checkin':
-                    case 'checkout':
                     case 'check_in':
                     case 'check_out':
+                   
                         break;
                     default:
                         if (in_array($key, $allowedRoomColumns)) {

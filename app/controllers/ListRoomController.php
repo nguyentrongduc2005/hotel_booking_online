@@ -22,19 +22,19 @@ class ListRoomController extends Controller
         $filters = [
             'price_range' => $req->query('price_range'),
             'room_type'   => $req->query('room_type'),
-            'checkin'     => $req->query('checkin'),
-            'checkout'    => $req->query('checkout'),
+            'check_in'     => $req->query('check_in'),
+            'check_out'    => $req->query('check_out'),
             'guest_count' => $req->query('guest'),
             'area_range'  => $req->query('area_range'),
             'bed_count'   => $req->query('bed_count'),
         ];
 
         // Xử lý ngày check-in và check-out
-        if (!empty($filters['checkin'])) {
-            $filters['check_in'] = $filters['checkin'];
+        if (!empty($filters['check_in'])) {
+            $filters['check_in'] = $filters['check_in'];
         }
-        if (!empty($filters['checkout'])) {
-            $filters['check_out'] = $filters['checkout'];
+        if (!empty($filters['check_out'])) {
+            $filters['check_out'] = $filters['check_out'];
         }
 
         $rooms = $this->model->getFilteredRooms($filters);

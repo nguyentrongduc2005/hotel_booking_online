@@ -9,11 +9,11 @@
       <div class="search-group">
         <label class="title">Check In
         </label>
-        <input type="date" name="checkin" id="checkin" class="search-date" value="<?= isset($filters['checkin']) ? $filters['checkin'] : '2024-06-18' ?>" required>
+        <input type="date" name="check_in" id="check_in" class="search-date" value="<?= isset($filters['check_in']) ? $filters['check_in'] : '2024-06-18' ?>" required>
       </div>
       <div class="search-group">
         <label class="title">Check out</label>
-        <input type="date" name="checkout" id="checkout" class="search-date" value="<?= isset($filters['checkout']) ? $filters['checkout'] : '2024-06-19' ?>" required>
+        <input type="date" name="check_out" id="check_out" class="search-date" value="<?= isset($filters['check_out']) ? $filters['check_out'] : '2024-06-19' ?>" required>
       </div>
       <div class="search-group">
         <label class="title1" for="room_count_select">Room/Guest</label>
@@ -226,11 +226,11 @@
   });
 
   // Submit form khi thay đổi ngày
-  document.getElementById('checkin').addEventListener('change', function() {
+  document.getElementById('check_in').addEventListener('change', function() {
     debouncedSubmit();
   });
 
-  document.getElementById('checkout').addEventListener('change', function() {
+  document.getElementById('check_out').addEventListener('change', function() {
     debouncedSubmit();
   });
 
