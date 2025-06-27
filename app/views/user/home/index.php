@@ -1,4 +1,9 @@
 <link rel="stylesheet" href="<?= $this->configs->config['pathAssets'] ?>css/homepage.css?v=<?= time() ?>">
+<?php date_default_timezone_set('Asia/Ho_Chi_Minh');
+$datePresent = date('Y-m-d');
+$nextDate = date('Y-m-d', strtotime($datePresent . ' +1 day'));
+?>
+
 <div id="homepage-container">
     <div id="hero-section">
         <div class="hero-logo">
@@ -9,15 +14,15 @@
             <div class="search-group">
                 <label class="title">Check In
                 </label>
-                <input type="date" name="Picker_search" id="checkin " class="search-date" value="2024-06-18" required>
+                <input type="date" name="check_in" id="check_in" class="search-date" value="<?= $datePresent ?>" required>
             </div>
             <div class="search-group">
                 <label class="title">Check out</label>
-                <input type="date" name="Picker_search" id="checkin " class="search-date" value="2024-06-19" required>
+                <input type="date" name="check_out" id="check_out" class="search-date" value="<?= $nextDate ?>" required>
             </div>
             <div class="search-group">
                 <label class="title1" for="room_count_select">Room/Guest</label>
-                <select name="room_count" id="room_count_select" class="room-select">
+                <select name="guest" id="room_count_select" class="room-select">
                     <option value="1">1 Guest</option>
                     <option value="2">2 Guests</option>
                     <option value="3">3 Guests</option>

@@ -1,19 +1,19 @@
 <link rel="stylesheet" href="<?= $this->configs->config['pathAssets'] ?>css/listroom.css?v=<?= time() ?>" />
-
-
-
-
+<?php date_default_timezone_set('Asia/Ho_Chi_Minh');
+$datePresent = date('Y-m-d');
+$nextDate = date('Y-m-d', strtotime($datePresent . ' +1 day'));
+?>
 <div id="listroom-container">
   <div class="listroom-search">
     <form class="search-bar" action="<?= $this->configs->config['basePath'] ?>/listroom" method="get">
       <div class="search-group">
         <label class="title">Check In
         </label>
-        <input type="date" name="check_in" id="check_in" class="search-date" value="<?= isset($filters['check_in']) ? $filters['check_in'] : '2024-06-18' ?>" required>
+        <input type="date" name="check_in" id="check_in" class="search-date" value="<?= isset($filters['check_in']) ? $filters['check_in'] : $datePresent ?>" required>
       </div>
       <div class="search-group">
         <label class="title">Check out</label>
-        <input type="date" name="check_out" id="check_out" class="search-date" value="<?= isset($filters['check_out']) ? $filters['check_out'] : '2024-06-19' ?>" required>
+        <input type="date" name="check_out" id="check_out" class="search-date" value="<?= isset($filters['check_out']) ? $filters['check_out'] : $nextDate ?>" required>
       </div>
       <div class="search-group">
         <label class="title1" for="room_count_select">Room/Guest</label>
@@ -26,8 +26,8 @@
       </div>
 
       <!-- Hidden inputs cho các filter -->
-      <input type="hidden" name="price_range" id="price_range_input" value="<?= isset($filters['price_range']) ? $filters['price_range'] : '60-200' ?>">
-      <input type="hidden" name="area_range" id="area_range_input" value="<?= isset($filters['area_range']) ? $filters['area_range'] : '15-100' ?>">
+      <input type="hidden" name="price_range" id="price_range_input" value="<?= isset($filters['price_range']) ? $filters['price_range'] : '15-150' ?>">
+      <input type="hidden" name="area_range" id="area_range_input" value="<?= isset($filters['area_range']) ? $filters['area_range'] : '15-80' ?>">
       <input type="hidden" name="bed_count" id="bed_count_input" value="<?= isset($filters['bed_count']) ? $filters['bed_count'] : '' ?>">
 
       <button type="submit" class="search-btn">
@@ -42,7 +42,7 @@
         <div class="filter-section">
           <div class="filter-label">Range Price</div>
           <div class="slider-container">
-            <input type="range" min="10" max="150" value="<?= isset($filters['price_range']) ? explode('-', $filters['price_range'])[0] : '15' ?>" id="rangeMin" class="slider">
+            <input type="range" min="10" max="140" value="<?= isset($filters['price_range']) ? explode('-', $filters['price_range'])[0] : '15' ?>" id="rangeMin" class="slider">
             <input type="range" min="20" max="150" value="<?= isset($filters['price_range']) ? explode('-', $filters['price_range'])[1] : '100' ?>" id="rangeMax" class="slider">
             <span id="minValue" class="slider-value"><?= isset($filters['price_range']) ? explode('-', $filters['price_range'])[0] : '15' ?></span>
             <span id="maxValue" class="slider-value"><?= isset($filters['price_range']) ? explode('-', $filters['price_range'])[1] : '100' ?></span>
@@ -103,159 +103,4 @@
     </div>
   </div>
 </div>
-<script>
-  const rangeMin = document.getElementById('rangeMin');
-  const rangeMax = document.getElementById('rangeMax');
-  const minValue = document.getElementById('minValue');
-  const maxValue = document.getElementById('maxValue');
-  const sliderContainer = document.querySelector('.slider-container');
-  const priceRangeInput = document.getElementById('price_range_input');
-  const areaRangeInput = document.getElementById('area_range_input');
-  const bedCountInput = document.getElementById('bed_count_input');
-  const areaMin = document.getElementById('areaMin');
-  const areaMax = document.getElementById('areaMax');
-  const areaMinValue = document.getElementById('areaMinValue');
-  const areaMaxValue = document.getElementById('areaMaxValue');
-
-  function getPercent(val, min, max) {
-    return ((val - min) / (max - min)) * 100;
-  }
-
-  function updateSlider() {
-    let min = parseInt(rangeMin.value);
-    let max = parseInt(rangeMax.value);
-    if (min > max - 10) {
-      rangeMin.value = max - 10;
-      min = max - 10;
-    }
-    if (max < min + 10) {
-      rangeMax.value = min + 10;
-      max = min + 10;
-    }
-    minValue.textContent = `$${min}`;
-    maxValue.textContent = `$${max}`;
-
-    // Cập nhật hidden input
-    priceRangeInput.value = `${min}-${max}`;
-
-    // Tính vị trí left cho value
-    const minPercent = getPercent(min, 10, 150);
-    const maxPercent = getPercent(max, 10, 150);
-
-    minValue.style.left = `calc(${minPercent}% - 20px)`;
-    maxValue.style.left = `calc(${maxPercent}% - 20px)`;
-  }
-
-  function updateAreaSlider() {
-    let min = parseInt(areaMin.value);
-    let max = parseInt(areaMax.value);
-    if (min > max - 5) {
-      areaMin.value = max - 5;
-      min = max - 5;
-    }
-    if (max < min + 5) {
-      areaMax.value = min + 5;
-      max = min + 5;
-    }
-    areaMinValue.textContent = `${min}m²`;
-    areaMaxValue.textContent = `${max}m²`;
-    areaRangeInput.value = `${min}-${max}`;
-
-    // Tính vị trí left cho value (nếu muốn đẹp)
-    const minPercent = ((min - 15) / (100 - 15)) * 100;
-    const maxPercent = ((max - 15) / (100 - 15)) * 100;
-    areaMinValue.style.left = `calc(${minPercent}% - 20px)`;
-    areaMaxValue.style.left = `calc(${maxPercent}% - 20px)`;
-  }
-
-  function toggleBedFilter(bedCount) {
-    const tags = document.querySelectorAll('.filter-tag');
-    tags.forEach(tag => tag.classList.remove('active'));
-
-    if (bedCountInput.value == bedCount) {
-      bedCountInput.value = '';
-    } else {
-      bedCountInput.value = bedCount;
-      event.target.classList.add('active');
-    }
-
-    // Auto submit sau khi thay đổi bed filter
-    debouncedSubmit();
-  }
-
-  function clearAllFilters() {
-    // Reset price range
-    rangeMin.value = 20;
-    rangeMax.value = 200;
-    priceRangeInput.value = '20-200';
-
-    // Reset area
-    areaMin.value = 20;
-    areaMax.value = 100;
-    areaRangeInput.value = '20-100';
-
-    // Reset bed count
-    bedCountInput.value = '';
-    document.querySelectorAll('.filter-tag').forEach(tag => tag.classList.remove('active'));
-
-    // Reset guest count
-    document.getElementById('room_count_select').value = '1';
-
-    // Update display
-    updateSlider();
-    updateAreaSlider();
-
-    // Auto submit sau khi clear
-    debouncedSubmit();
-  }
-
-  // Event listeners
-  rangeMin.addEventListener('input', updateSlider);
-  rangeMax.addEventListener('input', updateSlider);
-  areaMin.addEventListener('input', updateAreaSlider);
-  areaMax.addEventListener('input', updateAreaSlider);
-
-  // Auto submit form when filters change
-  function autoSubmitForm() {
-    const form = document.querySelector('.search-bar');
-    const submitBtn = form.querySelector('.search-btn');
-
-    // Thêm loading state
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = '<span class="search-icon">Searching...</span>';
-
-    form.submit();
-  }
-
-  // Thêm debounce để tránh submit quá nhiều
-  let submitTimeout;
-
-  function debouncedSubmit() {
-    clearTimeout(submitTimeout);
-    submitTimeout = setTimeout(autoSubmitForm, 500);
-  }
-
-  // Auto submit khi thay đổi filter
-  rangeMin.addEventListener('change', debouncedSubmit);
-  rangeMax.addEventListener('change', debouncedSubmit);
-  areaMin.addEventListener('change', debouncedSubmit);
-  areaMax.addEventListener('change', debouncedSubmit);
-
-  // Submit form khi thay đổi guest count
-  document.getElementById('room_count_select').addEventListener('change', function() {
-    debouncedSubmit();
-  });
-
-  // Submit form khi thay đổi ngày
-  document.getElementById('check_in').addEventListener('change', function() {
-    debouncedSubmit();
-  });
-
-  document.getElementById('check_out').addEventListener('change', function() {
-    debouncedSubmit();
-  });
-
-  // Initialize
-  updateSlider();
-  updateAreaSlider();
-</script>
+<script src="<?= $this->configs->config['pathAssets'] ?>js/listrooms.js"></script>
