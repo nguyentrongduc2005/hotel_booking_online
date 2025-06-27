@@ -60,7 +60,6 @@ class ListRoomModel
                     // Bỏ qua các key không phải cột room
                     case 'check_in':
                     case 'check_out':
-                   
                         break;
                     default:
                         if (in_array($key, $allowedRoomColumns)) {
