@@ -32,7 +32,7 @@ class AdminBookingController extends Controller
         echo '</pre>';
         exit;
         
-        // return $res->render('dashboard/bookings/all', [
+        // return $res->render('/bookings/allBookingsIndex', [
         //     'title'   => 'All Bookings',
         //     'filter'  => $filter,
         //     'records' => $bookings
@@ -57,7 +57,7 @@ class AdminBookingController extends Controller
         echo '</pre>';
         exit;
 
-        // return $res->render('dashboard/bookings/history', [
+        // return $res->render('/bookings/historyBookingsIndex', [
         //     'title'   => 'History Bookings',
         //     'filter'  => $filter,
         //     'records' => $records
