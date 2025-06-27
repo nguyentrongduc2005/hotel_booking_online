@@ -42,10 +42,10 @@
         <div class="filter-section">
           <div class="filter-label">Range Price</div>
           <div class="slider-container">
-            <input type="range" min="10" max="250" value="<?= isset($filters['price_range']) ? explode('-', $filters['price_range'])[0] : '60' ?>" id="rangeMin" class="slider">
-            <input type="range" min="10" max="250" value="<?= isset($filters['price_range']) ? explode('-', $filters['price_range'])[1] : '200' ?>" id="rangeMax" class="slider">
-            <span id="minValue" class="slider-value"><?= isset($filters['price_range']) ? explode('-', $filters['price_range'])[0] : '60' ?></span>
-            <span id="maxValue" class="slider-value"><?= isset($filters['price_range']) ? explode('-', $filters['price_range'])[1] : '200' ?></span>
+            <input type="range" min="10" max="150" value="<?= isset($filters['price_range']) ? explode('-', $filters['price_range'])[0] : '15' ?>" id="rangeMin" class="slider">
+            <input type="range" min="20" max="150" value="<?= isset($filters['price_range']) ? explode('-', $filters['price_range'])[1] : '100' ?>" id="rangeMax" class="slider">
+            <span id="minValue" class="slider-value"><?= isset($filters['price_range']) ? explode('-', $filters['price_range'])[0] : '15' ?></span>
+            <span id="maxValue" class="slider-value"><?= isset($filters['price_range']) ? explode('-', $filters['price_range'])[1] : '100' ?></span>
           </div>
         </div>
         <div class="filter-section">
@@ -57,11 +57,11 @@
         </div>
         <div class="filter-section">
           <div class="filter-label">Area</div>
-          <input type="range" id="priceRangeArea" min="15" max="100" value="<?= isset($filters['area_range']) ? explode('-', $filters['area_range'])[1] : '40' ?>" step="5">
-          <div id="priceRangeLabels" class="price-range-labels">
-            <span id="priceValueMin">15m²</span>
-            <span id="priceValueArea" class="ValueInputRange"><?= isset($filters['area_range']) ? explode('-', $filters['area_range'])[1] : '40' ?>m²</span>
-            <span id="priceValueMax">100m²</span>
+          <div class="slider-container">
+            <input type="range" min="15" max="80" value="<?= isset($filters['area_range']) ? explode('-', $filters['area_range'])[0] : '15' ?>" id="areaMin" class="slider">
+            <input type="range" min="20" max="80" value="<?= isset($filters['area_range']) ? explode('-', $filters['area_range'])[1] : '70' ?>" id="areaMax" class="slider">
+            <span id="areaMinValue" class="slider-value"><?= isset($filters['area_range']) ? explode('-', $filters['area_range'])[0] : '15' ?></span>
+            <span id="areaMaxValue" class="slider-value"><?= isset($filters['area_range']) ? explode('-', $filters['area_range'])[1] : '70' ?></span>
           </div>
         </div>
       </div>
@@ -112,8 +112,10 @@
   const priceRangeInput = document.getElementById('price_range_input');
   const areaRangeInput = document.getElementById('area_range_input');
   const bedCountInput = document.getElementById('bed_count_input');
-  const priceRangeArea = document.getElementById('priceRangeArea');
-  const priceTextArea = document.getElementById('priceValueArea');
+  const areaMin = document.getElementById('areaMin');
+  const areaMax = document.getElementById('areaMax');
+  const areaMinValue = document.getElementById('areaMinValue');
+  const areaMaxValue = document.getElementById('areaMaxValue');
 
   function getPercent(val, min, max) {
     return ((val - min) / (max - min)) * 100;
@@ -137,17 +139,33 @@
     priceRangeInput.value = `${min}-${max}`;
 
     // Tính vị trí left cho value
-    const minPercent = getPercent(min, 10, 250);
-    const maxPercent = getPercent(max, 10, 250);
+    const minPercent = getPercent(min, 10, 150);
+    const maxPercent = getPercent(max, 10, 150);
 
     minValue.style.left = `calc(${minPercent}% - 20px)`;
     maxValue.style.left = `calc(${maxPercent}% - 20px)`;
   }
 
   function updateAreaSlider() {
-    const areaValue = priceRangeArea.value;
-    priceTextArea.textContent = `${areaValue}m²`;
-    areaRangeInput.value = `15-${areaValue}`;
+    let min = parseInt(areaMin.value);
+    let max = parseInt(areaMax.value);
+    if (min > max - 5) {
+      areaMin.value = max - 5;
+      min = max - 5;
+    }
+    if (max < min + 5) {
+      areaMax.value = min + 5;
+      max = min + 5;
+    }
+    areaMinValue.textContent = `${min}m²`;
+    areaMaxValue.textContent = `${max}m²`;
+    areaRangeInput.value = `${min}-${max}`;
+
+    // Tính vị trí left cho value (nếu muốn đẹp)
+    const minPercent = ((min - 15) / (100 - 15)) * 100;
+    const maxPercent = ((max - 15) / (100 - 15)) * 100;
+    areaMinValue.style.left = `calc(${minPercent}% - 20px)`;
+    areaMaxValue.style.left = `calc(${maxPercent}% - 20px)`;
   }
 
   function toggleBedFilter(bedCount) {
@@ -167,13 +185,14 @@
 
   function clearAllFilters() {
     // Reset price range
-    rangeMin.value = 60;
+    rangeMin.value = 20;
     rangeMax.value = 200;
-    priceRangeInput.value = '60-200';
+    priceRangeInput.value = '20-200';
 
     // Reset area
-    priceRangeArea.value = 40;
-    areaRangeInput.value = '15-100';
+    areaMin.value = 20;
+    areaMax.value = 100;
+    areaRangeInput.value = '20-100';
 
     // Reset bed count
     bedCountInput.value = '';
@@ -193,7 +212,8 @@
   // Event listeners
   rangeMin.addEventListener('input', updateSlider);
   rangeMax.addEventListener('input', updateSlider);
-  priceRangeArea.addEventListener("input", updateAreaSlider);
+  areaMin.addEventListener('input', updateAreaSlider);
+  areaMax.addEventListener('input', updateAreaSlider);
 
   // Auto submit form when filters change
   function autoSubmitForm() {
@@ -218,7 +238,8 @@
   // Auto submit khi thay đổi filter
   rangeMin.addEventListener('change', debouncedSubmit);
   rangeMax.addEventListener('change', debouncedSubmit);
-  priceRangeArea.addEventListener('change', debouncedSubmit);
+  areaMin.addEventListener('change', debouncedSubmit);
+  areaMax.addEventListener('change', debouncedSubmit);
 
   // Submit form khi thay đổi guest count
   document.getElementById('room_count_select').addEventListener('change', function() {
