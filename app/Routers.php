@@ -201,12 +201,12 @@ Router::post('/admin/amenities/delete', 'AdminAmenitiesController@amenitiesDelet
 /////////////////////end amenities/////////////////////////////////////
 
 //////////////////////Booking and historyBooking/////////////////////////////////////
-Router::get('/dashboad/bookings/allBookings', 'AdminBookingController@allBookingsIndex', [
+Router::get('bookings/allBookings', 'AdminBookingController@allBookingsIndex', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
-router::get('/dashboad/bookings/historyBookings', 'AdminBookingController@historyBookingsIndex', [
+router::get('bookings/historyBookings', 'AdminBookingController@historyBookingsIndex', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',

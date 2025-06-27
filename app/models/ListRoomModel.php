@@ -46,9 +46,11 @@ class ListRoomModel
                     $condition .= "room_type.name_type_room = :room_type";
                     $params['room_type'] = $value;
 
-                } elseif ($key === 'area') {
-                    $condition .= "room.area >= :area";
-                    $params['area'] = (int)$value;
+                } elseif ($key === 'area_range') {
+                    [$min, $max] = explode('-', $value);
+                    $condition .= "room.arena BETWEEN :minArena AND :maxArena";
+                    $params['minArena'] = (float)$min;
+                    $params['maxArena'] = (float)$max;
 
                 } elseif ($key === 'guest_count') {
                     $condition .= "room.capacity >= :guest_count";
