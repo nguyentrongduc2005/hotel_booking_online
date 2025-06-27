@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 24, 2025 at 09:51 AM
+-- Generation Time: Jun 27, 2025 at 08:10 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -63,7 +63,6 @@ CREATE TABLE `booking` (
   `id_booking` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `guest_id` int(11) DEFAULT NULL,
-  `date_booking` date NOT NULL,
   `check_in` datetime NOT NULL,
   `check_out` datetime NOT NULL,
   `status` enum('pending','confirmed','cancelled','completed') DEFAULT 'pending',
@@ -78,12 +77,12 @@ CREATE TABLE `booking` (
 -- Dumping data for table `booking`
 --
 
-INSERT INTO `booking` (`id_booking`, `user_id`, `guest_id`, `date_booking`, `check_in`, `check_out`, `status`, `created_at`, `transaction_id`, `id_room`, `status_checkin`, `status_checkout`) VALUES
-(0, 1, NULL, '2025-06-03', '2025-06-05 00:00:00', '2025-06-07 00:00:00', 'confirmed', '2025-06-03 12:00:00', 1, 1, 'pending', 'pending'),
-(17, 2, NULL, '2025-06-04', '2025-06-24 04:00:09', '2025-06-24 00:00:00', 'confirmed', '2025-06-04 15:00:00', 2, 2, 'done', 'done'),
-(18, NULL, 4, '2025-06-01', '2025-06-24 05:15:12', '2025-06-24 00:00:00', 'confirmed', '2025-06-24 09:30:00', 3, 3, 'done', 'done'),
-(19, NULL, 1, '2025-06-05', '2025-06-24 00:00:00', '2025-06-23 00:00:00', 'confirmed', '2025-06-23 11:00:00', 4, 4, 'pending', 'pending'),
-(20, NULL, 5, '2025-06-06', '2025-06-09 00:00:00', '2025-06-11 00:00:00', 'confirmed', '2025-06-23 14:45:00', 5, 5, 'pending', 'pending');
+INSERT INTO `booking` (`id_booking`, `user_id`, `guest_id`, `check_in`, `check_out`, `status`, `created_at`, `transaction_id`, `id_room`, `status_checkin`, `status_checkout`) VALUES
+(0, 1, NULL, '2025-06-05 00:00:00', '2025-06-07 00:00:00', 'confirmed', '2025-06-03 00:00:00', 1, 1, 'pending', 'pending'),
+(17, 2, NULL, '2025-06-24 04:00:09', '2025-06-24 00:00:00', 'confirmed', '2025-06-24 00:00:00', 2, 2, 'done', 'done'),
+(18, NULL, 4, '2025-06-24 05:15:12', '2025-06-24 00:00:00', 'confirmed', '2025-06-24 00:00:00', 3, 3, 'done', 'done'),
+(19, NULL, 1, '2025-06-24 00:00:00', '2025-06-23 00:00:00', 'pending', '2025-06-23 00:00:00', 4, 4, 'pending', 'pending'),
+(20, NULL, 5, '2025-06-09 00:00:00', '2025-06-11 00:00:00', 'pending', '2025-06-23 14:45:00', 5, 5, 'pending', 'pending');
 
 -- --------------------------------------------------------
 
@@ -336,13 +335,6 @@ CREATE TABLE `token` (
   `created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `token`
---
-
-INSERT INTO `token` (`id_token`, `token`, `user_id`, `created_at`) VALUES
-(65, '5af2b400e635c86eb1e73056dfd2f48c817b9de8e93076fbcb205d576184fd1d', 1, '2025-06-24 14:44:37');
-
 -- --------------------------------------------------------
 
 --
@@ -353,7 +345,7 @@ CREATE TABLE `transaction` (
   `transaction_id` int(11) NOT NULL,
   `total_amount` decimal(10,2) NOT NULL,
   `payment_status` enum('pending','completed','failed','refunded') DEFAULT 'pending',
-  `payment_method` enum('cash','credit card','bank transfer','Momo','ZaloPay') NOT NULL,
+  `payment_method` enum('cash','credit card','bank transfer','Momo','ZaloPay') DEFAULT NULL,
   `created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -366,7 +358,9 @@ INSERT INTO `transaction` (`transaction_id`, `total_amount`, `payment_status`, `
 (2, 2500000.00, 'completed', 'bank transfer', '2025-06-02 09:45:00'),
 (3, 950000.00, 'pending', 'cash', '2025-06-03 18:20:00'),
 (4, 1800000.00, 'failed', 'credit card', '2025-06-04 11:15:00'),
-(5, 3200000.00, 'completed', 'ZaloPay', '2025-06-05 16:08:00');
+(5, 3200000.00, 'completed', 'ZaloPay', '2025-06-05 16:08:00'),
+(6, 100.00, 'pending', 'credit card', '2025-06-25 15:22:26'),
+(7, 100.00, 'pending', 'credit card', '2025-06-25 15:24:08');
 
 -- --------------------------------------------------------
 
@@ -391,12 +385,11 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `email`, `sdt`, `cccd`, `pass`, `full_name`, `created_at`, `discount`, `role`) VALUES
-(1, 'minhtld1451@ut.edu.vn', '0393336649', '086205001451', 'abc123', 'Trần Lê Duy Minh', '2025-06-01 10:00:00', 10, 'admin'),
-(2, 'linh2712nha@gmail.com', '0971815720', '086205001452', 'pass456', 'Nguyễn Quang Linh', '2025-06-02 09:30:00', 1, 'user'),
-(3, 'nguyentrongduc447@gmail.com', '0866225534', '086205001453', '123', 'Nguyễn Trọng Đức', '2025-06-03 11:45:00', 0, 'user'),
-(4, 'huynhdaihafc@gmail.com', '0903348270', '086205001454', 'hoang321', 'Huỳnh Đại Hà', '2025-06-04 08:20:00', 2, 'user'),
-(5, 'thinhlt1681@ut.edu.vn', '0365574437', '086205001455', 'kimanh456', 'Lê Trường Thịnh', '2025-06-05 14:15:00', 3, 'user'),
-(6, 'nva@gmail.com', '092422321', '0872904223544', '123', 'nguyen van a', '2025-06-21 16:51:00', NULL, 'user');
+(1, 'minhtld1451@ut.edu.vn', '0393336649', '086205001451', '$2y$10$WHDY6gcvNiLL.1fJtx1zAO5Ns2Uk/ZP/UV1xewVhUljszGKl51fZu', 'Trần Lê Duy Minh', '2025-06-01 10:00:00', 10, 'admin'),
+(2, 'linh2712nha@gmail.com', '0971815720', '086205001452', '$2y$10$WHDY6gcvNiLL.1fJtx1zAO5Ns2Uk/ZP/UV1xewVhUljszGKl51fZu', 'Nguyễn Quang Linh', '2025-06-02 09:30:00', 1, 'user'),
+(3, 'nguyentrongduc447@gmail.com', '0866225534', '086205001453', '$2y$10$WHDY6gcvNiLL.1fJtx1zAO5Ns2Uk/ZP/UV1xewVhUljszGKl51fZu', 'Nguyễn Trọng Đức', '2025-06-03 11:45:00', 0, 'user'),
+(4, 'huynhdaihafc@gmail.com', '0903348270', '086205001454', '$2y$10$WHDY6gcvNiLL.1fJtx1zAO5Ns2Uk/ZP/UV1xewVhUljszGKl51fZu', 'Huỳnh Đại Hà', '2025-06-04 08:20:00', 2, 'user'),
+(5, 'thinhlt1681@ut.edu.vn', '0365574437', '086205001455', '$2y$10$WHDY6gcvNiLL.1fJtx1zAO5Ns2Uk/ZP/UV1xewVhUljszGKl51fZu', 'Lê Trường Thịnh', '2025-06-05 14:15:00', 3, 'user');
 
 --
 -- Indexes for dumped tables
@@ -505,13 +498,13 @@ ALTER TABLE `amenity`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `id_booking` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_booking` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `guest`
 --
 ALTER TABLE `guest`
-  MODIFY `guest_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `guest_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `historybooking`
@@ -523,13 +516,13 @@ ALTER TABLE `historybooking`
 -- AUTO_INCREMENT for table `image_room`
 --
 ALTER TABLE `image_room`
-  MODIFY `id_image` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id_image` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT for table `room`
 --
 ALTER TABLE `room`
-  MODIFY `id_room` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_room` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `room_type`
@@ -547,19 +540,19 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT for table `token`
 --
 ALTER TABLE `token`
-  MODIFY `id_token` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id_token` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables

@@ -48,7 +48,29 @@ Router::get('/logout', 'AuthenController@logoutHandler', []);
 
 //kéo dài phiên làm việc;
 Router::get('/refeshToken', "AuthenController@refeshToken");
+/////////////////////////popup///////////////////////////////////////////////////////
 
+Router::get('/user', 'PopUpController@show', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleUser',
+]);
+Router::post('/user', 'PopUpController@handlerEdit', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleUser',
+]);
+
+Router::post('/user/changepassword', 'PopUpController@changePassword', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleUser',
+]);
+
+
+
+
+/////////////////////////////end popup///////////////////////////////////////////////
 
 ///////////////////////////PAYMENT////////////////////////////////////////////////////
 //submit từ trang detail room render ra form điền thông tin có

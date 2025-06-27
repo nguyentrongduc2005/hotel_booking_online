@@ -34,7 +34,8 @@ class AuthenController extends Controller
             $this->renderPartial('auth/login', ['message' => 'Invalid email or password.', 'email' => '', "password" => '']);
             return;
         }
-        if ($user['pass'] !== $password) {
+        // password_verify( $password, $user['pass'])
+        if (!password_verify($password, $user['pass'])) {
             $this->renderPartial('auth/login', ['message' => 'Invalid email or password.', 'email' => '', "password" => '']);
             return;
         }
@@ -96,7 +97,7 @@ class AuthenController extends Controller
             $this->renderPartial('auth/regis', $user);
             return;
         }
-
+        $user['pass'] = $hashedPassword = password_hash($user['pass'], PASSWORD_DEFAULT);
         //lưu thông tin người tài khoản vào db user
         $idUser = $this->model->insertUser($user);
         if (!$idUser) {
