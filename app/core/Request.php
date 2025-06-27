@@ -63,7 +63,7 @@ class Request
     }
 
     // Lấy dữ liệu POST
-    public function post($key = null, $default = null)
+    public function post($key = null, $default = [])
     {
         if ($key === null) {
             return $this->input;

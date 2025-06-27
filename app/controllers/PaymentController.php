@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\core\Controller;
 use app\models\PaymentModel;
+use app\core\AppException;
 
 class PaymentController extends Controller
 {
@@ -21,7 +22,8 @@ class PaymentController extends Controller
         $room = $this->model->getRoomInfo($req->params()["slug"]);
         if (!$room) {
             // Xử lý khi không tìm thấy phòng
-            $this->renderPartial('error/index', ['message' => 'Room not found', 'next' => $this->getConfig("basePath"), 'timeout' => 5]);
+            throw new AppException("Room not found", 400, $this->getConfig("basePath"));
+            // $this->renderPartial('error/index', ['message' => 'Room not found', 'next' => $this->getConfig("basePath"), 'timeout' => 5]);
         }
         if (isset($_SESSION['user_token']) && isset($_SESSION['user_name'])) {
             // Người dùng chưa đăng nhập, chuyển hướng đến trang đăng nhập
@@ -55,12 +57,13 @@ class PaymentController extends Controller
     public function method($req, $res)
     {
         $requestData = $req->post(); //này checkin, checkout, username, email, phone,cccd
-        $slug = $req->params()["slug"];
+        $slug = $req->params()["slug"] ?? "";
         $room = $this->model->getRoomInfo($slug);
         $idroom = $room['id_room'];
         if (!$idroom) {
             // Xử lý khi không tìm thấy phòng
-            $this->renderPartial('error/index', ['message' => 'Room not found', 'next' => $this->getConfig("basePath") . '/detailroom/' . $slug, 'timeout' => 5]);
+            throw new AppException("Room not found", 400, $this->getConfig("basePath") . '/detailroom/' . $slug);
+            // $this->renderPartial('error/index', ['message' => 'Room not found', 'next' => $this->getConfig("basePath") . '/detailroom/' . $slug, 'timeout' => 5]);
         }
         //xử lý phòng có bị trung lịch không
         $check = $this->model->checkRoomBooked($idroom, $requestData['check_in'], $requestData['check_out']);
@@ -93,7 +96,9 @@ class PaymentController extends Controller
         ]);
         if (!$idTransaction) {
             // Xử lý khi không tìm thấy phòng
-            $this->renderPartial('error/index', ['message' => 'Transaction not found, please call support.', 'next' => $this->getConfig("basePath") . '/detailroom/' . $slug, 'timeout' => 5]);
+            throw new AppException("Transaction not found, please call support", 404, $this->getConfig("basePath") . '/detailroom/' . $slug);
+
+            // $this->renderPartial('error/index', ['message' => 'Transaction not found, please call support.', 'next' => $this->getConfig("basePath") . '/detailroom/' . $slug, 'timeout' => 5]);
         }
         //insert bảng booking
         $data = [
@@ -106,7 +111,9 @@ class PaymentController extends Controller
         $id_booking = $this->model->insertBooking($data);
         if (!$id_booking) {
             // Xử lý khi không tìm thấy phòng
-            $this->renderPartial('error/index', ['message' => 'Booking not found, please call support.', 'next' => $this->getConfig("basePath") . '/detailroom/' . $slug, 'timeout' => 5]);
+            throw new AppException("Booking not found, please call support", 404, $this->getConfig("basePath") . '/detailroom/' . $slug);
+
+            // $this->renderPartial('error/index', ['message' => 'Booking not found, please call support.', 'next' => $this->getConfig("basePath") . '/detailroom/' . $slug, 'timeout' => 5]);
         }
 
 
@@ -134,14 +141,16 @@ class PaymentController extends Controller
     //submit từ trang paymentMethod
     public function paymentMethodHandler($req, $res)
     {
-        $requestData = $req->post()['method'];
+        $requestData = $req->post()['method'] ?? '';
         echo $requestData;
-        $id_transaction = $req->post()['id_transaction'];
+        $id_transaction = $req->post()['id_transaction'] ?? "";
         echo $id_transaction;
         $id =  $this->model->updateMethod(['payment_method' => $requestData], "transaction_id = $id_transaction");
         if (!$id) {
             // Xử lý khi không tìm thấy phòng
-            $this->renderPartial('error/index', ['message' => 'Payment method update failed, please call support.', 'next' => $this->getConfig("basePath") . '/detailroom/' . $req->params()["slug"], 'timeout' => 5]);
+            throw new AppException("Payment method update failed, please call support", 400, $this->getConfig("basePath") . '/detailroom/' .  $req->params()["slug"] ?? "");
+
+            // $this->renderPartial('error/index', ['message' => 'Payment method update failed, please call support.', 'next' => $this->getConfig("basePath") . '/detailroom/' . $req->params()["slug"], 'timeout' => 5]);
         }
 
         $this->render("success", []);

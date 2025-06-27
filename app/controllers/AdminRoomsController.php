@@ -5,7 +5,7 @@ namespace app\controllers;
 use app\core\Controller;
 use app\core\Registry;
 use app\models\AdminRoomsModel;
-
+use app\core\AppException;
 
 class AdminRoomsController extends Controller
 {
@@ -35,7 +35,8 @@ class AdminRoomsController extends Controller
 
     function roomFilter($req, $res)
     {
-        $requestData = $req->post();
+        $requestData = $req->post() ?? [];
+
         $data = $this->model->getDataByFilter($requestData);
         $nameRoomTypes = $this->model->getNameRoomTypes();
         $data['nameRoomTypes'] = $nameRoomTypes;
@@ -55,11 +56,14 @@ class AdminRoomsController extends Controller
         if (!empty($req->file('images'))) {
             $requestData['images'] = $req->file('images');
         }
+        if (!$requestData)
+            throw new AppException("bad request", 400, $this->getConfig("basePath") . "/admin/rooms");
         $check =  $this->model->addRoom($requestData);
         if ($check) {
             $this->redirect(Registry::getInstance()->config['basePath'] . '/admin/rooms');
         } else {
-            $this->renderPartial("error/index", ["message" => "Failed to insert data. The record may already exist.", "next" => $this->getConfig("basePath") . "/admin/rooms", "timeout" => 5]);
+            throw new AppException("Failed to insert data. The record may already exist.", 400, $this->getConfig("basePath") . "/admin/rooms");
+            // $this->renderPartial("error/index", ["message" => "Failed to insert data. The record may already exist.", "next" => $this->getConfig("basePath") . "/admin/rooms", "timeout" => 5]);
         }
     }
 
@@ -71,22 +75,30 @@ class AdminRoomsController extends Controller
         if (!empty($req->file('new_images'))) {
             $requestData['new_images'] = $req->file('new_images');
         }
-
+        if (!$requestData)
+            throw new AppException("bad request", 400, $this->getConfig("basePath") . "/admin/rooms");
         $check =  $this->model->editRoom($requestData);
         if ($check) {
             $this->redirect(Registry::getInstance()->config['basePath'] . '/admin/rooms');
         } else {
-            $this->renderPartial("error/index", ["message" => "Failed to insert data. The record may already exist.", "next" => $this->getConfig("basePath") . "/admin/rooms", "timeout" => 5]);
+            throw new AppException("Failed to update data. The record may already exist", 400, $this->getConfig("basePath") . "/admin/rooms");
+
+            // $this->renderPartial("error/index", ["message" => "Failed to insert data. The record may already exist.", "next" => $this->getConfig("basePath") . "/admin/rooms", "timeout" => 5]);
         }
     }
     function roomDelete($req, $res)
     {
         $requestData = $req->post();
+
+        if (!$requestData)
+            throw new AppException("bad request", 400, $this->getConfig("basePath") . "/admin/rooms");
         $check =  $this->model->deleteRoom($requestData['id_room']);
         if ($check) {
             $this->redirect(Registry::getInstance()->config['basePath'] . '/admin/rooms');
         } else {
-            $this->renderPartial("error/index", ["message" => "Failed to delete data. The record may already exist.", "next" => $this->getConfig("basePath") . "/admin/rooms", "timeout" => 5]);
+            throw new AppException("Failed to delete data. The record may already exist", 400, $this->getConfig("basePath") . "/admin/rooms");
+
+            // $this->renderPartial("error/index", ["message" => "Failed to delete data. The record may already exist.", "next" => $this->getConfig("basePath") . "/admin/rooms", "timeout" => 5]);
         }
     }
     ///////////////////////////////////////////////////////////////////////////////Type Rooms////////////////////////////////////////////////////
@@ -98,31 +110,45 @@ class AdminRoomsController extends Controller
     function typeRoomsAdd($req, $res)
     {
         $requestData = $req->post();
+
+        if (!$requestData)
+            throw new AppException("bad request", 400, $this->getConfig("basePath") . "/admin/roomtypes");
         $check =  $this->model->addTypeRoom($requestData);
         if ($check) {
             $this->redirect(Registry::getInstance()->config['basePath'] . '/admin/roomtypes');
         } else {
-            $this->renderPartial("error/index", ["message" => "Failed to insert data. The record may already exist.", "next" => $this->getConfig("basePath") . "/admin/roomtypes", "timeout" => 5]);
+            throw new AppException("Failed to insert data  type room. The record may already exist", 400, $this->getConfig("basePath") . "/admin/roomtypes");
+
+            // $this->renderPartial("error/index", ["message" => "Failed to insert data. The record may already exist.", "next" => $this->getConfig("basePath") . "/admin/roomtypes", "timeout" => 5]);
         }
     }
     function typeRoomsEdit($req, $res)
     {
         $requestData = $req->post();
+
+        if (!$requestData)
+            throw new AppException("bad request", 400, $this->getConfig("basePath") . "/admin/roomtypes");
         $check =  $this->model->editTypeRoom($requestData);
         if ($check) {
             $this->redirect(Registry::getInstance()->config['basePath'] . '/admin/roomtypes');
         } else {
-            $this->renderPartial("error/index", ["message" => "Failed to update data. The record may already exist.", "next" => $this->getConfig("basePath") . "/admin/roomtypes", "timeout" => 5]);
+            throw new AppException("Failed to update data type room. The record may already exist", 400, $this->getConfig("basePath") . "/admin/roomtypes");
+
+            // $this->renderPartial("error/index", ["message" => "Failed to update data. The record may already exist.", "next" => $this->getConfig("basePath") . "/admin/roomtypes", "timeout" => 5]);
         }
     }
     function typeRoomsDelete($req, $res)
     {
         $requestData = $req->post();
+        if (!$requestData)
+            throw new AppException("bad request", 400, $this->getConfig("basePath") . "/admin/roomtypes");
         $check =  $this->model->deleteTypeRoom($requestData['id_type_room']);
         if ($check) {
             $this->redirect(Registry::getInstance()->config['basePath'] . '/admin/roomtypes');
         } else {
-            $this->renderPartial("error/index", ["message" => "Failed to delete data. The record may already exist.", "next" => $this->getConfig("basePath") . "/admin/roomtypes", "timeout" => 5]);
+            throw new AppException("Failed to delete data  type room. The record may already exist", 400, $this->getConfig("basePath") . "/admin/roomtypes");
+
+            // $this->renderPartial("error/index", ["message" => "Failed to delete data. The record may already exist.", "next" => $this->getConfig("basePath") . "/admin/roomtypes", "timeout" => 5]);
         }
     }
 
@@ -141,7 +167,9 @@ class AdminRoomsController extends Controller
         if ($check) {
             $this->redirect(Registry::getInstance()->config['basePath'] . '/admin/amenities');
         } else {
-            $this->renderPartial("error/index", ["message" => "Failed to insert data. The record may already exist.", "next" => $this->getConfig("basePath") . "/admin/amenities", "timeout" => 5]);
+            throw new AppException("Failed to insert data  amenities. The record may already exist", 400, $this->getConfig("basePath") . "/admin/amenities");
+
+            // $this->renderPartial("error/index", ["message" => "Failed to insert data. The record may already exist.", "next" => $this->getConfig("basePath") . "/admin/amenities", "timeout" => 5]);
         }
     }
     function amenitiesEdit($req, $res)
@@ -151,7 +179,9 @@ class AdminRoomsController extends Controller
         if ($check) {
             $this->redirect(Registry::getInstance()->config['basePath'] . '/admin/amenities');
         } else {
-            $this->renderPartial("error/index", ["message" => "Failed to update data. The record may already exist.", "next" => $this->getConfig("basePath") . "/admin/amenities", "timeout" => 5]);
+            throw new AppException("Failed to update data  amenities. The record may already exist", 400, $this->getConfig("basePath") . "/admin/amenities");
+
+            // $this->renderPartial("error/index", ["message" => "Failed to update data. The record may already exist.", "next" => $this->getConfig("basePath") . "/admin/amenities", "timeout" => 5]);
         }
     }
     function amenitiesDelete($req, $res)
@@ -161,7 +191,9 @@ class AdminRoomsController extends Controller
         if ($check) {
             $this->redirect(Registry::getInstance()->config['basePath'] . '/admin/amenities');
         } else {
-            $this->renderPartial("error/index", ["message" => "Failed to delete data. The record may already exist.", "next" => $this->getConfig("basePath") . "/admin/amenities", "timeout" => 5]);
+            throw new AppException("Failed to delete data  amenities. The record may already exist", 400, $this->getConfig("basePath") . "/admin/amenities");
+
+            // $this->renderPartial("error/index", ["message" => "Failed to delete data. The record may already exist.", "next" => $this->getConfig("basePath") . "/admin/amenities", "timeout" => 5]);
         }
     }
 
