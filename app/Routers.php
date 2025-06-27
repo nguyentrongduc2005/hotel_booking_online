@@ -110,6 +110,7 @@ Router::post('/dashboard/checkout', 'DashboardController@checkoutHandler', [
 ]);
 
 
+
 //////////////////////rooms///////////////////////////////////////////
 Router::get('/admin/rooms', 'AdminRoomsController@roomsShow', [
     'AuthorMiddleware@checktoken',
@@ -199,3 +200,15 @@ Router::post('/admin/amenities/delete', 'AdminTypeRoomsController@typeRoomsDelet
 
 
 /////////////////////end amenities/////////////////////////////////////
+
+//////////////////////Booking and historyBooking/////////////////////////////////////
+Router::get('/dashboad/bookings/allBookings', 'AdminBookingController@allBookingsIndex', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+router::get('/dashboad/bookings/historyBookings', 'AdminBookingController@historyBookingsIndex', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
