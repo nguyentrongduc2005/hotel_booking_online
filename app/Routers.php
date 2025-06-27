@@ -50,22 +50,37 @@ Router::get('/logout', 'AuthenController@logoutHandler', []);
 Router::get('/refeshToken', "AuthenController@refeshToken");
 /////////////////////////popup///////////////////////////////////////////////////////
 
-Router::get('/user', 'PopUpController@show', [
+Router::get('/user', 'PopUpController@showUser', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleUser',
 ]);
-Router::post('/user', 'PopUpController@handlerEdit', [
+Router::post('/user', 'PopUpController@handlerEditUser', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleUser',
 ]);
 
-Router::post('/user/changepassword', 'PopUpController@changePassword', [
+Router::post('/user/changePass', 'PopUpController@changePasswordUser', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleUser',
 ]);
+
+Router::get('/user/reservations', 'PopUpController@myReservationHandler', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleUser',
+]);
+
+Router::post('/user/reservations', 'PopUpController@myReservationHandler', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleUser',
+]);
+
+
+
 
 
 

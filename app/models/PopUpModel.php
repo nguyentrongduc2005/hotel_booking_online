@@ -46,4 +46,22 @@ class PopUpModel
         if (!$row) return false;
         return true;
     }
+
+
+    function getMyReservation($filter, $role)
+    {
+        $condition = '';
+        if ($role == 'user') {
+            $condition = 'user.user_id = :user_id';
+        } else {
+            $condition = 'guest.cccd = :cccd';
+        }
+        $sql = "SELECT booking.id_booking ,booking.status_checkin,booking.status_checkout,booking.check_in,booking.check_out,booking.status, room.slug, room.name FROM `booking`  
+                INNER JOIN $role on $role.{$role}_id = booking.{$role}_id
+                INNER JOIN room ON booking.id_room = room.id_room
+                WHERE (booking.status = 'pending' OR booking.status = 'confirmed') 
+                AND $condition";
+        $data =  db::getAll($sql, $filter);
+        return  $data ?? [];
+    }
 }

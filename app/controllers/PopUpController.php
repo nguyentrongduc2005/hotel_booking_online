@@ -15,7 +15,7 @@ class PopUpController extends Controller
         $this->model = new PopUpModel();
     }
 
-    function show($req, $res)
+    function showUser($req, $res)
     {
         $id = $_SESSION['user_id'];
         $user = $this->model->getInfoUser($id);
@@ -26,7 +26,7 @@ class PopUpController extends Controller
         $this->render('user', $user);
     }
 
-    function handlerEdit($req, $res)
+    function handlerEditUser($req, $res)
     {
         $data = $req->post() ?? [];
         $row = $this->model->updateUser($data);
@@ -37,7 +37,7 @@ class PopUpController extends Controller
         $this->redirect($this->getConfig('basePath') . "/user");
     }
 
-    function changePassword($req, $res)
+    function changePasswordUser($req, $res)
     {
         if (!$_SESSION) return false;
         $id = $_SESSION['user_id'];
@@ -53,5 +53,24 @@ class PopUpController extends Controller
             "statusApi" => $check
         ];
         $res->json($data)->send();
+    }
+
+
+    function myReservationHandler($req, $res)
+    {
+        $data = [];
+        if (isset($_SESSION['user_id'])) {
+            $data = $this->model->getMyReservation(['user_id' => $_SESSION['user_id']], 'user');
+        } else {
+            if (isset($req->post()['cccd'])) {
+                $cccd = $req->post()['cccd'];
+
+                $data = $this->model->getMyReservation(['cccd' => $cccd], 'guest');
+            } else {
+                $this->render('myReservation', []);
+            }
+        }
+
+        $this->render('myReservation', $data);
     }
 }
