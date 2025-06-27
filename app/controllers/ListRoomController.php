@@ -23,10 +23,10 @@ class ListRoomController extends Controller
         $filters = [
             'price_range' => $req->query('price_range'),
             'room_type'   => $req->query('room_type'),
-            'checkin'     => $req->query('check_in'),
-            'checkout'    => $req->query('check_out'),
+            'checkin'     => $req->query('checkin'),
+            'checkout'    => $req->query('checkout'),
             'guest_count' => $req->query('guest'),
-            'area'        => $req->query('area'),
+            'area_range'  => $req->query('area_range'),
             'bed_count'   => $req->query('bed_count'),
         ];
 
@@ -44,5 +44,7 @@ class ListRoomController extends Controller
             'rooms' => $rooms,
             'filters' => $filters
         ]);
+
+       
     }
 }
