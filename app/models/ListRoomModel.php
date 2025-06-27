@@ -17,12 +17,12 @@ class ListRoomModel
         
         if (!empty($filters['check_in'])) {
             $dt = new DateTime($filters['check_in']);
-            $filters['check_in'] = $dt->format('Y-m-d');
+            $filters['check_in'] = $dt->format('Y-m-d H:i:s');
         }
 
         if (!empty($filters['check_out'])) {
             $dt = new DateTime($filters['check_out']);
-            $filters['check_out'] = $dt->format('Y-m-d');
+            $filters['check_out'] = $dt->format('Y-m-d H:i:s');
         }
 
         
