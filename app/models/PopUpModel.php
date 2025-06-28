@@ -20,7 +20,7 @@ class PopUpModel
         return $user ? $user : [];
     }
 
-    function updateUser($data)
+    function updateUser($data, $id)
     {
         $dataFilter = array_filter($data, function ($value) {
             return !(
@@ -29,8 +29,10 @@ class PopUpModel
                 (is_array($value) && empty($value))
             );
         });
+        echo '<pre';
+        print_r($dataFilter);
 
-        $row = db::update('user', $dataFilter, "user_id = :user_id");
+        $row = db::update('user', $dataFilter, "user_id = $id");
         return $row ? $row : false;
     }
 
