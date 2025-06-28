@@ -109,7 +109,7 @@ class DashboardController extends Controller
         $check = $this->model->updateCheckoutBooking("id_booking = $id AND status_checkin = 'done'");
         if ($check) {
             $data = [
-                "statusApi" => "true"
+                "statusApi" => $check
             ];
         }
         $res->json($data)->send();
