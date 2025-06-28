@@ -69,7 +69,15 @@ $nextDate = date('Y-m-d', strtotime($datePresent . ' +1 day'));
                 </div>
             <?php endforeach; ?>
         </div>
-        <div id="btn-explore" class="btn-explore1"><span>EXPLORE ALL</span></div>
+        <div id="btn-explore" class="btn-explore1">
+            <span>EXPLORE ALL</span>
+            <div class="icon">
+                <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                </svg>
+            </div>
+        </div>
     </div>
     <div id="rooms-section">
         <!-- Section Header -->
@@ -104,7 +112,15 @@ $nextDate = date('Y-m-d', strtotime($datePresent . ' +1 day'));
             </div>
         </div>
 
-        <div id="btn-explore"><span>EXPLORE ALL</span></div>
+        <div id="btn-explore" class="btn-explore1">
+            <span>EXPLORE ALL</span>
+            <div class="icon">
+                <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                </svg>
+            </div>
+        </div>
     </div>
 
     <div id="testimonials-section">
@@ -197,7 +213,7 @@ $nextDate = date('Y-m-d', strtotime($datePresent . ' +1 day'));
                 <p class="content-description">
                     Book your stay at Diamond Hotel – comfort, style, and service await.
                 </p>
-                <button class="book-now-btn">Book Now</button>
+                <button class="book-now-btn button-87">Book Now</button>
             </div>
         </div>
     </div>
