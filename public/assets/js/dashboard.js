@@ -65,7 +65,9 @@ document.querySelectorAll('.dashboard-action-reject').forEach(function (btn) {
         }
       })
       .catch((err) => {
-        alert('An error occurred!\n' + err);
+        // alert('An error occurred!\n' + err);
+        alert(err);
+
       });
   });
 });

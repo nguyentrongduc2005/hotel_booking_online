@@ -71,10 +71,41 @@ class PopUpController extends Controller
 
                 $data = $this->model->getMyReservation(['cccd' => $cccd], 'guest');
             } else {
-                $this->render('myReservation', []);
+                // $this->render('myReservation', []);
             }
         }
 
-        $this->render('myReservation', $data);
+        // $this->render('myReservation', $data);
+    }
+    function myReservationCancel($req, $res)
+    {
+        if (!isset($req->post()['id_booking'])) {
+            throw new AppException("Bad request", 400, $this->getConfig('basePath') . "/user/reservations");
+        }
+
+        $id_booking = $req->post()['id_booking'];
+        $check = $this->model->cancelBooking($id_booking);
+
+        $data = [
+            "statusApi" => $check
+        ];
+        $res->json($data)->send();
+    }
+
+    function historyHandler($req, $res)
+    {
+        $data = [];
+        if (isset($_SESSION['user_id'])) {
+            $data = $this->model->getHistories(['user_id' => $_SESSION['user_id']], 'user');
+        } else if (isset($req->post()['cccd'])) {
+            $cccd = $req->post()['cccd'];
+
+            $data = $this->model->getHistories(['cccd' => $cccd], 'guest');
+        } else {
+            // $this->render('myReservation', []);
+        }
+        // $this->render('myReservation',$data);
+        echo "<pre>";
+        print_r($data);
     }
 }

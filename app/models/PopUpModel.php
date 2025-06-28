@@ -66,4 +66,33 @@ class PopUpModel
         $data =  db::getAll($sql, $filter);
         return  $data ?? [];
     }
+
+    function getHistories($filter, $role)
+    {
+        $condition = '';
+        if ($role == 'user') {
+            $condition = 'user.user_id = :user_id';
+        } else {
+            $condition = 'guest.cccd = :cccd';
+        }
+        $sql = "SELECT historybooking.id_history ,historybooking.check_in,historybooking.check_out,historybooking.status, room.slug, room.name FROM `historybooking`  
+                INNER JOIN $role on $role.{$role}_id = historybooking.{$role}_id
+                INNER JOIN room ON historybooking.id_room = room.id_room
+                WHERE (historybooking.status = 'completed' OR historybooking.status = 'cancelled') 
+                AND $condition";
+        $data =  db::getAll($sql, $filter);
+        return  $data ?? [];
+    }
+
+    function cancelBooking($id_booking)
+    {
+        $row =  db::update('booking', ["status" => "cancelled"], "id_booking = $id_booking");
+        if (!$row) return false;
+        $sql = "SELECT booking.transaction_id FROM `booking` Where id_booking = :id";
+        $booking = db::getOne($sql, ["id" => $id_booking]);
+        if (!$booking) return false;
+        $rowT =  db::update('transaction', ["payment_status" => "refunded"], "transaction_id = {$booking['transaction_id']}");
+        if (!$rowT) return false;
+        return true;
+    }
 }

@@ -79,8 +79,23 @@ Router::post('/user/reservations', 'PopUpController@myReservationHandler', [
     'AuthorMiddleware@checkRoleUser',
 ]);
 
+Router::post('/user/reservations/cancel', 'PopUpController@myReservationCancel', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleUser',
+]);
 
+Router::get('/user/histories', 'PopUpController@historyHandler', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleUser',
+]);
 
+Router::post('/user/histories', 'PopUpController@historyHandler', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleUser',
+]);
 
 
 
