@@ -3,6 +3,7 @@
 $datePresent = date('Y-m-d');
 $nextDate = date('Y-m-d', strtotime($datePresent . ' +1 day'));
 ?>
+<!-- lấy từ cơ chế listroom qua thôi lấy này hôm nay và ngày mai gán mặc định  -->
 <div id="listroom-container">
   <div class="listroom-search">
     <form class="search-bar" action="<?= $this->configs->config['basePath'] ?>/listroom" method="get">
