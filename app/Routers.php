@@ -223,12 +223,12 @@ Router::post('/admin/amenities/delete', 'AdminAmenitiesController@amenitiesDelet
 /////////////////////end amenities/////////////////////////////////////
 
 //////////////////////Booking and historyBooking/////////////////////////////////////
-Router::get('bookings/allBookings', 'AdminBookingController@allBookingsIndex', [
+Router::get('/admin/allBookings', 'AdminBookingController@allBookingsIndex', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
-router::get('bookings/historyBookings', 'AdminBookingController@historyBookingsIndex', [
+router::get('/admin/historyBookings', 'AdminBookingController@historyBookingsIndex', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
