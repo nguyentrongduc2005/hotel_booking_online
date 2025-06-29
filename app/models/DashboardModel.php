@@ -196,4 +196,39 @@ class DashboardModel
         if ($rowSuccess > 0) return true;
         return false;
     }
+
+    function updateDataHistory($id, $status)
+    {
+        $condition = '';
+        if ($status == "completed") {
+            $condition = "AND (booking.status_checkin = 'done' AND booking.status_checkout  = 'done')";
+        } else if ($status == "cancelled") {
+            $condition = "AND booking.status = 'cancelled'";
+        }
+        $sql = "SELECT 
+                user_id,
+                guest_id,
+                check_in,
+                check_out,
+                created_at,
+                transaction_id,
+                id_room
+                FROM booking Where id_booking = :id $condition";
+        $booking_old =  db::getOne($sql, ["id" => $id]);
+        if (!$booking_old) return false;
+        $data = db::insert('historybooking', [
+            "user_id" => $booking_old['user_id'],
+            "guest_id" => $booking_old['guest_id'],
+            "check_in" => $booking_old['check_in'],
+            "check_out" => $booking_old['check_out'],
+            "created_at" => $booking_old['created_at'],
+            "transaction_id" => $booking_old['transaction_id'],
+            "id_room" => $booking_old['id_room'],
+            "status" => $status
+        ]);
+        if (!isset($data)) return false;
+        $row = db::delete('booking', "id_booking = $id");
+        if (!$row) return false;
+        return true;
+    }
 }

@@ -1,4 +1,9 @@
 <link rel="stylesheet" href="<?= $this->configs->config['pathAssets'] ?>css/homepage.css?v=<?= time() ?>">
+<?php date_default_timezone_set('Asia/Ho_Chi_Minh');
+$datePresent = date('Y-m-d');
+$nextDate = date('Y-m-d', strtotime($datePresent . ' +1 day'));
+?>
+
 <div id="homepage-container">
     <div id="hero-section">
         <div class="hero-logo">
@@ -9,15 +14,15 @@
             <div class="search-group">
                 <label class="title">Check In
                 </label>
-                <input type="date" name="Picker_search" id="checkin " class="search-date" value="2024-06-18" required>
+                <input type="date" name="check_in" id="check_in" class="search-date" value="<?= $datePresent ?>" required>
             </div>
             <div class="search-group">
                 <label class="title">Check out</label>
-                <input type="date" name="Picker_search" id="checkin " class="search-date" value="2024-06-19" required>
+                <input type="date" name="check_out" id="check_out" class="search-date" value="<?= $nextDate ?>" required>
             </div>
             <div class="search-group">
                 <label class="title1" for="room_count_select">Room/Guest</label>
-                <select name="room_count" id="room_count_select" class="room-select">
+                <select name="guest" id="room_count_select" class="room-select">
                     <option value="1">1 Guest</option>
                     <option value="2">2 Guests</option>
                     <option value="3">3 Guests</option>
@@ -64,7 +69,15 @@
                 </div>
             <?php endforeach; ?>
         </div>
-        <div id="btn-explore" class="btn-explore1"><span>EXPLORE ALL</span></div>
+        <div id="btn-explore" class="btn-explore1">
+            <span>EXPLORE ALL</span>
+            <div class="icon">
+                <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                </svg>
+            </div>
+        </div>
     </div>
     <div id="rooms-section">
         <!-- Section Header -->
@@ -99,7 +112,15 @@
             </div>
         </div>
 
-        <div id="btn-explore"><span>EXPLORE ALL</span></div>
+        <div id="btn-explore" class="btn-explore1">
+            <span>EXPLORE ALL</span>
+            <div class="icon">
+                <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                </svg>
+            </div>
+        </div>
     </div>
 
     <div id="testimonials-section">
@@ -192,7 +213,7 @@
                 <p class="content-description">
                     Book your stay at Diamond Hotel – comfort, style, and service await.
                 </p>
-                <button class="book-now-btn">Book Now</button>
+                <button class="book-now-btn button-87">Book Now</button>
             </div>
         </div>
     </div>

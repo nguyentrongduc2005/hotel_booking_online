@@ -43,9 +43,16 @@ class DashboardController extends Controller
         $status =  $req->payload()["status"]; //confirrmed or cancelled
         $data = "false";
         $check = $this->model->updataConformBooking("id_booking = $id",  $status);
+        if ($status == "cancelled") {
+            $check = $this->model->updateDataHistory($id, "cancelled");
+        }
         if ($check) {
             $data = [
                 "statusApi" => "true"
+            ];
+        } else {
+            $data = [
+                "statusApi" => "false"
             ];
         }
         $res->json($data)->send();
@@ -107,9 +114,11 @@ class DashboardController extends Controller
         $id =  $req->payload()["id"];
         $data = "false";
         $check = $this->model->updateCheckoutBooking("id_booking = $id AND status_checkin = 'done'");
+        //update insert qua bản history
+        $check = $this->model->updateDataHistory($id, "completed");
         if ($check) {
             $data = [
-                "statusApi" => "true"
+                "statusApi" => $check
             ];
         }
         $res->json($data)->send();

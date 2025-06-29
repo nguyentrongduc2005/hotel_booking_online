@@ -20,7 +20,7 @@ class PopUpModel
         return $user ? $user : [];
     }
 
-    function updateUser($data)
+    function updateUser($data, $id)
     {
         $dataFilter = array_filter($data, function ($value) {
             return !(
@@ -29,8 +29,10 @@ class PopUpModel
                 (is_array($value) && empty($value))
             );
         });
+        echo '<pre';
+        print_r($dataFilter);
 
-        $row = db::update('user', $dataFilter, "user_id = :user_id");
+        $row = db::update('user', $dataFilter, "user_id = $id");
         return $row ? $row : false;
     }
 
@@ -44,6 +46,53 @@ class PopUpModel
             "pass" => $passNew
         ], "user_id = $id");
         if (!$row) return false;
+        return true;
+    }
+
+
+    function getMyReservation($filter, $role)
+    {
+        $condition = '';
+        if ($role == 'user') {
+            $condition = 'user.user_id = :user_id';
+        } else {
+            $condition = 'guest.cccd = :cccd';
+        }
+        $sql = "SELECT booking.id_booking ,booking.status_checkin,booking.status_checkout,booking.check_in,booking.check_out,booking.status, room.slug, room.name FROM `booking`  
+                INNER JOIN $role on $role.{$role}_id = booking.{$role}_id
+                INNER JOIN room ON booking.id_room = room.id_room
+                WHERE (booking.status = 'pending' OR booking.status = 'confirmed') 
+                AND $condition";
+        $data =  db::getAll($sql, $filter);
+        return  $data ?? [];
+    }
+
+    function getHistories($filter, $role)
+    {
+        $condition = '';
+        if ($role == 'user') {
+            $condition = 'user.user_id = :user_id';
+        } else {
+            $condition = 'guest.cccd = :cccd';
+        }
+        $sql = "SELECT historybooking.id_history ,historybooking.check_in,historybooking.check_out,historybooking.status, room.slug, room.name FROM `historybooking`  
+                INNER JOIN $role on $role.{$role}_id = historybooking.{$role}_id
+                INNER JOIN room ON historybooking.id_room = room.id_room
+                WHERE (historybooking.status = 'completed' OR historybooking.status = 'cancelled') 
+                AND $condition";
+        $data =  db::getAll($sql, $filter);
+        return  $data ?? [];
+    }
+
+    function cancelBooking($id_booking)
+    {
+        $row =  db::update('booking', ["status" => "cancelled"], "id_booking = $id_booking");
+        if (!$row) return false;
+        $sql = "SELECT booking.transaction_id FROM `booking` Where id_booking = :id";
+        $booking = db::getOne($sql, ["id" => $id_booking]);
+        if (!$booking) return false;
+        $rowT =  db::update('transaction', ["payment_status" => "refunded"], "transaction_id = {$booking['transaction_id']}");
+        if (!$rowT) return false;
         return true;
     }
 }
