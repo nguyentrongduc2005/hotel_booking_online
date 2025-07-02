@@ -44,6 +44,10 @@ class DetailRoomController extends Controller
 
         $data['images'] = $images;
         $data['amenities'] = $amenities;
+        // echo "<pre>";
+        // print_r($data);
+
+        // echo "</pre>";
 
         $this->render('index', $data);
     }

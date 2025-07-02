@@ -23,24 +23,24 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="full-name">Full name <span class="required">*</span></label>
-                                    <input type="text" id="full-name" required />
+                                    <input type="text" id="full-name" name="full_name" value="<?= htmlspecialchars($data['user']['full_name'] ?? '') ?>" required />
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email Address <span class="required">*</span></label>
-                                    <input type="email" id="email" required />
+                                    <input type="email" id="email" name="email" value="<?= htmlspecialchars($data['user']['email'] ?? '') ?>" required />
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="phone">Phone number <span class="required">*</span></label>
-                                    <input type="tel" id="phone" required />
+                                    <input type="tel" id="phone" name="sdt" value="<?= htmlspecialchars($data['user']['sdt'] ?? '') ?>" required />
                                 </div>
                                 <div class="form-group">
                                     <label for="national-id">National ID <span class="required">*</span></label>
-                                    <input type="text" id="national-id" required />
+                                    <input type="text" id="national-id" name="cccd" value="<?= htmlspecialchars($data['user']['cccd'] ?? '') ?>" required />
                                 </div>
                             </div>
-
+    
                             <h2>Who are you booking for?</h2>
                             <div class="radio-group">
                                 <label class="radio-label">
@@ -48,7 +48,7 @@
                                     I'm the main the guest
                                 </label>
                                 <label class="radio-label">
-                                    <input type="radio" name="booking_for"/>
+                                    <input type="radio" name="booking_for" />
                                     I'm booking for someone else
                                 </label>
                             </div>
