@@ -104,4 +104,4 @@ $nextDate = date('Y-m-d', strtotime($datePresent . ' +1 day'));
     </div>
   </div>
 </div>
-<script src="<?= $this->configs->config['pathAssets'] ?>js/listrooms.js"></script>
+<script src="<?= $this->configs->config['pathAssets'] ?>js/listrooms.js?v=<?= time() ?>"></script>
