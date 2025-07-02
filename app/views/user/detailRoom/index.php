@@ -41,7 +41,8 @@
             </div>
             <div class="price-book">
                 <p>From <strong>$<?= number_format($data['price'], 2) ?>/night</strong></p>
-                <button class="book-btn">BOOK NOW</button>
+                <a href="<?= $this->configs->config['basePath'] ?>payment/<?= htmlspecialchars($data['slug']) ?>"
+                    class="btn-view-detail"><button class="book-btn">BOOK NOW</button></a>
             </div>
             <p> <?php $data['description']  ?> </p>
             <div class="amenities">

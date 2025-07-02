@@ -142,7 +142,7 @@ function autoSubmitForm() {
   const checkOutValue = checkOut.value;
 
   if (!checkInValue || !checkOutValue) {
-    setTimeout(() => {  
+    setTimeout(() => {
       alert("Oops! Don't forget to pick both check-in and check-out dates.");
     }, 3000);
     // set timeout 5s để hiển thị alert

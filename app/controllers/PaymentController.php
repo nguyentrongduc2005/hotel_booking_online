@@ -32,9 +32,9 @@ class PaymentController extends Controller
         } else {
             // Người dùng chưa đăng nhập, chuyển hướng đến trang đăng nhập
             $data["user"] = [
-                'username' => '',
+                'full_name' => '',
                 'email' => '',
-                'phone' => '',
+                'sdt' => '',
                 'cccd' => ''
             ];
         }
@@ -49,6 +49,10 @@ class PaymentController extends Controller
                 $data['discount'] = 0.05;
             }
         }
+        // echo "<pre>";
+        // print_r($data);
+
+        // echo "</pre>";
 
         $this->render('index', $data);
     }
