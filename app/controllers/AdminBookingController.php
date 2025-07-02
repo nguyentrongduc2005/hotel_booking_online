@@ -13,7 +13,7 @@ class AdminBookingController extends Controller
         parent::__construct();
         $this->model = new AdminBookingModel();
     }
-        
+
 
     public function allBookingsIndex($req, $res)
     {
@@ -31,7 +31,7 @@ class AdminBookingController extends Controller
         var_dump($bookings);
         echo '</pre>';
         exit;
-        
+
         // return $res->render('/bookings/allBookingsIndex', [
         //     'title'   => 'All Bookings',
         //     'filter'  => $filter,
@@ -51,7 +51,7 @@ class AdminBookingController extends Controller
         ];
 
         $records = $this->model->getDataByFilter($filter, 'history');
-        
+
         echo '<pre>';
         var_dump($records);
         echo '</pre>';

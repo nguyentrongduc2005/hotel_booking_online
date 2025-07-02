@@ -95,4 +95,35 @@ class PopUpModel
         if (!$rowT) return false;
         return true;
     }
+
+    function getTransaction($filter, $role)
+    {
+        $condition = '';
+        if ($role == 'user') {
+            $condition = 'user.user_id = :user_id';
+        } else {
+            $condition = 'guest.cccd = :cccd';
+        }
+
+        $sqlBooking = "SELECT booking.transaction_id FROM `booking`  
+                INNER JOIN $role on $role.{$role}_id = booking.{$role}_id
+                WHERE 
+                 $condition";
+
+        $dataBooking = db::getAll($sqlBooking, $filter);
+
+        $sqlHistory = "SELECT historybooking.transaction_id FROM `historybooking`  
+                INNER JOIN $role on $role.{$role}_id = historybooking.{$role}_id
+                WHERE $condition";
+        $dataHistory = db::getAll($sqlHistory, $filter);
+        $result = array_merge($dataBooking, $dataHistory);
+        $transactions = [];
+        foreach ($result as $transaction) {
+            $sql = "SELECT * FROM `transaction` WHERE transaction_id = :transaction_id";
+            $tran = db::getAll($sql, ['transaction_id' => $transaction['transaction_id']]);
+            $transactions = array_merge($transactions, $tran);
+        }
+
+        return $transactions ?? [];
+    }
 }
