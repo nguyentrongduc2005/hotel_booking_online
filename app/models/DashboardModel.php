@@ -142,6 +142,8 @@ class DashboardModel
             g.email      AS full_email_guest,
             u.full_name  AS full_name_user,
             u.email      AS full_email_user,
+            b.check_in,
+            b.check_out,
             TIME(b.check_in) AS checkin_time,
             r.id_room,
             r.slug AS room_slug
@@ -175,6 +177,8 @@ class DashboardModel
             g.email      AS full_email_guest,
             u.full_name  AS full_name_user,
             u.email      AS full_email_user,
+            b.check_in,
+            b.check_out,
             r.id_room,
             r.slug AS room_slug
             FROM booking AS b
@@ -232,3 +236,4 @@ class DashboardModel
         return true;
     }
 }
+

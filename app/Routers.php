@@ -198,25 +198,25 @@ Router::post('/admin/rooms/delete', 'AdminRoomsController@roomDelete', [
 ///////////////////////////////////end rooms/////////////////////////////
 
 ///////////////////type rooms/////////////////////////////////////
-Router::get('/admin/roomtypes', 'AdminTypeRoomsController@typeRoomsShow', [
+Router::get('/admin/roomtypes', 'AdminRoomsController@typeRoomsShow', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 
-Router::post('/admin/roomtypes/add', 'AdminTypeRoomsController@typeRoomsAdd', [
+Router::post('/admin/roomtypes/add', 'AdminRoomsController@typeRoomsAdd', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 
-Router::post('/admin/roomtypes/edit', 'AdminTypeRoomsController@typeRoomsEdit', [
+Router::post('/admin/roomtypes/edit', 'AdminRoomsController@typeRoomsEdit', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 
-Router::post('/admin/roomtypes/delete', 'AdminTypeRoomsController@typeRoomsDelete', [
+Router::post('/admin/roomtypes/delete', 'AdminRoomsController@typeRoomsDelete', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
@@ -226,25 +226,25 @@ Router::post('/admin/roomtypes/delete', 'AdminTypeRoomsController@typeRoomsDelet
 //////////////////end type rooms/////////////////////////////////////
 
 //////////////////////amenities/////////////////////////////////////
-Router::get('/admin/amenities', 'AdminAmenitiesController@amenitiesShow', [
+Router::get('/admin/amenities', 'AdminRoomsController@amenitiesShow', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 
-Router::post('/admin/amenities/add', 'AdminAmenitiesController@amenitiesAdd', [
+Router::post('/admin/amenities/add', 'AdminRoomsController@amenitiesAdd', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 
-Router::post('/admin/amenities/edit', 'AdminAmenitiesController@amenitiesEdit', [
+Router::post('/admin/amenities/edit', 'AdminRoomsController@amenitiesEdit', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 
-Router::post('/admin/amenities/delete', 'AdminAmenitiesController@amenitiesDelete', [
+Router::post('/admin/amenities/delete', 'AdminRoomsController@amenitiesDelete', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',

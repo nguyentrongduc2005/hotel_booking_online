@@ -18,49 +18,37 @@ class AdminBookingController extends Controller
     public function allBookingsIndex($req, $res)
     {
         $filter = [
-            'guest_name'    => $req->get('guest_name'),
-            'room_id'       => $req->get('room_id'),
-            'room_number'   => $req->get('room_number'),
-            'checkin_date'  => $req->get('checkin_date'),
-            'checkout_date' => $req->get('checkout_date'),
+            'guest_name'    => $_GET['guest_name']    ?? null,
+            'room_id'       => $_GET['room_id']       ?? null,
+            'room_number'   => $_GET['room_number']   ?? null,
+            'check_in'      => $_GET['check_in']      ?? null,
+            'check_out'     => $_GET['check_out']     ?? null,
         ];
 
         $bookings = $this->model->getDataByFilter($filter, 'all');
 
-        echo '<pre>';
-        var_dump($bookings);
-        echo '</pre>';
-        exit;
-        
-        // return $res->render('/bookings/allBookingsIndex', [
-        //     'title'   => 'All Bookings',
-        //     'filter'  => $filter,
-        //     'records' => $bookings
-        // ]);
+        $this->render('allBookings', [
+            'bookings' => $bookings
+        ]);
     }
 
     public function historyBookingsIndex($req, $res)
     {
         $filter = [
-            'guest_name'    => $req->get('guest_name'),
-            'room_id'       => $req->get('room_id'),
-            'room_number'   => $req->get('room_number'),
-            'checkin_date'  => $req->get('checkin_date'),
-            'checkout_date' => $req->get('checkout_date'),
-            'status'        => $req->get('status') //hiển thị trạng thái
+            'guest_name'    => $_GET['guest_name']    ?? null,
+            'room_id'       => $_GET['room_id']       ?? null,
+            'room_number'   => $_GET['room_number']   ?? null,
+            'checkin_date'  => $_GET['checkin_date']  ?? null,
+            'checkout_date' => $_GET['checkout_date'] ?? null,
+            'status'        => $_GET['status']        ?? null //hiển thị trạng thái
         ];
 
         $records = $this->model->getDataByFilter($filter, 'history');
-        
-        echo '<pre>';
-        var_dump($records);
-        echo '</pre>';
-        exit;
 
-        // return $res->render('/bookings/historyBookingsIndex', [
-        //     'title'   => 'History Bookings',
-        //     'filter'  => $filter,
-        //     'records' => $records
-        // ]);
+        $this->render('historyBookings', [
+            'title'   => 'History Bookings',
+            'filter'  => $filter,
+            'records' => $records
+        ]);
     }
 }

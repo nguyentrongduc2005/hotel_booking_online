@@ -19,8 +19,12 @@ class AdminRoomsController extends Controller
 
     function roomsShow($req, $res)
     {
-
-        $data = $this->model->getAllRooms();
+        $searchName = isset($_GET['name']) ? trim($_GET['name']) : '';
+        if ($searchName !== '') {
+            $data = $this->model->getAllRooms($searchName);
+        } else {
+            $data = $this->model->getAllRooms();
+        }
         $nameRoomTypes = $this->model->getNameRoomTypes();
         $data['nameRoomTypes'] = $nameRoomTypes;
         $amenities = $this->model->getAllAmenities();

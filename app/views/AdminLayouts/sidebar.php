@@ -16,14 +16,15 @@
       <li class="sidebar-item sidebar-bookings">
         Booking
         <ul class="sidebar-submenu">
-          <li class="sidebar-subitem"><a href="">All Bookings</a></li>
-          <li class="sidebar-subitem"><a href="">History Booking</a></li>
+          <li class="sidebar-subitem"><a href="<?= $this->configs->config['basePath'] ?>/bookings/allBookings">All Bookings</a></li>
+          <li class="sidebar-subitem"><a href="<?= $this->configs->config['basePath'] ?>/bookings/historyBookings">History Booking</a></li>
         </ul>
       </li>
-      <li class="sidebar-item sidebar-rooms">Rooms
+      <li class="sidebar-item sidebar-rooms">
+        <a href="<?= $this->configs->config['basePath'] ?>/admin/rooms" style="text-decoration: none; color: #fff;">Rooms</a>
         <ul class="sidebar-submenu">
-          <li class="sidebar-subitem"><a href="">Room Types</a></li>
-          <li class="sidebar-subitem"><a href="">Amenities</a></li>
+          <li class="sidebar-subitem"><a href="<?= $this->configs->config['basePath'] ?>/admin/roomtypes">Room Types</a></li>
+          <li class="sidebar-subitem"><a href="<?= $this->configs->config['basePath'] ?>/admin/amenities">Amenities</a></li>
         </ul>
       </li>
       <li class="sidebar-item sidebar-services">Services</li>
