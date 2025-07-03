@@ -172,7 +172,7 @@ class AdminRoomsModel
             foreach ($data['delete_images'] as $image_id) {
                 $Pimage = db::getOne("SELECT path FROM image_room WHERE id_image = :id_image", ['id_image' => $image_id]);
 
-                $filePath = __DIR__ . '/../../public' . $Pimage['path'];
+                $filePath = dirname(__DIR__, 2) . '/public/assets' . $Pimage['path'];
                 if ($Pimage && file_exists($filePath)) {
                     unlink($filePath);
                 }
