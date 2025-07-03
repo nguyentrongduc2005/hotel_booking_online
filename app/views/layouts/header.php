@@ -99,16 +99,3 @@
 
 <!-- Header JS -->
 <script src="<?= $this->configs->config['pathAssets'] ?>js/header.js?v=<?= time() ?>"></script>
-<?php if (isset($_SESSION["timer"])) {
-
-    $path  = $this->configs->config['basePath'];
-    $leftTime = $_SESSION["timer"] - time();
-
-    $leftTime = max(0, ($leftTime - 120) * 1000);
-    if ($leftTime > 0) {
-        echo " <script>
-   setTimeout(function() { 
-   checktokenTimer('{$path}')
-                            }, " . $leftTime . ")</script>";
-    }
-} ?>

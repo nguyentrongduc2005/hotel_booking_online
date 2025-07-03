@@ -156,6 +156,13 @@ class PaymentController extends Controller
 
             // $this->renderPartial('error/index', ['message' => 'Payment method update failed, please call support.', 'next' => $this->getConfig("basePath") . '/detailroom/' . $req->params()["slug"], 'timeout' => 5]);
         }
+        if (isset($_SESSION['user_id'])) {
+            $row =  $this->model->updataDiscount($_SESSION['user_id']);
+            if (! $row) {
+                throw new AppException("discount failed update failed, please call support", 400, $this->getConfig("basePath") . '/detailroom/' .  $req->params()["slug"] ?? "");
+            }
+        }
+
 
         $this->render("success", []);
     }

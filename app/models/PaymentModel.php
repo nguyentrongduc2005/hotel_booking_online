@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\core\AppException;
 use app\core\db;
 use \DateTime;
 
@@ -98,5 +99,11 @@ class PaymentModel
             'check_out' => $check_out
         ]);
         return $data ? true : false;
+    }
+
+    function updataDiscount($id)
+    {
+        $row = db::update("user", ["discount" => "discount+1"], "user_id = $id");
+        return $row;
     }
 }
