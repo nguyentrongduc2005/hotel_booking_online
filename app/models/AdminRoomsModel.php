@@ -211,9 +211,11 @@ class AdminRoomsModel
         // Xóa ảnh liên quan đến phòng
         $images = db::getAll("SELECT path FROM image_room WHERE id_room = :id_room", ['id_room' => $id_room]);
         foreach ($images as $image) {
-            $filePath = __DIR__ . '/../../public' . $image['path'];
+            $filePath = dirname(__DIR__, 2) . '/public/assets' . $image['path'];
             if (file_exists($filePath)) {
                 unlink($filePath);
+            } else {
+                return false;
             }
         }
         db::delete('image_room', "id_room = $id_room");

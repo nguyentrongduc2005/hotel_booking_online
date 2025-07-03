@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 27, 2025 at 08:10 AM
+-- Generation Time: Jul 03, 2025 at 09:55 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -118,7 +118,7 @@ INSERT INTO `guest` (`guest_id`, `full_name`, `cccd`, `email`, `sdt`, `created_a
 
 CREATE TABLE `historybooking` (
   `id_history` int(11) NOT NULL,
-  `id_room` int(11) NOT NULL,
+  `id_room` int(11) DEFAULT NULL,
   `transaction_id` int(11) NOT NULL,
   `check_in` datetime NOT NULL,
   `check_out` datetime NOT NULL,
@@ -424,10 +424,10 @@ ALTER TABLE `guest`
 --
 ALTER TABLE `historybooking`
   ADD PRIMARY KEY (`id_history`),
-  ADD UNIQUE KEY `id_booking` (`id_room`),
   ADD UNIQUE KEY `transaction_id` (`transaction_id`),
   ADD KEY `user_id` (`user_id`),
-  ADD KEY `guest_id` (`guest_id`);
+  ADD KEY `guest_id` (`guest_id`),
+  ADD KEY `booking_ibfk_5` (`id_room`);
 
 --
 -- Indexes for table `image_room`
@@ -565,13 +565,13 @@ ALTER TABLE `booking`
   ADD CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   ADD CONSTRAINT `booking_ibfk_2` FOREIGN KEY (`guest_id`) REFERENCES `guest` (`guest_id`),
   ADD CONSTRAINT `booking_ibfk_3` FOREIGN KEY (`transaction_id`) REFERENCES `transaction` (`transaction_id`),
-  ADD CONSTRAINT `booking_ibfk_4` FOREIGN KEY (`id_room`) REFERENCES `room` (`id_room`);
+  ADD CONSTRAINT `booking_ibfk_4` FOREIGN KEY (`id_room`) REFERENCES `room` (`id_room`) ON DELETE SET NULL;
 
 --
 -- Constraints for table `historybooking`
 --
 ALTER TABLE `historybooking`
-  ADD CONSTRAINT `historybooking_ibfk_1` FOREIGN KEY (`id_room`) REFERENCES `room` (`id_room`),
+  ADD CONSTRAINT `booking_ibfk_5` FOREIGN KEY (`id_room`) REFERENCES `room` (`id_room`) ON DELETE SET NULL,
   ADD CONSTRAINT `historybooking_ibfk_2` FOREIGN KEY (`transaction_id`) REFERENCES `transaction` (`transaction_id`),
   ADD CONSTRAINT `historybooking_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   ADD CONSTRAINT `historybooking_ibfk_4` FOREIGN KEY (`guest_id`) REFERENCES `guest` (`guest_id`);
