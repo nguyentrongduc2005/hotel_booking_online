@@ -176,6 +176,7 @@ class PaymentController extends Controller
                 throw new AppException("discount failed update failed, please call support", 400, $this->getConfig("basePath") . '/detailroom/' .  $req->params()["slug"] ?? "");
             }
         }
+        unset($_SESSION['transaction']);
 
         $this->redirect($this->getConfig('basePath') . '/payment/success');
 
