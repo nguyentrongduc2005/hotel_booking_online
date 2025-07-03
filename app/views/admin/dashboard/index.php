@@ -72,8 +72,6 @@
     </div>
 </div>
 
-<script>
-  window.BASE_PATH = '<?= $this->configs->config["basePath"] ?? "" ?>';
-</script>
+<script>window.BASE_PATH = '<?= $this->configs->config["basePath"] ?? "" ?>';</script>
 <script src="<?= $this->configs->config['pathAssets'] ?>js/dashboard.js?v=<?= time() ?>"></script>
 

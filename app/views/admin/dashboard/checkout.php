@@ -11,19 +11,36 @@
                 <th>ID Room</th>
                 <th>Room</th>
                 <th>Estimated Check-out</th>
-                <th>Payment Status</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>John Doe</td>
-                <td>101</td>
-                <td>Deluxe Room</td>
-                <td>2025-07-01</td>
-                <td>???</td>
-              </tr>
+              <?php if (!empty($checkoutToday)): ?>
+                <?php foreach ($checkoutToday as $booking): ?>
+                  <tr data-id-booking="<?= htmlspecialchars($booking['id_booking']) ?>">
+                    <td>
+                      <?= htmlspecialchars($booking['full_name_user'] ?? $booking['full_name_guest'] ?? 'Unknown') ?>
+                    </td>
+                    <td><?= htmlspecialchars($booking['id_room'] ?? '-') ?></td>
+                    <td><?= htmlspecialchars($booking['room_slug'] ?? '-') ?></td>
+                    <td><?= htmlspecialchars(date('d/m/Y', strtotime($booking['check_out']))) ?></td>
+                    <td>
+                      <button class="btn-action-checkout" data-id="<?= htmlspecialchars($booking['id_booking']) ?>">Check-out</button>
+                    </td>
+                  </tr>
+                <?php endforeach; ?>
+              <?php else: ?>
+                <tr>
+                  <td colspan="5" style="text-align: center; color: #888;">No check-outs scheduled for today</td>
+                </tr>
+              <?php endif; ?>
             </tbody>
           </table>
         </div>
       </div>
 </div>
+
+<script>
+  window.BASE_PATH = '<?= $this->configs->config["basePath"] ?? "" ?>';
+</script>
+<script src="<?= $this->configs->config['pathAssets'] ?>js/checkout.js?v=<?= time() ?>"></script>
