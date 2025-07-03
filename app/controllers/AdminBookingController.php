@@ -8,7 +8,7 @@ use app\models\AdminBookingModel;
 
 class AdminBookingController extends Controller
 {
-    private AdminBookingModel $model;
+    private $model;
 
     public function __construct()
     {
@@ -16,67 +16,47 @@ class AdminBookingController extends Controller
         $this->model = new AdminBookingModel();
     }
 
-    public function allBookings(Request $req, $res)
-
-
-    public function allBookingsIndex($req, $res)
+    //danh sách booking hiện tại
+    public function AllIndex(Request $req, $res)
     {
         $filters = [
-            'name' => $req->query('name'),
-            'id_room' => $req->query('id_room'),
-            'check_in' => $req->query('check_in'),
-            'check_out' => $req->query('check_out'),
+            'guest_name' => $req->query('guest_name'),
+            'room_code'  => $req->query('room_code'),
+            'check_in'   => $req->query('check_in'),
+            'check_out'  => $req->query('check_out')
         ];
 
-        $bookings = $this->model->getAllBookings($filters);
-        
-        //test
-        echo "<pre>";
-        print_r($bookings);
-        echo "</pre>";
+        $bookings = $this->model->bookingFilter($filters, false);
 
-        // return $this->render('admin/bookings/all', [
-        //     'bookings' => $bookings,
-        //     'filters' => $filters,
-        $bookings = $this->model->getDataByFilter($filter, 'all');
-
-        echo '<pre>';
-        var_dump($bookings);
-        echo '</pre>';
-        exit;
-
-        // return $res->render('/bookings/allBookingsIndex', [
-        //     'title'   => 'All Bookings',
-        //     'filter'  => $filter,
-        //     'records' => $bookings
-        // ]);
+        return $this->render('admin/bookings/index', [
+            'bookings' => $bookings,
+            'filters' => $filters
+        ]);
     }
 
-    public function historyBookings(Request $req, $res)
+    //  lịch sử booking 
+    public function historyIndex(Request $req, $res)
     {
         $filters = [
-            'name' => $req->query('name'),
-            'id_room' => $req->query('id_room'),
-            'check_in' => $req->query('check_in'),
-            'check_out' => $req->query('check_out'),
+            'guest_name' => $req->query('guest_name'),
+            'room_code'  => $req->query('room_code'),
+            'check_in'   => $req->query('check_in'),
+            'check_out'  => $req->query('check_out')
         ];
 
-        $bookings = $this->model->getHistoryBookings($filters);
-        
-        //test
-        echo "<pre>";
-        print_r($bookings);
-        echo "</pre>";
-        $records = $this->model->getDataByFilter($filter, 'history');
+        $bookings = $this->model->bookingFilter($filters, true);
 
-        echo '<pre>';
-        var_dump($records);
-        echo '</pre>';
-        exit;
-
-        // return $this->render('admin/bookings/history', [
-        //     'bookings' => $bookings,
-        //     'filters' => $filters,
-        // ]);
+        return $this->render('admin/bookings/history', [
+            'bookings' => $bookings,
+            'filters' => $filters
+        ]);
+    }
+     
+    public function bookingIndex(Request $req, $res)
+    {
+        return $this->render('admin/bookings/index', [
+            'bookings' => $this->model->getAllBookings(),
+            'history' => $this->model->getHistoryBookings()
+        ]);
     }
 }

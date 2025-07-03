@@ -12,78 +12,109 @@ class AdminBookingModel
         db::connect();
     }
 
-    // Lấy danh sách các booking chưa hoàn tất (All Bookings)
-    public function getAllBookings($filters = [])
+    // tất cả các booking 
+    public function getAllBookings()
     {
-        return $this->getDataByFilter($filters, 'booking');
+        $sql = "SELECT * FROM booking ORDER BY check_in DESC";
+        $data = db::getAll($sql);
+
+        foreach ($data as $key => $row) {
+            $data[$key]['room'] = $this->getRoomById($row['id_room']);
+            $data[$key]['guest'] = $this->getGuestById($row['guest_id']);
+        }
+
+        return $data ?: [];
     }
 
-    // Lấy danh sách các booking đã hoàn tất (History Bookings)
-    public function getHistoryBookings($filters = [])
+    // lịch sử booking
+    public function getHistoryBookings()
     {
-        return $this->getDataByFilter($filters, 'historybooking');
+        $sql = "SELECT * FROM historybooking ORDER BY check_in DESC";
+        $data = db::getAll($sql);
+
+        foreach ($data as $key => $row) {
+            $data[$key]['room'] = $this->getRoomById($row['id_room']);
+            $data[$key]['guest'] = $this->getGuestById($row['guest_id']);
+            $data[$key]['total_days'] = $this->calculateDays($row['check_in'], $row['check_out']);
+        }
+
+        return $data ?: [];
     }
 
-    // Hàm chung để query dữ liệu từ bảng booking hoặc historybooking
-    private function getDataByFilter($filters, $table)
+    public function bookingFilter($filter, $isHistory = false)
     {
-        $where = [];
+        $table = $isHistory ? "historybooking" : "booking";
+
+        $conditions = [];
         $params = [];
 
-        // Xử lý ngày
-        if (!empty($filters['check_in'])) {
-            $dt = new DateTime($filters['check_in']);
-            $filters['check_in'] = $dt->format('Y-m-d');
+        if (!empty($filter['guest_name'])) {
+            $conditions[] = "guest.full_name LIKE :guest_name";
+            $params['guest_name'] = "%" . $filter['guest_name'] . "%";
         }
 
-        if (!empty($filters['check_out'])) {
-            $dt = new DateTime($filters['check_out']);
-            $filters['check_out'] = $dt->format('Y-m-d');
+        if (!empty($filter['room_code'])) {
+            $conditions[] = "room.room_code = :room_code";
+            $params['room_code'] = $filter['room_code'];
         }
 
-        // Các điều kiện lọc
-        if (!empty($filters['name'])) {
-            $where[] = "guest.name_guest LIKE :name";
-            $params['name'] = '%' . $filters['name'] . '%';
+        if (!empty($filter['check_in'])) {
+            $dt = new DateTime($filter['check_in']);
+            $filter['check_in'] = $dt->format('Y-m-d H:i:s');
+            $conditions[] = "$table.check_in >= :check_in";
+            $params['check_in'] = $filter['check_in'];
         }
 
-        if (!empty($filters['id_room'])) {
-            $where[] = "room.id_room = :id_room";
-            $params['id_room'] = $filters['id_room'];
+        if (!empty($filter['check_out'])) {
+            $dt = new DateTime($filter['check_out']);
+            $filter['check_out'] = $dt->format('Y-m-d H:i:s');
+            $conditions[] = "$table.check_out <= :check_out";
+            $params['check_out'] = $filter['check_out'];
         }
 
-        if (!empty($filters['check_in'])) {
-            $where[] = "$table.check_in >= :check_in";
-            $params['check_in'] = $filters['check_in'];
+        $whereSQL = "";
+        if (!empty($conditions)) {
+            $whereSQL = "WHERE " . implode(" AND ", $conditions);
         }
 
-        if (!empty($filters['check_out'])) {
-            $where[] = "$table.check_out <= :check_out";
-            $params['check_out'] = $filters['check_out'];
-        }
-
-        // Câu SQL với JOIN
-        $sql = "SELECT 
-                    $table.id_booking,
-                    guest.name_guest,
-                    room.id_room,
-                    room.room_number,
-                    $table.check_in,
-                    $table.check_out,
-                    DATEDIFF($table.check_out, $table.check_in) AS total_days,
-                    $table.status
+        $sql = "SELECT $table.* 
                 FROM $table
-                INNER JOIN guest ON $table.id_guest = guest.id_guest
-                INNER JOIN room ON $table.id_room = room.id_room
-        ";
+                LEFT JOIN room ON room.id_room = $table.id_room
+                LEFT JOIN guest ON guest.guest_id = $table.guest_id
+                $whereSQL
+                ORDER BY $table.check_in DESC";
 
-        // Thêm điều kiện WHERE nếu có
-        if (!empty($where)) {
-            $sql .= " WHERE " . implode(' AND ', $where);
+        $data = db::getAll($sql, $params);
+
+        foreach ($data as $key => $row) {
+            $data[$key]['room'] = $this->getRoomById($row['id_room']);
+            $data[$key]['guest'] = $this->getGuestById($row['guest_id']);
+            if ($isHistory) {
+                $data[$key]['total_days'] = $this->calculateDays($row['check_in'], $row['check_out']);
+            }
         }
 
-        $sql .= " ORDER BY $table.check_in DESC";
+        return $data ?: [];
+    }
 
-        return db::getAll($sql, $params) ?: [];
+    private function getRoomById($roomId)
+    {
+        $sql = "SELECT room_code FROM room WHERE id_room = :id LIMIT 1";
+        $room = db::getOne($sql, ['id' => $roomId]);
+        return $room ? $room['room_code'] : null;
+    }
+
+    private function getGuestById($guestId)
+    {
+        $sql = "SELECT full_name FROM guest WHERE guest_id = :id LIMIT 1";
+        $guest = db::getOne($sql, ['id' => $guestId]);
+        return $guest ? $guest['full_name'] : null;
+    }
+
+    private function calculateDays($checkIn, $checkOut)
+    {
+        $in = new DateTime($checkIn);
+        $out = new DateTime($checkOut);
+        return $in->diff($out)->days;
     }
 }
