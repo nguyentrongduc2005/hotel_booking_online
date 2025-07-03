@@ -14,12 +14,12 @@
                         <div class="step-name">Payment</div>
                     </div>
                 </div>
-
+                <?php $room = $data['room']; ?>
                 <div class="main-content">
                     <div class="booking-form-container">
                         <div class="booking-form">
                             <h1>Enter your details</h1>
-                            <form>
+                            <form action="<?= $this->configs->config['basePath'] ?>/payment/<?= htmlspecialchars($room['slug']) ?>/handler" method="POST">
                                 <div class="form-row">
                                     <div class="form-group">
                                         <label for="full-name">Full name <span class="required">*</span></label>
@@ -40,7 +40,10 @@
                                         <input type="text" id="national-id" name="cccd" value="<?= htmlspecialchars($data['user']['cccd'] ?? '') ?>" required />
                                     </div>
                                 </div>
-
+                                <!-- Hidden inputs for check_in and check_out -->
+                                <input type="hidden" id="check_in" name="check_in" />
+                                <input type="hidden" id="check_out" name="check_out" />
+                                <input type="hidden" id="total_amount" name="total_amount" />
                                 <h2>Who are you booking for?</h2>
                                 <div class="radio-group">
                                     <label class="radio-label">
@@ -52,7 +55,6 @@
                                         I'm booking for someone else
                                     </label>
                                 </div>
-
                                 <button type="submit" class="btn-next">Next: Payment Method</button>
                                 <p class="form-note">
                                     Your contact info will be used to send confirmation and updates.
@@ -124,11 +126,14 @@
             var nights = lastSearch.diffDays || 1;
             var price = parseFloat(<?= json_encode($room['price']) ?>);
             var discount = parseFloat(<?= json_encode($discount) ?>);
-            // console.log(discount);
+            // Gán giá trị check_in/check_out vào input hidden
+            document.getElementById('check_in').value = lastSearch.checkIn || '';
+            document.getElementById('check_out').value = lastSearch.checkOut || '';
             var total = price * nights;
             var totalAll = total - (total * discount);
             document.getElementById('js-total').textContent = ` ${total}$`;
             document.getElementById('js-totalAll').textContent = ` ${totalAll}$`;
             document.getElementById('js-trip-nights').textContent = `x  ${nights} nights`;
+            document.getElementById('total_amount').value = totalAll;
         });
     </script>
