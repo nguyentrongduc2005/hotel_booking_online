@@ -97,6 +97,16 @@ Router::post('/user/histories', 'PopUpController@historyHandler', [
     'AuthorMiddleware@checkRoleUser',
 ]);
 
+Router::get('/user/transactions', 'PopUpController@getTransaction', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleUser',
+]);
+Router::post('/user/transactions', 'PopUpController@getTransaction', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleUser',
+]);
 
 
 

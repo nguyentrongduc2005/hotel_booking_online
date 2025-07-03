@@ -13,7 +13,7 @@ class AdminBookingController extends Controller
         parent::__construct();
         $this->model = new AdminBookingModel();
     }
-        
+
 
     public function allBookingsIndex($req, $res)
     {
@@ -30,6 +30,13 @@ class AdminBookingController extends Controller
         $this->render('allBookings', [
             'bookings' => $bookings
         ]);
+      
+        // return $res->render('/bookings/allBookingsIndex', [
+        //     'title'   => 'All Bookings',
+        //     'filter'  => $filter,
+        //     'records' => $bookings
+        // ]);
+
     }
 
     public function historyBookingsIndex($req, $res)

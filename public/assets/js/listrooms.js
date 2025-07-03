@@ -34,8 +34,6 @@ function getTomorrow() {
 
 const datePresent = getToday();
 const nextDate = getTomorrow();
-console.log('datePresent:', datePresent, 'nextDate:', nextDate);
-
 function getPercent(val, min, max) {
   return ((val - min) / (max - min)) * 100;
 }
@@ -174,12 +172,11 @@ function autoSubmitForm() {
   // trước khi đưa vào sessionSt
   // Lưu dữ liệu đã submit vào sessionStorage trước khi submit form
   sessionStorage.setItem('lastSearch', JSON.stringify({
-    checkIn: document.getElementById('check_in').value,
-    checkOut: document.getElementById('check_out').value
+    checkIn: checkInValue,
+    checkOut: checkOutValue,
+    diffDays: getDiffDays(checkInValue, checkOutValue),
   }));
   // Thêm loading state
-  submitBtn.disabled = true;
-  submitBtn.innerHTML = '<span class="search-icon loading">Searching...</span>';
 
   form.submit();
   // log ra console để kiểm tra
@@ -217,6 +214,32 @@ document.getElementById('check_out').addEventListener('change', function () {
   debouncedSubmit();
 });
 
+// Khi vào trang listroom, nếu chưa có lastSearch thì set mặc định hôm nay và ngày mai
+if (!sessionStorage.getItem('lastSearch')) {
+  sessionStorage.setItem('lastSearch', JSON.stringify({
+    checkIn: getToday(),
+    checkOut: getTomorrow(),
+    diffDays: getDiffDays(getToday(), getTomorrow())
+  }));
+}
+
 // Initialize
 updateSlider();
 updateAreaSlider();
+
+// lấy ra ngầy để vô sessionStorage
+function getDiffDays(checkInValue, checkOutValue) {
+  // checkInValue và checkOutValue là chuỗi dạng 'yyyy-mm-dd'
+  const [yyyy1, mm1, dd1] = checkInValue.split('-').map(Number);
+  const [yyyy2, mm2, dd2] = checkOutValue.split('-').map(Number);
+  const checkInDate = new Date(yyyy1, mm1 - 1, dd1);
+  const checkOutDate = new Date(yyyy2, mm2 - 1, dd2);
+  const diffTime = checkOutDate - checkInDate;
+  const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+  return diffDays;
+}
+
+// console.log(getDiffDays('2024-06-01', '2024-06-05'));
+
+
+
