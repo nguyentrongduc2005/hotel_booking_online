@@ -64,7 +64,11 @@
 
                     <?php
                     $room = $data['room'];
-                    $discount = isset($data['discount']) ? $data['discount'] : "0%";
+                    $discount = isset($data['discount']) ? $data['discount'] : 0;
+                    $discountRender = $discount;
+                    if ($discountRender != 0) {
+                        $discountRender = ($discountRender * 100) . "%";
+                    }
                     ?>
 
                     <div class="trip-summary-container">
@@ -92,12 +96,12 @@
                                 </div>
                                 <div class="summary-item">
                                     <span>Discount</span>
-                                    <span class="bold"><?= $discount ?></span>
+                                    <span class="bold"><?= $discountRender ?></span>
                                 </div>
                                 <hr class="total-hr" />
                                 <div class="summary-item grand-total">
                                     <span>Total</span>
-                                    <span class="bold"> </span>
+                                    <span class="bold" id="js-totalAll"></span>
                                 </div>
                             </div>
                         </div>
@@ -119,9 +123,12 @@
             document.getElementById('js-checkout').textContent = formatDate(lastSearch.checkOut);
             var nights = lastSearch.diffDays || 1;
             var price = parseFloat(<?= json_encode($room['price']) ?>);
+            var discount = parseFloat(<?= json_encode($discount) ?>);
             // console.log(discount);
             var total = price * nights;
+            var totalAll = total - (total * discount);
             document.getElementById('js-total').textContent = ` ${total}$`;
+            document.getElementById('js-totalAll').textContent = ` ${totalAll}$`;
             document.getElementById('js-trip-nights').textContent = `x  ${nights} nights`;
         });
     </script>
