@@ -97,6 +97,16 @@ Router::post('/user/histories', 'PopUpController@historyHandler', [
     'AuthorMiddleware@checkRoleUser',
 ]);
 
+Router::get('/user/transactions', 'PopUpController@getTransaction', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleUser',
+]);
+Router::post('/user/transactions', 'PopUpController@getTransaction', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleUser',
+]);
 
 
 
@@ -104,7 +114,7 @@ Router::post('/user/histories', 'PopUpController@historyHandler', [
 
 ///////////////////////////PAYMENT////////////////////////////////////////////////////
 //submit từ trang detail room render ra form điền thông tin có
-Router::post('/payment/{slug}', 'PaymentController@formInfo', [
+Router::get('/payment/{slug}', 'PaymentController@formInfo', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleUser',

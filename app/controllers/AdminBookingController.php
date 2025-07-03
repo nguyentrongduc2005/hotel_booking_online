@@ -17,6 +17,9 @@ class AdminBookingController extends Controller
     }
 
     public function allBookings(Request $req, $res)
+
+
+    public function allBookingsIndex($req, $res)
     {
         $filters = [
             'name' => $req->query('name'),
@@ -35,6 +38,17 @@ class AdminBookingController extends Controller
         // return $this->render('admin/bookings/all', [
         //     'bookings' => $bookings,
         //     'filters' => $filters,
+        $bookings = $this->model->getDataByFilter($filter, 'all');
+
+        echo '<pre>';
+        var_dump($bookings);
+        echo '</pre>';
+        exit;
+
+        // return $res->render('/bookings/allBookingsIndex', [
+        //     'title'   => 'All Bookings',
+        //     'filter'  => $filter,
+        //     'records' => $bookings
         // ]);
     }
 
@@ -53,6 +67,12 @@ class AdminBookingController extends Controller
         echo "<pre>";
         print_r($bookings);
         echo "</pre>";
+        $records = $this->model->getDataByFilter($filter, 'history');
+
+        echo '<pre>';
+        var_dump($records);
+        echo '</pre>';
+        exit;
 
         // return $this->render('admin/bookings/history', [
         //     'bookings' => $bookings,

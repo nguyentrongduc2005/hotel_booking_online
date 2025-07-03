@@ -12,6 +12,28 @@ const areaMinValue = document.getElementById('areaMinValue');
 const areaMaxValue = document.getElementById('areaMaxValue');
 const checkIn = document.getElementById('check_in');
 const checkOut = document.getElementById('check_out');
+
+// Tạo biến ngày hôm nay (yyyy-mm-dd)
+function getToday() {
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const dd = String(today.getDate()).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+// Tạo biến ngày mai (yyyy-mm-dd)
+function getTomorrow() {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const yyyy = tomorrow.getFullYear();
+  const mm = String(tomorrow.getMonth() + 1).padStart(2, '0');
+  const dd = String(tomorrow.getDate()).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+const datePresent = getToday();
+const nextDate = getTomorrow();
 function getPercent(val, min, max) {
   return ((val - min) / (max - min)) * 100;
 }
@@ -114,22 +136,54 @@ function autoSubmitForm() {
   const form = document.querySelector('.search-bar');
   const submitBtn = form.querySelector('.search-btn');
 
-  // Lưu dữ liệu đã submit vào sessionStorage trước khi submit form
-  sessionStorage.setItem('lastSearch', JSON.stringify({ 
-    checkIn: document.getElementById('check_in').value,
-    checkOut: document.getElementById('check_out').value
-  }));
+  const checkInValue = checkIn.value;
+  const checkOutValue = checkOut.value;
 
+  if (!checkInValue || !checkOutValue) {
+    setTimeout(() => {
+      alert("Oops! Don't forget to pick both check-in and check-out dates.");
+    }, 3000);
+    // set timeout 5s để hiển thị alert
+    return;
+  }
+  // Convert về Date object để so sánh ngày
+  function parseDateFromInput(dateStr) {
+    const [yyyy, mm, dd] = dateStr.split('-').map(Number);
+    return new Date(yyyy, mm - 1, dd); // tháng -1 vì JS tính từ 0
+  }
+
+  const checkInDate = parseDateFromInput(checkInValue);
+  const checkOutDate = parseDateFromInput(checkOutValue);
+  // Check ngày checkout phải sau checkin
+  const diffDays = (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24);
+  // Lấy lại giá trị ngày hôm nay và mai cho search 
+  if (diffDays < 1) {
+    setTimeout(() => {
+      checkIn.value = datePresent;
+      checkOut.value = nextDate;
+      alert("Check-out date must be at least 1 day after check-in date.");
+      return;
+    }, 1500);
+    // Set lại giá trị cho input cho thanh search như bên home page
+    checkInDate
+    return;
+  }
+  // validate 
+  // trước khi đưa vào sessionSt
+  // Lưu dữ liệu đã submit vào sessionStorage trước khi submit form
+  sessionStorage.setItem('lastSearch', JSON.stringify({
+    checkIn: checkInValue,
+    checkOut: checkOutValue,
+    diffDays: getDiffDays(checkInValue, checkOutValue),
+  }));
   // Thêm loading state
-  submitBtn.disabled = true;
-  submitBtn.innerHTML = '<span class="search-icon loading">Searching...</span>';
 
   form.submit();
   // log ra console để kiểm tra
-  console.log('Form submitted with filters:', {
-    checkIn: document.getElementById('check_in').value,
-    checkOut: document.getElementById('check_out').value
-  });
+  // console.log('Form submitted with filters:', {
+  //   checkIn: document.getElementById('check_in').value,
+  //   checkOut: document.getElementById('check_out').value
+  // });
 }
 
 // Thêm debounce để tránh submit quá nhiều
@@ -147,19 +201,45 @@ areaMin.addEventListener('change', debouncedSubmit);
 areaMax.addEventListener('change', debouncedSubmit);
 
 // Submit form khi thay đổi guest count
-document.getElementById('room_count_select').addEventListener('change', function() {
+document.getElementById('room_count_select').addEventListener('change', function () {
   debouncedSubmit();
 });
 
 // Submit form khi thay đổi ngày
-document.getElementById('check_in').addEventListener('change', function() {
+document.getElementById('check_in').addEventListener('change', function () {
   debouncedSubmit();
 });
 
-document.getElementById('check_out').addEventListener('change', function() {
+document.getElementById('check_out').addEventListener('change', function () {
   debouncedSubmit();
 });
+
+// Khi vào trang listroom, nếu chưa có lastSearch thì set mặc định hôm nay và ngày mai
+if (!sessionStorage.getItem('lastSearch')) {
+  sessionStorage.setItem('lastSearch', JSON.stringify({
+    checkIn: getToday(),
+    checkOut: getTomorrow(),
+    diffDays: getDiffDays(getToday(), getTomorrow())
+  }));
+}
 
 // Initialize
 updateSlider();
 updateAreaSlider();
+
+// lấy ra ngầy để vô sessionStorage
+function getDiffDays(checkInValue, checkOutValue) {
+  // checkInValue và checkOutValue là chuỗi dạng 'yyyy-mm-dd'
+  const [yyyy1, mm1, dd1] = checkInValue.split('-').map(Number);
+  const [yyyy2, mm2, dd2] = checkOutValue.split('-').map(Number);
+  const checkInDate = new Date(yyyy1, mm1 - 1, dd1);
+  const checkOutDate = new Date(yyyy2, mm2 - 1, dd2);
+  const diffTime = checkOutDate - checkInDate;
+  const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+  return diffDays;
+}
+
+// console.log(getDiffDays('2024-06-01', '2024-06-05'));
+
+
+

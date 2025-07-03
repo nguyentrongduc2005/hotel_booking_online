@@ -108,4 +108,21 @@ class PopUpController extends Controller
         echo "<pre>";
         print_r($data);
     }
+
+
+    function getTransaction($req, $res)
+    {
+        $data = [];
+        if (isset($_SESSION['user_id'])) {
+            $data = $this->model->getTransaction(['user_id' => $_SESSION['user_id']], 'user');
+        } else if (isset($req->post()['cccd'])) {
+            $cccd = $req->post()['cccd'];
+            $data = $this->model->getTransaction(['cccd' => $cccd], 'guest');
+        } else {
+            // $this->render('myReservation', []);
+        }
+        // $this->render('myReservation',$data);
+        echo "<pre>";
+        print_r($data);
+    }
 }
