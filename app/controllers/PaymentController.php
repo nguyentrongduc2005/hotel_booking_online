@@ -57,8 +57,7 @@ class PaymentController extends Controller
         $this->render('index', $data);
     }
 
-    //submit từ trang form
-    public function method($req, $res)
+    function formInfoHandler($req, $res)
     {
         $requestData = $req->post(); //này checkin, checkout, username, email, phone,cccd
         $slug = $req->params()["slug"] ?? "";
@@ -76,7 +75,7 @@ class PaymentController extends Controller
             $meta['room'] = $room;
             $meta['message'] = "Phòng đã được đặt trong khoảng thời gian này";
             // Xử lý khi phòng đã được đặt
-            $this->render('index', $meta);
+            // $this->render('index', $meta);
         }
 
         //xử lý người dùng là guest or user
@@ -140,15 +139,30 @@ class PaymentController extends Controller
             }
         }
 
-        $this->render('paymentMethod', $payload);
+        $_SESSION['transaction'] = $payload;
+
+        // echo "<pre>";
+        // print_r($payload);
+        $this->redirect($this->getConfig('basePath') . '/paymentMethod/' . $slug);
+        // $this->render('paymentMethod', $payload);
     }
+    //submit từ trang form
+    public function getMethod($req, $res)
+    {
+        if (isset($_SESSION['transaction']))
+            $this->render('paymentMethod', $_SESSION['transaction']);
+        else
+            throw new AppException('bad request', 400, $this->getConfig('basePath'));
+    }
+
+
     //submit từ trang paymentMethod
     public function paymentMethodHandler($req, $res)
     {
         $requestData = $req->post()['method'] ?? '';
-        echo $requestData;
+        // echo $requestData;
         $id_transaction = $req->post()['id_transaction'] ?? "";
-        echo $id_transaction;
+        // echo $id_transaction;
         $id =  $this->model->updateMethod(['payment_method' => $requestData], "transaction_id = $id_transaction");
         if (!$id) {
             // Xử lý khi không tìm thấy phòng
@@ -163,7 +177,13 @@ class PaymentController extends Controller
             }
         }
 
+        $this->redirect($this->getConfig('basePath') . '/payment/success');
 
-        $this->render("success", []);
+        // $this->render("success", []);
+    }
+
+    function paymentSuccess()
+    {
+        $this->render('success', []);
     }
 }

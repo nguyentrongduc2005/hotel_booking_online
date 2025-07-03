@@ -19,25 +19,32 @@
                     <div class="booking-form-container">
                         <div class="booking-form">
                             <h1>Enter your details</h1>
-                            <form action="<?= $this->configs->config['basePath'] ?>/payment/<?= htmlspecialchars($room['slug']) ?>/handler" method="POST">
+                            <form
+                                action="<?= $this->configs->config['basePath'] ?>/payment/<?= htmlspecialchars($room['slug']) ?>"
+                                method="POST">
                                 <div class="form-row">
                                     <div class="form-group">
                                         <label for="full-name">Full name <span class="required">*</span></label>
-                                        <input type="text" id="full-name" name="full_name" value="<?= htmlspecialchars($data['user']['full_name'] ?? '') ?>" required />
+                                        <input type="text" id="full-name" name="full_name"
+                                            value="<?= htmlspecialchars($data['user']['full_name'] ?? '') ?>"
+                                            required />
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email Address <span class="required">*</span></label>
-                                        <input type="email" id="email" name="email" value="<?= htmlspecialchars($data['user']['email'] ?? '') ?>" required />
+                                        <input type="email" id="email" name="email"
+                                            value="<?= htmlspecialchars($data['user']['email'] ?? '') ?>" required />
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group">
                                         <label for="phone">Phone number <span class="required">*</span></label>
-                                        <input type="tel" id="phone" name="sdt" value="<?= htmlspecialchars($data['user']['sdt'] ?? '') ?>" required />
+                                        <input type="tel" id="phone" name="sdt"
+                                            value="<?= htmlspecialchars($data['user']['sdt'] ?? '') ?>" required />
                                     </div>
                                     <div class="form-group">
                                         <label for="national-id">National ID <span class="required">*</span></label>
-                                        <input type="text" id="national-id" name="cccd" value="<?= htmlspecialchars($data['user']['cccd'] ?? '') ?>" required />
+                                        <input type="text" id="national-id" name="cccd"
+                                            value="<?= htmlspecialchars($data['user']['cccd'] ?? '') ?>" required />
                                     </div>
                                 </div>
                                 <!-- Hidden inputs for check_in and check_out -->
@@ -75,7 +82,8 @@
 
                     <div class="trip-summary-container">
                         <div class="trip-summary">
-                            <img src="<?= $this->configs->config['pathAssets'] . $room['thumb'] ?>" alt="<?= $room['name_type_room']  ?>" />
+                            <img src="<?= $this->configs->config['pathAssets'] . $room['thumb'] ?>"
+                                alt="<?= $room['name_type_room']  ?>" />
                             <div class="summary-details">
                                 <h2>Your trip summary</h2>
                                 <div class="summary-item">
@@ -92,7 +100,8 @@
                                 </div>
                                 <hr />
                                 <div class="summary-item total">
-                                    <span class="bold"><?= $room['price'] . '$ ' ?> <span id="js-trip-nights" class="bold"></span></span>
+                                    <span class="bold"><?= $room['price'] . '$ ' ?> <span id="js-trip-nights"
+                                            class="bold"></span></span>
                                     <span class="bold" id="js-total">
                                     </span>
                                 </div>

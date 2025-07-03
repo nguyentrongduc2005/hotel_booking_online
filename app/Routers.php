@@ -119,14 +119,25 @@ Router::get('/payment/{slug}', 'PaymentController@formInfo', [
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleUser',
 ]);
+Router::post('/payment/{slug}', 'PaymentController@formInfoHandler', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleUser',
+]);
+
 //submit từ trang form thông tin xử lý kiểm tra booking của người dùng và lưu vào render chọn method
-Router::post('/payment/{slug}/handler', 'PaymentController@method', [
+Router::get('/paymentMethod/{slug}', 'PaymentController@getMethod', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleUser',
+]);
+Router::post('/paymentMethod/{slug}/handler', 'PaymentController@methodHandler', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleUser',
 ]);
 //submit từ trang chọn method sử lý databasse để lưu vào bảng transaction thành cồng render ra trang thanks nếu không thì render ra fail
-Router::post('/payment/{slug}/transaction', 'PaymentController@paymentMethodHandler', [
+Router::get('/payment/success', 'PaymentController@paymentMethodHandler', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleUser',
