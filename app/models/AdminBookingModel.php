@@ -40,6 +40,7 @@ class AdminBookingModel
 
         return $data ?: [];
     }
+    
 
     public function bookingFilter($filter, $isHistory = false)
     {
