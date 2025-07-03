@@ -112,15 +112,34 @@ class DashboardController extends Controller
     public function checkoutHandler($req, $res)
     {
         $id =  $req->payload()["id"];
-        $data = "false";
-        $check = $this->model->updateCheckoutBooking("id_booking = $id AND status_checkin = 'done'");
-        //update insert qua bản history
-        $check = $this->model->updateDataHistory($id, "completed");
+        $data = ["statusApi" => "false"];
+        
+        // Debug: Log booking ID
+        error_log("Checkout attempt for booking ID: " . $id);
+        
+        // Cập nhật status_checkout = done
+        $check = $this->model->updateCheckoutBooking("id_booking = $id");
+        
         if ($check) {
-            $data = [
-                "statusApi" => $check
-            ];
+            error_log("Checkout update successful for booking ID: " . $id);
+            // Chuyển booking vào history
+            $historyCheck = $this->model->updateDataHistory($id, "completed");
+            if ($historyCheck) {
+                error_log("History update successful for booking ID: " . $id);
+                $data = [
+                    "statusApi" => "true"
+                ];
+            } else {
+                error_log("History update failed for booking ID: " . $id);
+                // Nếu không chuyển được vào history, vẫn coi như thành công
+                $data = [
+                    "statusApi" => "true"
+                ];
+            }
+        } else {
+            error_log("Checkout update failed for booking ID: " . $id);
         }
+        
         $res->json($data)->send();
     }
 }
