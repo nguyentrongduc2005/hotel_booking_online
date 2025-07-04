@@ -45,21 +45,21 @@
 <div id="loginPopup" class="login-popup" style="display:none;">
     <div class="login-popup-content">
         <div class="login-popup-header">
-            <?php if (isset($_SESSION["user_token"])) { ?>
+            <?php if (isset($_SESSION["user_id"])) { ?>
                 <div class="login-popup-avatar"
                     style="background-image: url('<?= $this->configs->config['pathAssets'] ?>/img/user/avatar.jpg')"></div>
             <?php } ?>
             <button class="login-popup-close" id="closeLoginPopup">&times;</button>
-            <?php if (!isset($_SESSION["user_token"])) { ?>
+            <?php if (!isset($_SESSION["user_id"])) { ?>
                 <a href="<?= $this->configs->config['basePath'] ?>/login" class="login-popup-signup nav-link">LOGIN</a>
             <?php } ?>
-            <?php if (!isset($_SESSION["user_token"])) { ?>
+            <?php if (!isset($_SESSION["user_id"])) { ?>
                 <div class="login-popup-login-link">
                     Don't have an account?
                     <a href="<?= $this->configs->config['basePath'] ?>/regis" id="registerLink">sign up</a>
                 </div>
             <?php } ?>
-            <?php if (isset($_SESSION["user_token"])) { ?>
+            <?php if (isset($_SESSION["user_id"])) { ?>
                 <div class="login-popup-info">
                     <div class="login-popup-username">
                         <?= htmlspecialchars($_SESSION["user_name"] ?? '') ?>
@@ -82,7 +82,7 @@
                 reservation</div>
             <div class="login-popup-item"> <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-history.png"
                     alt="Diamond Hotel"> My booking history</div>
-            <?php if (isset($_SESSION["user_token"])) { ?>
+            <?php if (isset($_SESSION["user_id"])) { ?>
                 <a class="login-popup-item" href="<?= $this->configs->config['basePath'] ?>/logout">
                     <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-logout.png" alt="Diamond Hotel">Log out
                 </a>

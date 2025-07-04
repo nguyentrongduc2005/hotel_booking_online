@@ -17,50 +17,30 @@ class AuthorMiddleware
     //3
 
     ///
-    public function checktoken($req, $res)
+    public function checkSession($req, $res)
     {
-        error_log("Middleware chạy: checktoken");
-
-        //kiểm tra có token không 
-        if (empty($_SESSION['user_token']) || empty($_SESSION['timer'])) {
-            if (isset($_COOKIE['user_token'], $_COOKIE['timer'])) {
-                /////////////////////////////////////
-            }
-        }
-
-
-        //kiểm tra token có khớp với db không
+        // error_log("Middleware chạy: checktoken");
         db::connect();
-        $sqlToken = "SELECT * FROM token WHERE token.token = :userToken;";
 
-        $data = db::getOne($sqlToken, ['userToken' => $_SESSION['user_token']]);
-        if (!$data) {
-            session_destroy();
-            return true;
+        if (!isset($_SESSION['user_id'])) {
+            if (!isset($_COOKIE['user_id'])) {
+                return true;
+            }
+            $_SESSION['user_id'] = $_COOKIE['user_id'];
         }
-        //kiêm tra con thơi gian không
-        if ($_SESSION['timer'] < time()) {
-            db::delete('token', "token.id_token = {$data['id_token']}");
-            session_destroy();
-            return true;
-        }
+
         //nếu khớp tìm user của token
         $sqlUser = "SELECT discount, email, full_name, user.role from user where user.user_id = :id;";
-        $user = db::getOne($sqlUser, ['id' => $data['user_id']]);
-        //token không chủ
-        if (!$user) {
-            db::delete('token', "token.id_token = {$data['id_token']}");
-            session_destroy();
-            return true;
-        }
-        if (isset($_SESSION['user_name']) && isset($_SESSION['role']) && isset($_SESSION['user_email']) && isset($_SESSION['level']) && isset($_SESSION['user_id'])) return true;
+        $user = db::getOne($sqlUser, ['id' => $_SESSION['user_id']]);
+
+
+
+        if (isset($_SESSION['user_name']) && isset($_SESSION['role']) && isset($_SESSION['user_email']) && isset($_SESSION['level'])) return true;
         // set thông tin user vào token lấy role
         $_SESSION['user_name'] = isset($user['full_name']) ? $user['full_name'] : '';
         $_SESSION['role'] = isset($user['role']) ? $user['role'] : '';
         $_SESSION['user_email'] = isset($user['email']) ? $user['email'] : '';
         $_SESSION['level'] = $user['discount'] >= 5 ? ($user['discount'] > 10 ? "diamond" : "gold") : "silver";
-        $_SESSION['user_id'] = $data['user_id'];
-
         return true;
     }
 
@@ -68,7 +48,7 @@ class AuthorMiddleware
     {
         // Controller::setLayout("Adminlayouts/main");
         // Controller::setcomponent('/admin');
-        if (empty($_SESSION['user_room']) && empty($_SESSION['role'])) return true;
+        if (empty($_SESSION['user_name']) && empty($_SESSION['role'])) return true;
 
         if ($_SESSION['role'] === 'admin') {
             Controller::setLayout("Adminlayouts/main");
@@ -94,13 +74,10 @@ class AuthorMiddleware
     }
     public function checkRoleUser($req, $res)
     {
-
-
         if (isset($_SESSION['role'])) {
-            if ($_SESSION['role'] === 'user') {
-
+            if ($_SESSION['role'] == 'user') {
                 return true;
-            } else if ($_SESSION['role'] === 'admin') {
+            } else if ($_SESSION['role'] == 'admin') {
                 throw new AppException("Forbidden", 403);
             }
         } else {
