@@ -25,7 +25,7 @@ class PaymentController extends Controller
             throw new AppException("Room not found", 400, $this->getConfig("basePath"));
             // $this->renderPartial('error/index', ['message' => 'Room not found', 'next' => $this->getConfig("basePath"), 'timeout' => 5]);
         }
-        if (isset($_SESSION['user_token']) && isset($_SESSION['user_name'])) {
+        if (isset($_SESSION['user_id']) && isset($_SESSION['user_name'])) {
             // Người dùng chưa đăng nhập, chuyển hướng đến trang đăng nhập
             $user = $this->model->getUserbyId($_SESSION['user_id']);
             $data["user"] = $user;
@@ -80,7 +80,7 @@ class PaymentController extends Controller
 
         //xử lý người dùng là guest or user
         $customer = "";
-        if (!isset($_SESSION['user_token']) || !isset($_SESSION['user_name']) || !isset($_SESSION['user_id'])) {
+        if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_name'])) {
             //insert vào bảng guest
             $guestData = [
                 'full_name' => $requestData['full_name'],
@@ -143,8 +143,10 @@ class PaymentController extends Controller
 
         // echo "<pre>";
         // print_r($payload);
+        // echo "</pre>";
         $this->redirect($this->getConfig('basePath') . '/paymentMethod/' . $slug);
         // $this->render('paymentMethod', $payload);
+
     }
     //submit từ trang form
     public function getMethod($req, $res)
@@ -159,6 +161,13 @@ class PaymentController extends Controller
     //submit từ trang paymentMethod
     public function paymentMethodHandler($req, $res)
     {
+        // echo '<pre>';
+        // print_r($_SESSION);
+        // echo '</pre>';
+        // echo '<pre>';
+        // print_r($req->post());
+        // echo '</pre>';
+        // die();
         $requestData = $req->post()['method'] ?? '';
         // echo $requestData;
         $id_transaction = $req->post()['id_transaction'] ?? "";
@@ -166,25 +175,28 @@ class PaymentController extends Controller
         $id =  $this->model->updateMethod(['payment_method' => $requestData], "transaction_id = $id_transaction");
         if (!$id) {
             // Xử lý khi không tìm thấy phòng
-            throw new AppException("Payment method update failed, please call support", 400, $this->getConfig("basePath") . '/detailroom/' .  $req->params()["slug"] ?? "");
 
+            throw new AppException("Payment method update failed, please call support", 400, $this->getConfig("basePath") . '/detailroom/' .  $req->params()["slug"] ?? "");
             // $this->renderPartial('error/index', ['message' => 'Payment method update failed, please call support.', 'next' => $this->getConfig("basePath") . '/detailroom/' . $req->params()["slug"], 'timeout' => 5]);
         }
         if (isset($_SESSION['user_id'])) {
             $row =  $this->model->updataDiscount($_SESSION['user_id']);
-            if (! $row) {
+            if (!$row) {
                 throw new AppException("discount failed update failed, please call support", 400, $this->getConfig("basePath") . '/detailroom/' .  $req->params()["slug"] ?? "");
             }
         }
-        unset($_SESSION['transaction']);
+        // unset($_SESSION['transaction']);
 
-        $this->redirect($this->getConfig('basePath') . '/payment/success');
-
+        $this->redirect($this->getConfig('basePath') . '/paymentSuccess');
+        // echo '<pre>';
+        // print_r($req->post());
+        // echo '</pre>';
+        // die();
         // $this->render("success", []);
     }
 
-    function paymentSuccess()
+    function paymentSuccess($req, $res)
     {
-        $this->render('success', []);
+        $this->render("success", []);
     }
 }

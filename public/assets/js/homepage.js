@@ -93,29 +93,3 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-function checktokenTimer(access) {
-
-    let confirmExtend = confirm("Your session will expire in a few minutes. Click OK to continue your session.");
-    if (confirmExtend) {
-        fetch(access + "/refeshToken", { credentials: 'include' })
-            .then(res => {
-
-                if (res.status === 401) {
-                    alert("Session has expired. Please log in again.");
-                    window.location.href = access + "/login";
-                } else {
-                    return res.json();
-                }
-            })
-            .then(data => {
-                if (data.refreshToken) {
-                    alert("Session has been extended.");
-                }
-            })
-            .catch(() => {
-                alert("Failed to extend the session. Please try again.");
-                window.location.href = access + "/login";
-            });
-
-    }
-}

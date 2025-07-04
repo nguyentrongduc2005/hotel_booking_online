@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 03, 2025 at 09:55 AM
+-- Generation Time: Jul 04, 2025 at 05:46 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -124,7 +124,6 @@ CREATE TABLE `historybooking` (
   `check_out` datetime NOT NULL,
   `status` enum('pending','confirmed','cancelled','completed') DEFAULT 'pending',
   `created_at` datetime DEFAULT current_timestamp(),
-  `date_booking` date NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `guest_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -133,12 +132,12 @@ CREATE TABLE `historybooking` (
 -- Dumping data for table `historybooking`
 --
 
-INSERT INTO `historybooking` (`id_history`, `id_room`, `transaction_id`, `check_in`, `check_out`, `status`, `created_at`, `date_booking`, `user_id`, `guest_id`) VALUES
-(2, 1, 1, '2025-06-10 14:00:00', '2025-06-12 12:00:00', 'confirmed', '2025-06-08 18:29:36', '2025-06-08', 1, NULL),
-(3, 2, 2, '2025-06-11 15:00:00', '2025-06-13 12:00:00', 'pending', '2025-06-08 18:29:36', '2025-06-08', NULL, 2),
-(4, 3, 3, '2025-06-12 14:00:00', '2025-06-14 12:00:00', '', '2025-06-08 18:29:36', '2025-06-08', 3, NULL),
-(5, 4, 4, '2025-06-13 15:00:00', '2025-06-15 12:00:00', 'cancelled', '2025-06-08 18:29:36', '2025-06-08', NULL, 4),
-(6, 5, 5, '2025-06-14 14:00:00', '2025-06-16 12:00:00', 'confirmed', '2025-06-08 18:29:36', '2025-06-08', 5, NULL);
+INSERT INTO `historybooking` (`id_history`, `id_room`, `transaction_id`, `check_in`, `check_out`, `status`, `created_at`, `user_id`, `guest_id`) VALUES
+(2, 1, 1, '2025-06-10 14:00:00', '2025-06-12 12:00:00', 'confirmed', '2025-06-08 18:29:36', 1, NULL),
+(3, 2, 2, '2025-06-11 15:00:00', '2025-06-13 12:00:00', 'pending', '2025-06-08 18:29:36', NULL, 2),
+(4, 3, 3, '2025-06-12 14:00:00', '2025-06-14 12:00:00', '', '2025-06-08 18:29:36', 3, NULL),
+(5, 4, 4, '2025-06-13 15:00:00', '2025-06-15 12:00:00', 'cancelled', '2025-06-08 18:29:36', NULL, 4),
+(6, 5, 5, '2025-06-14 14:00:00', '2025-06-16 12:00:00', 'confirmed', '2025-06-08 18:29:36', 5, NULL);
 
 -- --------------------------------------------------------
 
@@ -325,19 +324,6 @@ INSERT INTO `services` (`id_service`, `name`, `slug`, `description`, `created_at
 -- --------------------------------------------------------
 
 --
--- Table structure for table `token`
---
-
-CREATE TABLE `token` (
-  `id_token` int(11) NOT NULL,
-  `token` varchar(500) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `created_at` datetime DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `transaction`
 --
 
@@ -345,7 +331,7 @@ CREATE TABLE `transaction` (
   `transaction_id` int(11) NOT NULL,
   `total_amount` decimal(10,2) NOT NULL,
   `payment_status` enum('pending','completed','failed','refunded') DEFAULT 'pending',
-  `payment_method` enum('cash','credit card','bank transfer','Momo','ZaloPay') DEFAULT NULL,
+  `payment_method` enum('ZaloPay','Momo','credit card','bank transfer') DEFAULT NULL,
   `created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -356,7 +342,7 @@ CREATE TABLE `transaction` (
 INSERT INTO `transaction` (`transaction_id`, `total_amount`, `payment_status`, `payment_method`, `created_at`) VALUES
 (1, 1200000.00, 'completed', 'Momo', '2025-06-01 14:32:00'),
 (2, 2500000.00, 'completed', 'bank transfer', '2025-06-02 09:45:00'),
-(3, 950000.00, 'pending', 'cash', '2025-06-03 18:20:00'),
+(3, 950000.00, 'pending', NULL, '2025-06-03 18:20:00'),
 (4, 1800000.00, 'failed', 'credit card', '2025-06-04 11:15:00'),
 (5, 3200000.00, 'completed', 'ZaloPay', '2025-06-05 16:08:00'),
 (6, 100.00, 'pending', 'credit card', '2025-06-25 15:22:26'),
@@ -464,13 +450,6 @@ ALTER TABLE `services`
   ADD PRIMARY KEY (`id_service`);
 
 --
--- Indexes for table `token`
---
-ALTER TABLE `token`
-  ADD PRIMARY KEY (`id_token`),
-  ADD KEY `user_id` (`user_id`);
-
---
 -- Indexes for table `transaction`
 --
 ALTER TABLE `transaction`
@@ -537,12 +516,6 @@ ALTER TABLE `services`
   MODIFY `id_service` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `token`
---
-ALTER TABLE `token`
-  MODIFY `id_token` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
-
---
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
@@ -594,12 +567,6 @@ ALTER TABLE `room`
 ALTER TABLE `room_amenity`
   ADD CONSTRAINT `room_amenity_ibfk_1` FOREIGN KEY (`id_room`) REFERENCES `room` (`id_room`) ON DELETE CASCADE,
   ADD CONSTRAINT `room_amenity_ibfk_2` FOREIGN KEY (`amenity_id`) REFERENCES `amenity` (`amenity_id`) ON DELETE CASCADE;
-
---
--- Constraints for table `token`
---
-ALTER TABLE `token`
-  ADD CONSTRAINT `token_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
