@@ -4,7 +4,6 @@ body > #khung {
     grid-template-rows: auto 1fr auto;
     min-height: 100vh;
 }
-
 body > #khung > #header {
     position: sticky;
     top: 0;
@@ -75,7 +74,7 @@ span.required {
 .progress-line {
     position: absolute;
     height: 1px;
-    width: 80px;
+    width: 100px;
     background-color: #888;
     top: 50%;
     left: 52%;

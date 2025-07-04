@@ -19,6 +19,7 @@ class AuthorMiddleware
     ///
     public function checktoken($req, $res)
     {
+        error_log("Middleware chạy: checktoken");
 
         //kiểm tra có token không 
         if (empty($_SESSION['user_token']) || empty($_SESSION['timer'])) {

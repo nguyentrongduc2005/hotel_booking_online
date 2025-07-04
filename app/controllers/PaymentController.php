@@ -143,8 +143,9 @@ class PaymentController extends Controller
 
         // echo "<pre>";
         // print_r($payload);
-        $this->redirect($this->getConfig('basePath') . '/paymentMethod/' . $slug);
-        // $this->render('paymentMethod', $payload);
+        // echo "</pre>";
+        // $this->redirect($this->getConfig('basePath') . '/paymentMethod/' . $slug);
+        $this->render('paymentMethod', $payload);
     }
     //submit từ trang form
     public function getMethod($req, $res)
@@ -159,6 +160,13 @@ class PaymentController extends Controller
     //submit từ trang paymentMethod
     public function paymentMethodHandler($req, $res)
     {
+        // echo '<pre>';
+        // print_r($_SESSION);
+        // echo '</pre>';
+        // echo '<pre>';
+        // print_r($req->post());
+        // echo '</pre>';
+        // die();
         $requestData = $req->post()['method'] ?? '';
         // echo $requestData;
         $id_transaction = $req->post()['id_transaction'] ?? "";
@@ -166,25 +174,29 @@ class PaymentController extends Controller
         $id =  $this->model->updateMethod(['payment_method' => $requestData], "transaction_id = $id_transaction");
         if (!$id) {
             // Xử lý khi không tìm thấy phòng
-            throw new AppException("Payment method update failed, please call support", 400, $this->getConfig("basePath") . '/detailroom/' .  $req->params()["slug"] ?? "");
 
+            throw new AppException("Payment method update failed, please call support", 400, $this->getConfig("basePath") . '/detailroom/' .  $req->params()["slug"] ?? "");
             // $this->renderPartial('error/index', ['message' => 'Payment method update failed, please call support.', 'next' => $this->getConfig("basePath") . '/detailroom/' . $req->params()["slug"], 'timeout' => 5]);
         }
         if (isset($_SESSION['user_id'])) {
             $row =  $this->model->updataDiscount($_SESSION['user_id']);
-            if (! $row) {
+            if (!$row) {
                 throw new AppException("discount failed update failed, please call support", 400, $this->getConfig("basePath") . '/detailroom/' .  $req->params()["slug"] ?? "");
             }
         }
-        unset($_SESSION['transaction']);
+        // unset($_SESSION['transaction']);
 
         $this->redirect($this->getConfig('basePath') . '/payment/success');
-
+        // echo '<pre>';
+        // print_r($req->post());
+        // echo '</pre>';
+        // die();
         // $this->render("success", []);
     }
 
-    function paymentSuccess()
+
+    function success($req, $res)
     {
-        $this->render('success', []);
+        $this->render("success", []);
     }
 }

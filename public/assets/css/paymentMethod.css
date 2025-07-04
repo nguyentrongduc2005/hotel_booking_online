@@ -74,9 +74,9 @@ span.required {
 
 .progress-line {
     position: absolute;
-    height: 1px;
-    width: 80px;
-    background-color: #888;
+    height: 3px;
+    width: 100px;
+    background-color: #ffffff;
     top: 50%;
     left: 52%;
     transform: translate(-50%, -50%);
@@ -98,8 +98,8 @@ span.required {
 }
 
 .step-circle {
-    width: 30px;
-    height: 30px;
+    width: 33px;
+    height: 33px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -340,7 +340,7 @@ span.bold {
 }
 
 .payment-method-title {
-    font-size: 22px;
+    font-size: 28px;
     font-weight: bold;
     margin-bottom: 18px;
     color: #252525;
@@ -350,43 +350,79 @@ span.bold {
     display: flex;
     align-items: center;
     background: #fff;
-    border-radius: 8px;
-    border: 1px solid #e0e0e0;
-    margin-bottom: 12px;
-    padding: 10px 16px;
+    border-radius: 10px;
+    border: 1.5px solid #e0e0e0;
+    margin-bottom: 16px;
+    padding: 14px 18px;
     cursor: pointer;
     position: relative;
-    transition: border 0.2s;
+    transition: border 0.2s, box-shadow 0.2s;
+    font-size: 18px;
+}
+.payment-option:hover, .payment-option input[type="radio"]:checked ~ .custom-radio {
+    border-color: #252525;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
-.payment-option img {
-    width: 38px;
-    height: 38px;
+.payment-logos {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 70px;
+}
+.payment-logos img {
+    height: 32px;
+    width: auto;
     object-fit: contain;
-    margin-right: 18px;
+    background: none;
 }
 
-.payment-option span {
+.payment-label {
     flex: 1;
-    font-size: 17px;
     color: #888;
     font-weight: 500;
+    font-size: 18px;
+    margin-left: 18px;
 }
 
 .payment-option input[type="radio"] {
-    margin-left: 12px;
-    accent-color: #252525;
+    opacity: 0;
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.custom-radio {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    border: 2px solid #bbb;
+    border-radius: 50%;
+    background: #fff;
+    transition: border 0.2s;
+}
+.payment-option input[type="radio"]:checked ~ .custom-radio {
+    border: 6px solid #252525;
 }
 
 .btn-paynow {
     width: 100%;
     background: #252525;
     color: #fff;
-    padding: 15px 0;
+    padding: 18px 0;
     border: none;
     border-radius: 10px;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
     margin-top: 18px;
     cursor: pointer;
+    margin-bottom: 0;
 }
