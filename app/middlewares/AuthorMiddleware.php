@@ -8,11 +8,25 @@ use app\core\AppException;
 
 class AuthorMiddleware
 {
+
+
+
+    ///
+    //1. dang nhạp có token db và session
+    ///2 được lưu vào cookie để lần sao kh cần login
+    //3
+
+    ///
     public function checktoken($req, $res)
     {
 
         //kiểm tra có token không 
-        if (empty($_SESSION['user_token']) || empty($_SESSION['timer'])) return true;
+        if (empty($_SESSION['user_token']) || empty($_SESSION['timer'])) {
+            if (isset($_COOKIE['user_token'], $_COOKIE['timer'])) {
+                /////////////////////////////////////
+            }
+        }
+
 
         //kiểm tra token có khớp với db không
         db::connect();
@@ -20,14 +34,12 @@ class AuthorMiddleware
 
         $data = db::getOne($sqlToken, ['userToken' => $_SESSION['user_token']]);
         if (!$data) {
-            session_unset();
             session_destroy();
             return true;
         }
         //kiêm tra con thơi gian không
         if ($_SESSION['timer'] < time()) {
             db::delete('token', "token.id_token = {$data['id_token']}");
-            session_unset();
             session_destroy();
             return true;
         }
@@ -37,7 +49,6 @@ class AuthorMiddleware
         //token không chủ
         if (!$user) {
             db::delete('token', "token.id_token = {$data['id_token']}");
-            session_unset();
             session_destroy();
             return true;
         }

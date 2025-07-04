@@ -3,6 +3,7 @@
 namespace app\models;
 
 use app\core\db;
+use DateTime;
 
 class AuthenModel
 {
@@ -45,9 +46,20 @@ class AuthenModel
         $token = bin2hex(random_bytes(32));
         $id_token = db::insert('token', [
             'token' => $token,
-            "user_id" => $id_user
+            "user_id" => $id_user,
+            "expires_at" => 60 * 60
         ]);
         return $id_token ? $id_token : [];
+    }
+
+    function updateTimeToken($token, $expires)
+    {
+        $row =  db::update('token', [
+            "expires_at" => $expires,
+            "created_at" => (new DateTime())->format('Y-m-d H:i:s')
+        ], "token = $token");
+
+        return $row ?? [];
     }
 
     public function findUserbyEmail($email)

@@ -54,9 +54,9 @@ class AuthenController extends Controller
         $token = $this->model->findTokenByidToken($idtoken);
         if ($token) {
             $_SESSION['user_token'] = $token['token'];
-            $now = time();               // thời gian hiện tại (timestamp)
-            $after30Min = $now + 1800;
-            $_SESSION['timer'] = $after30Min;
+            $now = strtotime($token['created_at']);               // thời gian hiện tại (timestamp)
+            $after1h = $now + $token['expires_at'];
+            $_SESSION['timer'] = $after1h;
         }
 
 
@@ -116,9 +116,9 @@ class AuthenController extends Controller
         $token = $this->model->findTokenByidToken($idtoken);
         if ($token) {
             $_SESSION['user_token'] = $token['token'];
-            $now = time();               // thời gian hiện tại (timestamp)
-            $after30Min = $now + 1800;
-            $_SESSION['timer'] = $after30Min;
+            $now = strtotime($token['created_at']);               // thời gian hiện tại (timestamp)
+            $after1h = $now + $token['expires_at'];
+            $_SESSION['timer'] = $after1h;
         }
         $user['message'] = "Register successful. Redirecting... ";
         $user['access'] =  $this->getConfig('basePath');
@@ -150,14 +150,18 @@ class AuthenController extends Controller
     function refeshToken($req, $res)
     {
 
-        if (isset($_SESSION['timer'])) {
+        if (isset($_SESSION['timer']) && isset($_SESSION['user_token'])) {
 
             if ($_SESSION['timer'] < time()) {
                 return $res->json(['refreshToken' => false], 401)->send();
             }
+            $row = $this->model->updateTimeToken($_SESSION['user_token'], (60 * 60));
+            if (! $row) {
+                return $res->json(['refreshToken' => false], 200)->send();
+            }
             $now = time();               // thời gian hiện tại (timestamp)
-            $after30Min = $now + 1800;
-            $_SESSION['timer'] = $after30Min;
+            $after1h = $now +  (60 * 60);
+            $_SESSION['timer'] = $after1h;
             return $res->json(['refreshToken' => true], 200)->send();
         }
     }
