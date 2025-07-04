@@ -141,9 +141,10 @@ class PaymentController extends Controller
 
         $_SESSION['transaction'] = $payload;
 
-        // echo "<pre>";
-        // print_r($payload);
-        $this->redirect($this->getConfig('basePath') . '/paymentMethod/' . $slug);
+        echo "<pre>";
+        print_r($payload);
+        echo "</pre>";
+        // $this->redirect($this->getConfig('basePath') . '/paymentMethod/' . $slug);
         // $this->render('paymentMethod', $payload);
     }
     //submit từ trang form
