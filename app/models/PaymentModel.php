@@ -17,7 +17,7 @@ class PaymentModel
 
     function getRoomInfo($slug)
     {
-        $sql = "SELECT room.id_room,room.slug, room.price, room.status, room.area, room.capacity, room_type.name_type_room,  room.thumb
+        $sql = "SELECT room.id_room, room.slug, room.price, room.status, room.area, room.capacity, room_type.name_type_room,  room.thumb
                 FROM room
                 INNER JOIN room_type ON room.id_room_type = room_type.id_type_room
                 WHERE room.slug = :slug";

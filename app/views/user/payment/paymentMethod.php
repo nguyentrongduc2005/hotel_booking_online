@@ -15,14 +15,19 @@
                     </div>
                 </div>
                 <?php $room = $data['room']; ?>
+                <pre><?php print_r($data['room']); ?></pre>
+
                 <div class="main-content">
                     <div class="booking-form-container">
                         <div class="booking-form">
                             <h1>Payment Method</h1>
-                            <form action="<?= $this->configs->config['basePath'] ?>/paymentMethod/<?= htmlspecialchars($room['slug']) ?>" method="POST">
+                            <form
+                                action="<?= $this->configs->config['basePath'] ?>/paymentMethod/<?= htmlspecialchars($room['slug']) ?>"
+                                method="POST">
                                 <label class="payment-option">
                                     <span class="payment-logos">
-                                        <img src="<?= $this->configs->config['pathAssets'] ?>img/paymentMethod/paypal.png" alt="Paypal" />
+                                        <img src="<?= $this->configs->config['pathAssets'] ?>img/paymentMethod/paypal.png"
+                                            alt="Paypal" />
                                     </span>
                                     <span class="payment-label">Paypal</span>
                                     <input type="radio" name="method" value="ZaloPay" checked>
@@ -30,8 +35,10 @@
                                 </label>
                                 <label class="payment-option">
                                     <span class="payment-logos">
-                                        <img src="<?= $this->configs->config['pathAssets'] ?>img/paymentMethod/momo.png" alt="Momo" />
-                                        <img src="<?= $this->configs->config['pathAssets'] ?>img/paymentMethod/vnpay.png" alt="VNPAY" />
+                                        <img src="<?= $this->configs->config['pathAssets'] ?>img/paymentMethod/momo.png"
+                                            alt="Momo" />
+                                        <img src="<?= $this->configs->config['pathAssets'] ?>img/paymentMethod/vnpay.png"
+                                            alt="VNPAY" />
                                     </span>
                                     <span class="payment-label">E-Wallet</span>
                                     <input type="radio" name="method" value="Momo">
@@ -39,8 +46,10 @@
                                 </label>
                                 <label class="payment-option">
                                     <span class="payment-logos">
-                                        <img src="<?= $this->configs->config['pathAssets'] ?>img/paymentMethod/visa.png" alt="Visa" />
-                                        <img src="<?= $this->configs->config['pathAssets'] ?>img/paymentMethod/master.png" alt="Mastercard" />
+                                        <img src="<?= $this->configs->config['pathAssets'] ?>img/paymentMethod/visa.png"
+                                            alt="Visa" />
+                                        <img src="<?= $this->configs->config['pathAssets'] ?>img/paymentMethod/master.png"
+                                            alt="Mastercard" />
                                     </span>
                                     <span class="payment-label">Card Payment</span>
                                     <input type="radio" name="method" value="credit card">
@@ -48,7 +57,8 @@
                                 </label>
                                 <label class="payment-option">
                                     <span class="payment-logos">
-                                        <img src="<?= $this->configs->config['pathAssets'] ?>img/paymentMethod/bank.png" alt="Bank Transfer" />
+                                        <img src="<?= $this->configs->config['pathAssets'] ?>img/paymentMethod/bank.png"
+                                            alt="Bank Transfer" />
                                     </span>
                                     <span class="payment-label">Bank Transfer</span>
                                     <input type="radio" name="method" value="bank transfer">

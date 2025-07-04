@@ -25,7 +25,7 @@ class PaymentController extends Controller
             throw new AppException("Room not found", 400, $this->getConfig("basePath"));
             // $this->renderPartial('error/index', ['message' => 'Room not found', 'next' => $this->getConfig("basePath"), 'timeout' => 5]);
         }
-        if (isset($_SESSION['user_token']) && isset($_SESSION['user_name'])) {
+        if (isset($_SESSION['user_id']) && isset($_SESSION['user_name'])) {
             // Người dùng chưa đăng nhập, chuyển hướng đến trang đăng nhập
             $user = $this->model->getUserbyId($_SESSION['user_id']);
             $data["user"] = $user;
@@ -80,7 +80,7 @@ class PaymentController extends Controller
 
         //xử lý người dùng là guest or user
         $customer = "";
-        if (!isset($_SESSION['user_token']) || !isset($_SESSION['user_name']) || !isset($_SESSION['user_id'])) {
+        if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_name'])) {
             //insert vào bảng guest
             $guestData = [
                 'full_name' => $requestData['full_name'],
@@ -144,8 +144,9 @@ class PaymentController extends Controller
         // echo "<pre>";
         // print_r($payload);
         // echo "</pre>";
-        // $this->redirect($this->getConfig('basePath') . '/paymentMethod/' . $slug);
-        $this->render('paymentMethod', $payload);
+        $this->redirect($this->getConfig('basePath') . '/paymentMethod/' . $slug);
+        // $this->render('paymentMethod', $payload);
+
     }
     //submit từ trang form
     public function getMethod($req, $res)
@@ -186,7 +187,7 @@ class PaymentController extends Controller
         }
         // unset($_SESSION['transaction']);
 
-        $this->redirect($this->getConfig('basePath') . '/payment/success');
+        $this->redirect($this->getConfig('basePath') . '/paymentSuccess');
         // echo '<pre>';
         // print_r($req->post());
         // echo '</pre>';
@@ -194,8 +195,7 @@ class PaymentController extends Controller
         // $this->render("success", []);
     }
 
-
-    function success($req, $res)
+    function paymentSuccess($req, $res)
     {
         $this->render("success", []);
     }

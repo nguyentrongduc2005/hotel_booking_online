@@ -138,7 +138,7 @@ Router::post('/paymentMethod/{slug}', 'PaymentController@paymentMethodHandler', 
 ]);
 //submit từ trang chọn method sử lý databasse để lưu vào bảng transaction thành cồng render ra trang thanks nếu không thì render ra fail
 
-Router::get('/payment/success', 'PaymentController@paymentSuccess', [
+Router::get('/paymentSuccess', 'PaymentController@paymentSuccess', [
     'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleUser',
