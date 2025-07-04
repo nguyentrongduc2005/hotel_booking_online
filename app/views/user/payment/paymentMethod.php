@@ -18,16 +18,14 @@
                 <div class="main-content">
                     <div class="booking-form-container">
                         <div class="booking-form">
-                            <h1>Enter your details</h1>
-
-                            <h2>Select Payment Method</h2>
-                            <form action="#" method="POST">
+                            <h1>Payment Method</h1>
+                            <form action="<?= $this->configs->config['basePath'] ?>/paymentMethod/<?= htmlspecialchars($room['slug']) ?>" method="POST">
                                 <label class="payment-option">
                                     <span class="payment-logos">
                                         <img src="<?= $this->configs->config['pathAssets'] ?>img/paymentMethod/paypal.png" alt="Paypal" />
                                     </span>
                                     <span class="payment-label">Paypal</span>
-                                    <input type="radio" name="payment_method" value="paypal" checked>
+                                    <input type="radio" name="method" value="ZaloPay" checked>
                                     <span class="custom-radio"></span>
                                 </label>
                                 <label class="payment-option">
@@ -36,7 +34,7 @@
                                         <img src="<?= $this->configs->config['pathAssets'] ?>img/paymentMethod/vnpay.png" alt="VNPAY" />
                                     </span>
                                     <span class="payment-label">E-Wallet</span>
-                                    <input type="radio" name="payment_method" value="ewallet">
+                                    <input type="radio" name="method" value="Momo">
                                     <span class="custom-radio"></span>
                                 </label>
                                 <label class="payment-option">
@@ -45,7 +43,7 @@
                                         <img src="<?= $this->configs->config['pathAssets'] ?>img/paymentMethod/master.png" alt="Mastercard" />
                                     </span>
                                     <span class="payment-label">Card Payment</span>
-                                    <input type="radio" name="payment_method" value="card">
+                                    <input type="radio" name="method" value="credit card">
                                     <span class="custom-radio"></span>
                                 </label>
                                 <label class="payment-option">
@@ -53,10 +51,12 @@
                                         <img src="<?= $this->configs->config['pathAssets'] ?>img/paymentMethod/bank.png" alt="Bank Transfer" />
                                     </span>
                                     <span class="payment-label">Bank Transfer</span>
-                                    <input type="radio" name="payment_method" value="bank">
+                                    <input type="radio" name="method" value="bank transfer">
                                     <span class="custom-radio"></span>
                                 </label>
                                 <button type="submit" class="btn-paynow">Pay now</button>
+                                <input type="hidden" id="id_transaction" name="id_transaction"
+                                    value="<?= htmlspecialchars($data['id_transaction'] ?? '') ?>" />
                             </form>
                         </div>
                     </div>
