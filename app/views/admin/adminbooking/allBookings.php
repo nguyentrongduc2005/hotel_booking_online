@@ -37,7 +37,7 @@
                 <td><?= htmlspecialchars($booking['id_booking'] ?? '') ?></td>
                 <td><?= htmlspecialchars($booking['guest_name'] ?? '') ?></td>
                 <td><?= htmlspecialchars($booking['id_room'] ?? '') ?></td>
-                <td><?= htmlspecialchars($booking['room_number'] ?? '') ?></td>
+                <td><?= htmlspecialchars($booking['room_name'] ?? '') ?></td>
                 <td><?= htmlspecialchars($booking['check_in'] ?? $booking['checkin'] ?? '') ?></td>
                 <td><?= htmlspecialchars($booking['check_out'] ?? $booking['checkout'] ?? '') ?></td>
                 <td>

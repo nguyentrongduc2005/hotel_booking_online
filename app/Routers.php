@@ -274,17 +274,18 @@ Router::post('/admin/amenities/delete', 'AdminRoomsController@amenitiesDelete', 
 /////////////////////end amenities/////////////////////////////////////
 
 //////////////////////Booking and historyBooking/////////////////////////////////////
-Router::get('/admin/booking', 'AdminBookingController@bookingIndex', [
+Router::get('/admin/Booking/allbookings', 'AdminBookingController@allIndex', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
-Router::get('/admin/booking/allBookings', 'AdminBookingController@AllIndex', [
+router::get('/admin/Booking/historybookings', 'AdminBookingController@historyIndex', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
-router::get('/admin/booking/historyBookings', 'AdminBookingController@HistoryIndex', [
+//////////////////////SERVICES/////////////////////////////////////
+Router::get('/admin/services', 'AdminServicesController@index', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
