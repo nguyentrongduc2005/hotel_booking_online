@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\core\AppException;
 use app\core\db;
 use \DateTime;
 
@@ -16,7 +17,7 @@ class PaymentModel
 
     function getRoomInfo($slug)
     {
-        $sql = "SELECT room.id_room,room.slug, room.price, room.status, room.area, room.capacity, room_type.name_type_room,  room.thumb
+        $sql = "SELECT room.id_room, room.slug, room.price, room.status, room.area, room.capacity, room_type.name_type_room,  room.thumb
                 FROM room
                 INNER JOIN room_type ON room.id_room_type = room_type.id_type_room
                 WHERE room.slug = :slug";
@@ -98,5 +99,13 @@ class PaymentModel
             'check_out' => $check_out
         ]);
         return $data ? true : false;
+    }
+
+    function updataDiscount($id)
+    {
+        $sql = "UPDATE user SET discount = discount + 1 WHERE user_id = $id";
+        $stmt = db::connect()->prepare($sql);
+        $stmt->execute();
+        return $stmt->rowCount();
     }
 }

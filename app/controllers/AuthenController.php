@@ -17,12 +17,19 @@ class AuthenController extends Controller
 
     function login($req, $res)
     {
-        $this->renderPartial('auth/login');
+        if (isset($_COOKIE['user_id'])) {
+            $this->redirect($this->getConfig('basePath'));
+        } else {
+            $this->renderPartial('auth/login');
+        }
     }
     function regis($req, $res)
     {
-
-        $this->renderPartial('auth/regis');
+        if (isset($_COOKIE['user_id'])) {
+            $this->redirect($this->getConfig('basePath'));
+        } else {
+            $this->renderPartial('auth/regis');
+        }
     }
     function loginHandler($req, $res)
     {
@@ -34,30 +41,18 @@ class AuthenController extends Controller
             $this->renderPartial('auth/login', ['message' => 'Invalid email or password.', 'email' => '', "password" => '']);
             return;
         }
-        if ($user['pass'] !== $password) {
+        // password_verify( $password, $user['pass'])
+        if (!password_verify($password, $user['pass'])) {
             $this->renderPartial('auth/login', ['message' => 'Invalid email or password.', 'email' => '', "password" => '']);
             return;
         }
-        if ($this->model->findTokenbyId($user["user_id"])) {
-            $this->renderPartial('auth/login', ['message' => "This account is already logged in on another device.", 'email' => '', "password" => '']);
-            return;
-        }
+        // if ($this->model->findTokenbyId($user["user_id"])) {
+        //     $this->renderPartial('auth/login', ['message' => "This account is already logged in on another device.", 'email' => '', "password" => '']);
+        //     return;
+        // }
 
-        //tạo token và lưu vào db
-        $idtoken = $this->model->generateAndInsertToken($user["user_id"]);
-        if (!$idtoken) {
-            $this->renderPartial('auth/login', ['message' => "Something went wrong. Please try again.", 'email' => '', "password" => '']);
-            return;
-        }
-        //lưu vào token session để client có thể request
-        $token = $this->model->findTokenByidToken($idtoken);
-        if ($token) {
-            $_SESSION['user_token'] = $token['token'];
-            $now = time();               // thời gian hiện tại (timestamp)
-            $after30Min = $now + 1800;
-            $_SESSION['timer'] = $after30Min;
-        }
-
+        $_SESSION['user_id'] = $user['user_id'];
+        setcookie("user_id", $user['user_id'], time() + (86400 * 7), "/", "", false, true);
 
         $this->renderPartial('auth/login', [
             'message' => "Login successful. Redirecting...",
@@ -72,7 +67,6 @@ class AuthenController extends Controller
     }
     function regisHandler($req, $res)
     {
-
         // xác thực các thông tin chưa tồn tại trong db
         $user  = $req->post();
 
@@ -96,7 +90,7 @@ class AuthenController extends Controller
             $this->renderPartial('auth/regis', $user);
             return;
         }
-
+        $user['pass'] = $hashedPassword = password_hash($user['pass'], PASSWORD_DEFAULT);
         //lưu thông tin người tài khoản vào db user
         $idUser = $this->model->insertUser($user);
         if (!$idUser) {
@@ -105,20 +99,9 @@ class AuthenController extends Controller
             return;
         }
 
-        //lưu token vào db user và session để điều hướng trang qua trang home
-        $idtoken = $this->model->generateAndInsertToken($idUser);
-        if (!$idtoken) {
-            $user['message'] = "Something went wrong. Please try again.";
-            $this->renderPartial('auth/regis', $user);
-            return;
-        }
-        $token = $this->model->findTokenByidToken($idtoken);
-        if ($token) {
-            $_SESSION['user_token'] = $token['token'];
-            $now = time();               // thời gian hiện tại (timestamp)
-            $after30Min = $now + 1800;
-            $_SESSION['timer'] = $after30Min;
-        }
+
+        $_SESSION['user_id'] = $idUser;
+        setcookie("user_id", $idUser, time() + (86400 * 7), "/", "", false, true);
         $user['message'] = "Register successful. Redirecting... ";
         $user['access'] =  $this->getConfig('basePath');
         $this->renderPartial('auth/regis', $user);
@@ -127,37 +110,9 @@ class AuthenController extends Controller
 
     function logoutHandler($req, $res)
     {
-        if (isset($_SESSION["user_token"])) {
-            $id_token = $this->model->findTokenByToken($_SESSION["user_token"]);
-            if ($id_token) {
-                if ($this->model->deleteToken($id_token['id_token'])) {
-                    session_unset();
-                    session_destroy();
-                    $this->redirect($this->getConfig('basePath') . "/login");
-                }
-            } else {
+        session_destroy();
+        setcookie("user_id", '', time() - 1, "/", "", false, true);
 
-                $this->redirect($this->getConfig('basePath') . "/login");
-            }
-        } else {
-            // $this->renderPartial('auth/login', ['email' => '', 'password' => '', 'message' => '']);
-            $this->redirect($this->getConfig('basePath'));
-        }
-    }
-
-
-    function refeshToken($req, $res)
-    {
-
-        if (isset($_SESSION['timer'])) {
-
-            if ($_SESSION['timer'] < time()) {
-                return $res->json(['refreshToken' => false], 401)->send();
-            }
-            $now = time();               // thời gian hiện tại (timestamp)
-            $after30Min = $now + 1800;
-            $_SESSION['timer'] = $after30Min;
-            return $res->json(['refreshToken' => true], 200)->send();
-        }
+        $this->redirect($this->getConfig('basePath'));
     }
 }

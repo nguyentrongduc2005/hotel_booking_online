@@ -3,13 +3,13 @@
 // use app\core\Controller;
 
 Router::get('/', 'HomeController@show', [
-    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleUser',
 ]);
 //router trang list room
 Router::get('/listroom', 'ListRoomController@index', [
-    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleUser',
 ]);
@@ -17,7 +17,7 @@ Router::get('/listroom', 'ListRoomController@index', [
 
 //router trang detail room
 Router::get('/detailroom/{slug}', 'DetailRoomController@index', [
-    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleUser'
 ]);
@@ -33,7 +33,7 @@ Router::get('/services/{slug}', 'ServicesController@detail', [
 ]);
 //router trang liên lạc
 Router::get('/contact', 'ContactController@show', [
-    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleUser',
 ]);
@@ -48,24 +48,98 @@ Router::get('/logout', 'AuthenController@logoutHandler', []);
 
 //kéo dài phiên làm việc;
 Router::get('/refeshToken', "AuthenController@refeshToken");
+/////////////////////////popup///////////////////////////////////////////////////////
 
-
-///////////////////////////PAYMENT////////////////////////////////////////////////////
-//submit từ trang detail room render ra form điền thông tin có
-Router::post('/payment/{slug}', 'PaymentController@formInfo', [
-    'AuthorMiddleware@checktoken',
+Router::get('/user', 'PopUpController@showUser', [
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleUser',
 ]);
+Router::post('/user', 'PopUpController@handlerEditUser', [
+    'AuthorMiddleware@checkSession',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleUser',
+]);
+
+Router::post('/user/changePass', 'PopUpController@changePasswordUser', [
+    'AuthorMiddleware@checkSession',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleUser',
+]);
+
+Router::get('/user/reservations', 'PopUpController@myReservationHandler', [
+    'AuthorMiddleware@checkSession',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleUser',
+]);
+
+Router::post('/user/reservations', 'PopUpController@myReservationHandler', [
+    'AuthorMiddleware@checkSession',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleUser',
+]);
+
+Router::post('/user/reservations/cancel', 'PopUpController@myReservationCancel', [
+    'AuthorMiddleware@checkSession',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleUser',
+]);
+
+Router::get('/user/histories', 'PopUpController@historyHandler', [
+    'AuthorMiddleware@checkSession',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleUser',
+]);
+
+Router::post('/user/histories', 'PopUpController@historyHandler', [
+    'AuthorMiddleware@checkSession',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleUser',
+]);
+
+Router::get('/user/transactions', 'PopUpController@getTransaction', [
+    'AuthorMiddleware@checkSession',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleUser',
+]);
+Router::post('/user/transactions', 'PopUpController@getTransaction', [
+    'AuthorMiddleware@checkSession',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleUser',
+]);
+
+
+
+/////////////////////////////end popup///////////////////////////////////////////////
+
+///////////////////////////PAYMENT////////////////////////////////////////////////////
+//submit từ trang detail room render ra form điền thông tin có
+Router::get('/payment/{slug}', 'PaymentController@formInfo', [
+    'AuthorMiddleware@checkSession',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleUser',
+]);
+Router::post('/payment/{slug}', 'PaymentController@formInfoHandler', [
+    'AuthorMiddleware@checkSession',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleUser',
+]);
+
 //submit từ trang form thông tin xử lý kiểm tra booking của người dùng và lưu vào render chọn method
-Router::post('/payment/{slug}/handler', 'PaymentController@method', [
-    'AuthorMiddleware@checktoken',
+Router::get('/paymentMethod/{slug}', 'PaymentController@getMethod', [
+    'AuthorMiddleware@checkSession',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleUser',
+]);
+Router::post('/paymentMethod/{slug}', 'PaymentController@paymentMethodHandler', [
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleUser',
 ]);
 //submit từ trang chọn method sử lý databasse để lưu vào bảng transaction thành cồng render ra trang thanks nếu không thì render ra fail
-Router::post('/payment/{slug}/transaction', 'PaymentController@paymentMethodHandler', [
-    'AuthorMiddleware@checktoken',
+
+Router::get('/paymentSuccess', 'PaymentController@paymentSuccess', [
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleUser',
 ]);
@@ -77,66 +151,67 @@ Router::post('/payment/{slug}/transaction', 'PaymentController@paymentMethodHand
 
 ////ADMIN//////////////////////////////////////////////////////////////////////////////////
 Router::get('/dashboard', 'DashboardController@show', [
-    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 
 Router::post('/dashboard/confirm', 'DashboardController@bookingConfirm', [
-    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 
 Router::get('/dashboard/checkin', 'DashboardController@checkinShow', [
-    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 Router::post('/dashboard/checkin', 'DashboardController@checkinHandler', [
-    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 
 Router::get('/dashboard/checkout', 'DashboardController@checkoutShow', [
-    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 Router::post('/dashboard/checkout', 'DashboardController@checkoutHandler', [
-    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 
 
+
 //////////////////////rooms///////////////////////////////////////////
 Router::get('/admin/rooms', 'AdminRoomsController@roomsShow', [
-    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 
 // filter rooms
 Router::post('/admin/rooms', 'AdminRoomsController@roomFilter', [
-    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 
 Router::post('/admin/rooms/add', 'AdminRoomsController@roomAdd', [
-    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 Router::post('/admin/rooms/edit', 'AdminRoomsController@roomEdit', [
-    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 Router::post('/admin/rooms/delete', 'AdminRoomsController@roomDelete', [
-    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
@@ -145,26 +220,26 @@ Router::post('/admin/rooms/delete', 'AdminRoomsController@roomDelete', [
 ///////////////////////////////////end rooms/////////////////////////////
 
 ///////////////////type rooms/////////////////////////////////////
-Router::get('/admin/roomtypes', 'AdminTypeRoomsController@typeRoomsShow', [
-    'AuthorMiddleware@checktoken',
+Router::get('/admin/roomtypes', 'AdminRoomsController@typeRoomsShow', [
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 
-Router::post('/admin/roomtypes/add', 'AdminTypeRoomsController@typeRoomsAdd', [
-    'AuthorMiddleware@checktoken',
+Router::post('/admin/roomtypes/add', 'AdminRoomsController@typeRoomsAdd', [
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 
-Router::post('/admin/roomtypes/edit', 'AdminTypeRoomsController@typeRoomsEdit', [
-    'AuthorMiddleware@checktoken',
+Router::post('/admin/roomtypes/edit', 'AdminRoomsController@typeRoomsEdit', [
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 
-Router::post('/admin/roomtypes/delete', 'AdminTypeRoomsController@typeRoomsDelete', [
-    'AuthorMiddleware@checktoken',
+Router::post('/admin/roomtypes/delete', 'AdminRoomsController@typeRoomsDelete', [
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
@@ -173,47 +248,45 @@ Router::post('/admin/roomtypes/delete', 'AdminTypeRoomsController@typeRoomsDelet
 //////////////////end type rooms/////////////////////////////////////
 
 //////////////////////amenities/////////////////////////////////////
-Router::get('/admin/amenities', 'AdminAmenitiesController@amenitiesShow', [
-    'AuthorMiddleware@checktoken',
+Router::get('/admin/amenities', 'AdminRoomsController@amenitiesShow', [
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 
-Router::post('/admin/amenities/add', 'AdminAmenitiesController@amenitiesAdd', [
-    'AuthorMiddleware@checktoken',
+Router::post('/admin/amenities/add', 'AdminRoomsController@amenitiesAdd', [
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 
-Router::post('/admin/amenities/edit', 'AdminAmenitiesController@amenitiesEdit', [
-    'AuthorMiddleware@checktoken',
+Router::post('/admin/amenities/edit', 'AdminRoomsController@amenitiesEdit', [
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 
-Router::post('/admin/amenities/delete', 'AdminAmenitiesController@amenitiesDelete', [
-    'AuthorMiddleware@checktoken',
+Router::post('/admin/amenities/delete', 'AdminRoomsController@amenitiesDelete', [
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 
 /////////////////////end amenities/////////////////////////////////////
 
-///////////////////////transactions/////////////////////////////////////
-
-Router::get('/admin/transactions', 'AdminTransactionsController@transactionsShow', [
-    'AuthorMiddleware@checktoken',
+//////////////////////Booking and historyBooking/////////////////////////////////////
+Router::get('/admin/booking', 'AdminBookingController@bookingIndex', [
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
-
-Router::post('/admin/transactions', 'AdminTransactionsController@transactionFilter', [
-    // 'AuthorMiddleware@checktoken',
-    // 'AuthorMiddleware@author',
-    // 'AuthorMiddleware@checkRoleAdmin',
+Router::get('/admin/booking/allBookings', 'AdminBookingController@AllIndex', [
+    'AuthorMiddleware@checkSession',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
 ]);
-
-
-
-
-///////////////////////end transactions/////////////////////////////////////
+router::get('/admin/booking/historyBookings', 'AdminBookingController@HistoryIndex', [
+    'AuthorMiddleware@checkSession',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);

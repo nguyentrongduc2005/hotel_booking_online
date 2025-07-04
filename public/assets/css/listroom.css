@@ -83,7 +83,7 @@
     transition: background 0.2s;
     color: #FFF;
     min-height: 80px;
-    
+    min-width: 200px;
 }
 
 .search-btn:hover {
@@ -229,15 +229,15 @@ backdrop-filter: blur(10px);
 }
 .room-img {
  height: 100%;
-  width: 210px;
+  width: 230px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .room-img img {
-  width: 210px;
+  width: 230px;
   height: 95%;
-  object-fit: contain;
+  object-fit: cover;
   border-radius: 2px;
   margin-left: 10px;
 }
@@ -570,6 +570,27 @@ background: #2b1f1faf;
 
 }
 .room-list::-webkit-scrollbar-thumb {
-  background: #666262;
-  border-radius: 8px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 10px;
+}
+
+.no-results {
+  text-align: center;
+  padding: 60px 20px;
+  color: #fff;
+  background: rgba(255,255,255,0.1);
+  border-radius: 12px;
+  margin: 20px;
+}
+
+.no-results h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #f2c2c2;
+}
+
+.no-results p {
+  font-size: 1rem;
+  opacity: 0.8;
+  line-height: 1.5;
 }

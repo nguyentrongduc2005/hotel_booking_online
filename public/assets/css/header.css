@@ -78,9 +78,10 @@
     margin: 0 5px;
 }
 .btn-login {
+    position: relative;
+    overflow: hidden;
     color: #fff;
-    background: rgba(255,255,255,0.1);
-    border: 1px solid #fff;
+    border: none;
     min-width: 150px;
     height: fit-content;
     display: flex;
@@ -89,12 +90,37 @@
     padding: 10px 5px 10px;
     align-items: center;
     border-radius: 31px;
-border: 1px solid rgba(51, 47, 30, 0.46);
-background: rgba(228, 228, 228, 0.35);
-}   
+    cursor: pointer;
+    background: rgba(228, 228, 228, 0.35);
+}
 
-.btn-login:hover {
-    background: rgba(124, 119, 119, 0.35);
+.btn-login::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 31px;
+    background: linear-gradient(to right,#77530a,#ffd277,#77530a,#77530a,#ffd277,#77530a);
+    background-size: 250%;
+    background-position: left;
+    transition-duration: 1s;
+    z-index: -1;
+    padding: 2px;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+}
+
+.btn-login:hover::before {
+    background-position: right;
+    transition-duration: 1s;
+}
+
+.btn-login:active {
+    transform: scale(0.95);
 }
 
 .content_btn{

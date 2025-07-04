@@ -95,6 +95,7 @@ class db
         }
         $clause = rtrim($clause, ', ');
         $sql = "UPDATE $tableName SET $clause WHERE $codition";
+
         // echo $sql;
         $stmt = self::connect()->prepare($sql);
         $stmt->execute($params);

@@ -13,19 +13,25 @@ class AdminRoomsModel
         // Initialize the model if needed
     }
 
-    public function getAllRooms()
+    public function getAllRooms($searchName = null)
     {
-        $sql = "SELECT room.id_room,room.slug, room.price, room.status ,room.area ,room.capacity ,room_type.name_type_room,room.id_room_type, COUNT(room_amenity.amenity_id) AS amenity_count FROM room
+        $sql = "SELECT room.id_room, room.name, room.slug, room.price, room.status ,room.area ,room.capacity ,room_type.name_type_room,room.id_room_type, COUNT(room_amenity.amenity_id) AS amenity_count FROM room
                 INNER JOIN room_type on room.id_room_type = room_type.id_type_room
-                LEFT JOIN room_amenity on room.id_room = room_amenity.id_room
-                GROUP BY room.id_room;";
-        $data = db::getAll($sql);
+                LEFT JOIN room_amenity on room.id_room = room_amenity.id_room";
+        $params = [];
+        if ($searchName) {
+            $sql .= " WHERE room.name LIKE :name";
+            $params['name'] = '%' . $searchName . '%';
+        }
+        $sql .= " GROUP BY room.id_room;";
+        $data = db::getAll($sql, $params);
         return $data ? $data : [];
     }
 
     public function getDataByFilter($filter)
     {
         $condition = "";
+        $params = [];
         foreach ($filter as $key => $value) {
             if (!empty($value)) {
                 if ($condition != "") {
@@ -33,19 +39,24 @@ class AdminRoomsModel
                 }
                 if ($key == "capacity" || $key == "area") {
                     $condition .= "room.$key >= :$key";
+                    $params[$key] = $value;
                 } else if ($key == "slug") {
                     $condition .= "room.$key LIKE CONCAT('%', :$key, '%')";
+                    $params[$key] = $value;
                 } else {
                     $condition .= "room.$key = :$key";
+                    $params[$key] = $value;
                 }
             }
         }
-        $sql = "SELECT room.slug, room.price, room.status ,room.area ,room.capacity ,room_type.name_type_room,room.id_room_type, COUNT(room_amenity.amenity_id) AS amenity_count FROM room
+        $sql = "SELECT room.id_room, room.name, room.slug, room.price, room.status ,room.area ,room.capacity ,room_type.name_type_room,room.id_room_type, COUNT(room_amenity.amenity_id) AS amenity_count FROM room
                 INNER JOIN room_type on room.id_room_type = room_type.id_type_room
                 LEFT JOIN room_amenity on room.id_room = room_amenity.id_room
-                GROUP BY room.id_room WHERE $condition;";
-        echo $sql;
-        $data = db::getAll($sql, $filter);
+                GROUP BY room.id_room";
+        if ($condition) {
+            $sql .= " HAVING $condition";
+        }
+        $data = db::getAll($sql, $params);
         return $data ? $data : [];
     }
     function getNameRoomTypes()
@@ -161,7 +172,7 @@ class AdminRoomsModel
             foreach ($data['delete_images'] as $image_id) {
                 $Pimage = db::getOne("SELECT path FROM image_room WHERE id_image = :id_image", ['id_image' => $image_id]);
 
-                $filePath = __DIR__ . '/../../public' . $Pimage['path'];
+                $filePath = dirname(__DIR__, 2) . '/public/assets' . $Pimage['path'];
                 if ($Pimage && file_exists($filePath)) {
                     unlink($filePath);
                 }
@@ -200,9 +211,11 @@ class AdminRoomsModel
         // Xóa ảnh liên quan đến phòng
         $images = db::getAll("SELECT path FROM image_room WHERE id_room = :id_room", ['id_room' => $id_room]);
         foreach ($images as $image) {
-            $filePath = __DIR__ . '/../../public' . $image['path'];
+            $filePath = dirname(__DIR__, 2) . '/public/assets' . $image['path'];
             if (file_exists($filePath)) {
                 unlink($filePath);
+            } else {
+                return false;
             }
         }
         db::delete('image_room', "id_room = $id_room");

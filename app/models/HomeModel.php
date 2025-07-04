@@ -15,13 +15,12 @@ class HomeModel
 
     public function getDataRooms()
     {
-        $data = db::getAll("SELECT room.id_room,room.thumb,room.name, room.slug, room.price FROM room");
+        $data = db::getAll("SELECT room.id_room,room.thumb,room.name, room.slug, room.price FROM room limit 10");
         return $data ? $data : [];
     }
 
     public function getDataServices()
     {
-
         $data = db::getAll("SELECT services.id_service, services.name, services.Path_img FROM services");
         return $data ? $data : [];
     }
