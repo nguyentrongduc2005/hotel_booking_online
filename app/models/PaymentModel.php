@@ -103,7 +103,9 @@ class PaymentModel
 
     function updataDiscount($id)
     {
-        $row = db::update("user", ["discount" => "discount+1"], "user_id = $id");
-        return $row;
+        $sql = "UPDATE user SET discount = discount + 1 WHERE user_id = $id";
+        $stmt = db::connect()->prepare($sql);
+        $stmt->execute();
+        return $stmt->rowCount();
     }
 }
