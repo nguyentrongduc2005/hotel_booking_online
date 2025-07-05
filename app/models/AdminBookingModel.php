@@ -7,7 +7,7 @@ use Exception;
 
 class AdminBookingModel
 {
-    // Lấy tất cả các booking hiện tại (chưa chuyển qua lịch sử)
+    // Lấy tất cả các booking hiện tại
     public function getAllBookings()
     {
         $sql = "SELECT 
