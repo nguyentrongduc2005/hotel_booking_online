@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <?php $room = $data['room']; ?>
-                <pre><?php print_r($data['room']); ?></pre>
+                <!-- <pre><?php print_r($data['room']); ?></pre> -->
 
                 <div class="main-content">
                     <div class="booking-form-container">
@@ -67,6 +67,9 @@
                                 <button type="submit" class="btn-paynow">Pay now</button>
                                 <input type="hidden" id="id_transaction" name="id_transaction"
                                     value="<?= htmlspecialchars($data['id_transaction'] ?? '') ?>" />
+                                <input type="hidden" id="total_amount" name="total_amount" />
+                                <input type="hidden" id="check_in" name="check_in" />
+                                <input type="hidden" id="check_out" name="check_out" />
                             </form>
                         </div>
                     </div>
