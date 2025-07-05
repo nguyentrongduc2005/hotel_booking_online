@@ -276,28 +276,28 @@ Router::post('/admin/amenities/delete', 'AdminRoomsController@amenitiesDelete', 
 
 //////////////////////Booking and historyBooking/////////////////////////////////////
 Router::get('/admin/Booking/allbookings', 'AdminBookingController@allIndex', [
-    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 router::get('/admin/Booking/historybookings', 'AdminBookingController@historyIndex', [
-    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 //////////////////////Admin/////////////////////////////////////
 Router::get('/admin/services', 'AdminServicesController@index', [
-    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 router::get('/admin/customers', 'AdminCustomersController@index', [
-    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 router::get('/admin/accountAdmin', 'AdminAccountController@index', [
-    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
