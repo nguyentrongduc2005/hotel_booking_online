@@ -22,7 +22,7 @@ class AdminServicesController extends Controller
         $search = $req->query('search');
         $services = $this->model->getAllServices($search);
 
-        return $this->render('adminservices/index', [
+        return $this->render('index', [
             'services' => $services,
             'search' => $search
         ]);
@@ -39,7 +39,7 @@ class AdminServicesController extends Controller
         $success = $this->model->addService($data);
 
         if ($success) {
-            return $res->redirect('/admin/services');
+            return $res->redirect('services');
         }
 
         return $res->json(['error' => 'Thêm dịch vụ thất bại'], 400);
@@ -57,7 +57,7 @@ class AdminServicesController extends Controller
         $success = $this->model->editService($data);
 
         if ($success) {
-            return $res->redirect('/admin/services');
+            return $res->redirect('services');
         }
 
         return $res->json(['error' => 'Cập nhật thất bại'], 400);
@@ -70,7 +70,7 @@ class AdminServicesController extends Controller
         $success = $this->model->deleteService($id);
 
         if ($success) {
-            return $res->redirect('/admin/services');
+            return $res->redirect('services');
         }
 
         return $res->json(['error' => 'Xoá thất bại'], 400);
