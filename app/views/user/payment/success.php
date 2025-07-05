@@ -22,7 +22,7 @@
                     <p>Your payment has been successfully processed.</p>
                     <p style="margin-top: 16px; color: #fff; font-size: 1.1rem;">Please check your email for booking details.</p>
                     <div class="success-actions">
-                        <a href="<?= $this->configs->config['basePath'] ?>/" class="btn-success-nav">Continue Shopping</a>
+                        <a href="<?= $this->configs->config['basePath'] ?>listroom" class="btn-success-nav">Continue Booking</a>
                         <a href="<?= $this->configs->config['basePath'] ?>/popup/myTransaction" class="btn-success-nav transaction-btn">View My Transactions</a>
                     </div>
                     <div class="success-social">
