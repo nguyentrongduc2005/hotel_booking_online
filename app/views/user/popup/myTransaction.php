@@ -1,3 +1,11 @@
+<?php
+// Đảm bảo biến $transactions nhận dữ liệu từ backend (tương thích với renderPartial)
+if (!isset($transactions) && isset($data)) {
+  $transactions = $data;
+} elseif (!isset($transactions)) {
+  $transactions = [];
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,8 +26,13 @@
         <div class="back-button"></div>
       </div>
       <div class="header-right">
-        <span class="user-name">Tran Le Duy Minh</span>
-        <a href="user.html">
+        <span class="user-name">
+          <?php if (isset($user) && isset($user['full_name']))
+            echo htmlspecialchars($user['full_name']);
+          else
+            echo 'User'; ?>
+        </span>
+        <a href="<?php echo $this->configs->config['basePath']; ?>/user">
           <div class="avatar"></div>
         </a>
       </div>
@@ -31,34 +44,34 @@
           <div class="sidebar-title">Transaction</div>
 
           <div class="sidebar-menu">
-            <a href="user.html" class="menu-item">
+            <a href="<?php echo $this->configs->config['basePath']; ?>/user" class="menu-item">
               <div class="menu-icon">
-                <img src="icon/user.svg" alt="User" />
+                <img src="icon/popup-user.svg" alt="User" />
               </div>
               <span>User</span>
             </a>
             <div class="menu-item active">
               <div class="menu-icon">
-                <img src="icon/pay.svg" alt="Transaction" />
+                <img src="icon/popup-transaction.svg" alt="Transaction" />
               </div>
               <span>Transaction</span>
             </div>
-            <a href="reservation.html" class="menu-item">
+            <a href="<?php echo $this->configs->config['basePath']; ?>/user/reservations" class="menu-item">
               <div class="menu-icon">
-                <img src="icon/rev.svg" alt="My Reservation" />
+                <img src="icon/popup-reservation.svg" alt="My Reservation" />
               </div>
               <span>My Reservation</span>
             </a>
-            <a href="historybooking.html" class="menu-item">
+            <a href="<?php echo $this->configs->config['basePath']; ?>/user/histories" class="menu-item">
               <div class="menu-icon">
-                <img src="icon/history.svg" alt="My History Booking" />
+                <img src="icon/popup-history.svg" alt="My History Booking" />
               </div>
               <span>My History Booking</span>
             </a>
           </div>
         </div>
 
-        <a href="guest.html" class="sidebar-logout">
+        <a href="<?php echo $this->configs->config['basePath']; ?>/logout" class="sidebar-logout">
           <div class="logout-icon">
             <img src="icon/logout.svg" alt="Logout" />
           </div>
@@ -78,17 +91,26 @@
         </form>
 
         <?php if (!empty($transactions)): ?>
-          <?php foreach ($transactions as $data): ?>
+          <?php foreach ($transactions as $tran): ?>
             <div class="card">
               <div class="card-left">
-                <div class="hotel-name">Transaction ID: <?= htmlspecialchars($data['id']) ?></div>
-                <div class="transaction-line">Method: <?= htmlspecialchars($data['method']) ?></div>
-                <div class="transaction-line"><?= htmlspecialchars($data['date']) ?></div>
-                <div class="status" data-status="<?= htmlspecialchars(strtolower($data['status'])) ?>">
-                  <?= htmlspecialchars($data['status']) ?>
+                <div class="hotel-name">Transaction ID:
+                  <?= isset($tran['transaction_id']) ? htmlspecialchars($tran['transaction_id']) : '' ?>
+                </div>
+                <div class="transaction-line">Method:
+                  <?= isset($tran['method']) ? htmlspecialchars($tran['method']) : (isset($tran['payment_method']) ? htmlspecialchars($tran['payment_method']) : 'N/A') ?>
+                </div>
+                <div class="transaction-line">
+                  <?= isset($tran['created_at']) ? htmlspecialchars($tran['created_at']) : (isset($tran['date']) ? htmlspecialchars($tran['date']) : '') ?>
+                </div>
+                <div class="status"
+                  data-status="<?= isset($tran['payment_status']) ? htmlspecialchars(strtolower($tran['payment_status'])) : '' ?>">
+                  <?= isset($tran['payment_status']) ? htmlspecialchars($tran['payment_status']) : '' ?>
                 </div>
               </div>
-              <div class="price">$<?= htmlspecialchars($data['amount']) ?></div>
+              <div class="price">
+                $<?= isset($tran['total_amount']) ? htmlspecialchars($tran['total_amount']) : (isset($tran['amount']) ? htmlspecialchars($tran['amount']) : '0.00') ?>
+              </div>
             </div>
           <?php endforeach; ?>
         <?php else: ?>
@@ -97,7 +119,7 @@
 
       </div>
     </div>
-    <script src="main.js"></script>
+
 </body>
 
 </html>

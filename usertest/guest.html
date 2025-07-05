@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guest Popup</title>
+    <link rel="stylesheet" href="guest.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container" id="main-content">
+      <div class="header">
+        <div class="header-left">
+          <div class="back-button"></div>
+        </div>
+        <div class="header-right">
+          <span class="user-name">Welcome Guest</span>
+          <div class="avatar"></div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="sidebar">
+          <div class="sidebar-top">
+            <div class="sidebar-title">User Profile</div>
+
+            <div class="sidebar-menu">
+              <div class="menu-item active">
+                <div class="menu-icon">
+                  <img src="icon/user.svg" alt="User" />
+                </div>
+                <span>User</span>
+              </div>
+              <a href="transaction.html" class="menu-item">
+                <div class="menu-icon">
+                  <img src="icon/pay.svg" alt="Transaction" />
+                </div>
+                <span>Transaction</span>
+              </a>
+              <a href="reservation.html" class="menu-item">
+                <div class="menu-icon">
+                  <img src="icon/rev.svg" alt="Reservation" />
+                </div>
+                <span>My Reservation</span>
+              </a>
+              <a href="historybooking.html" class="menu-item">
+                <div class="menu-icon">
+                  <img src="icon/history.svg" alt="History Booking" />
+                </div>
+                <span>My History Booking</span>
+              </a>
+            </div>
+          </div>
+
+          <a href="guest.html" class="sidebar-logout">
+            <div class="logout-icon">
+              <img src="icon/logout.svg" alt="Logout" />
+            </div>
+            <span>Logout</span>
+          </a>
+        </div>
+
+        <div class="main">
+          <div class="profile-avatar-name">
+            <div class="avatar-wrapper">
+              <div class="main-avatar">
+                <img src="icon/Vector.svg" alt="AvatarEDIT" />
+              </div>
+            </div>
+            <div class="profile-name">Welcome Guest</div>
+          </div>
+
+          <div class="profile-form">
+            <div class="form-row">
+              <label>Full Name</label>
+              <input type="text" />
+            </div>
+            <div class="form-row">
+              <label>Citizen ID</label>
+              <input type="text" />
+            </div>
+            <div class="form-row">
+              <label>Email</label>
+              <input type="email" />
+            </div>
+            <div class="form-row">
+              <label>Phone</label>
+              <input type="tel" />
+            </div>
+            <div class="form-row">
+              <label>Password</label>
+              <input type="password" />
+            </div>
+          </div>
+
+          <div class="profile-actions">
+            <div class="action-buttons">
+              <button class="save-btn">Save</button>
+              <button class="cancel-btn">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
