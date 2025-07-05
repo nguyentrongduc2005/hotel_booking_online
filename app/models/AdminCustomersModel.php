@@ -6,15 +6,50 @@ use app\core\db;
 
 class AdminCustomersModel
 {
-    public function getGuests()
+    public function __construct()
     {
-        $sql = "SELECT * FROM guest ORDER BY created_at DESC";
-        return db::getAll($sql);
+        db::connect();
     }
 
-    public function getUsers()
+    
+    public function getAllUsers($searchName = null)
     {
-        $sql = "SELECT * FROM user ORDER BY created_at DESC";
-        return db::getAll($sql);
+        $sql = "SELECT user_id, full_name, email, phone_number FROM user";
+        $params = [];
+
+        if (!empty($searchName)) {
+            $sql .= " WHERE full_name LIKE :name";
+            $params['name'] = '%' . $searchName . '%';
+        }
+
+        $sql .= " ORDER BY user_id DESC";
+        return db::getAll($sql, $params) ?: [];
+    }
+
+    
+    public function getAllGuests($searchName = null)
+    {
+        $sql = "SELECT guest_id, full_name, email, phone_number FROM guest";
+        $params = [];
+
+        if (!empty($searchName)) {
+            $sql .= " WHERE full_name LIKE :name";
+            $params['name'] = '%' . $searchName . '%';
+        }
+
+        $sql .= " ORDER BY guest_id DESC";
+        return db::getAll($sql, $params) ?: [];
+    }
+
+   
+    public function deleteUser($userId)
+    {
+        return db::delete("user", "user_id = $userId") ? true : false;
+    }
+
+    
+    public function deleteGuest($guestId)
+    {
+        return db::delete("guest", "guest_id = $guestId") ? true : false;
     }
 }
