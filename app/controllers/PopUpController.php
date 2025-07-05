@@ -32,7 +32,8 @@ class PopUpController extends Controller
 
     function handlerEditUser($req, $res)
     {
-        if (!isset($_SESSION['user_id'])) return;
+        if (!isset($_SESSION['user_id']))
+            return;
         $data = $req->post() ?? [];
 
         $row = $this->model->updateUser($data, $_SESSION['user_id']);
@@ -43,11 +44,15 @@ class PopUpController extends Controller
 
     function changePasswordUser($req, $res)
     {
-        if (!$_SESSION) return false;
+        $data = false;
+        if (!$_SESSION)
+
+            $data = false;
         $id = $_SESSION['user_id'];
 
         $payload = $req->payload();
-        if (!isset($payload)) return false;
+        if (!isset($payload))
+            $data = false;
         $check = $this->model->checkUpdatePass([
             'pass_old' => $payload["pass_old"],
             'pass_new' => $payload["pass_new"],
@@ -122,7 +127,8 @@ class PopUpController extends Controller
             // $this->render('myReservation', []);
         }
         $this->renderPartial('user/popup/myTransaction', $data);
-        // echo "<pre>";
-        // print_r($data);
+        echo "<pre>";
+        print_r($data);
+        die();
     }
 }

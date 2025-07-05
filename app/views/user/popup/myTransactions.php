@@ -94,6 +94,7 @@
         <?php else: ?>
           <div style="padding: 20px; color: #888;">No transactions found.</div>
         <?php endif; ?>
+
       </div>
     </div>
     <script src="main.js"></script>
