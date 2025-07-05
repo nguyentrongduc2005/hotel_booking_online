@@ -123,7 +123,7 @@ class PopUpModel
             $tran = db::getAll($sql, ['transaction_id' => $transaction['transaction_id']]);
             $transactions = array_merge($transactions, $tran);
         }
-
+        
         return $transactions ?? [];
     }
 }

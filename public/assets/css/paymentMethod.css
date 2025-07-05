@@ -40,7 +40,8 @@ body > #khung > #footer {
 }
 
 .container-payment {
-    margin-top: -150px;
+    margin-top: 150px;
+    margin-bottom: 50px;
     width: 100%;
     max-width: 1100px;
     position: relative;
