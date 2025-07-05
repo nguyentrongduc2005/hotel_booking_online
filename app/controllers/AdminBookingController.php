@@ -21,7 +21,7 @@ class AdminBookingController extends Controller
     {
         $filters = [
             'guest_name' => $req->query('guest_name'),
-            'room_code'  => $req->query('room_code'),
+            'id_room'  => $req->query('id_room'),
             'check_in'   => $req->query('check_in'),
             'check_out'  => $req->query('check_out')
         ];
@@ -43,12 +43,12 @@ class AdminBookingController extends Controller
     {
         $filters = [
             'guest_name' => $req->query('guest_name'),
-            'room_code'  => $req->query('room_code'),
+            'id_room'  => $req->query('id_room'),
             'check_in'   => $req->query('check_in'),
             'check_out'  => $req->query('check_out')
         ];
 
-         $bookings = $this->model->bookingFilter('booking', $filters);
+         $bookings = $this->model->bookingFilter('historybooking', $filters);
         //  echo "<pre>";
         // print_r($bookings);
         // echo "</pre>";
@@ -58,5 +58,6 @@ class AdminBookingController extends Controller
             'filters' => $filters
         ]);
     }
+ 
          
 }

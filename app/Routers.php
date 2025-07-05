@@ -285,8 +285,18 @@ router::get('/admin/Booking/historybookings', 'AdminBookingController@historyInd
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
-//////////////////////SERVICES/////////////////////////////////////
+//////////////////////Admin/////////////////////////////////////
 Router::get('/admin/services', 'AdminServicesController@index', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+router::get('/admin/customers', 'AdminCustomersController@index', [
+    'AuthorMiddleware@checktoken',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+router::get('/admin/accountAdmin', 'AdminAccountController@index', [
     'AuthorMiddleware@checktoken',
     'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',

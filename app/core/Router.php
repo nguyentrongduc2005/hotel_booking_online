@@ -149,7 +149,7 @@ class Router
 
             if (!$match) {
 
-               echo "loi"; // throw new AppException("Not Found", 404);
+              echo "loi";         //   throw new AppException("Not Found", 404);
             }
         }
     }
