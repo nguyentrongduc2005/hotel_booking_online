@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <?php $room = $data['room']; ?>
-                <pre><?php print_r($data['room']); ?></pre>
+                <!-- <pre><?php print_r($data['room']); ?></pre> -->
 
                 <div class="main-content">
                     <div class="booking-form-container">
