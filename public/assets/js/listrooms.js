@@ -136,48 +136,18 @@ function autoSubmitForm() {
   const form = document.querySelector('.search-bar');
   const submitBtn = form.querySelector('.search-btn');
 
-  const checkInValue = checkIn.value;
-  const checkOutValue = checkOut.value;
-
-  if (!checkInValue || !checkOutValue) {
-    setTimeout(() => {
-      alert("Oops! Don't forget to pick both check-in and check-out dates.");
-    }, 3000);
-    // set timeout 5s để hiển thị alert
-    return;
-  }
-  // Convert về Date object để so sánh ngày
-  function parseDateFromInput(dateStr) {
-    const [yyyy, mm, dd] = dateStr.split('-').map(Number);
-    return new Date(yyyy, mm - 1, dd); // tháng -1 vì JS tính từ 0
-  }
-
-  const checkInDate = parseDateFromInput(checkInValue);
-  const checkOutDate = parseDateFromInput(checkOutValue);
-  // Check ngày checkout phải sau checkin
-  const diffDays = (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24);
-  // Lấy lại giá trị ngày hôm nay và mai cho search 
-  if (diffDays < 1) {
-    setTimeout(() => {
-      checkIn.value = datePresent;
-      checkOut.value = nextDate;
-      alert("Check-out date must be at least 1 day after check-in date.");
-      return;
-    }, 1500);
-    // Set lại giá trị cho input cho thanh search như bên home page
-    checkInDate
-    return;
-  }
   // validate 
   // trước khi đưa vào sessionSt
   // Lưu dữ liệu đã submit vào sessionStorage trước khi submit form
+
   sessionStorage.setItem('lastSearch', JSON.stringify({
-    checkIn: checkInValue,
-    checkOut: checkOutValue,
-    diffDays: getDiffDays(checkInValue, checkOutValue),
+    checkIn: checkIn.value,
+    checkOut: checkOut.value,
+    diffDays: getDiffDays(checkIn.value, checkOut.value),
   }));
   // Thêm loading state
-
+  // checkIn.value = datePresent;
+  // checkOut.value = nextDate;
   form.submit();
   // log ra console để kiểm tra
   // console.log('Form submitted with filters:', {
@@ -191,7 +161,7 @@ let submitTimeout;
 
 function debouncedSubmit() {
   clearTimeout(submitTimeout);
-  submitTimeout = setTimeout(autoSubmitForm, 1000);
+  submitTimeout = setTimeout(autoSubmitForm, 3000);
 }
 
 // Auto submit khi thay đổi filter
@@ -206,13 +176,28 @@ document.getElementById('room_count_select').addEventListener('change', function
 });
 
 // Submit form khi thay đổi ngày
-document.getElementById('check_in').addEventListener('change', function () {
-  debouncedSubmit();
-});
+function onDateChange() {
+  clearTimeout(checkTimeout);
+  checkTimeout = setTimeout(() => {
+    const checkInValue = checkIn.value;
+    const checkOutValue = checkOut.value;
+    if (!checkInValue || !checkOutValue) return;
 
-document.getElementById('check_out').addEventListener('change', function () {
-  debouncedSubmit();
-});
+    if (!isValidDateRange(checkInValue, checkOutValue)) {
+      // Nếu nhập sai, alert và đặt lại ngày về mặc định
+      alert("Ngày trả phòng phải sau ngày nhận phòng ít nhất 1 ngày!");
+      checkIn.value = datePresent;
+      checkOut.value = nextDate;
+      return;
+    }
+    // Nếu hợp lệ thì submit
+    debouncedSubmit();
+  }, 500);
+}
+
+// Gắn sự kiện cho input ngày (chỉ dùng 1 cơ chế)
+checkIn.addEventListener('change', onDateChange);
+checkOut.addEventListener('change', onDateChange);
 
 // Khi vào trang listroom, nếu chưa có lastSearch thì set mặc định hôm nay và ngày mai
 if (!sessionStorage.getItem('lastSearch')) {
@@ -240,6 +225,18 @@ function getDiffDays(checkInValue, checkOutValue) {
 }
 
 // console.log(getDiffDays('2024-06-01', '2024-06-05'));
+
+function isValidDateRange(checkInValue, checkOutValue) {
+  if (!checkInValue || !checkOutValue) return false;
+  const [yyyy1, mm1, dd1] = checkInValue.split('-').map(Number);
+  const [yyyy2, mm2, dd2] = checkOutValue.split('-').map(Number);
+  const checkInDate = new Date(yyyy1, mm1 - 1, dd1);
+  const checkOutDate = new Date(yyyy2, mm2 - 1, dd2);
+  const diffDays = (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24);
+  return diffDays >= 1;
+}
+
+let checkTimeout;
 
 
 

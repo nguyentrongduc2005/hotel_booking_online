@@ -2,6 +2,11 @@ body {
     padding: 0;
     margin: 0;
     background-color: #0C0B0E;
+    scrollbar-width: none;      /* Firefox */
+    -ms-overflow-style: none;   /* IE, Edge */
+}
+body::-webkit-scrollbar {
+    display: none;              /* Chrome, Safari */
 }
 
 #khung {
@@ -14,11 +19,6 @@ body {
     background-position: top center;
 }
 
-#main {
-    flex: 1;
-    min-height: 130vh;
-
-}
 
 #hero-section {
     min-height: 95vh;
@@ -149,7 +149,47 @@ label.title {
 .search-icon {
     font-size: 1.2rem;
 }
+.scroll-container::-webkit-scrollbar {
+    width: 6px; /* Độ rộng mảnh */
+  }
+  
+  .scroll-container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .scroll-container::-webkit-scrollbar-thumb {
+    background-color: #452525;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
 
+  input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 9px;
+  background: #f7eed7b7;
+  border-radius: 4px;
+  outline: none;
+
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 17px;
+  height: 17px;
+  background: #d8bca6f3;
+  border: 2px solid #fff7f7ee;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s ease, border 0.3s ease;
+}
+input[type=range]::-webkit-slider-thumb:hover {
+   background: #f8f4f1f8;
+  border: 2px solid #e4d3c7ee;
+   transform: scale(1.1);
+}
 @media (max-width: 700px) {
     .hero-title {
         font-size: 2.2rem;
