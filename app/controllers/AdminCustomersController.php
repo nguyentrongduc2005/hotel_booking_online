@@ -15,12 +15,14 @@ class AdminCustomersController extends Controller
         $this->model = new AdminCustomersModel();
     }
 
-    public function index($req, $res)
+    public function index()
     {
-        $customers = $this->model->getAllCustomers();
+        $guests = $this->model->getGuests();
+        $users = $this->model->getUsers();
 
         return $this->render('index', [
-            'customers' => $customers
+            'guests' => $guests,
+            'users' => $users
         ]);
     }
 }

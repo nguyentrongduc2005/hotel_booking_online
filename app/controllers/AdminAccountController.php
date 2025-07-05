@@ -19,7 +19,7 @@ class AdminAccountController extends Controller
     {
         $admins = $this->model->getAllAdmins();
 
-        return $this->render('admin/AdminAccounts/index', [
+        return $this->render('index', [
             'admins' => $admins
         ]);
     }
