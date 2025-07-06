@@ -341,3 +341,9 @@ Router::post('/admin/services/delete/:id', 'AdminServicesController@delete', [
     'AuthorMiddleware@checkSession',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
+
+//Không thèm làm router cho toi luôn mà!!!!!
+Router::get('/admin/transactions', 'AdminTransactionsController@transactionsShow', [
+    'AuthorMiddleware@checkSession',
+    'AuthorMiddleware@checkRoleAdmin',
+]);

@@ -15,7 +15,7 @@ class AdminRoomsModel
 
     public function getAllRooms($searchName = null)
     {
-        $sql = "SELECT room.id_room, room.name, room.slug, room.price, room.status ,room.area ,room.capacity ,room_type.name_type_room,room.id_room_type, COUNT(room_amenity.amenity_id) AS amenity_count FROM room
+        $sql = "SELECT room.id_room, room.name, room.slug, room.price, room.status ,room.area ,room.capacity ,room.amount_bed, room_type.name_type_room,room.id_room_type, COUNT(room_amenity.amenity_id) AS amenity_count FROM room
                 INNER JOIN room_type on room.id_room_type = room_type.id_type_room
                 LEFT JOIN room_amenity on room.id_room = room_amenity.id_room";
         $params = [];
@@ -49,7 +49,7 @@ class AdminRoomsModel
                 }
             }
         }
-        $sql = "SELECT room.id_room, room.name, room.slug, room.price, room.status ,room.area ,room.capacity ,room_type.name_type_room,room.id_room_type, COUNT(room_amenity.amenity_id) AS amenity_count FROM room
+        $sql = "SELECT room.id_room, room.name, room.slug, room.price, room.status ,room.area ,room.capacity ,room.amount_bed, room_type.name_type_room,room.id_room_type, COUNT(room_amenity.amenity_id) AS amenity_count FROM room
                 INNER JOIN room_type on room.id_room_type = room_type.id_type_room
                 LEFT JOIN room_amenity on room.id_room = room_amenity.id_room
                 GROUP BY room.id_room";
@@ -208,20 +208,21 @@ class AdminRoomsModel
 
     function deleteRoom($id_room)
     {
-        // Xóa ảnh liên quan đến phòng
+        // Xóa lịch sử booking liên quan đến phòng
+        db::delete('historybooking', "id_room = $id_room");
+        // Xóa booking liên quan đến phòng
+        db::delete('booking', "id_room = $id_room");
+        // Xóa tiện nghi liên quan đến phòng
+        db::delete('room_amenity', "id_room = $id_room");
+        // Xóa ảnh liên quan đến phòng (và file vật lý)
         $images = db::getAll("SELECT path FROM image_room WHERE id_room = :id_room", ['id_room' => $id_room]);
         foreach ($images as $image) {
             $filePath = dirname(__DIR__, 2) . '/public/assets' . $image['path'];
             if (file_exists($filePath)) {
                 unlink($filePath);
-            } else {
-                return false;
             }
         }
         db::delete('image_room', "id_room = $id_room");
-        // Xóa tiện nghi liên quan đến phòng
-        db::delete('room_amenity', "id_room = $id_room");
-
         // Xóa phòng
         $row = db::delete('room', "id_room = $id_room");
         return $row ? true : false;
