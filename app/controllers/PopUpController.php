@@ -127,9 +127,6 @@ class PopUpController extends Controller
         } else {
             // $this->render('myReservation', []);
         }
-        $this->renderPartial('user/popup/myTransaction', $data);
-        echo "<pre>";
-        print_r($data);
-        die();
+        $this->renderPartial('user/popup/myTransactions', $data);
     }
 }
