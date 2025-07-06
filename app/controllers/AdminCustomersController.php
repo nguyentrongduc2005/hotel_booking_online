@@ -10,10 +10,13 @@ class AdminCustomersController extends Controller
 {
     private $model;
 
-    public function __construct()
+    public     function __construct()
     {
         parent::__construct();
         $this->model = new AdminCustomersModel();
+        // Set viewpathComponent to /admin for admin controllers
+        self::setcomponent('/admin');
+        self::setLayout('AdminLayouts/main');
     }
 
     public function index(Request $req, $res)

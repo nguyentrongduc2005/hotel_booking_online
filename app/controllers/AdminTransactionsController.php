@@ -14,19 +14,22 @@ class AdminTransactionsController extends Controller
     {
         parent::__construct();
         $this->model = new AdminTransactionsModel();
+        // Set viewpathComponent to /admin for admin controllers
+        self::setcomponent('/admin');
+        self::setLayout('AdminLayouts/main');
     }
 
     function transactionsShow($req, $res)
     {
-        $data = $this->model->getAllTransactions();
-        $this->render('index', $data);
+        $transactions = $this->model->getAllTransactions();
+        $this->render('index', ['transactions' => $transactions]);
     }
 
 
     function transactionFilter($req, $res)
     {
         $filter = $req->post();
-        $data = $this->model->transactionFilter($filter);
-        $this->render('index', $data);
+        $transactions = $this->model->transactionFilter($filter);
+        $this->render('index', ['transactions' => $transactions]);
     }
 }
