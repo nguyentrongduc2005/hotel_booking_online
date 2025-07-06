@@ -211,3 +211,125 @@ input[type=range]::-webkit-slider-thumb:hover {
         height: 60px;
     }
 }
+
+#preloader {
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  background: #111;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s;
+}
+
+.preloader-capsule {
+  position: relative;
+  width: 980px;
+  height: 110px;
+  background: #131212; /* Đen nhạt hơn nền */
+  border-radius: 2px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.15);
+}
+
+.preloader-bar {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 0;
+  background: #ffffffd7;
+  opacity: 0.92;
+  transition: width 1.2s cubic-bezier(.4,0,.2,1);
+  z-index: 1;
+}
+
+.preloader-text {
+  position: relative;
+  z-index: 2;
+  font-family: 'Inter', sans-serif;
+  font-size: 2.4rem;
+  color: #f1d8d8;
+  font-weight: 700;
+  letter-spacing: 2px;
+  mix-blend-mode: difference; /* Để chữ luôn nổi bật trên nền trắng hoặc đen */
+  text-align: center;
+  width: 100%;
+  user-select: none;
+
+}
+
+
+
+.preloader-desc {
+  position: absolute;
+  bottom: 7%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #d6cfc2;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  opacity: 0.85;
+  text-align: center;
+  width: 100%;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Hiệu ứng mask fade out hình chữ nhật */
+@keyframes mask-fade-out {
+  0% {
+    mask-image: none;
+    -webkit-mask-image: none;
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    mask-image: radial-gradient(rectangle at 50% 50%, transparent 60%, black 100%);
+    -webkit-mask-image: radial-gradient(rectangle at 50% 50%, transparent 60%, black 100%);
+    opacity: 0;
+  }
+}
+
+/* Viên thuốc phóng to và làm rõ background */
+.preloader-capsule.animate-out {
+  animation: capsule-scale-full 0.9s cubic-bezier(.4,0,.2,1) forwards;
+  z-index: 10;
+}
+@keyframes capsule-scale-full {
+  to {
+    transform: scale(12, 12);
+    opacity: 1;
+  }
+}
+
+/* Chữ Diamond Hotel mờ dần và scale nhỏ lại */
+.preloader-text.animate-out {
+  animation: text-fade-scale-out 0.7s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes text-fade-scale-out {
+  to {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+}
+
+/* Dòng mô tả biến mất bình thường */
+.preloader-desc.animate-out {
+  animation: desc-fade-out 0.5s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes desc-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+#preloader.animate-out {
+  animation: mask-fade-out 0.8s cubic-bezier(.4,0,.2,1) forwards;
+}
