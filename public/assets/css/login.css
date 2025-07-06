@@ -1,3 +1,20 @@
+@font-face {
+    font-family: 'SVN-Gilroy';
+    src: url('../font/SVN-Gilroy.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: 'SVN-Gilroy';
+    src: url('../font/SVN-GilroyBold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
+
+
 .login-bg-overlay {
     position: fixed;
     inset: 0;
@@ -41,6 +58,8 @@
 }
 
 .login-signup-btn {
+    font-family: SVN-Gilroy;
+    font-weight: bold !important;
     background: #181511;
     color: #fff;
     border: none;
@@ -55,7 +74,7 @@
 }
 
 .login-title {
-    font-family: 'Montserrat', sans-serif;
+    font-family: SVN-Gilroy;
     font-size: 1.6rem;
     font-weight: bold;
     margin-bottom: 8px;
@@ -63,11 +82,13 @@
 }
 
 .login-sub {
+    font-family: SVN-Gilroy;
     color: #888;
     margin-bottom: 24px;
 }
 
 .login-form label {
+    font-family: SVN-Gilroy;
     color: #222;
     font-size: 1rem;
     margin-bottom: 4px;
@@ -76,6 +97,7 @@
 
 .login-form input[type="email"],
 .login-form input[type="password"] {
+    font-family: SVN-Gilroy;
     width: 100%;
     padding: 12px 14px;
     margin-bottom: 16px;
@@ -114,11 +136,13 @@
 }
 
 .login-remember {
+    font-family: SVN-Gilroy;
     color: #888;
     font-size: 0.95rem;
 }
 
 .login-forgot {
+    font-family: SVN-Gilroy;
     color: #888;
     font-size: 0.95rem;
     text-decoration: none;
@@ -129,6 +153,7 @@
 }
 
 .login-submit-btn {
+    font-family: SVN-Gilroy;
     width: 100%;
     background: #181511;
     color: #fff;

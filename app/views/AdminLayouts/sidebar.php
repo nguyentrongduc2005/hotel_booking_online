@@ -52,6 +52,9 @@
       <li class="sidebar-item sidebar-transactions"><a
           href="<?= $this->configs->config['basePath'] ?>/admin/transactions"
           style="text-decoration: none; color: #fff;">Transactions</a></li>
+      <li class="sidebar-item sidebar-transactions"><a
+          href="<?= $this->configs->config['basePath'] ?>/logout"
+          style="text-decoration: none; color: #fff;">Logout</a></li>
     </ul>
   </nav>
 </aside>

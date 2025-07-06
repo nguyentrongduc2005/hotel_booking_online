@@ -64,6 +64,7 @@ function deleteUser(userId) {
                 'Content-Type': 'application/json',
             }
         })
+        
         .then(response => response.json())
         .then(data => {
             if (data.success) {

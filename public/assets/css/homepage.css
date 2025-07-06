@@ -1,3 +1,20 @@
+@font-face {
+  font-family: 'SVN-Gilroy';
+  src: url('../font/SVN-Gilroy.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SVN-Gilroy';
+  src: url('../font/SVN-GilroyBold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+
 .welcome-container {
 
   background-color: #0C0B0E;
@@ -773,11 +790,11 @@
 }
 .search-group .title1{
   font-size: 1.1rem;
-  font-weight: 600;
   margin: 5px;
   min-width: 90px;
   margin-top: 15px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'SVN-Gilroy';
+  font-weight: bold;
   margin-right: 10px;
 }
 .search-group:first-child {
@@ -845,6 +862,7 @@ input[type="date"].search-date:-ms-input-placeholder { color: #fff; opacity: 0.7
 input[type="date"].search-date::placeholder { color: #fff; opacity: 0.7;}
 
 .room-select {
+  font-family: 'SVN-Gilroy';
   background: rgba(255, 242, 242, 0.432);
   border: 1.5px solid #fff;
   border-radius: 8px;
