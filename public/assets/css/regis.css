@@ -1,3 +1,20 @@
+@font-face {
+    font-family: 'SVN-Gilroy';
+    src: url('../font/SVN-Gilroy.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: 'SVN-Gilroy';
+    src: url('../font/SVN-GilroyBold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
+
+
 .regis-bg-overlay {
     position: fixed;
     inset: 0;
@@ -37,7 +54,7 @@
     background-position: center;
 }
 .regis-title {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'SVN-Gilroy';
     font-size: 1.6rem;
     font-weight: bold;
     margin-bottom: 32px;
@@ -47,6 +64,7 @@
 .regis-form input[type="text"],
 .regis-form input[type="email"],
 .regis-form input[type="password"] {
+    font-family: 'SVN-Gilroy';
     width: 100%;
     padding: 12px 14px;
     margin-bottom: 16px;
@@ -64,6 +82,8 @@
     margin-bottom: 0;
 }
 .regis-submit-btn {
+    font-family: 'SVN-Gilroy';
+    font-weight: bold;
     width: 100%;
     background: #181511;
     color: #fff;
@@ -80,12 +100,14 @@
     background: #333;
 }
 .regis-bottom-link {
+    font-family: 'SVN-Gilroy';
     margin-top: 32px;
     text-align: right;
     color: #888;
     font-size: 1rem;
 }
 .regis-login-link {
+    font-family: 'SVN-Gilroy';
     color: #1976d2;
     text-decoration: none;
     margin-left: 4px;

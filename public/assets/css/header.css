@@ -1,4 +1,20 @@
 /* Header/navbar trong suốt */
+@font-face {
+  font-family: 'SVN-Gilroy';
+  src: url('../font/SVN-Gilroy.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SVN-Gilroy';
+  src: url('../font/SVN-GilroyBold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
 .header {
     background: rgba(0, 0, 0, 0.1); /* nền đen trong suốt */
     backdrop-filter: blur(8px);      /* hiệu ứng mờ */
@@ -214,6 +230,7 @@
   align-items: center;
   justify-content: center;
 }
+
 .login-popup-content {
   background: #fff;
   border-radius: 12px;
@@ -222,7 +239,7 @@
   max-width: 95vw;
   padding: 0 0 24px 0;
   position: relative;
-  font-family: 'Inter', sans-serif;
+  font-family: SVN-Gilroy;
 }
 .login-popup-header {
   display: flex;
@@ -233,15 +250,16 @@
   border-radius: 12px 12px 0 0;
   position: relative;
 }
-      .login-popup-avatar {
+
+.login-popup-avatar {
         width: 100px;
         height: 100px;
         border-radius: 50%;
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
+}
 
-      }
 .login-popup-signup {
   background: #ff9800;
   color: #fff;
