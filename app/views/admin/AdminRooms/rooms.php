@@ -226,7 +226,7 @@
             </div>
 
             <label class="add-room-label">Ảnh hiện tại (Tick để xóa):</label>
-            <div id="edit-room-images" style="display: flex; flex-wrap: wrap; gap: 3px; margin-bottom: 5px;"></div>
+            <div id="edit-room-images" style="display: flex; flex-wrap: wrap; gap: 3px; margin-bottom: 5px; margin-top: 10px;"></div>
 
             <label class="add-room-label">Upload nhiều ảnh (nếu muốn thay):</label>
             <input type="file" name="new_images[]" id="edit_images_input" multiple>
