@@ -109,20 +109,44 @@
   background: #f7931e;
   color: #fff;
   border: none;
-  padding: 0.4rem 0.7rem;
+  padding: 0.7rem 1rem;
   border-radius: 25px;
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 1.1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  display: flex;
-  flex-direction: row;
   margin: 0.1rem;
+  margin: 10px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  color: white;
+  font-weight: 700;
+  box-shadow: 0px 0px 14px -7px #f09819;
+  background-image: linear-gradient(45deg, #FF512F 0%, #F09819  51%, #FF512F  100%);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin: 0 auto;
 }
-
+.btn-view-detail{
+  text-decoration: none;
+  
+}
 .book-btn:hover {
   background: #e67e00;
   transform: translateY(-2px);
+
+}
+.book-btn:hover {
+  background-position: right center;
+  /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+.book-btn:active {
+  transform: scale(0.95);
 }
 
 .amenities {
