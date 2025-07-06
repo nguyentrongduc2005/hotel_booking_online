@@ -303,7 +303,7 @@ Router::get('/admin/customers/users', 'AdminCustomersController@users', [
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 
-Router::post('/admin/customers/users/delete/:id', 'AdminCustomersController@deleteUser', [
+Router::post('/admin/customers/users/delete/{id}', 'AdminCustomersController@deleteUser', [
     'AuthorMiddleware@checkSession',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
@@ -314,7 +314,7 @@ Router::get('/admin/customers/guests', 'AdminCustomersController@guests', [
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 
-Router::post('/admin/customers/guests/delete/:id', 'AdminCustomersController@deleteGuest', [
+Router::post('/admin/customers/guests/delete/{id}', 'AdminCustomersController@deleteGuest', [
     'AuthorMiddleware@checkSession',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
@@ -331,13 +331,13 @@ Router::post('/admin/services/create', 'AdminServicesController@create', [
 ]);
 
 // Sửa
-Router::post('/admin/services/update/:id', 'AdminServicesController@update', [
+Router::post('/admin/services/update/{id}', 'AdminServicesController@update', [
     'AuthorMiddleware@checkSession',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 
 // Xoá
-Router::post('/admin/services/delete/:id', 'AdminServicesController@delete', [
+Router::post('/admin/services/delete/{id}', 'AdminServicesController@delete', [
     'AuthorMiddleware@checkSession',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
