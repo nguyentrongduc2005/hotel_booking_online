@@ -76,11 +76,11 @@ class PopUpController extends Controller
 
                 $data = $this->model->getMyReservation(['cccd' => $cccd], 'guest');
             } else {
-                // $this->render('myReservation', []);
+                $this->render('myReservation', []);
             }
         }
 
-        // $this->render('myReservation', $data);
+        $this->renderPartial('user/popup/my', $data);
     }
     function myReservationCancel($req, $res)
     {
@@ -117,18 +117,33 @@ class PopUpController extends Controller
 
     function getTransaction($req, $res)
     {
-        $data = [];
+        $transactions = [];
+        $user = null;
+
         if (isset($_SESSION['user_id'])) {
-            $data = $this->model->getTransaction(['user_id' => $_SESSION['user_id']], 'user');
+            // Lấy dữ liệu giao dịch
+            $transactions = $this->model->getTransaction(['user_id' => $_SESSION['user_id']], 'user');
+
+            // Lấy thông tin người dùng
+            $user = $this->model->getInfoUser($_SESSION['user_id']);
         } else if (isset($req->post()['cccd'])) {
             $cccd = $req->post()['cccd'];
-            $data = $this->model->getTransaction(['cccd' => $cccd], 'guest');
+            $transactions = $this->model->getTransaction(['cccd' => $cccd], 'guest');
+            // Guest không có thông tin user
+            $user = null;
         } else {
-            // $this->render('myReservation', []);
+            // Nếu không có dữ liệu gì hết, load trang rỗng
+            $this->render('myTransaction', []);
+            return;
         }
-        $this->renderPartial('user/popup/myTransaction', $data);
-        echo "<pre>";
-        print_r($data);
-        die();
+
+        // Truyền cả giao dịch + user vào view
+        $this->renderPartial('user/popup/myTransaction', [
+            'transactions' => $transactions,
+            'user' => $user
+        ]);
     }
+
+
+
 }

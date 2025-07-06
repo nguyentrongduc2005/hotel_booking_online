@@ -34,7 +34,7 @@ if (!isset($transactions) && isset($data)) {
     <div class="content">
       <div class="sidebar">
         <div class="sidebar-top">
-          <div class="sidebar-title">Transaction</div>
+          <div class="sidebar-title">User Profile</div>
 
           <div class="sidebar-menu">
             <div class="menu-item">
@@ -69,18 +69,16 @@ if (!isset($transactions) && isset($data)) {
         </div>
       </div>
       <div class="main">
-        <form action="your-target-page.html" method="GET" class="search-form" id="search-form">
+        <form action="your-target-page.html" method="GET" class="search-form">
           <div class="search-bar custom-search">
-            <img src="<?= $this->configs->config['pathAssets'] ?>/icon/find.svg" alt="Search" id="find-btn"
-              style="cursor: pointer;" />
+            <img src="<?= $this->configs->config['pathAssets'] ?>/icon/find.svg" alt="Search" />
             <input type="text" id="search-input" name="citizenId"
               placeholder="Enter Citizen ID to find your reservation" required />
             <div class="clear-btn" id="clear-btn">
-              <img src="<?= $this->configs->config['pathAssets'] ?>/icon/x.svg" alt="Clear" />
+              <img src="<?= $this->configs->config['pathAssets'] ?>/icon/x.svg" alt="Search" />
             </div>
           </div>
         </form>
-
 
         <?php if (!empty($transactions)): ?>
           <?php foreach ($transactions as $tran): ?>
@@ -110,8 +108,6 @@ if (!isset($transactions) && isset($data)) {
         <?php endif; ?>
       </div>
     </div>
-    <script src="<?= $this->configs->config['pathAssets'] ?>/js/transaction.js"></script>
-
 </body>
 
 </html>

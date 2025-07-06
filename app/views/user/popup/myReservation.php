@@ -1,52 +1,132 @@
-<style>
-    .center-form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 200px;
-    }
-</style>
+<pre>
+<?php print_r($data); ?>
+</pre>
+<?php
+$reservations = isset($data) && is_array($data) ? $data : [];
+?>
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="center-form">
-    <form action="/hotel_booking_online/public/user/reservations" method="POST">
-        <label for="cccd">CCCD:</label>
-        <input type="text" id="cccd" name="cccd" required pattern="\d{12}" maxlength="12" placeholder="Nhập số CCCD">
-        <button type="submit">Gửi</button>
-    </form>
-</div>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reservation Popup</title>
+    <link rel="stylesheet"
+        href="<?php echo $this->configs->config['pathAssets']; ?>css/reservation.css?v=<?php echo time(); ?>" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+</head>
 
-
-<?php if (!empty($data) && is_array($data)): ?>
-    <div style="margin-top: 30px;">
-        <h3>Thông tin đặt phòng</h3>
-        <table border="1" cellpadding="8" cellspacing="0">
-            <thead>
-                <tr>
-                    <th>ID Đặt phòng</th>
-                    <th>Phòng</th>
-                    <th>Ngày nhận</th>
-                    <th>Ngày trả</th>
-                    <th>Trạng thái nhận</th>
-                    <th>Trạng thái trả</th>
-                    <th>Trạng thái</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($data as $reservation): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($reservation['id_booking']); ?></td>
-                        <td><?php echo htmlspecialchars($reservation['name']); ?></td>
-                        <td><?php echo htmlspecialchars($reservation['check_in']); ?></td>
-                        <td><?php echo htmlspecialchars($reservation['check_out']); ?></td>
-                        <td><?php echo htmlspecialchars($reservation['status_checkin']); ?></td>
-                        <td><?php echo htmlspecialchars($reservation['status_checkout']); ?></td>
-                        <td><?php echo htmlspecialchars($reservation['status']); ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+<body>
+    <div class="container" id="main-content">
+        <div class="header">
+            <div class="header-left">
+                <div class="back-button"></div>
+            </div>
+            <div class="header-right">
+                <span class="user-name"><?= isset($user['full_name']) ? $user['full_name'] : '' ?></span>
+                <div class="avatar" style="
+              background-image: url('<?= $this->configs->config['pathAssets'] ?>/img/user/avatar.jpg');
+            "></div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="sidebar">
+                <div class="sidebar-top">
+                    <div class="sidebar-title">Reservation</div>
+                    <div class="sidebar-menu">
+                        <div class="menu-item">
+                            <div class="menu-icon">
+                                <img src="<?= $this->configs->config['pathAssets'] ?>/icon/popup-user.svg"
+                                    alt="Logout" />
+                            </div>
+                            <span>User</span>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-icon" style="color: black">
+                                <img src="<?= $this->configs->config['pathAssets'] ?>/icon/popup-transaction.svg"
+                                    alt="Logout" />
+                            </div>
+                            <span>Transaction</span>
+                        </div>
+                        <div class="menu-item active">
+                            <div class="menu-icon">
+                                <img src="<?= $this->configs->config['pathAssets'] ?>/icon/popup-reservation.svg"
+                                    alt="Logout" />
+                            </div>
+                            <span>My Reservation</span>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-icon">
+                                <img src="<?= $this->configs->config['pathAssets'] ?>/icon/popup-history.svg"
+                                    alt="Logout" />
+                            </div>
+                            <span>My History Booking</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-logout">
+                    <a href="<?= $this->configs->config['basePath'] ?>/logout" class="sidebar-logout">
+                        <img src="<?= $this->configs->config['pathAssets'] ?>/icon/logout.svg" alt="Logout"
+                            class="logout-icon" />Logout</a>
+                </div>
+            </div>
+            <div class="main">
+                <form action="your-target-page.html" method="GET" class="search-form" id="search-form">
+                    <div class="search-bar custom-search">
+                        <img src="<?= $this->configs->config['pathAssets'] ?>/icon/find.svg" alt="Search" id="find-btn"
+                            style="cursor: pointer" />
+                        <input type="text" id="search-input" name="citizenId"
+                            placeholder="Enter Citizen ID to find your reservation" required />
+                        <div class="clear-btn" id="clear-btn">
+                            <img src="<?= $this->configs->config['pathAssets'] ?>/icon/x.svg" alt="Clear" />
+                        </div>
+                    </div>
+                </form>
+                <?php if (!empty($reservations)): ?>
+                    <?php foreach ($reservations as $reservation): ?>
+                        <div class="card">
+                            <div class="card-left">
+                                <div class="card-row">
+                                    <div class="hotel-name">
+                                        <?= htmlspecialchars($reservation['name'] ?? 'N/A') ?>
+                                    </div>
+                                    <div class="status <?= strtolower($reservation['status'] ?? 'pending') ?>">
+                                        <?= htmlspecialchars($reservation['status'] ?? 'Pending') ?>
+                                    </div>
+                                </div>
+                                <div class="transaction-line">
+                                    Booking ID:
+                                    <?= htmlspecialchars($reservation['id_booking'] ?? '-') ?>
+                                    / Room:
+                                    <?= htmlspecialchars($reservation['room_number'] ?? '-') ?>
+                                </div>
+                                <div class="transaction-line">
+                                    <?= isset($reservation['check_in']) && isset($reservation['check_out'])
+                                        ? date('d/m/Y', strtotime($reservation['check_in'])) . ' - ' . date('d/m/Y', strtotime($reservation['check_out']))
+                                        : '' ?>
+                                </div>
+                                <div class="timeline-bar <?= strtolower($reservation['status'] ?? 'pending') ?>">
+                                    <div class="timeline-left"></div>
+                                    <div class="timeline-right"></div>
+                                </div>
+                            </div>
+                            <?php if (strtolower($reservation['status'] ?? '') === 'pending'): ?>
+                                <form method="POST" action="<?= $this->configs->config['basePath'] ?>/reservation/cancel"
+                                    style="display: inline">
+                                    <input type="hidden" name="booking_id"
+                                        value="<?= htmlspecialchars($reservation['booking_id'] ?? '') ?>" />
+                                    <button type="submit" class="cancel-btn">Cancel</button>
+                                </form>
+                            <?php endif; ?>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <div class="no-reservation">No reservations found.</div>
+                <?php endif; ?>
+            </div>
+        </div>
     </div>
-<?php elseif (isset($data)): ?>
-    <div style="margin-top: 30px; color: red;">Không tìm thấy thông tin đặt phòng.</div>
-<?php endif; ?>
+    <script src="<?= $this->configs->config['pathAssets'] ?>/js/reservation.js"></script>
+</body>
+
+</html>
