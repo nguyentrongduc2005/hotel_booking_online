@@ -3,6 +3,7 @@
 namespace app\core;
 
 use \Exception;
+use \app\core\Controller;
 
 class AppException extends Exception
 {
@@ -11,10 +12,13 @@ class AppException extends Exception
     private $controller;
     function __construct($message, $code = null, $next = null)
     {
-        $this->controller = new \app\core\Controller();
+        $this->controller = new Controller();
 
         if ($next === null) {
             $next = $this->controller->getConfig("basePath");
+            if (Controller::$componentView == '/admin') {
+                $next = $next . "/dashboard";
+            }
         }
 
         $this->next = $next;
