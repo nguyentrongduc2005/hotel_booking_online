@@ -31,12 +31,38 @@ class AdminServicesModel
     // Thêm
     public function addService($data)
     {
-        $id = db::insert('services', [
-            'name' => $data['name'],
-            'description' => $data['description'] ?? ''
-        ]);
-        return $id ? true : false;
+    $imagePath = null;
+
+    // Xử lý upload ảnh
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        $uploadDir = 'uploads/services/';
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0755, true);
+        }
+
+        $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+        $fileName = uniqid('service_') . '.' . $ext;
+        $targetPath = $uploadDir . $fileName;
+
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
+            $imagePath = $targetPath;
+        }
     }
+
+    // Tạo slug từ tên
+    $slug = strtolower(trim(preg_replace('/[^a-z0-9]+/i', '-', $data['name']), '-'));
+
+    $insertData = [
+        'name' => $data['name'],
+        'slug' => $slug,
+        'description' => $data['description'] ?? '',
+        'Path_img' => $imagePath,
+    ];
+
+    $id = db::insert('services', $insertData);
+    return $id ? true : false;
+    }
+
 
     // Sửa
     public function editService($data)

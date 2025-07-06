@@ -35,38 +35,73 @@ class AdminServicesController extends Controller
 
     // Thêm
     public function create(Request $req, $res)
-    {
-        $data = [
-            'name' => $req->post('name'),
-            'description' => $req->post('description')
-        ];
+   {
+    // Dữ liệu text từ form
+    $data = [
+        'name' => $req->post('name'),
+        'description' => $req->post('description'),
+    ];
 
-        $success = $this->model->addService($data);
-
-        if ($success) {
-            return $res->json(['success' => true, 'message' => 'Thêm dịch vụ thành công']);
+    // Xử lý file ảnh
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        $uploadDir = 'uploads/services/';
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0755, true);
         }
 
-        return $res->json(['error' => 'Thêm dịch vụ thất bại'], 400);
+        $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+        $fileName = uniqid('service_') . '.' . $ext;
+        $targetPath = $uploadDir . $fileName;
+
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
+            $data['Path_img'] = $targetPath;
+        }
     }
+
+    $success = $this->model->addService($data);
+
+    if ($success) {
+        return $res->redirect('services'); 
+    }
+
+    return $res->json(['error' => 'Thêm dịch vụ thất bại'], 400);
+    }
+
 
     // Cập nhật
     public function update(Request $req, $res)
     {
-        $data = [
-            'id_service' => $req->param('id'),
-            'name' => $req->post('name'),
-            'description' => $req->post('description')
-        ];
+    $data = [
+        'id_service' => $req->param('id'),
+        'name' => $req->post('name'),
+        'description' => $req->post('description'),
+    ];
 
-        $success = $this->model->editService($data);
-
-        if ($success) {
-            return $res->json(['success' => true, 'message' => 'Cập nhật dịch vụ thành công']);
+    // Xử lý ảnh nếu có upload mới
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        $uploadDir = 'uploads/services/';
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0755, true);
         }
 
-        return $res->json(['error' => 'Cập nhật thất bại'], 400)->send();
+        $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+        $fileName = uniqid('service_') . '.' . $ext;
+        $targetPath = $uploadDir . $fileName;
+
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
+            $data['Path_img'] = $targetPath;
+        }
     }
+
+    $success = $this->model->editService($data);
+
+    if ($success) {
+        return $res->redirect('services');
+    }
+
+    return $res->json(['error' => 'Cập nhật thất bại'], 400)->send();
+   }
+
 
     // Xoá
     public function delete(Request $req, $res)

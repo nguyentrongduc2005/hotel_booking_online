@@ -14,7 +14,7 @@ class AdminCustomersController extends Controller
     {
         parent::__construct();
         $this->model = new AdminCustomersModel();
-        // Set viewpathComponent to /admin for admin controllers
+       
         self::setcomponent('/admin');
         self::setLayout('AdminLayouts/main');
     }
@@ -58,7 +58,7 @@ class AdminCustomersController extends Controller
         self::setcomponent('/admin');
         self::setLayout('AdminLayouts/main');
 
-        // Render đúng view 'guests' (không thêm đường dẫn dài)
+        // Render đúng view 'guests' 
         return $this->render('guests', [
             'guests' => $guests,
             'search' => $search
