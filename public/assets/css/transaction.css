@@ -318,3 +318,10 @@ body {
 .custom-search .clear-btn:hover img {
   opacity: 0.7;
 }
+.search-form {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: transparent;
+  margin-bottom: 12px;
+}
