@@ -74,7 +74,7 @@ class AdminCustomersController extends Controller
         return $res->json([
             'success' => $result,
             'message' => $result ? 'Xoá user thành công' : 'Xoá user thất bại'
-        ]);
+        ])->send();
     }
 
     // Xoá guest
@@ -86,6 +86,6 @@ class AdminCustomersController extends Controller
         return $res->json([
             'success' => $result,
             'message' => $result ? 'Xoá guest thành công' : 'Xoá guest thất bại'
-        ]);
+        ])->send();
     }
 }

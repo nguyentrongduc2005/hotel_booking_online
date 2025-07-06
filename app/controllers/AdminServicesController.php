@@ -26,7 +26,7 @@ class AdminServicesController extends Controller
         self::setcomponent('/admin');
         // Set admin layout
         self::setLayout('AdminLayouts/main');
-        
+
         return $this->render('index', [
             'services' => $services,
             'search' => $search
@@ -65,7 +65,7 @@ class AdminServicesController extends Controller
             return $res->json(['success' => true, 'message' => 'Cập nhật dịch vụ thành công']);
         }
 
-        return $res->json(['error' => 'Cập nhật thất bại'], 400);
+        return $res->json(['error' => 'Cập nhật thất bại'], 400)->send();
     }
 
     // Xoá
@@ -78,6 +78,6 @@ class AdminServicesController extends Controller
             return $res->json(['success' => true, 'message' => 'Xóa dịch vụ thành công']);
         }
 
-        return $res->json(['error' => 'Xoá thất bại'], 400);
+        return $res->json(['error' => 'Xoá thất bại'], 400)->send();
     }
 }

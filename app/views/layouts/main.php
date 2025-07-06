@@ -25,25 +25,13 @@
 
         <!-- Hide footer on payment page (do bug quá) -->
         <?php if (!str_contains($_SERVER['REQUEST_URI'], 'payment')): ?>
-        <div id="footer">
-            <?= $this->renderPartial('layouts/footer'); ?>
-        </div>
+            <div id="footer">
+                <?= $this->renderPartial('layouts/footer'); ?>
+            </div>
         <?php endif; ?>
     </div>
     <script src="<?= $this->configs->config['pathAssets'] ?>js/homepage.js?v=<?= time() ?>"></script>
-    <?php if (isset($_SESSION["timer"])) {
 
-    $path  = $this->configs->config['basePath'];
-    $leftTime = $_SESSION["timer"] - time();
-
-    $leftTime = max(0, ($leftTime - 300) * 1000);
-    if ($leftTime > 0) {
-      echo " <script>
-   setTimeout(function() { 
-   checktokenTimer('{$path}')
-                            }, " . $leftTime . ")</script>";
-    }
-  } ?>
 </body>
 
 

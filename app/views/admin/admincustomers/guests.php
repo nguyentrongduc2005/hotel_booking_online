@@ -5,10 +5,12 @@
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
         <div class="dashboard-title">Guest Management</div>
         <div class="dashboard-search-container" style="margin-bottom:0;">
-            <form method="GET" action="<?= $this->configs->config['basePath'] ?? '' ?>/admin/customers/guests" class="dashboard-search-form">
+            <form method="GET" action="<?= $this->configs->config['basePath'] ?? '' ?>/admin/customers/guests"
+                class="dashboard-search-form">
                 <div class="search-bar-wrapper">
                     <span class="search-icon"><i class="fa fa-search"></i></span>
-                    <input type="text" name="search" placeholder="Tìm kiếm theo tên khách..." value="<?= htmlspecialchars($search ?? '') ?>" class="dashboard-search-input">
+                    <input type="text" name="search" placeholder="Tìm kiếm theo tên khách..."
+                        value="<?= htmlspecialchars($search ?? '') ?>" class="dashboard-search-input">
                 </div>
             </form>
         </div>
@@ -36,7 +38,8 @@
                             <td><?= htmlspecialchars($guest['sdt']) ?></td>
                             <td><?= htmlspecialchars($guest['cccd']) ?></td>
                             <td>
-                                <span class="dashboard-action dashboard-action-delete" onclick="deleteGuest(<?= $guest['guest_id'] ?>)">
+                                <span class="dashboard-action dashboard-action-delete"
+                                    onclick="deleteGuest(<?= $guest['guest_id'] ?>)">
                                     <i class="fa fa-trash"></i>
                                 </span>
                             </td>
@@ -55,28 +58,29 @@
 </div>
 
 <script>
-window.BASE_PATH = '<?= $this->configs->config["basePath"] ?? "" ?>';
-function deleteGuest(guestId) {
-    if (confirm('Bạn có chắc muốn xóa khách này?')) {
-        fetch(`${window.BASE_PATH}/admin/customers/guests/delete/${guestId}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert(data.message);
-                location.reload();
-            } else {
-                alert(data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Có lỗi xảy ra khi xóa khách.');
-        });
+    window.BASE_PATH = '<?= $this->configs->config["basePath"] ?? "" ?>';
+
+    function deleteGuest(guestId) {
+        if (confirm('Bạn có chắc muốn xóa khách này?')) {
+            fetch(`${window.BASE_PATH}/admin/customers/guests/delete/${guestId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert(data.message);
+                        location.reload();
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Có lỗi xảy ra khi xóa khách.');
+                });
+        }
     }
-}
 </script>
