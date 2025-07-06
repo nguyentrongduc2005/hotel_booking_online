@@ -44,20 +44,21 @@ class PopUpController extends Controller
 
     function changePasswordUser($req, $res)
     {
-        $data = false;
-        if (!$_SESSION)
-
-            $data = false;
+        $check = false;
+        if (!isset($_SESSION['user_id']))
+            $check = false;
         $id = $_SESSION['user_id'];
 
         $payload = $req->payload();
         if (!isset($payload))
             $data = false;
+
         $check = $this->model->checkUpdatePass([
             'pass_old' => $payload["pass_old"],
             'pass_new' => $payload["pass_new"],
 
         ], $id);
+        $check = true;
         $data = [
             "statusApi" => $check
         ];
