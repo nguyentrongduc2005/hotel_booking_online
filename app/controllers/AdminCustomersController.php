@@ -30,6 +30,38 @@ class AdminCustomersController extends Controller
         ]);
     }
 
+    // Method for users page
+    public function users(Request $req, $res)
+    {
+        $search = $req->query('search');
+        $users = $this->model->getAllUsers($search);
+
+        self::setcomponent('/admin');
+        self::setLayout('AdminLayouts/main');
+
+        return $this->render('users', [
+            'users' => $users,
+            'search' => $search
+        ]);
+    }
+
+    // Method for guests page
+    public function guests(Request $req, $res)
+    {
+        $search = $req->query('search');
+        $guests = $this->model->getAllGuests($search);
+
+        // Đặt lại component view và layout cho admin
+        self::setcomponent('/admin');
+        self::setLayout('AdminLayouts/main');
+
+        // Render đúng view 'guests' (không thêm đường dẫn dài)
+        return $this->render('guests', [
+            'guests' => $guests,
+            'search' => $search
+        ]);
+    }
+
     // Xoá user
     public function deleteUser(Request $req, $res)
     {
