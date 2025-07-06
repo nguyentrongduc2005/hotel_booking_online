@@ -22,6 +22,11 @@ class AdminServicesController extends Controller
         $search = $req->query('search');
         $services = $this->model->getAllServices($search);
 
+        // Set component view to admin for this controller
+        self::setcomponent('/admin');
+        // Set admin layout
+        self::setLayout('AdminLayouts/main');
+        
         return $this->render('index', [
             'services' => $services,
             'search' => $search
@@ -39,7 +44,7 @@ class AdminServicesController extends Controller
         $success = $this->model->addService($data);
 
         if ($success) {
-            return $res->redirect('services');
+            return $res->json(['success' => true, 'message' => 'Thêm dịch vụ thành công']);
         }
 
         return $res->json(['error' => 'Thêm dịch vụ thất bại'], 400);
@@ -49,7 +54,7 @@ class AdminServicesController extends Controller
     public function update(Request $req, $res)
     {
         $data = [
-            'id_service' => $req->post('id_service'),
+            'id_service' => $req->param('id'),
             'name' => $req->post('name'),
             'description' => $req->post('description')
         ];
@@ -57,7 +62,7 @@ class AdminServicesController extends Controller
         $success = $this->model->editService($data);
 
         if ($success) {
-            return $res->redirect('services');
+            return $res->json(['success' => true, 'message' => 'Cập nhật dịch vụ thành công']);
         }
 
         return $res->json(['error' => 'Cập nhật thất bại'], 400);
@@ -66,11 +71,11 @@ class AdminServicesController extends Controller
     // Xoá
     public function delete(Request $req, $res)
     {
-        $id = $req->query('id_service');
+        $id = $req->param('id');
         $success = $this->model->deleteService($id);
 
         if ($success) {
-            return $res->redirect('services');
+            return $res->json(['success' => true, 'message' => 'Xóa dịch vụ thành công']);
         }
 
         return $res->json(['error' => 'Xoá thất bại'], 400);

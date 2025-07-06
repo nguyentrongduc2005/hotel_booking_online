@@ -29,6 +29,7 @@
             <th>Room Type</th>
             <th>Area</th>
             <th>Capacity</th>
+            <th>Bed</th>
             <th>Price</th>
             <th>Status</th>
             <th>Action</th>
@@ -44,6 +45,7 @@
                         <td><?= htmlspecialchars($room['name_type_room'] ?? '') ?></td>
                         <td><?= htmlspecialchars($room['area'] ?? '') ?> m²</td>
                         <td><?= htmlspecialchars($room['capacity'] ?? '') ?></td>
+                        <td><?= htmlspecialchars($room['amount_bed'] ?? '') ?></td>
                         <td><?= htmlspecialchars($room['price'] ?? '') ?></td>
                         <td>
                             <?php
@@ -114,16 +116,37 @@
             </select>
 
             <label class="add-room-label">Chọn tiện nghi (Amenity):</label>
-            <div class="amenities-group">
-                <label><input type="checkbox" name="amenities[]" value="1"> Wi-Fi</label>
-                <label><input type="checkbox" name="amenities[]" value="2"> TV</label>
-                <label><input type="checkbox" name="amenities[]" value="3"> Máy lạnh</label>
-                <label><input type="checkbox" name="amenities[]" value="4"> Mini bar</label>
-                <label><input type="checkbox" name="amenities[]" value="5"> Bồn tắm</label>
+            <div class="amenities-group" style="width: 100%; margin-top: 8px;">
+                <table style="width: 100%; border-collapse: separate; border-spacing: 0 8px;">
+                    <tbody>
+                    <?php
+                    $total = count($amenities);
+                    $cols = 2;
+                    $rows = ceil($total / $cols);
+                    for ($r = 0; $r < $rows; $r++) {
+                        echo '<tr>';
+                        for ($c = 0; $c < $cols; $c++) {
+                            $idx = $r * $cols + $c;
+                            echo '<td style="width: 48%; min-width: 220px; height: 48px; padding-bottom: 0; text-align: left; vertical-align: middle;">';
+                            if (isset($amenities[$idx])) {
+                                $amenity = $amenities[$idx];
+                                echo '<label style="display: flex; align-items: center; gap: 8px; width: 100%; height: 100%; cursor: pointer; font-size: 16px; line-height: 1.4; margin-bottom: 0; white-space: normal;">';
+                                echo '<input type="checkbox" name="amenities[]" value="' . htmlspecialchars($amenity['amenity_id']) . '" class="edit-amenity">';
+                                echo '<span style="text-align: left;">' . htmlspecialchars($amenity['amenity_name']) . '</span>';
+                                echo '</label>';
+                            }
+                            echo '</td>';
+                        }
+                        echo '</tr>';
+                    }
+                    ?>
+                    </tbody>
+                </table>
             </div>
 
             <label class="add-room-label">Upload nhiều ảnh:</label>
-            <input type="file" name="images[]" multiple required>
+            <input type="file" name="images[]" id="add_images_input" multiple required>
+            <div id="add-images-preview" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; justify-content: center;"></div>
 
             <button type="submit" name="submit" class="btn-add-room">Thêm phòng</button>
         </form>
@@ -174,16 +197,40 @@
             </select>
 
             <label class="add-room-label">Chọn tiện nghi (Amenity):</label>
-            <div class="amenities-group">
-                <label><input type="checkbox" name="amenities[]" value="1" class="edit-amenity"> Wi-Fi</label>
-                <label><input type="checkbox" name="amenities[]" value="2" class="edit-amenity"> TV</label>
-                <label><input type="checkbox" name="amenities[]" value="3" class="edit-amenity"> Máy lạnh</label>
-                <label><input type="checkbox" name="amenities[]" value="4" class="edit-amenity"> Mini bar</label>
-                <label><input type="checkbox" name="amenities[]" value="5" class="edit-amenity"> Bồn tắm</label>
+            <div class="amenities-group" style="width: 100%; margin-top: 8px;">
+                <table style="width: 100%; border-collapse: separate; border-spacing: 0 8px;">
+                    <tbody>
+                    <?php
+                    $total = count($amenities);
+                    $cols = 2;
+                    $rows = ceil($total / $cols);
+                    for ($r = 0; $r < $rows; $r++) {
+                        echo '<tr>';
+                        for ($c = 0; $c < $cols; $c++) {
+                            $idx = $r * $cols + $c;
+                            echo '<td style="width: 48%; min-width: 220px; height: 48px; padding-bottom: 0; text-align: left; vertical-align: middle;">';
+                            if (isset($amenities[$idx])) {
+                                $amenity = $amenities[$idx];
+                                echo '<label style="display: flex; align-items: left; width: 100%; height: 100%; cursor: pointer; font-size: 16px; line-height: 1.4; margin-bottom: 0; white-space: normal;">';
+                                echo '<input type="checkbox" name="amenities[]" value="' . htmlspecialchars($amenity['amenity_id']) . '" class="edit-amenity">';
+                                echo '<span style="text-align: left;">' . htmlspecialchars($amenity['amenity_name']) . '</span>';
+                                echo '</label>';
+                            }
+                            echo '</td>';
+                        }
+                        echo '</tr>';
+                    }
+                    ?>
+                    </tbody>
+                </table>
             </div>
 
+            <label class="add-room-label">Ảnh hiện tại (Tick để xóa):</label>
+            <div id="edit-room-images" style="display: flex; flex-wrap: wrap; gap: 3px; margin-bottom: 5px;"></div>
+
             <label class="add-room-label">Upload nhiều ảnh (nếu muốn thay):</label>
-            <input type="file" name="new_images[]" multiple>
+            <input type="file" name="new_images[]" id="edit_images_input" multiple>
+            <div id="edit-images-preview" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; justify-content: center;"></div>
 
             <button type="submit" name="submit" class="btn-add-room">Lưu thay đổi</button>
         </form>
@@ -267,6 +314,42 @@
                 if (cb) cb.checked = true;
             });
         }
+        // Hiển thị ảnh hiện có
+        const imagesDiv = document.getElementById('edit-room-images');
+        imagesDiv.innerHTML = '';
+        if (room.images && room.images.length > 0) {
+            room.images.forEach(function(img) {
+                const imgBox = document.createElement('div');
+                imgBox.style.position = 'relative';
+                imgBox.style.display = 'inline-block';
+                imgBox.style.width = '90px';
+                imgBox.style.height = '70px';
+                imgBox.style.border = '1px solid #ccc';
+                imgBox.style.borderRadius = '6px';
+                imgBox.style.overflow = 'hidden';
+                imgBox.style.background = '#f8f8f8';
+                imgBox.style.marginRight = '6px';
+                imgBox.style.marginBottom = '6px';
+                // Ảnh
+                const image = document.createElement('img');
+                image.src = window.BASE_PATH + '/assets' + img.path;
+                image.style.width = '100%';
+                image.style.height = '100%';
+                image.style.objectFit = 'cover';
+                // Checkbox xóa
+                const del = document.createElement('input');
+                del.type = 'checkbox';
+                del.name = 'delete_images[]';
+                del.value = img.id_image;
+                del.style.position = 'absolute';
+                del.style.top = '4px';
+                del.style.right = '4px';
+                del.title = 'Tick để xóa ảnh này';
+                imgBox.appendChild(image);
+                imgBox.appendChild(del);
+                imagesDiv.appendChild(imgBox);
+            });
+        }
         document.getElementById('editRoomModal').style.display = 'flex';
     }
     function closeEditRoomModal() {
@@ -289,5 +372,45 @@
             }
 });
     }
+    // Preview ảnh khi chọn ở thêm phòng
+    document.getElementById('add_images_input')?.addEventListener('change', function(e) {
+        const preview = document.getElementById('add-images-preview');
+        preview.innerHTML = '';
+        Array.from(e.target.files).forEach(file => {
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                const img = document.createElement('img');
+                img.src = ev.target.result;
+                img.style.width = '90px';
+                img.style.height = '70px';
+                img.style.objectFit = 'cover';
+                img.style.border = '1px solid #ccc';
+                img.style.borderRadius = '6px';
+                img.style.marginRight = '6px';
+                preview.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        });
+    });
+    // Preview ảnh khi chọn ở sửa phòng
+    document.getElementById('edit_images_input')?.addEventListener('change', function(e) {
+        const preview = document.getElementById('edit-images-preview');
+        preview.innerHTML = '';
+        Array.from(e.target.files).forEach(file => {
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                const img = document.createElement('img');
+                img.src = ev.target.result;
+                img.style.width = '90px';
+                img.style.height = '70px';
+                img.style.objectFit = 'cover';
+                img.style.border = '1px solid #ccc';
+                img.style.borderRadius = '6px';
+                img.style.marginRight = '6px';
+                preview.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        });
+    });
     window.BASE_PATH = '<?= $this->configs->config["basePath"] ?? "" ?>';
 </script>

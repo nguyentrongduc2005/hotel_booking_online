@@ -14,7 +14,7 @@ class AdminCustomersModel
     
     public function getAllUsers($searchName = null)
     {
-        $sql = "SELECT user_id, full_name, email, phone_number FROM user";
+        $sql = "SELECT user_id, full_name, email, cccd, sdt FROM user";
         $params = [];
 
         if (!empty($searchName)) {
@@ -29,7 +29,7 @@ class AdminCustomersModel
     
     public function getAllGuests($searchName = null)
     {
-        $sql = "SELECT guest_id, full_name, email, phone_number FROM guest";
+        $sql = "SELECT guest_id, full_name, email, sdt, cccd FROM guest";
         $params = [];
 
         if (!empty($searchName)) {
