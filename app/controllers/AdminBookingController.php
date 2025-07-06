@@ -10,10 +10,12 @@ class AdminBookingController extends Controller
 {
     private $model;
 
-    public function __construct()
+    public     function __construct()
     {
         parent::__construct();
         $this->model = new AdminBookingModel();
+        // Set viewpathComponent to /admin for admin controllers
+        self::setcomponent('/admin');
     }
 
     //danh sách booking hiện tại

@@ -14,6 +14,8 @@ class AdminRoomsController extends Controller
     {
         parent::__construct();
         $this->model = new AdminRoomsModel();
+        // Set viewpathComponent to /admin for admin controllers
+        self::setcomponent('/admin');
     }
 
 
