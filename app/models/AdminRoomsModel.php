@@ -3,6 +3,8 @@
 namespace app\models;
 
 use app\core\db;
+// If you are using Laravel, uncomment the next line:
+// use Illuminate\Support\Str;
 
 class AdminRoomsModel
 {
@@ -15,7 +17,7 @@ class AdminRoomsModel
 
     public function getAllRooms($searchName = null)
     {
-        $sql = "SELECT room.id_room, room.name, room.slug, room.price, room.status ,room.area ,room.capacity ,room_type.name_type_room,room.id_room_type, COUNT(room_amenity.amenity_id) AS amenity_count FROM room
+        $sql = "SELECT room.id_room, room.name, room.slug, room.price, room.status ,room.area ,room.capacity ,room.amount_bed, room_type.name_type_room,room.id_room_type, COUNT(room_amenity.amenity_id) AS amenity_count FROM room
                 INNER JOIN room_type on room.id_room_type = room_type.id_type_room
                 LEFT JOIN room_amenity on room.id_room = room_amenity.id_room";
         $params = [];
@@ -49,7 +51,7 @@ class AdminRoomsModel
                 }
             }
         }
-        $sql = "SELECT room.id_room, room.name, room.slug, room.price, room.status ,room.area ,room.capacity ,room_type.name_type_room,room.id_room_type, COUNT(room_amenity.amenity_id) AS amenity_count FROM room
+        $sql = "SELECT room.id_room, room.name, room.slug, room.price, room.status ,room.area ,room.capacity ,room.amount_bed, room_type.name_type_room,room.id_room_type, COUNT(room_amenity.amenity_id) AS amenity_count FROM room
                 INNER JOIN room_type on room.id_room_type = room_type.id_type_room
                 LEFT JOIN room_amenity on room.id_room = room_amenity.id_room
                 GROUP BY room.id_room";
@@ -80,11 +82,16 @@ class AdminRoomsModel
         return $data ? $data : [];
     }
 
+
+
     function addRoom($data)
     {
-        //add dữ liệu vào bảng room
+        // If you are using Laravel, use the following line:
+        // 'slug' => $data['slug'] . '-' . Str::random(6),
+        // Otherwise, use PHP's random_bytes for a random string:
+
         $id = db::insert('room', [
-            'slug' => $data['slug'],
+            'slug' => $data['slug'] . '-' . bin2hex(random_bytes(3)),
             'name' => $data['name'] ?? '', // Thêm tên phòng nếu có
             'description' => $data['description'] ?? '', // Thêm mô tả nếu có
             "amount_bed" => $data['amount_bed'] ?? 0, // Thêm số lượng giường nếu có
@@ -94,6 +101,7 @@ class AdminRoomsModel
             'capacity' => $data['capacity'],
             'id_room_type' => $data['id_room_type']
         ]);
+        if (!db::update('room', ['slug' => $data['slug'] . '-' . $id], "id_room = $id")) return false;
 
         if (!$id) {
             return false; // Trả về false nếu không thể thêm phòng
@@ -208,20 +216,21 @@ class AdminRoomsModel
 
     function deleteRoom($id_room)
     {
-        // Xóa ảnh liên quan đến phòng
-        $images = db::getAll("SELECT path FROM image_room WHERE id_room = :id_room", ['id_room' => $id_room]);
-        foreach ($images as $image) {
-            $filePath = dirname(__DIR__, 2) . '/public/assets' . $image['path'];
-            if (file_exists($filePath)) {
-                unlink($filePath);
-            } else {
-                return false;
-            }
-        }
-        db::delete('image_room', "id_room = $id_room");
+        // Xóa lịch sử booking liên quan đến phòng
+        db::delete('historybooking', "id_room = $id_room");
+        // Xóa booking liên quan đến phòng
+        db::delete('booking', "id_room = $id_room");
         // Xóa tiện nghi liên quan đến phòng
         db::delete('room_amenity', "id_room = $id_room");
-
+        // Xóa ảnh liên quan đến phòng (và file vật lý)
+        $images = db::getAll("SELECT path FROM image_room WHERE id_room = :id_room", ['id_room' => $id_room]);
+        // foreach ($images as $image) {
+        //     $filePath = dirname(__DIR__, 2) . '/public/assets' . $image['path'];
+        //     if (file_exists($filePath)) {
+        //         unlink($filePath);
+        //     }
+        // }
+        db::delete('image_room', "id_room = $id_room");
         // Xóa phòng
         $row = db::delete('room', "id_room = $id_room");
         return $row ? true : false;

@@ -9,10 +9,12 @@ class AdminAccountController extends Controller
 {
     private $model;
 
-    public function __construct()
+    public     function __construct()
     {
         parent::__construct();
         $this->model = new AdminAccountModel();
+        // Set viewpathComponent to /admin for admin controllers
+        self::setcomponent('/admin');
     }
 
     public function index($req, $res)

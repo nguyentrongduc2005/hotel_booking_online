@@ -1,5 +1,4 @@
-<link rel="stylesheet" href="<?= $this->configs->config['pathAssets'] ?>css/homepage.css?v=<?= time() ?>">
-<?php date_default_timezone_set('Asia/Ho_Chi_Minh');
+<link rel="stylesheet" href="<?= $this->configs->config['pathAssets'] ?>css/homepage.css?v=<?= time() ?>"><?php date_default_timezone_set('Asia/Ho_Chi_Minh');
 $datePresent = date('Y-m-d');
 $nextDate = date('Y-m-d', strtotime($datePresent . ' +1 day'));
 ?>

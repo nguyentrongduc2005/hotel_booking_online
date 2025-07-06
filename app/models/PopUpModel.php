@@ -29,8 +29,6 @@ class PopUpModel
                 (is_array($value) && empty($value))
             );
         });
-        echo '<pre';
-        print_r($dataFilter);
 
         $row = db::update('user', $dataFilter, "user_id = $id");
         return $row ? $row : false;
@@ -38,17 +36,15 @@ class PopUpModel
 
     function checkUpdatePass($payload, $id)
     {
-
         $user = $this->getInfoUser($id);
         if (!password_verify($payload["pass_old"], $user["pass"])) return false;
-        $passNew = password_hash($$payload["pass_new"], PASSWORD_DEFAULT);
+        $passNew = password_hash($payload["pass_new"], PASSWORD_DEFAULT);
         $row =  db::update('user', [
             "pass" => $passNew
         ], "user_id = $id");
         if (!$row) return false;
         return true;
     }
-
 
     function getMyReservation($filter, $role)
     {
@@ -123,7 +119,7 @@ class PopUpModel
             $tran = db::getAll($sql, ['transaction_id' => $transaction['transaction_id']]);
             $transactions = array_merge($transactions, $tran);
         }
-        
+
         return $transactions ?? [];
     }
 }

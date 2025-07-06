@@ -37,14 +37,21 @@
               href="<?= $this->configs->config['basePath'] ?>/admin/amenities">Amenities</a></li>
         </ul>
       </li>
-      <li class="sidebar-item sidebar-services">Services</li>
+      <li class="sidebar-item sidebar-services"><a href="<?= $this->configs->config['basePath'] ?>/admin/services"
+          style="text-decoration: none; color: #fff;">Services</a></li>
       <li class="sidebar-item sidebar-customers">Customers
         <ul class="sidebar-submenu">
-          <li class="sidebar-subitem"><a href="">Guests</a></li>
-          <li class="sidebar-subitem"><a href="">Users</a></li>
+          <li class="sidebar-subitem"><a
+              href="<?= $this->configs->config['basePath'] ?>/admin/customers/guests"
+              style="text-decoration: none; color: #fff;">Guests</a></li>
+          <li class="sidebar-subitem"><a
+              href="<?= $this->configs->config['basePath'] ?>/admin/customers/users"
+              style="text-decoration: none; color: #fff;">Users</a></li>
         </ul>
       </li>
-      <li class="sidebar-item sidebar-transactions">Transactions</li>
+      <li class="sidebar-item sidebar-transactions"><a
+          href="<?= $this->configs->config['basePath'] ?>/admin/transactions"
+          style="text-decoration: none; color: #fff;">Transactions</a></li>
     </ul>
   </nav>
 </aside>

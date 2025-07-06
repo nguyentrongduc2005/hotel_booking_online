@@ -1,3 +1,46 @@
+.amenities-group input[type="checkbox"] {
+  margin: -80px !important;
+}
+
+#edit-room-images {
+  max-width: 500px;
+  margin: 0 auto 12px auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.modal-add-room-content {
+  max-width: 500px;
+  width: 95%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-room-form {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.add-room-label {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 4px;
+  font-weight: bold;
+}
+
+.add-room-form input,
+.add-room-form textarea,
+.add-room-form select {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+}
+
 .dashboard-container {
   background: #f8f8f5;
   padding: 24px 24px 0 24px;
@@ -256,6 +299,8 @@ input {
 
 .modal-filter-content,
 .modal-add-room-content {
+    max-height: 90vh;
+    overflow-y: auto;
     background: #fff;
     padding: 24px 10px;
     border-radius: 8px;
@@ -360,4 +405,76 @@ input.search-bar {
     max-width: 600px;
     width: 95%;
     /* ...các thuộc tính cũ... */
+}
+
+/* Search styles */
+.dashboard-search-container {
+  margin-bottom: 20px;
+}
+
+.dashboard-search-form {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.dashboard-search-input {
+  flex: 1;
+  max-width: 300px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: 'SVN-Gilroy';
+  font-size: 1rem;
+}
+
+.dashboard-search-button {
+  padding: 8px 16px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'SVN-Gilroy';
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.dashboard-search-button:hover {
+  background: #0056b3;
+}
+
+.dashboard-action-delete {
+  color: #e05a4a;
+}
+
+/* Amenity checkbox align left and even spacing */
+.amenities-group table {
+  width: 100%;
+}
+
+.amenities-group td {
+  padding-bottom: 6px;
+  padding-top: 6px;
+  vertical-align: middle;
+}
+
+.amenities-group label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'SVN-Gilroy';
+  font-size: 1rem;
+  font-weight: normal;
+  width: 100%;
+}
+
+.amenities-group input[type="checkbox"] {
+  margin: 0;
+  accent-color: #007bff; /* Optional: màu xanh cho checkbox */
+}
+
+.amenities-group span {
+  flex: 1;
+  text-align: left;
 }

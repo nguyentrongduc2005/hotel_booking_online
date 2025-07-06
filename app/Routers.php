@@ -286,18 +286,64 @@ router::get('/admin/Booking/historybookings', 'AdminBookingController@historyInd
     'AuthorMiddleware@checkRoleAdmin',
 ]);
 //////////////////////Admin/////////////////////////////////////
+Router::get('/admin/accountAdmin', 'AdminAccountController@index', [
+    'AuthorMiddleware@checkSession',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+
+Router::get('/admin/private', 'AdminAccountController@privateAdmin', [
+    'AuthorMiddleware@checkSession',
+    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+// Users
+Router::get('/admin/customers/users', 'AdminCustomersController@users', [
+    'AuthorMiddleware@checkSession',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+
+Router::post('/admin/customers/users/delete/{id}', 'AdminCustomersController@deleteUser', [
+    'AuthorMiddleware@checkSession',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+
+// Guests
+Router::get('/admin/customers/guests', 'AdminCustomersController@guests', [
+    'AuthorMiddleware@checkSession',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+
+Router::post('/admin/customers/guests/delete/{id}', 'AdminCustomersController@deleteGuest', [
+    'AuthorMiddleware@checkSession',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+
 Router::get('/admin/services', 'AdminServicesController@index', [
     'AuthorMiddleware@checkSession',
-    'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
-router::get('/admin/customers', 'AdminCustomersController@index', [
+
+// Thêm
+Router::post('/admin/services/create', 'AdminServicesController@create', [
     'AuthorMiddleware@checkSession',
-    'AuthorMiddleware@author',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
-router::get('/admin/accountAdmin', 'AdminAccountController@index', [
+
+// Sửa
+Router::post('/admin/services/update/{id}', 'AdminServicesController@update', [
     'AuthorMiddleware@checkSession',
-    'AuthorMiddleware@author',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+
+// Xoá
+Router::post('/admin/services/delete/{id}', 'AdminServicesController@delete', [
+    'AuthorMiddleware@checkSession',
+    'AuthorMiddleware@checkRoleAdmin',
+]);
+
+//Không thèm làm router cho toi luôn mà!!!!!
+Router::get('/admin/transactions', 'AdminTransactionsController@transactionsShow', [
+    'AuthorMiddleware@checkSession',
     'AuthorMiddleware@checkRoleAdmin',
 ]);
