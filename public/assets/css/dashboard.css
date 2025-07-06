@@ -1,3 +1,7 @@
+body {
+  margin: 0;
+}
+
 .amenities-group input[type="checkbox"] {
   margin: -80px !important;
 }

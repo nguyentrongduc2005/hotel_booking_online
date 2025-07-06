@@ -187,3 +187,8 @@
   font-weight: bold;
   font-style: normal;
 }
+
+.sidebar-logout-bottom {
+  margin-top: auto;
+  padding-bottom: 24px;
+}
