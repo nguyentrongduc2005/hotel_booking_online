@@ -200,8 +200,8 @@
 
                     </div>
                 </div>
-
                 <div class="view-gallery">View Gallery</div>
+
             </div>
 
             <!-- DIV 2: CONTENT & BOOK NOW SECTION -->
@@ -210,7 +210,9 @@
                 <p class="content-description">
                     Book your stay at Diamond Hotel – comfort, style, and service await.
                 </p>
-                <button id="book-now-btn" class="book-now-btn button-87">Book Now</button>
+                <a href="<?= $this->configs->config['basePath'] ?>/listroom" class="nav-link-btn">
+                    <button id="book-now-btn" class="book-now-btn button-87">Book Now</button>
+                </a>
             </div>
         </div>
     </div>
