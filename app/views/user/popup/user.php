@@ -5,12 +5,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>User Popup</title>
-    <link rel="stylesheet" href="<?= $this->configs->config['pathAssets'] ?>css/user.css?v=<?= time() ?>" />
+    <link rel="stylesheet"
+        href="<?php echo $this->configs->config['pathAssets']; ?>css/user.css?v=<?php echo time(); ?>" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+
 </head>
 
 
 <body>
-    <div class="container">
+    <div class="container" id="main-content">
         <div class="header">
             <div class="header-left">
                 <div class="back-button"></div>
@@ -30,25 +33,28 @@
                     <div class="sidebar-title">User Profile</div>
 
                     <div class="sidebar-menu">
-                        <div class="menu-item active">
+                        <div class="menu-item active" data-href="<?= $this->configs->config['basePath'] ?>/user">
                             <div class="menu-icon"><img
                                     src="<?= $this->configs->config['pathAssets'] ?>/icon/popup-user.svg"
-                                    alt="Logout" /></div>
+                                    alt="Logout" />
+                            </div>
                             <span>User</span>
                         </div>
-                        <div class="menu-item">
+                        <div class="menu-item" data-href="<?= $this->configs->config['basePath'] ?>/user/transactions">
+
                             <div class="menu-icon" style="color: black;"><img
                                     src="<?= $this->configs->config['pathAssets'] ?>/icon/popup-transaction.svg"
                                     alt="Logout" /></div>
                             <span>Transaction</span>
                         </div>
-                        <div class="menu-item">
+                        <div class="menu-item" data-href="<?= $this->configs->config['basePath'] ?>/user/reservations">
+
                             <div class="menu-icon"><img
                                     src="<?= $this->configs->config['pathAssets'] ?>/icon/popup-reservation.svg"
                                     alt="Logout" /></div>
                             <span>My Reservation</span>
                         </div>
-                        <div class="menu-item">
+                        <div class="menu-item" data-href="<?= $this->configs->config['basePath'] ?>/user/histories">
                             <div class="menu-icon">
                                 <img src="<?= $this->configs->config['pathAssets'] ?>/icon/popup-history.svg"
                                     alt="Logout" />
@@ -62,7 +68,6 @@
                     <a href="<?= $this->configs->config['basePath'] ?>/logout" class="sidebar-logout">
                         <img src="<?= $this->configs->config['pathAssets'] ?>/icon/logout.svg" alt="Logout"
                             class="logout-icon" />Logout</a>
-
                 </div>
             </div>
 

@@ -37,12 +37,16 @@ class PopUpModel
     function checkUpdatePass($payload, $id)
     {
         $user = $this->getInfoUser($id);
-        if (!password_verify($payload["pass_old"], $user["pass"])) return false;
-        $passNew = password_hash($payload["pass_new"], PASSWORD_DEFAULT);
-        $row =  db::update('user', [
+
+        if (!password_verify($payload["pass_old"], $user["pass"]))
+            return false;
+        $passNew = password_hash($$payload["pass_new"], PASSWORD_DEFAULT);
+        $row = db::update('user', [
+
             "pass" => $passNew
         ], "user_id = $id");
-        if (!$row) return false;
+        if (!$row)
+            return false;
         return true;
     }
 
@@ -59,9 +63,10 @@ class PopUpModel
                 INNER JOIN room ON booking.id_room = room.id_room
                 WHERE (booking.status = 'pending' OR booking.status = 'confirmed') 
                 AND $condition";
-        $data =  db::getAll($sql, $filter);
-        return  $data ?? [];
+        $data = db::getAll($sql, $filter);
+        return $data ?? [];
     }
+
 
     function getHistories($filter, $role)
     {
@@ -76,19 +81,22 @@ class PopUpModel
                 INNER JOIN room ON historybooking.id_room = room.id_room
                 WHERE (historybooking.status = 'completed' OR historybooking.status = 'cancelled') 
                 AND $condition";
-        $data =  db::getAll($sql, $filter);
-        return  $data ?? [];
+        $data = db::getAll($sql, $filter);
+        return $data ?? [];
     }
 
     function cancelBooking($id_booking)
     {
-        $row =  db::update('booking', ["status" => "cancelled"], "id_booking = $id_booking");
-        if (!$row) return false;
+        $row = db::update('booking', ["status" => "cancelled"], "id_booking = $id_booking");
+        if (!$row)
+            return false;
         $sql = "SELECT booking.transaction_id FROM `booking` Where id_booking = :id";
         $booking = db::getOne($sql, ["id" => $id_booking]);
-        if (!$booking) return false;
-        $rowT =  db::update('transaction', ["payment_status" => "refunded"], "transaction_id = {$booking['transaction_id']}");
-        if (!$rowT) return false;
+        if (!$booking)
+            return false;
+        $rowT = db::update('transaction', ["payment_status" => "refunded"], "transaction_id = {$booking['transaction_id']}");
+        if (!$rowT)
+            return false;
         return true;
     }
 
@@ -120,6 +128,9 @@ class PopUpModel
             $transactions = array_merge($transactions, $tran);
         }
 
+
         return $transactions ?? [];
     }
+
+
 }

@@ -90,4 +90,27 @@ saveButton.addEventListener("click", () => {
 
   // Gọi hàm đổi mật khẩu
   changePassword(oldPassword, newPassword);
+  //click sidebar
+  const menuItems = document.querySelectorAll(".sidebar .menu-item");
+  menuItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      const targetUrl = item.getAttribute("data-href");
+      if (targetUrl) {
+        window.location.href = targetUrl;
+      }
+    });
+  });
+});
+//click sidebar
+document.addEventListener("DOMContentLoaded", () => {
+  const menuItems = document.querySelectorAll(".sidebar .menu-item");
+
+  menuItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      const targetUrl = item.getAttribute("data-href");
+      if (targetUrl) {
+        window.location.href = targetUrl;
+      }
+    });
+  });
 });

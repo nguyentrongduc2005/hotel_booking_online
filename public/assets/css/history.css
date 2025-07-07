@@ -173,7 +173,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 100px;
+  height: auto;
   margin-bottom: 9px;
   padding: 10px;
   border: 1px solid #e3e2e2;
@@ -186,7 +186,6 @@ body {
 .card-left {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   height: 100%;
 }
 
@@ -223,18 +222,10 @@ body {
   color: #f4ce5a;
 }
 
-.status.failed {
+.status.cancelled {
   background-color: #fcebea;
   border: 1px solid #dc3545;
   color: #dc3545;
-}
-
-.price {
-  font-size: 16px;
-  font-weight: bold;
-  color: #222;
-  text-align: right;
-  align-self: center;
 }
 
 .main::-webkit-scrollbar {
