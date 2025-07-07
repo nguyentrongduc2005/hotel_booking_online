@@ -11,7 +11,10 @@
             justify-content: center;
             font-size: 19px;
         }
-
+        .info-error{
+            max-width: 300px;
+            margin: 0 auto;
+        }
         .error-container {
             text-align: center;
             background: #FFFBEA;

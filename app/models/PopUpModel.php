@@ -131,6 +131,4 @@ class PopUpModel
 
         return $transactions ?? [];
     }
-
-
 }

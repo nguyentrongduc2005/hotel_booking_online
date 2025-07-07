@@ -328,3 +328,7 @@ body {
   background: transparent;
   margin-bottom: 12px;
 }
+.no-reservation{
+  text-align: center;
+  font-size: 25px;
+}
