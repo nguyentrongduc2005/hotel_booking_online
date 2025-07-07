@@ -15,6 +15,20 @@ $password = $password ?? '';
         onclick="window.location.href='<?= $this->configs->config['basePath'] ?>/regis'">Sign up</button>
       <div class="login-title">WELCOME TO DIAMOND!</div>
       <div class="login-sub">Sign in your account</div>
+      <!-- Social Login Buttons -->
+      <div class="login-social-row">
+        <button type="button" class="login-social-btn login-google-btn">
+          <img src="<?= $this->configs->config['pathAssets'] ?>img/success/google.png" alt="Google" class="login-social-icon"> Google
+        </button>
+        <button type="button" class="login-social-btn login-facebook-btn">
+          <img src="<?= $this->configs->config['pathAssets'] ?>img/success/facebook.png" alt="Facebook" class="login-social-icon"> Facebook
+        </button>
+      </div>
+      <div class="login-divider-row">
+        <span class="login-divider-line"></span>
+        <span class="login-divider-text">or</span>
+        <span class="login-divider-line"></span>
+      </div>
       <form class="login-form" method="post" action="<?= $this->configs->config['basePath'] ?>/login">
         <label for="email">Your Email</label>
         <input type="email" id="email" name="email" required value="<?= htmlspecialchars($email) ?>">
@@ -50,9 +64,6 @@ $password = $password ?? '';
         },1000)
         </script>";
   } ?>
-
-
-
   </form>
   </div>
   <div class="login-right"

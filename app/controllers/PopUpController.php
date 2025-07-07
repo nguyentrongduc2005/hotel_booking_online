@@ -123,8 +123,6 @@ class PopUpController extends Controller
             'history' => $data,
             'user' => $user
         ]);
-        // echo "<pre>";
-        // print_r($data);
 
     }
 

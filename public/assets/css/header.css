@@ -352,3 +352,7 @@
   text-align: center;
   word-break: break-all;
 } 
+.nav-link-btn{
+  text-decoration: unset;
+  color: rgb(14, 13, 13);
+}
