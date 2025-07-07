@@ -1,7 +1,39 @@
+@font-face {
+  font-family: 'SVN-Gilroy';
+  src: url('../font/SVN-Gilroy.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SVN-Gilroy';
+  src: url('../font/SVN-GilroyBold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+a, p {
+  font-family: SVN-Gilroy;
+  font-weight: normal;
+}
+
+h1, h2, h3, h4, h5, strong {
+  font-family: 'SVN-Gilroy';
+  font-weight: bold;
+}
 body {
     padding: 0;
     margin: 0;
     background-color: #0C0B0E;
+    scrollbar-width: none;      /* Firefox */
+    -ms-overflow-style: none;   /* IE, Edge */
+}
+
+
+body::-webkit-scrollbar {
+    display: none;              /* Chrome, Safari */
 }
 
 #khung {
@@ -14,11 +46,6 @@ body {
     background-position: top center;
 }
 
-#main {
-    flex: 1;
-    min-height: 130vh;
-
-}
 
 #hero-section {
     min-height: 95vh;
@@ -149,7 +176,47 @@ label.title {
 .search-icon {
     font-size: 1.2rem;
 }
+.scroll-container::-webkit-scrollbar {
+    width: 6px; /* Độ rộng mảnh */
+  }
+  
+  .scroll-container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .scroll-container::-webkit-scrollbar-thumb {
+    background-color: #452525;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
 
+  input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 9px;
+  background: #f7eed7b7;
+  border-radius: 4px;
+  outline: none;
+
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 17px;
+  height: 17px;
+  background: #d8bca6f3;
+  border: 2px solid #fff7f7ee;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s ease, border 0.3s ease;
+}
+input[type=range]::-webkit-slider-thumb:hover {
+   background: #f8f4f1f8;
+  border: 2px solid #e4d3c7ee;
+   transform: scale(1.1);
+}
 @media (max-width: 700px) {
     .hero-title {
         font-size: 2.2rem;
@@ -170,4 +237,126 @@ label.title {
         width: 60px;
         height: 60px;
     }
+}
+
+#preloader {
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  background: #111;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s;
+}
+
+.preloader-capsule {
+  position: relative;
+  width: 980px;
+  height: 110px;
+  background: #131212; /* Đen nhạt hơn nền */
+  border-radius: 2px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.15);
+}
+
+.preloader-bar {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 0;
+  background: #ffffffd7;
+  opacity: 0.92;
+  transition: width 1.2s cubic-bezier(.4,0,.2,1);
+  z-index: 1;
+}
+
+.preloader-text {
+  position: relative;
+  z-index: 2;
+  font-family: 'Inter', sans-serif;
+  font-size: 2.4rem;
+  color: #f1d8d8;
+  font-weight: 700;
+  letter-spacing: 2px;
+  mix-blend-mode: difference; /* Để chữ luôn nổi bật trên nền trắng hoặc đen */
+  text-align: center;
+  width: 100%;
+  user-select: none;
+
+}
+
+
+
+.preloader-desc {
+  position: absolute;
+  bottom: 7%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #d6cfc2;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  opacity: 0.85;
+  text-align: center;
+  width: 100%;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Hiệu ứng mask fade out hình chữ nhật */
+@keyframes mask-fade-out {
+  0% {
+    mask-image: none;
+    -webkit-mask-image: none;
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    mask-image: radial-gradient(rectangle at 50% 50%, transparent 60%, black 100%);
+    -webkit-mask-image: radial-gradient(rectangle at 50% 50%, transparent 60%, black 100%);
+    opacity: 0;
+  }
+}
+
+/* Viên thuốc phóng to và làm rõ background */
+.preloader-capsule.animate-out {
+  animation: capsule-scale-full 0.9s cubic-bezier(.4,0,.2,1) forwards;
+  z-index: 10;
+}
+@keyframes capsule-scale-full {
+  to {
+    transform: scale(12, 12);
+    opacity: 1;
+  }
+}
+
+/* Chữ Diamond Hotel mờ dần và scale nhỏ lại */
+.preloader-text.animate-out {
+  animation: text-fade-scale-out 0.7s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes text-fade-scale-out {
+  to {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+}
+
+/* Dòng mô tả biến mất bình thường */
+.preloader-desc.animate-out {
+  animation: desc-fade-out 0.5s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes desc-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+#preloader.animate-out {
+  animation: mask-fade-out 0.8s cubic-bezier(.4,0,.2,1) forwards;
 }

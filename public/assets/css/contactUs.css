@@ -1,4 +1,21 @@
 /* Contact*page specific styles */
+@font-face {
+    font-family: 'SVN-Gilroy';
+    src: url('../font/SVN-Gilroy.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: 'SVN-Gilroy';
+    src: url('../font/SVN-GilroyBold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
+
+
 
 .contact-page {
     font-family: 'SVN-Gilroy';
@@ -71,6 +88,7 @@
 
 .form-group input,
 .form-group textarea {
+    font-family: 'SVN-Gilroy';
     width: 100%;
     padding: 15px;
     border: 2px solid #e1e5e9;

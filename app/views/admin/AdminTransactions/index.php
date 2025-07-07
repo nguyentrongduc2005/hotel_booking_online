@@ -1,23 +1,57 @@
-<?php   
+<link rel="stylesheet" href="<?= $this->configs->config['pathAssets'] ?>css/dashboard.css?v=<?= time() ?>">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+<div class="dashboard-container">
+  <div class="dashboard-all-bookings">
+    <div class="dashboard-header"
+      style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+      <div class="dashboard-title">All Transactions</div>
+      <div class="dashboard-actions" style="display: flex; gap: 8px; align-items: center;">
+        <form class="dashboard-search-form" method="get"
+          action="<?= $this->configs->config['basePath'] ?? '' ?>/admin/transactions"
+          style="display: flex; align-items: center;">
+          <div class="search-bar-wrapper">
+            <span class="search-icon"><i class="fa fa-search"></i></span>
+            <input type="text" class="dashboard-search-input" name="search"
+              placeholder="Tìm kiếm theo tên..." value="<?= htmlspecialchars($search ?? '') ?>">
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="dashboard-table-wrapper">
+      <table class="dashboard-table">
+        <thead>
+          <tr>
+            <th>Transaction ID</th>
+            <th>Booking ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Total</th>
+            <th>Payment Method</th>
+            <th>Payment Status</th>
+          </tr>
+        </thead>
+        <tbody>
 
-echo "<pre>";
-print_r($data);
-echo "</pre>";
-?>
-
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-
-</body>
-
-</html>
+          <?php if (!empty($transactions)): ?>
+            <?php foreach ($transactions as $tran): ?>
+              <tr>
+                <td><?= htmlspecialchars($tran['transaction_id'] ?? '') ?></td>
+                <td><?= htmlspecialchars($tran['id_booking'] ?? '') ?></td>
+                <td><?= htmlspecialchars($tran['user']['name'] ?? '') ?></td>
+                <td><?= htmlspecialchars($tran['user']['email'] ?? '') ?></td>
+                <td><?= htmlspecialchars($tran['total_amount'] ?? '') ?></td>
+                <td><?= htmlspecialchars($tran['payment_method'] ?? '') ?></td>
+                <td><?= htmlspecialchars($tran['payment_status'] ?? '') ?></td>
+              </tr>
+            <?php endforeach; ?>
+          <?php else: ?>
+            <tr>
+              <td colspan="7" style="text-align:center;">Không có giao dịch nào.</td>
+            </tr>
+          <?php endif; ?>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

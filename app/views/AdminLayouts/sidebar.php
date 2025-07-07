@@ -7,34 +7,54 @@
   <nav class="sidebar-nav">
     <ul class="sidebar-menu">
       <li class="sidebar-item sidebar-dashboard">
-        <a href="<?= $this->configs->config['basePath'] ?>/dashboard" style="text-decoration: none; color: #fff;">Dashboard</a>
+        <a href="<?= $this->configs->config['basePath'] ?>/dashboard"
+          style="text-decoration: none; color: #fff;">Dashboard</a>
         <ul class="sidebar-submenu">
-          <li class="sidebar-subitem"><a href="<?= $this->configs->config['basePath'] ?>/dashboard/checkin">Check-in</a></li>
-          <li class="sidebar-subitem"><a href="<?= $this->configs->config['basePath'] ?>/dashboard/checkout">Check-out</a></li>
+          <li class="sidebar-subitem"><a
+              href="<?= $this->configs->config['basePath'] ?>/dashboard/checkin">Check-in</a></li>
+          <li class="sidebar-subitem"><a
+              href="<?= $this->configs->config['basePath'] ?>/dashboard/checkout">Check-out</a></li>
         </ul>
       </li>
       <li class="sidebar-item sidebar-bookings">
         Booking
         <ul class="sidebar-submenu">
-          <li class="sidebar-subitem"><a href="<?= $this->configs->config['basePath'] ?>/bookings/allBookings">All Bookings</a></li>
-          <li class="sidebar-subitem"><a href="<?= $this->configs->config['basePath'] ?>/bookings/historyBookings">History Booking</a></li>
+          <li class="sidebar-subitem"><a
+              href="<?= $this->configs->config['basePath'] ?>/admin/Booking/allbookings">All Bookings</a>
+          </li>
+          <li class="sidebar-subitem"><a
+              href="<?= $this->configs->config['basePath'] ?>/admin/Booking/historybookings">History
+              Booking</a></li>
         </ul>
       </li>
       <li class="sidebar-item sidebar-rooms">
-        <a href="<?= $this->configs->config['basePath'] ?>/admin/rooms" style="text-decoration: none; color: #fff;">Rooms</a>
+        <a href="<?= $this->configs->config['basePath'] ?>/admin/rooms"
+          style="text-decoration: none; color: #fff;">Rooms</a>
         <ul class="sidebar-submenu">
-          <li class="sidebar-subitem"><a href="<?= $this->configs->config['basePath'] ?>/admin/roomtypes">Room Types</a></li>
-          <li class="sidebar-subitem"><a href="<?= $this->configs->config['basePath'] ?>/admin/amenities">Amenities</a></li>
+          <li class="sidebar-subitem"><a href="<?= $this->configs->config['basePath'] ?>/admin/roomtypes">Room
+              Types</a></li>
+          <li class="sidebar-subitem"><a
+              href="<?= $this->configs->config['basePath'] ?>/admin/amenities">Amenities</a></li>
         </ul>
       </li>
-      <li class="sidebar-item sidebar-services">Services</li>
+      <li class="sidebar-item sidebar-services"><a href="<?= $this->configs->config['basePath'] ?>/admin/services"
+          style="text-decoration: none; color: #fff;">Services</a></li>
       <li class="sidebar-item sidebar-customers">Customers
         <ul class="sidebar-submenu">
-          <li class="sidebar-subitem"><a href="">Guests</a></li>
-          <li class="sidebar-subitem"><a href="">Users</a></li>
+          <li class="sidebar-subitem"><a
+              href="<?= $this->configs->config['basePath'] ?>/admin/customers/guests"
+              style="text-decoration: none; color: #fff;">Guests</a></li>
+          <li class="sidebar-subitem"><a
+              href="<?= $this->configs->config['basePath'] ?>/admin/customers/users"
+              style="text-decoration: none; color: #fff;">Users</a></li>
         </ul>
       </li>
-      <li class="sidebar-item sidebar-transactions">Transactions</li>
+      <li class="sidebar-item sidebar-transactions"><a
+          href="<?= $this->configs->config['basePath'] ?>/admin/transactions"
+          style="text-decoration: none; color: #fff;">Transactions</a></li>
+      <li class="sidebar-item sidebar-transactions"><a
+          href="<?= $this->configs->config['basePath'] ?>/logout"
+          style="text-decoration: none; color: #fff;">Logout</a></li>
     </ul>
   </nav>
 </aside>

@@ -14,6 +14,8 @@ class AdminRoomsController extends Controller
     {
         parent::__construct();
         $this->model = new AdminRoomsModel();
+        // Set viewpathComponent to /admin for admin controllers
+        self::setcomponent('/admin');
     }
 
 
@@ -30,7 +32,7 @@ class AdminRoomsController extends Controller
         $amenities = $this->model->getAllAmenities();
         $data['amenities'] = $amenities;
         foreach ($data as $key => $value) {
-            if (isset($value['images'])) {
+            if (isset($value['id_room'])) {
                 $data[$key]['images'] = $this->model->getImagesByRoomId($value['id_room']);
             }
         }
@@ -47,7 +49,7 @@ class AdminRoomsController extends Controller
         $amenities = $this->model->getAllAmenities();
         $data['amenities'] = $amenities;
         foreach ($data as $key => $value) {
-            if (isset($value['images'])) {
+            if (isset($value['id_room'])) {
                 $data[$key]['images'] = $this->model->getImagesByRoomId($value['id_room']);
             }
         }

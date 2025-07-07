@@ -2,8 +2,8 @@
 <div class="contact-page">
     <div class="main-container">
         <!-- Contact Form Section -->
-        <div class="contact-form-container" id="contactFormContainer">
-            <div class="contact-form">
+        <div class="contact-form-container" id="contactFormContainer" >
+            <div class="contact-form" style="padding: 10px 35px;">
                 <div class="form-header">
                     <h1>Contact Us</h1>
                     <p>We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>

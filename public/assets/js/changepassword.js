@@ -47,7 +47,7 @@ function changePassword(oldPass, newPass) {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log("Kết quả từ API:", data);
+
       if (data.statusApi === true) {
         // Thành công: chuyển hướng về trang user
         window.location.href = "/hotel_booking_online/public/user";
@@ -69,14 +69,21 @@ saveButton.addEventListener("click", () => {
   const oldPassword = oldPasswordInput.value.trim();
   const newPassword = newPasswordInput.value.trim();
   const confirmPassword = confirmPasswordInput.value.trim();
+  console.log(oldPassword);
+  console.log(newPassword);
+  console.log(confirmPassword);
+
+
 
   // Kiểm tra các trường nhập liệu
   if (!oldPassword || !newPassword || !confirmPassword) {
+
     alert("Vui lòng điền đầy đủ thông tin.");
     return;
   }
 
   if (newPassword !== confirmPassword) {
+
     alert("Mật khẩu mới và xác nhận mật khẩu không khớp.");
     return;
   }

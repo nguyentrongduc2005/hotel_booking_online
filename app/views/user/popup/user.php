@@ -116,7 +116,7 @@
                 <div class="popup-overlay" id="popup">
                     <div class="popup-box">
                         <h3 class="popup-title">Change Password</h3>
-                        <form id="change-password-form">
+                        <div id="change-password-form">
                             <div class="popup-field">
                                 <label for="old">Old Password</label>
                                 <input type="password" id="old" name="old_password" required />
@@ -133,10 +133,10 @@
                             </div>
 
                             <div class="popup-actions">
-                                <button type="submit" class="popup-save">Save</button>
+                                <button class="popup-save">Save</button>
                                 <button type="button" class="popup-cancel" id="close-popup">Cancel</button>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
 
