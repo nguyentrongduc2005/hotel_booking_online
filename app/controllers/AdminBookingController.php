@@ -29,6 +29,9 @@ class AdminBookingController extends Controller
         ];
 
         $bookings = $this->model->bookingFilter('booking', $filters);
+        // echo '<pre>';
+        // print_r($bookings);
+        // echo '</pre>';
 
         return $this->render('allBookings', [
             'bookings' => $bookings,
@@ -47,10 +50,13 @@ class AdminBookingController extends Controller
             'check_out'  => $req->query('check_out'),
         ];
 
-        $bookings = $this->model->bookingFilter('historybooking', $filters);
+        $historyBookings = $this->model->bookingFilter('historybooking', $filters);
+        // echo '<pre>';
+        // print_r($historyBookings);  
+        // echo '</pre>';
 
         return $this->render('historyBookings', [
-            'bookings' => $bookings,
+            'historyBookings' =>$historyBookings,
             'filters' => $filters
         ]);
     }
