@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="<?= $this->configs->config['pathAssets'] ?>css/homepage.css?v=<?= time() ?>"><?php date_default_timezone_set('Asia/Ho_Chi_Minh');
-$datePresent = date('Y-m-d');
-$nextDate = date('Y-m-d', strtotime($datePresent . ' +1 day'));
-?>
+                                                                                                            $datePresent = date('Y-m-d');
+                                                                                                            $nextDate = date('Y-m-d', strtotime($datePresent . ' +1 day'));
+                                                                                                            ?>
 
 <div id="homepage-container">
     <div id="hero-section">
@@ -68,34 +68,30 @@ $nextDate = date('Y-m-d', strtotime($datePresent . ' +1 day'));
                 </div>
             <?php endforeach; ?>
         </div>
-        <div id="btn-explore" class="btn-explore1">
-            <span>EXPLORE ALL</span>
-            <div class="icon">
-                <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
-                </svg>
+        <a href="<?= $this->configs->config['basePath'] ?>/services" class="nav-link-btn">
+            <div id="btn-explore" class="btn-explore1">
+                <span>EXPLORE ALL</span>
+                <div class="icon">
+                    <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                    </svg>
+                </div>
             </div>
-        </div>
+        </a>
     </div>
     <div id="rooms-section">
-        <!-- Section Header -->
         <div class="section-header">
             <h2 class="section-title">Rooms Designed for You</h2>
             <p class="section-subtitle">Choose the room that suits your journey</p>
         </div>
-
-        <!-- Rooms Container -->
         <div class="room-container">
-            <!-- Navigation Arrows -->
             <button class="prev-btn nav-arrow nav-arrow-left">
                 <span class="arrow-icon">&lt;</span>
             </button>
             <button class="next-btn nav-arrow nav-arrow-right">
                 <span class="arrow-icon">&gt;</span>
             </button>
-
-            <!-- Rooms Grid -->
             <div class="rooms-grid">
                 <?php foreach ($rooms as $room): ?>
                     <div class="room-card"
@@ -111,15 +107,17 @@ $nextDate = date('Y-m-d', strtotime($datePresent . ' +1 day'));
             </div>
         </div>
 
-        <div id="btn-explore" class="btn-explore1">
-            <span>EXPLORE ALL</span>
-            <div class="icon">
-                <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
-                </svg>
+        <a href="<?= $this->configs->config['basePath'] ?>/listroom" class="nav-link-btn">
+            <div id="btn-explore" class="btn-explore1">
+                <span>EXPLORE ALL</span>
+                <div class="icon">
+                    <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                    </svg>
+                </div>
             </div>
-        </div>
+        </a>
     </div>
 
     <div id="testimonials-section">
@@ -212,13 +210,24 @@ $nextDate = date('Y-m-d', strtotime($datePresent . ' +1 day'));
                 <p class="content-description">
                     Book your stay at Diamond Hotel – comfort, style, and service await.
                 </p>
-                <button class="book-now-btn button-87">Book Now</button>
+                <button id="book-now-btn" class="book-now-btn button-87">Book Now</button>
             </div>
         </div>
     </div>
 </div>
 
 <script src="<?= $this->configs->config['pathAssets'] ?>js/homepage.js"></script>
+<script>
+    document.getElementById('explore-services').onclick = function() {
+        window.location.href = "<?= $this->configs->config['basePath'] ?>/services";
+    };
+    document.getElementById('explore-rooms').onclick = function() {
+        window.location.href = "<?= $this->configs->config['basePath'] ?>/listroom";
+    };
+    document.getElementById('book-now-btn').onclick = function() {
+        window.location.href = "<?= $this->configs->config['basePath'] ?>/listroom";
+    };
+</script>
 </body>
 
 </html>
