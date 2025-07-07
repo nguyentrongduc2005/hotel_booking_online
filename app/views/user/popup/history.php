@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Reservation Popup</title>
+    <title>History Booking Popup</title>
     <link rel="stylesheet"
-        href="<?php echo $this->configs->config['pathAssets']; ?>css/reservation.css?v=<?php echo time(); ?>" />
+        href="<?php echo $this->configs->config['pathAssets']; ?>css/history.css?v=<?php echo time(); ?>" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
 </head>
 
@@ -18,42 +18,41 @@
             </div>
             <div class="header-right">
                 <span class="user-name"><?= isset($user['full_name']) ? $user['full_name'] : '' ?></span>
-                <div class="avatar"
-                    style="background-image: url('<?= $this->configs->config['pathAssets'] ?>/img/user/avatar.jpg');">
-                </div>
+                <div class="avatar" style="
+              background-image: url('<?= $this->configs->config['pathAssets'] ?>/img/user/avatar.jpg');
+            "></div>
             </div>
         </div>
         <div class="content">
             <div class="sidebar">
                 <div class="sidebar-top">
-                    <div class="sidebar-title">Reservation</div>
+                    <div class="sidebar-title">History Booking</div>
                     <div class="sidebar-menu">
-                        <div class="menu-item" data-href="<?= $this->configs->config['basePath'] ?>/user">
+                        <div class="menu-item" data-href="<?= $this->configs->config['basePath'] ?>/user/">
                             <div class="menu-icon">
-                                <img src="<?= $this->configs->config['pathAssets'] ?>/icon/popup-user.svg"
-                                    alt="Logout" />
+                                <img src="<?= $this->configs->config['pathAssets'] ?>/icon/popup-user.svg" alt="User" />
                             </div>
                             <span>User</span>
                         </div>
                         <div class="menu-item" data-href="<?= $this->configs->config['basePath'] ?>/user/transactions">
                             <div class="menu-icon" style="color: black">
                                 <img src="<?= $this->configs->config['pathAssets'] ?>/icon/popup-transaction.svg"
-                                    alt="Logout" />
+                                    alt="Transaction" />
                             </div>
                             <span>Transaction</span>
                         </div>
-                        <div class="menu-item active "
-                            data-href="<?= $this->configs->config['basePath'] ?>/user/reservations">
+                        <div class="menu-item" data-href="<?= $this->configs->config['basePath'] ?>/user/reservations">
                             <div class="menu-icon">
                                 <img src="<?= $this->configs->config['pathAssets'] ?>/icon/popup-reservation.svg"
-                                    alt="Logout" />
+                                    alt="Reservation" />
                             </div>
                             <span>My Reservation</span>
                         </div>
-                        <div class="menu-item" data-href="<?= $this->configs->config['basePath'] ?>/user/histories">
+                        <div class="menu-item active"
+                            data-href="<?= $this->configs->config['basePath'] ?>/user/histories">
                             <div class="menu-icon">
                                 <img src="<?= $this->configs->config['pathAssets'] ?>/icon/popup-history.svg"
-                                    alt="Logout" />
+                                    alt="History" />
                             </div>
                             <span>My History Booking</span>
                         </div>
@@ -66,73 +65,50 @@
                 </div>
             </div>
             <div class="main">
-                <form action="your-target-page.html" method="POST" class="search-form" id="search-form">
+                <form action="" method="GET" class="search-form" id="search-form">
                     <div class="search-bar custom-search">
                         <img src="<?= $this->configs->config['pathAssets'] ?>/icon/find.svg" alt="Search" id="find-btn"
                             style="cursor: pointer;" />
                         <input type="text" id="search-input" name="citizenId"
-                            placeholder="Enter Citizen ID to find your reservation" required />
+                            placeholder="Enter Citizen ID to find your booking history" required />
                         <div class="clear-btn" id="clear-btn">
                             <img src="<?= $this->configs->config['pathAssets'] ?>/icon/x.svg" alt="Clear" />
                         </div>
                     </div>
                 </form>
-                <?php if (!empty($reservations)): ?>
-                    <?php foreach ($reservations as $reservation): ?>
+                <?php if (!empty($history)): ?>
+                    <?php foreach ($history as $booking): ?>
                         <div class="card">
                             <div class="card-left">
                                 <div class="card-row">
                                     <div class="hotel-name">
-                                        <?= htmlspecialchars($reservation['name'] ?? 'N/A') ?>
-                                    </div>
-                                    <div class="status <?= strtolower($reservation['status'] ?? 'pending') ?>">
-                                        <?= htmlspecialchars($reservation['status'] ?? 'Pending') ?>
+                                        <?= htmlspecialchars($booking['name'] ?? 'N/A') ?>
                                     </div>
                                 </div>
                                 <div class="transaction-line">
                                     Booking ID:
-                                    <?= htmlspecialchars($reservation['id_booking'] ?? '-') ?>
+                                    <?= htmlspecialchars($booking['id_history'] ?? '-') ?>
                                     / Room:
-                                    <?= htmlspecialchars($reservation['slug'] ?? '-') ?>
+                                    <?= htmlspecialchars($booking['slug'] ?? '-') ?>
                                 </div>
                                 <div class="transaction-line">
-                                    <?= isset($reservation['check_in']) && isset($reservation['check_out'])
-                                        ? date('d/m/Y', strtotime($reservation['check_in'])) . ' - ' . date('d/m/Y', strtotime($reservation['check_out']))
+                                    <?= isset($booking['check_in']) && isset($booking['check_out'])
+                                        ? date('d/m/Y', strtotime($booking['check_in'])) . ' - ' . date('d/m/Y', strtotime($booking['check_out']))
                                         : '' ?>
                                 </div>
-                                <?php
-                                $statusCheckin = strtolower($reservation['status_checkin'] ?? '');
-                                $statusCheckout = strtolower($reservation['status_checkout'] ?? '');
-
-                                $timelineClass = '';
-                                if ($statusCheckout === 'done') {
-                                    $timelineClass = 'checkout-done';
-                                } elseif ($statusCheckin === 'done') {
-                                    $timelineClass = 'checkin-done';
-                                }
-                                ?>
-                                <div class="timeline-bar <?= $timelineClass ?>">
-                                    <div class="timeline-left"></div>
-                                    <div class="timeline-right"></div>
-                                </div>
-
                             </div>
-
-                            <form method="POST" action="<?= $this->configs->config['basePath'] ?>/reservation/cancel"
-                                style="display: inline">
-                                <input type="hidden" name="booking_id"
-                                    value="<?= htmlspecialchars($reservation['booking_id'] ?? '') ?>" />
-                                <button type="submit" class="cancel-btn">Cancel</button>
-                            </form>
+                            <div class="status <?= strtolower($booking['status'] ?? 'completed') ?>">
+                                <?= htmlspecialchars($booking['status'] ?? 'Completed') ?>
+                            </div>
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>
-                    <div class="no-reservation">No reservations found.</div>
+                    <div class="no-reservation">No booking history found.</div>
                 <?php endif; ?>
             </div>
         </div>
-        <script src="<?= $this->configs->config['pathAssets'] ?>/js/reservation.js?v=<?= time() ?>"></script>
-
+    </div>
+    <script src="<?= $this->configs->config['pathAssets'] ?>/js/history.js?v=<?= time() ?>"></script>
 </body>
 
 </html>

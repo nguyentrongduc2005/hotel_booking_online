@@ -299,12 +299,6 @@ body {
   cursor: pointer;
 }
 
-/* .custom-search .search-icon {
-  width: 18px;
-  height: 18px;
-  margin-right: 6px;
-  cursor: pointer;
-} */
 .custom-search input[type="text"] {
   border: none;
   outline: none;

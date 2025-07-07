@@ -118,4 +118,14 @@ document.addEventListener("DOMContentLoaded", () => {
       searchInput.value.trim() ? searchForm.submit() : searchInput.focus();
     });
   }
+  //click sidebar
+  const menuItems = document.querySelectorAll(".sidebar .menu-item");
+  menuItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      const targetUrl = item.getAttribute("data-href");
+      if (targetUrl) {
+        window.location.href = targetUrl;
+      }
+    });
+  });
 });

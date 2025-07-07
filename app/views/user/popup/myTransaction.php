@@ -1,10 +1,3 @@
-<?php
-if (!isset($transactions) && isset($data)) {
-  $transactions = $data;
-} elseif (!isset($transactions)) {
-  $transactions = [];
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,22 +30,22 @@ if (!isset($transactions) && isset($data)) {
           <div class="sidebar-title">Transaction</div>
 
           <div class="sidebar-menu">
-            <div class="menu-item">
+            <div class="menu-item" data-href="<?= $this->configs->config['basePath'] ?>/user/">
               <div class="menu-icon"><img src="<?= $this->configs->config['pathAssets'] ?>/icon/popup-user.svg"
                   alt="Logout" /></div>
               <span>User</span>
             </div>
-            <div class="menu-item active">
+            <div class="menu-item active" data-href="<?= $this->configs->config['basePath'] ?>/user/transactions">
               <div class="menu-icon" style="color: black;"><img
                   src="<?= $this->configs->config['pathAssets'] ?>/icon/popup-transaction.svg" alt="Logout" /></div>
               <span>Transaction</span>
             </div>
-            <div class="menu-item">
+            <div class="menu-item" data-href="<?= $this->configs->config['basePath'] ?>/user/reservations">
               <div class="menu-icon"><img src="<?= $this->configs->config['pathAssets'] ?>/icon/popup-reservation.svg"
                   alt="Logout" /></div>
               <span>My Reservation</span>
             </div>
-            <div class="menu-item">
+            <div class="menu-item" data-href="<?= $this->configs->config['basePath'] ?>/user/histories">
               <div class="menu-icon">
                 <img src="<?= $this->configs->config['pathAssets'] ?>/icon/popup-history.svg" alt="Logout" />
               </div>
@@ -110,7 +103,7 @@ if (!isset($transactions) && isset($data)) {
         <?php endif; ?>
       </div>
     </div>
-    <script src="<?= $this->configs->config['pathAssets'] ?>/js/transaction.js"></script>
+    <script src="<?= $this->configs->config['pathAssets'] ?>/js/transaction.js?v=<?= time() ?>"></script>
 
 </body>
 

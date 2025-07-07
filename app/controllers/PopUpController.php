@@ -68,19 +68,25 @@ class PopUpController extends Controller
     function myReservationHandler($req, $res)
     {
         $data = [];
+        $user = NULL;
         if (isset($_SESSION['user_id'])) {
             $data = $this->model->getMyReservation(['user_id' => $_SESSION['user_id']], 'user');
+            $user = $this->model->getInfoUser($_SESSION['user_id']);
+
         } else {
             if (isset($req->post()['cccd'])) {
                 $cccd = $req->post()['cccd'];
-
                 $data = $this->model->getMyReservation(['cccd' => $cccd], 'guest');
+                $user = NULL;
             } else {
                 $this->render('myReservation', []);
             }
         }
 
-        $this->renderPartial('user/popup/my', $data);
+        $this->renderPartial('user/popup/myReservation', [
+            'reservations' => $data,
+            'user' => $user
+        ]);
     }
     function myReservationCancel($req, $res)
     {
@@ -100,46 +106,48 @@ class PopUpController extends Controller
     function historyHandler($req, $res)
     {
         $data = [];
+        $user = null;
         if (isset($_SESSION['user_id'])) {
             $data = $this->model->getHistories(['user_id' => $_SESSION['user_id']], 'user');
+            $user = $this->model->getInfoUser($_SESSION['user_id']);
         } else if (isset($req->post()['cccd'])) {
             $cccd = $req->post()['cccd'];
-
             $data = $this->model->getHistories(['cccd' => $cccd], 'guest');
+            $user = null;
+
         } else {
-            // $this->render('myReservation', []);
+            // $this->render('history', []);
         }
-        // $this->render('myReservation',$data);
-        echo "<pre>";
-        print_r($data);
+        $this->renderPartial('/user/popup/history', [
+            'history' => $data,
+            'user' => $user
+        ]);
+        // echo "<pre>";
+        // print_r($data);
+
     }
 
 
     function getTransaction($req, $res)
     {
-        $transactions = [];
+        $data = [];
         $user = null;
 
         if (isset($_SESSION['user_id'])) {
-            // Lấy dữ liệu giao dịch
-            $transactions = $this->model->getTransaction(['user_id' => $_SESSION['user_id']], 'user');
+            $data = $this->model->getTransaction(['user_id' => $_SESSION['user_id']], 'user');
 
-            // Lấy thông tin người dùng
             $user = $this->model->getInfoUser($_SESSION['user_id']);
         } else if (isset($req->post()['cccd'])) {
             $cccd = $req->post()['cccd'];
-            $transactions = $this->model->getTransaction(['cccd' => $cccd], 'guest');
-            // Guest không có thông tin user
+            $data = $this->model->getTransaction(['cccd' => $cccd], 'guest');
             $user = null;
         } else {
-            // Nếu không có dữ liệu gì hết, load trang rỗng
-            $this->render('myTransaction', []);
+            $this->renderPartial('myTransaction', []);
             return;
         }
 
-        // Truyền cả giao dịch + user vào view
         $this->renderPartial('user/popup/myTransaction', [
-            'transactions' => $transactions,
+            'transactions' => $data,
             'user' => $user
         ]);
     }
