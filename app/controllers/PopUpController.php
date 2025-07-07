@@ -80,7 +80,8 @@ class PopUpController extends Controller
                 $data = $this->model->getMyReservation(['cccd' => $cccd], 'guest');
                 $user = NULL;
             } else {
-                $this->render('myReservation', []);
+                $this->renderPartial('user/popup/myReservation', []);
+                return;
             }
         }
 
@@ -117,7 +118,8 @@ class PopUpController extends Controller
             $user = null;
 
         } else {
-            // $this->render('history', []);
+            $this->renderPartial('/user/popup/history', []);
+            return;
         }
         $this->renderPartial('/user/popup/history', [
             'history' => $data,
@@ -143,7 +145,7 @@ class PopUpController extends Controller
             $data = $this->model->getTransaction(['cccd' => $cccd], 'guest');
             $user = null;
         } else {
-            $this->renderPartial('myTransaction', []);
+            $this->renderPartial('user/popup/myTransaction', []);
             return;
         }
         $this->renderPartial('user/popup/myTransaction', [
