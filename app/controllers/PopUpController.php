@@ -73,14 +73,14 @@ class PopUpController extends Controller
         if (isset($_SESSION['user_id'])) {
             $data = $this->model->getMyReservation(['user_id' => $_SESSION['user_id']], 'user');
             $user = $this->model->getInfoUser($_SESSION['user_id']);
-
         } else {
             if (isset($req->post()['cccd'])) {
                 $cccd = $req->post()['cccd'];
                 $data = $this->model->getMyReservation(['cccd' => $cccd], 'guest');
                 $user = NULL;
             } else {
-                $this->render('myReservation', []);
+                $this->renderPartial('user/popup/myReservation', []);
+                return;
             }
         }
 
@@ -115,7 +115,6 @@ class PopUpController extends Controller
             $cccd = $req->post()['cccd'];
             $data = $this->model->getHistories(['cccd' => $cccd], 'guest');
             $user = null;
-
         } else {
             // $this->render('history', []);
         }
@@ -141,16 +140,12 @@ class PopUpController extends Controller
             $data = $this->model->getTransaction(['cccd' => $cccd], 'guest');
             $user = null;
         } else {
-            $this->renderPartial('myTransaction', []);
+            $this->renderPartial('user/popup/myTransaction', []);
             return;
         }
         $this->renderPartial('user/popup/myTransaction', [
             'transactions' => $data,
             'user' => $user
         ]);
-
     }
-
-
-
 }
