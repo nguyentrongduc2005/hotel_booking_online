@@ -7,6 +7,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>History Booking Popup</title>
+    <link rel="icon" href="/hotel_booking_online/public/assets/icon/diamond_logo_small.png" sizes="32x32"
+        type="image/png">
     <link rel="stylesheet"
         href="<?php echo $this->configs->config['pathAssets']; ?>css/history.css?v=<?php echo time(); ?>" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />

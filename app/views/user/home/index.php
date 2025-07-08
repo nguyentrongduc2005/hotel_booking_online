@@ -192,19 +192,13 @@
 
                     <div class="gallery-item instagram"
                         style="background-image: url('<?= $this->configs->config['pathAssets'] ?>/img/ourservice/card-ig01.png')">
-
                     </div>
-
                     <div class="gallery-item"
                         style="background-image: url('<?= $this->configs->config['pathAssets'] ?>/img/ourservice/card-ig02.png')">
-
                     </div>
                 </div>
                 <div class="view-gallery">View Gallery</div>
-
             </div>
-
-            <!-- DIV 2: CONTENT & BOOK NOW SECTION -->
             <div class="content-section">
                 <h2 class="content-title">Make your stay unforgettable</h2>
                 <p class="content-description">
