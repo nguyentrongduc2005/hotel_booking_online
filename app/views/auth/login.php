@@ -65,6 +65,7 @@ $password = $password ?? '';
         </script>";
   } ?>
   </form>
+  
   </div>
   <div class="login-right"
     style="background-image: url('<?= $this->configs->config['pathAssets'] ?>/img/bg-login.png')"></div>
