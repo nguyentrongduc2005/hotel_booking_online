@@ -116,7 +116,8 @@ class PopUpController extends Controller
             $data = $this->model->getHistories(['cccd' => $cccd], 'guest');
             $user = null;
         } else {
-            // $this->render('history', []);
+            $this->renderPartial('/user/popup/history', []);
+            return;
         }
         $this->renderPartial('/user/popup/history', [
             'history' => $data,
