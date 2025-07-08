@@ -25,49 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
       searchInput.value.trim() ? searchForm.submit() : searchInput.focus();
     });
   }
-  // Cancel reservation
-  const cancelButtons = document.querySelectorAll(".cancel-btn");
 
-  cancelButtons.forEach((button) => {
-    button.addEventListener("click", function (e) {
-      e.preventDefault();
-
-      const card = this.closest(".card");
-      const bookingId = this.dataset.bookingId;
-
-      if (!bookingId) {
-        alert("Booking ID not found.");
-        return;
-      }
-
-      if (confirm("Are you sure you want to cancel this booking?")) {
-        fetch("/user/reservations/cancel", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-          body: `id_booking=${encodeURIComponent(bookingId)}`,
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.statusApi) {
-              card.style.transition = "all 0.5s ease";
-              card.style.transform = "translateY(-100%)";
-              card.style.opacity = "0";
-              setTimeout(() => {
-                card.remove();
-              }, 500);
-            } else {
-              alert("Failed to cancel the booking. Please try again.");
-            }
-          })
-          .catch((error) => {
-            console.error("Error sending cancellation request:", error);
-            alert("An error occurred. Please try again later.");
-          });
-      }
-    });
-  });
   //click sidebar
   const menuItems = document.querySelectorAll(".sidebar .menu-item");
   menuItems.forEach((item) => {
@@ -75,6 +33,44 @@ document.addEventListener("DOMContentLoaded", () => {
       const targetUrl = item.getAttribute("data-href");
       if (targetUrl) {
         window.location.href = targetUrl;
+      }
+    });
+  });
+});
+// Cancel reservation
+document.addEventListener("DOMContentLoaded", function () {
+  const cancelButtons = document.querySelectorAll(".cancel-btn");
+
+  cancelButtons.forEach((btn) => {
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      const bookingId = btn.dataset.bookingId;
+      const card = btn.closest(".card");
+
+      if (!bookingId) return;
+
+      if (confirm("Bạn có chắc chắn muốn huỷ booking này không?")) {
+        fetch("/user/reservations/cancel", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id_booking: bookingId }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.statusApi) {
+              card.style.transition = "all 0.5s ease";
+              card.style.opacity = "0";
+              setTimeout(() => card.remove(), 500);
+            } else {
+              alert("Không thể huỷ booking. Vui lòng thử lại.");
+            }
+          })
+          .catch(() => {
+            alert("Có lỗi kết nối đến máy chủ.");
+          });
       }
     });
   });

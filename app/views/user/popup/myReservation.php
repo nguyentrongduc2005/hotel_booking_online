@@ -129,18 +129,9 @@
                                 </div>
 
                             </div>
-                            <form method="POST" action="<?= $this->configs->config['basePath'] ?>/reservation/cancel"
-                                style="display: inline">
-                                <input type="hidden" name="booking_id"
-                                    value="<?= htmlspecialchars($reservation['id_booking'] ?? '') ?>" />
-                                <button type="submit" class="cancel-btn"
-                                    data-booking-id="<?= htmlspecialchars($reservation['id_booking']) ?>">
-                                    Cancel
-                                </button>
-                            </form>
-
-
-
+                            <button class="cancel-btn" data-booking-id="<?= htmlspecialchars($reservation['id_booking']) ?>">
+                                Cancel
+                            </button>
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>
