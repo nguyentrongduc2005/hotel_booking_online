@@ -49,8 +49,12 @@
     justify-content: center;
     min-width: 340px;
     box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 0.5s;
 }
-
+.login-left.show {
+    opacity: 1;
+}
 .login-right {
     flex: 1;
     background: #e5e5e5;
@@ -60,7 +64,16 @@
     margin-bottom: 50px;
     background-size: cover;
     background-position: center;
-    border-radius: 20px 10px 10px 20px;
+    border-radius: 10px 10px 10px 10px;
+    transform: translateX(-80%);
+    opacity: 0;
+    animation: loginRightIn 1s cubic-bezier(0.77,0,0.18,1) forwards;
+}
+@keyframes loginRightIn {
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 .login-signup-btn {

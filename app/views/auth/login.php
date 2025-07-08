@@ -71,3 +71,14 @@ $password = $password ?? '';
 </div>
 
 <script src="<?= $this->configs->config['pathAssets'] ?>js/login.js?v=<?= time() ?>"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const loginRight = document.querySelector('.login-right');
+    const loginLeft = document.querySelector('.login-left');
+    if (loginRight && loginLeft) {
+      loginRight.addEventListener('animationend', function() {
+        loginLeft.classList.add('show');
+      });
+    }
+  });
+</script>
