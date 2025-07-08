@@ -18,14 +18,18 @@
     <div class="container" id="main-content">
         <div class="header">
             <div class="header-left">
-                <div class="back-button"></div>
+                <div class="back-button">
+                    <a href="<?= $this->configs->config['basePath'] ?>/" class="back-link">
+                        <img src="<?= $this->configs->config['pathAssets'] ?>/icon/button back.svg" alt="Back"
+                            class="back-icon" />
+                    </a>
+                </div>
             </div>
             <div class="header-right">
                 <span class="user-name"><?= isset($data['full_name']) ? $data['full_name'] : '' ?></span>
                 <div class="avatar"
                     style="background-image: url('<?= $this->configs->config['pathAssets'] ?>/img/user/avatar.jpg');">
                 </div>
-
             </div>
         </div>
 

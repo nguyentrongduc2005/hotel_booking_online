@@ -1,3 +1,5 @@
+<?php $isLoggedIn = isset($user); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +18,12 @@
     <div class="container" id="main-content">
         <div class="header">
             <div class="header-left">
-                <div class="back-button"></div>
+                <div class="back-button">
+                    <a href="<?= $this->configs->config['basePath'] ?>/" class="back-link">
+                        <img src="<?= $this->configs->config['pathAssets'] ?>/icon/button back.svg" alt="Back"
+                            class="back-icon" />
+                    </a>
+                </div>
             </div>
             <div class="header-right">
                 <span class="user-name"><?= isset($user['full_name']) ? $user['full_name'] : '' ?></span>
@@ -61,24 +68,29 @@
                         </div>
                     </div>
                 </div>
-                <div class="sidebar-logout">
+                <div class="sidebar-logout <?php if (!$isLoggedIn)
+                    echo 'hidden'; ?>">
                     <a href="<?= $this->configs->config['basePath'] ?>/logout" class="sidebar-logout">
                         <img src="<?= $this->configs->config['pathAssets'] ?>/icon/logout.svg" alt="Logout"
-                            class="logout-icon" />Logout</a>
+                            class="logout-icon" />
+                        Logout
+                    </a>
                 </div>
             </div>
             <div class="main">
-                <form action="your-target-page.html" method="POST" class="search-form" id="search-form">
-                    <div class="search-bar custom-search">
-                        <img src="<?= $this->configs->config['pathAssets'] ?>/icon/find.svg" alt="Search" id="find-btn"
-                            style="cursor: pointer;" />
-                        <input type="text" id="search-input" name="citizenId"
-                            placeholder="Enter Citizen ID to find your reservation" required />
-                        <div class="clear-btn" id="clear-btn">
-                            <img src="<?= $this->configs->config['pathAssets'] ?>/icon/x.svg" alt="Clear" />
+                <?php if (!$isLoggedIn): ?>
+                    <form action="your-target-page.php" method="GET" class="search-form" id="search-form">
+                        <div class="search-bar custom-search">
+                            <img src="<?= $this->configs->config['pathAssets'] ?>/icon/find.svg" alt="Search" id="find-btn"
+                                style="cursor: pointer;" />
+                            <input type="text" id="search-input" name="citizenId"
+                                placeholder="Enter Citizen ID to find your reservation" required />
+                            <div class="clear-btn" id="clear-btn">
+                                <img src="<?= $this->configs->config['pathAssets'] ?>/icon/x.svg" alt="Clear" />
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                <?php endif; ?>
                 <?php if (!empty($reservations)): ?>
                     <?php foreach ($reservations as $reservation): ?>
                         <div class="card">
@@ -119,17 +131,22 @@
                                 </div>
 
                             </div>
-
                             <form method="POST" action="<?= $this->configs->config['basePath'] ?>/reservation/cancel"
                                 style="display: inline">
                                 <input type="hidden" name="booking_id"
-                                    value="<?= htmlspecialchars($reservation['booking_id'] ?? '') ?>" />
-                                <button type="submit" class="cancel-btn">Cancel</button>
+                                    value="<?= htmlspecialchars($reservation['id_booking'] ?? '') ?>" />
+                                <button type="submit" class="cancel-btn"
+                                    data-booking-id="<?= htmlspecialchars($reservation['id_booking']) ?>">
+                                    Cancel
+                                </button>
                             </form>
+
+
+
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>
-                    <div class="no-reservation">No reservations found.</div>
+                    <div style="padding: 20px; color: #888;">No transactions found.</div>
                 <?php endif; ?>
             </div>
         </div>
