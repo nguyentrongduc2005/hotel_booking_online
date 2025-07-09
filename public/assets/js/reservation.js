@@ -1,11 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // console.log("JS Loaded");
-  //search
   const searchForm = document.getElementById("search-form");
   const searchInput = document.getElementById("search-input");
   const clearBtn = document.getElementById("clear-btn");
   const findBtn = document.getElementById("find-btn");
-
+  const basePath = "<?= $this->getConfig('basePath') ?>";
   if (searchInput && clearBtn && findBtn && searchForm) {
     clearBtn.style.display = searchInput.value.trim() ? "flex" : "none";
 
@@ -51,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!bookingId) return;
 
       if (confirm("Bạn có chắc chắn muốn huỷ booking này không?")) {
-        fetch("/user/reservations/cancel", {
+        fetch(`http://localhost/hotel_booking_online/public/user/reservations/cancel`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
