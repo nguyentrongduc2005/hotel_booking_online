@@ -103,13 +103,22 @@
 
 /* Our service */
 
+
+.ser-content p {
+
+}
+
 #our-services{
-  font-family: 'inter';
-  color: #ccc;
+  color: white;
 }
 #our-services h2 {
-  text-align: center;
+  margin-bottom: 0s;
+  text-align: left;
   font-size: 35px;
+}
+
+#our-services p {
+  font-size: 1.15rem;
 }
 
 

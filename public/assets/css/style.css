@@ -14,6 +14,42 @@
   font-display: swap;
 }
 
+.service-video {
+  display: flex;
+  justify-content: flex-end;
+}
+.ser-video {
+  margin-top: 50px;
+  margin-right: 150px;
+}
+
+.service-img {
+  margin-left: 200px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.ser-content {
+  max-width: 700px;     
+  margin: 0 auto;
+  text-align: left; 
+}
+
+.ser-img-container {
+  margin-top: 25px;
+  display: flex;
+  gap: 25px; /* khoảng cách giữa 2 ảnh, tuỳ chỉnh */
+  justify-content: center;
+}
+
+.ser-img-container img {
+  width: 550px;
+  height: 550px;
+  object-fit: cover;      /* luôn lấp đầy, không viền trắng, không méo */
+  object-position: center;/* crop chính giữa */
+  display: block;
+}
+
 a, p {
   font-family: SVN-Gilroy;
   font-weight: normal;

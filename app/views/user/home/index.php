@@ -56,18 +56,24 @@
         </div>
     </div>
     <div id="our-services">
-        <h2>Our Services</h2>
-        <div class="services-wrapper">
-            <?php foreach ($services as $service): ?>
-                <div class="service-box"
-                    style="background-image: url('<?= $this->configs->config['pathAssets'] . $service['Path_img'] ?>')">
-                    <div class="service-text">
-                        <strong><?= htmlspecialchars($service['name']) ?></strong>
-                        <span><?= htmlspecialchars($service['description'] ?? '') ?></span>
-                    </div>
-                </div>
-            <?php endforeach; ?>
+        <div class="service-video">
+            <video class="ser-video" width="1083" height="598" autoplay loop muted>
+                <source src="<?= $this->configs->config['pathAssets'] ?>video/ser-video.mp4" type="video/mp4">
+            </video>
         </div>
+        <div class="service-img">
+            <div class="ser-img-container">
+                <img src="<?= $this->configs->config['pathAssets'] ?>img/service/RoomService.jpg">
+                <img src="<?= $this->configs->config['pathAssets'] ?>img/service/SpaService.jpg">
+            </div>
+        </div>
+        <div class="ser-content" style="text-align: left; color: white;">
+            <h2>Our Services</h2>
+            <p>We deliver tailored solutions designed to meet your needs — from concept to execution.
+            Whether you're looking to elevate your brand, streamline operations, or&nbsp;create meaningful
+            digital experiences, our team is here to help you grow with&nbsp;purpose.</p>
+        </div>
+    </div>
         <a href="<?= $this->configs->config['basePath'] ?>/services" class="nav-link-btn">
             <div id="btn-explore" class="btn-explore1">
                 <span>EXPLORE ALL</span>
