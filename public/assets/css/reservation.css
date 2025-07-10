@@ -661,3 +661,7 @@ body {
 .timeline-bar.checkout-done .timeline-right {
     background: #4caf50; /* xanh */
 }
+.disabled {
+  pointer-events: none;
+  cursor: not-allowed;
+}
