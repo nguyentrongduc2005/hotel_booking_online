@@ -63,19 +63,24 @@ class AdminServicesModel
     return $id ? true : false;
     }
 
+    // Lấy 1 service theo id
+    public function getServiceById($id_service)
+    {
+        return db::getOne("SELECT * FROM services WHERE id_service = :id_service", ['id_service' => $id_service]);
+    }
 
     // Sửa
     public function editService($data)
     {
-        $filtered = array_filter($data, function ($value) {
-            return !(
-                $value === '' ||
-                $value === null ||
-                (is_array($value) && empty($value))
-            );
-        });
-
-        $row = db::update('services', $filtered, "id_service = {$data['id_service']}");
+        // Giữ lại cả trường Path_img nếu có (kể cả null)
+        $fields = ['name', 'description', 'Path_img'];
+        $updateData = [];
+        foreach ($fields as $field) {
+            if (array_key_exists($field, $data)) {
+                $updateData[$field] = $data[$field];
+            }
+        }
+        $row = db::update('services', $updateData, "id_service = {$data['id_service']}");
         return $row ? true : false;
     }
 

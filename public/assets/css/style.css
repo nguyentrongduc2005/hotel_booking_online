@@ -24,7 +24,7 @@
 }
 
 .service-img {
-  margin-left: 200px;
+  margin-left: 400px;
   display: flex;
   justify-content: flex-start;
 }
@@ -38,13 +38,13 @@
 .ser-img-container {
   margin-top: 25px;
   display: flex;
-  gap: 25px; /* khoảng cách giữa 2 ảnh, tuỳ chỉnh */
+  gap: 25px;
   justify-content: center;
 }
 
 .ser-img-container img {
-  width: 550px;
-  height: 550px;
+  width: 400px;
+  height: 400px;
   object-fit: cover;      /* luôn lấp đầy, không viền trắng, không méo */
   object-position: center;/* crop chính giữa */
   display: block;
