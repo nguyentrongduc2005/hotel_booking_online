@@ -37,9 +37,15 @@
                 <div class="spoke"></div>
             </div>
         </div>
-        <p><?= $message ?></p>
-        <p>Trang sẽ chuyển sau <span class="countdown"><?= $timeout ?></span> seconds...</p>
+        <p class="info-error"><?= $message ?></p>
+        <p>Go back to the homepage after changing <span class="countdown"><?= $timeout ?></span> seconds...</p>
         <button onclick="redirectNow()">Back</button>
+        <div class="sidebar-home">
+            <a href="<?= $this->configs->config['basePath'] ?>/" class="sidebar-home-link">
+
+                Về trang chủ
+            </a>
+        </div>
     </div>
 
     <script>

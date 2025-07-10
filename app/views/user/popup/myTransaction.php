@@ -1,3 +1,4 @@
+<?php $isLoggedIn = isset($user); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,102 +6,124 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Transaction Popup</title>
-    <link rel="stylesheet" href="<?= $this->configs->config['pathAssets'] ?>css/transaction.css?v=<?= time() ?>" />
+    <link rel="icon" href="/hotel_booking_online/public/assets/icon/diamond_logo_small.png" sizes="32x32"
+        type="image/png">
+    <link rel="stylesheet"
+        href="<?php echo $this->configs->config['pathAssets']; ?>css/transaction.css?v=<?php echo time(); ?>" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+
 </head>
 
 <body>
     <div class="container" id="main-content">
         <div class="header">
             <div class="header-left">
-                <div class="back-button"></div>
+                <div class="back-button">
+                    <a href="<?= $this->configs->config['basePath'] ?>/" class="back-link">
+                        <img src="<?= $this->configs->config['pathAssets'] ?>/icon/button back.svg" alt="Back"
+                            class="back-icon" />
+                    </a>
+                </div>
             </div>
             <div class="header-right">
-                <span class="user-name"><?= isset($_SESSION['user_name']) ? $_SESSION['user_name'] : '' ?></span>
-                <a href="user.html">
-                    <div class="avatar"></div>
-                </a>
+                <span class="user-name"><?= isset($user['full_name']) ? $user['full_name'] : '' ?></span>
+                <div class="avatar"
+                    style="background-image: url('<?= $this->configs->config['pathAssets'] ?>/img/user/avatar.jpg');">
+                </div>
             </div>
         </div>
-
         <div class="content">
             <div class="sidebar">
                 <div class="sidebar-top">
                     <div class="sidebar-title">Transaction</div>
 
                     <div class="sidebar-menu">
-                        <a href="user.html" class="menu-item">
-                            <div class="menu-icon">
-                                <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-user.png" alt="User" />
-                            </div>
+                        <div class="menu-item" data-href="<?= $this->configs->config['basePath'] ?>/user/">
+                            <div class="menu-icon"><img
+                                    src="<?= $this->configs->config['pathAssets'] ?>/icon/popup-user.svg"
+                                    alt="Logout" /></div>
                             <span>User</span>
-                        </a>
-                        <div class="menu-item active">
-                            <div class="menu-icon">
-                                <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-transaction.png"
-                                    alt="Transaction" />
-                            </div>
+                        </div>
+                        <div class="menu-item active"
+                            data-href="<?= $this->configs->config['basePath'] ?>/user/transactions">
+                            <div class="menu-icon" style="color: black;"><img
+                                    src="<?= $this->configs->config['pathAssets'] ?>/icon/popup-transaction.svg"
+                                    alt="Logout" /></div>
                             <span>Transaction</span>
                         </div>
-                        <a href="reservation.html" class="menu-item">
-                            <div class="menu-icon">
-                                <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-reservation.png"
-                                    alt="My Reservation" />
-                            </div>
+                        <div class="menu-item" data-href="<?= $this->configs->config['basePath'] ?>/user/reservations">
+                            <div class="menu-icon"><img
+                                    src="<?= $this->configs->config['pathAssets'] ?>/icon/popup-reservation.svg"
+                                    alt="Logout" /></div>
                             <span>My Reservation</span>
-                        </a>
-                        <a href="historybooking.html" class="menu-item">
+                        </div>
+                        <div class="menu-item" data-href="<?= $this->configs->config['basePath'] ?>/user/histories">
                             <div class="menu-icon">
-                                <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-history.png"
-                                    alt="My History Booking" />
+                                <img src="<?= $this->configs->config['pathAssets'] ?>/icon/popup-history.svg"
+                                    alt="Logout" />
                             </div>
                             <span>My History Booking</span>
-                        </a>
+                        </div>
                     </div>
                 </div>
 
-                <a href="guest.html" class="sidebar-logout">
-                    <div class="logout-icon">
-                        <img src="<?= $this->configs->config['pathAssets'] ?>icon/logout.jpg" alt="Logout" />
-                    </div>
-                    <span>Logout</span>
-                </a>
+                <div class="sidebar-logout <?php if (!$isLoggedIn)
+                                      echo 'hidden'; ?>">
+                    <a href="<?= $this->configs->config['basePath'] ?>/logout" class="sidebar-logout">
+                        <img src="<?= $this->configs->config['pathAssets'] ?>/icon/logout.svg" alt="Logout"
+                            class="logout-icon" />
+                        Logout
+                    </a>
+                </div>
+
+
             </div>
             <div class="main">
-                <!-- <div class="search-bar custom-search">
-            <img src="icon/find.svg" alt="Search" class="search-icon" />
-            <input
-              type="text"
-              id="search-input"
-              placeholder="Enter Citizen ID to find your reservation"
-            />
-            <div class="clear-btn" id="clear-btn">
-              <img src="icon/x.svg" alt="Clear" />
-            </div>
-          </div> -->
-                <?php if (empty($data)): ?>
-                <div class="no-results">
-                    <h3>không có data</h3>
-                    <p>không có data</p>
-                </div>
-                <?php else: ?>
-                <?php foreach ($data as $item): ?>
-                <div class="card">
-                    <div class="card-left">
-                        <div class="hotel-name">transaction: <?= $item['transaction_id'] ?></div>
-                        <div class="transaction-line">Method: <?= $item['payment_method'] ?></div>
-                        <div class="transaction-line"><?= $item['created_at'] ?></div>
-                        <div class="status"><?= $item['payment_status'] ?></div>
+                <?php if (!$isLoggedIn): ?>
+                <form action="" method="POST" class="search-form" id="search-form">
+                    <div class="search-bar custom-search">
+                        <img src="<?= $this->configs->config['pathAssets'] ?>/icon/find.svg" alt="Search" id="find-btn"
+                            style="cursor: pointer;" />
+                        <input type="text" id="search-input" name="cccd"
+                            placeholder="Enter Citizen ID to find your reservation" required />
+                        <div class="clear-btn" id="clear-btn">
+                            <img src="<?= $this->configs->config['pathAssets'] ?>/icon/x.svg" alt="Clear" />
+                        </div>
                     </div>
-                    <div class="price">$ <?= $item['total_amount'] ?> </div>
-                </div>
-                <?php endforeach; ?>
+                </form>
                 <?php endif; ?>
 
+
+                <?php if (!empty($transactions)): ?>
+                <?php foreach ($transactions as $tran): ?>
+                <div class="card">
+                    <div class="card-left">
+                        <div class="hotel-name">Transaction ID:
+                            <?= isset($tran['transaction_id']) ? htmlspecialchars($tran['transaction_id']) : '' ?>
+                        </div>
+                        <div class="transaction-line">Method:
+                            <?= isset($tran['method']) ? htmlspecialchars($tran['method']) : (isset($tran['payment_method']) ? htmlspecialchars($tran['payment_method']) : 'N/A') ?>
+                        </div>
+                        <div class="transaction-line">
+                            <?= isset($tran['created_at']) ? htmlspecialchars($tran['created_at']) : (isset($tran['date']) ? htmlspecialchars($tran['date']) : '') ?>
+                        </div>
+                        <div class="status"
+                            data-status="<?= isset($tran['payment_status']) ? htmlspecialchars(strtolower($tran['payment_status'])) : '' ?>">
+                            <?= isset($tran['payment_status']) ? htmlspecialchars($tran['payment_status']) : '' ?>
+                        </div>
+                    </div>
+                    <div class="price">
+                        <?= isset($tran['total_amount']) ? htmlspecialchars($tran['total_amount']) : (isset($tran['amount']) ? htmlspecialchars($tran['amount']) : '0.00') ?>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+                <?php else: ?>
+                <div style="padding: 20px; color: #888;">No transactions found.</div>
+                <?php endif; ?>
             </div>
         </div>
-    </div>
-    <script src="main.js"></script>
+        <script src="<?= $this->configs->config['pathAssets'] ?>/js/transaction.js?v=<?= time() ?>"></script>
+
 </body>
 
 </html>

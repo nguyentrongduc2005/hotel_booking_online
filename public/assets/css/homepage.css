@@ -1,6 +1,27 @@
+@font-face {
+  font-family: 'SVN-Gilroy';
+  src: url('../font/SVN-Gilroy.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SVN-Gilroy';
+  src: url('../font/SVN-GilroyBold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+
 .welcome-container {
 
   background-color: #0C0B0E;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 .welcome-hotel {
@@ -86,12 +107,22 @@
 
 /* Our service */
 
+
+.ser-content p {
+
+}
+
 #our-services{
-  font-family: 'inter';
-  color: #ccc;
+  color: white;
 }
 #our-services h2 {
-  text-align: center;
+  margin-bottom: 0s;
+  text-align: left;
+  font-size: 35px;
+}
+
+#our-services p {
+  font-size: 1.15rem;
 }
 
 
@@ -281,7 +312,8 @@
   margin: 0;
   font-weight: 700;
   line-height: normal;
-  font-size: 32px;
+  font-size: 35px;
+  margin-bottom: 15px;
 }
 
 .section-subtitle {
@@ -446,6 +478,7 @@
   height: 90vh;
   position: relative;
   overflow: hidden;
+  margin-top: 100px;
 }
 
 .testimonials-bg {
@@ -773,11 +806,11 @@
 }
 .search-group .title1{
   font-size: 1.1rem;
-  font-weight: 600;
   margin: 5px;
   min-width: 90px;
   margin-top: 15px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'SVN-Gilroy';
+  font-weight: bold;
   margin-right: 10px;
 }
 .search-group:first-child {
@@ -845,6 +878,7 @@ input[type="date"].search-date:-ms-input-placeholder { color: #fff; opacity: 0.7
 input[type="date"].search-date::placeholder { color: #fff; opacity: 0.7;}
 
 .room-select {
+  font-family: 'SVN-Gilroy';
   background: rgba(255, 242, 242, 0.432);
   border: 1.5px solid #fff;
   border-radius: 8px;
@@ -865,4 +899,10 @@ input[type="date"].search-date::placeholder { color: #fff; opacity: 0.7;}
 .room-select option {
   color: #222;
   background: #fff;
+}
+
+/*  */
+
+.nav-link-btn{
+  text-decoration: unset;
 }

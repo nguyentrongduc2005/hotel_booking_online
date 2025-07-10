@@ -1,3 +1,20 @@
+@font-face {
+    font-family: 'SVN-Gilroy';
+    src: url('../font/SVN-Gilroy.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: 'SVN-Gilroy';
+    src: url('../font/SVN-GilroyBold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
+
+
 .regis-bg-overlay {
     position: fixed;
     inset: 0;
@@ -6,38 +23,60 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    min-width: 100vw;
+    min-height: 100vh;
 }
 .regis-main-container {
     display: flex;
     background: #fff;
-    border-radius: 2px;
+    border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-    min-width: 700px;
-    min-height: 500px;
-    max-width: 90vw;
-    max-height: 90vh;
+    width: 70vw;
+    height: 80vh;
+    max-width: 100vw;
+    max-height: 100vh;
     font-family: 'inter';
 }
 .regis-left {
     flex: 1;
-    padding: 40px 36px 36px 36px;
+    padding: 4vw 3vw 3vw 3vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     min-width: 340px;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+.regis-left.show {
+    opacity: 1;
 }
 .regis-right {
     flex: 1;
     background: #e5e5e5;
     min-width: 340px;
-    min-height: 500px;
-    background-image: url('https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=600&q=80');
+    min-height: 77.5vh;
+    margin: 10px;
+    margin-bottom: 50px;
     background-size: cover;
     background-position: center;
+    border-radius: 10px 10px 10px 10px;
+    transform: translateX(80%);
+    opacity: 0;
+    animation: regisRightIn 1s cubic-bezier(0.77,0,0.18,1) forwards;
+}
+@keyframes regisRightIn {
+    to {
+        transform: translateX(0);
+        opacity: 1;
+
+    }
 }
 .regis-title {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'SVN-Gilroy';
     font-size: 1.6rem;
     font-weight: bold;
     margin-bottom: 32px;
@@ -47,6 +86,7 @@
 .regis-form input[type="text"],
 .regis-form input[type="email"],
 .regis-form input[type="password"] {
+    font-family: 'SVN-Gilroy';
     width: 100%;
     padding: 12px 14px;
     margin-bottom: 16px;
@@ -64,6 +104,8 @@
     margin-bottom: 0;
 }
 .regis-submit-btn {
+    font-family: 'SVN-Gilroy';
+    font-weight: bold;
     width: 100%;
     background: #181511;
     color: #fff;
@@ -80,12 +122,14 @@
     background: #333;
 }
 .regis-bottom-link {
+    font-family: 'SVN-Gilroy';
     margin-top: 32px;
     text-align: right;
     color: #888;
     font-size: 1rem;
 }
 .regis-login-link {
+    font-family: 'SVN-Gilroy';
     color: #1976d2;
     text-decoration: none;
     margin-left: 4px;
@@ -93,15 +137,32 @@
 .regis-login-link:hover {
     text-decoration: underline;
 }
+@media (max-width: 1200px) {
+    .regis-main-container {
+        min-width: 0;
+        min-height: 0;
+    }
+    .regis-left, .regis-right {
+        min-width: 0;
+        min-height: 0;
+        padding: 32px 12px;
+    }
+}
 @media (max-width: 900px) {
     .regis-main-container {
         flex-direction: column;
-        min-width: 320px;
+        width: 98vw;
+        height: auto;
+        min-width: 0;
         min-height: 0;
     }
     .regis-right {
         min-height: 180px;
         min-width: 0;
         height: 180px;
+    }
+    .regis-left {
+        min-width: 0;
+        padding: 24px 8px;
     }
 } 

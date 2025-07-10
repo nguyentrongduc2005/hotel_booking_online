@@ -1,0 +1,150 @@
+/* Glassmorphism effect for success box */
+.glass-success {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 24px;
+    padding: 40px 32px;
+    text-align: center;
+    min-width: 1000px;
+    max-width: 1000px;
+    margin: 20px auto;
+}
+.glass-success h1 {
+    font-family: 'SVN-GilroyBold', sans-serif;
+    color: #fff;
+    margin-bottom: 12px;
+    font-size: 2.2rem;
+    font-weight: bold;
+}
+.glass-success p {
+    color: #eee;
+    font-family: 'SVN-Gilroy', sans-serif;
+    font-size: 1.2rem;
+}
+.success-actions {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+.btn-success-nav {
+    background: #fff;
+    color: #1a1a1a;
+    font-family: 'SVN-GilroyBold', sans-serif;
+    font-size: 1.1rem;
+    padding: 12px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    border: none;
+    outline: none;
+    display: inline-block;
+}
+.btn-success-nav:hover {
+    background: #222;
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+.success-social {
+    margin-top: 40px;
+}
+.success-social-title {
+    color: #ffffffb7;
+    font-family: 'SVN-GilroyBold', sans-serif;
+    font-size: 1rem;
+    margin-bottom: 18px;
+    letter-spacing: 0.5px;
+}
+.success-social-list {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+}
+.success-social-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 56px;
+    height: 56px;
+    border-radius: 17px;
+    background: rgba(255,255,255,0.18);
+    box-shadow: 0 2px 8px 0 rgba(78, 196, 186, 0.1), 0 4px 16px 0 #fff2;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+    cursor: pointer;
+    overflow: visible;
+}
+.success-social-item img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
+    z-index: 2;
+    background: none;
+}
+.success-social-item .text {
+    display: none;
+}
+.success-social-item span {
+    display: none;
+}
+.success-social-item:hover {
+    background: rgba(255,255,255,0.28);
+    box-shadow: 0 4px 16px 0 #fff4, 0 2px 8px 0 #fff2;
+    transform: scale(1.08);
+}
+.success-social-item:hover img {
+    transform: scale(1.13);
+}
+.btn-success-nav.transaction-btn {
+    background: transparent;
+    position: relative;
+    padding: 12px 32px;
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    font-family: 'SVN-GilroyBold', sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid rgb(209, 227, 245);
+    outline: none;
+    overflow: hidden;
+    color: rgb(225, 236, 247);
+    transition: color 0.3s 0.1s cubic-bezier(.4,2,.6,1);
+    text-align: center;
+    z-index: 1;
+}
+.btn-success-nav.transaction-btn span {
+    margin: 0 10px;
+}
+.btn-success-nav.transaction-btn::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    content: '';
+    border-radius: 50%;
+    display: block;
+    width: 20em;
+    height: 20em;
+    left: -5em;
+    text-align: center;
+    transition: box-shadow 0.5s cubic-bezier(.4,2,.6,1);
+    z-index: -1;
+}
+.btn-success-nav.transaction-btn:hover {
+    color: #fff;
+}
+.btn-success-nav.transaction-btn:hover::before {
+    box-shadow: inset 0 0 0 10em #111;
+} 

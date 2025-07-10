@@ -3,15 +3,12 @@
 <header class="header">
     <nav class="navbar">
         <div class="navbar-container">
-            <!-- Logo diamond -->
             <div class="navbar-brand">
                 <a href="<?= $this->configs->config['basePath'] ?>">
                     <img src="<?= $this->configs->config['pathAssets'] ?>icon/diamond_logo_small.png"
                         alt="Diamond Hotel">
                 </a>
             </div>
-
-            <!-- content  chính -->
             <div class="navbar-menu">
                 <ul class="navbar-nav">
                     <li class="nav-item">
@@ -28,9 +25,6 @@
                     </li>
                 </ul>
             </div>
-
-
-            <!-- Phần đăng nhập-->
             <div class="btn btn-login">
                 <img class='user_icon' src="<?= $this->configs->config['pathAssets'] ?>icon/User.png"
                     alt="Diamond Hotel">
@@ -73,15 +67,29 @@
         </div>
         <div class="login-popup-menu">
             <div class="login-popup-item"> <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-user.png"
-                    alt="Diamond Hotel"> User</div>
+                    alt="Diamond Hotel">
+                <a href="<?= $this->configs->config['basePath'] ?>/user" class="nav-link-btn">
+                    User
+                </a>
+            </div>
             <div class="login-popup-item"> <img
                     src="<?= $this->configs->config['pathAssets'] ?>icon/popup-transaction.png" alt="Diamond Hotel">
-                Transaction</div>
+                <a href="<?= $this->configs->config['basePath'] ?>/user/transactions" class="nav-link-btn">
+                    Transaction
+                </a>
+            </div>
             <div class="login-popup-item"> <img
-                    src="<?= $this->configs->config['pathAssets'] ?>icon/popup-reservation.png" alt="Diamond Hotel"> My
-                reservation</div>
+                    src="<?= $this->configs->config['pathAssets'] ?>icon/popup-reservation.png" alt="Diamond Hotel">
+                <a href="<?= $this->configs->config['basePath'] ?>/user/reservations" class="nav-link-btn">
+                    My reservation
+                </a>
+            </div>
             <div class="login-popup-item"> <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-history.png"
-                    alt="Diamond Hotel"> My booking history</div>
+                    alt="Diamond Hotel">
+                <a href="<?= $this->configs->config['basePath'] ?>/user/histories" class="nav-link-btn">
+                    My booking history
+                </a>
+            </div>
             <?php if (isset($_SESSION["user_id"])) { ?>
                 <a class="login-popup-item" href="<?= $this->configs->config['basePath'] ?>/logout">
                     <img src="<?= $this->configs->config['pathAssets'] ?>icon/popup-logout.png" alt="Diamond Hotel">Log out

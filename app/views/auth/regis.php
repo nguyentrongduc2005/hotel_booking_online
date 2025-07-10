@@ -35,3 +35,14 @@
     </div>
   </div>
 </div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const regisRight = document.querySelector('.regis-right');
+    const regisLeft = document.querySelector('.regis-left');
+    if (regisRight && regisLeft) {
+      regisRight.addEventListener('animationend', function() {
+        regisLeft.classList.add('show');
+      });
+    }
+  });
+</script>

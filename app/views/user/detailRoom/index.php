@@ -1,8 +1,9 @@
     <link rel="stylesheet" href="<?= $this->configs->config['pathAssets'] ?>css/detailRoom.css?v=<?= time() ?>" />
     <main class="room-details">
         <div class="left-info">
-
             <div class="main-image placeholder-16-9">
+                <img src="<?= $this->configs->config['pathAssets'] . $data['thumb'] ?>"
+                    alt="<?= $data['name_type_room'] ?>" />
                 <img src="<?= $this->configs->config['pathAssets'] . $data['thumb'] ?>"
                     alt="<?= $data['name_type_room'] ?>" />
             </div>
@@ -50,10 +51,11 @@
                 <ul>
                     <?php if (!empty($data['amenities'])): ?>
                         <?php foreach ($data['amenities'] as $amenity): ?>
-                            <li> <i class="icon-amenity"></i> <?= $amenity['name'] ?></li>
+                            <li><span>&#10003;</span><?= $amenity['name'] ?></li>
                         <?php endforeach; ?>
                     <?php endif; ?>
                 </ul>
             </div>
         </div>
     </main>
+    <script src="<?= $this->configs->config['pathAssets'] ?>js/detailRoom.js?v=<?= time() ?>"></script>

@@ -17,33 +17,71 @@
 
 <body>
 
-    <div id="khung">
-        <?= $this->renderPartial('layouts/header'); ?>
-        <div id="main">
-            <?= $content; ?>
-        </div>
+    <!-- <?php
+            // Chỉ hiện preloader ở homepage
+            $isHome = $_SERVER['REQUEST_URI'] === '/' || $_SERVER['REQUEST_URI'] === '/hotel_booking_online/public/';
+            if ($isHome):
+            ?>
+        <!-- <div id="preloader" style="background: #111;">
+            <div class="preloader-content">
+                <div class="preloader-left-text preloader-animate-text">Welcome to<br> our Hotel</div>
+                <div class="preloader-bar-wrap">
+                    <div class="preloader-bar"></div>
+                </div>
+                <div class="preloader-right-text preloader-animate-text">Diamond <br> Hotel</div>
+            </div>
+        </div> -->
+<?php endif; ?> -->
 
-        <!-- Hide footer on payment page (do bug quá) -->
-        <?php if (!str_contains($_SERVER['REQUEST_URI'], 'payment')): ?>
-        <div id="footer">
-            <?= $this->renderPartial('layouts/footer'); ?>
-        </div>
-        <?php endif; ?>
+<div id="khung">
+    <?= $this->renderPartial('layouts/header'); ?>
+    <div id="main">
+        <?= $content; ?>
     </div>
-    <script src="<?= $this->configs->config['pathAssets'] ?>js/homepage.js?v=<?= time() ?>"></script>
-    <?php if (isset($_SESSION["timer"])) {
+    <?= $this->renderPartial('layouts/footer'); ?>
+</div>
+<script src="<?= $this->configs->config['pathAssets'] ?>js/homepage.js?v=<?= time() ?>"></script>
+<?php if (isset($_SESSION["timer"])) {
 
     $path  = $this->configs->config['basePath'];
     $leftTime = $_SESSION["timer"] - time();
 
     $leftTime = max(0, ($leftTime - 300) * 1000);
     if ($leftTime > 0) {
-      echo " <script>
-   setTimeout(function() { 
-   checktokenTimer('{$path}')
+        echo " <script>
+            setTimeout(function() { 
+        checktokenTimer('{$path}')
                             }, " . $leftTime . ")</script>";
     }
-  } ?>
+} ?>
+<script>
+    window.addEventListener('load', function() {
+        const preloader = document.getElementById('preloader');
+        // Bắt đầu: text tách ra hai bên
+        setTimeout(() => {
+            if (preloader) preloader.classList.add('split');
+        }, 500);
+
+        // Khi gần hết loading: text thu về giữa và mờ dần
+        setTimeout(() => {
+            if (preloader) {
+                preloader.classList.remove('split');
+                preloader.classList.add('unsplit');
+            }
+        }, 1400);
+
+        // Sau 1.4s: fade out preloader
+        setTimeout(() => {
+            if (preloader) preloader.classList.add('fadeout');
+        }, 1600);
+
+        // Sau 2.2s: ẩn hẳn preloader
+        setTimeout(() => {
+            if (preloader) preloader.style.display = 'none';
+        }, 2400);
+    });
+</script>
+
 </body>
 
 

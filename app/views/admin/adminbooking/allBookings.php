@@ -22,7 +22,7 @@
         <thead>
           <tr>
             <th>Booking ID</th>
-            <th>Guest Name</th>
+            <th>Name</th>
             <th>Room ID</th>
             <th>Room</th>
             <th>Check-in</th>
@@ -35,9 +35,19 @@
             <?php foreach ($bookings as $booking): ?>
               <tr>
                 <td><?= htmlspecialchars($booking['id_booking'] ?? '') ?></td>
-                <td><?= htmlspecialchars($booking['guest_name'] ?? '') ?></td>
+                <td>
+                  <?php
+                    if (!empty($booking['user_id'])) {
+                        echo htmlspecialchars($booking['user_name'] ?? '');
+                    } elseif (!empty($booking['guest_id'])) {
+                        echo htmlspecialchars($booking['guest_name'] ?? '');
+                    } else {
+                        echo '';
+                    }
+                  ?>
+                </td>
                 <td><?= htmlspecialchars($booking['id_room'] ?? '') ?></td>
-                <td><?= htmlspecialchars($booking['room_number'] ?? '') ?></td>
+                <td><?= htmlspecialchars($booking['room_name'] ?? '') ?></td>
                 <td><?= htmlspecialchars($booking['check_in'] ?? $booking['checkin'] ?? '') ?></td>
                 <td><?= htmlspecialchars($booking['check_out'] ?? $booking['checkout'] ?? '') ?></td>
                 <td>

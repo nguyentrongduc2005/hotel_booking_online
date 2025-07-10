@@ -40,7 +40,8 @@ body > #khung > #footer {
 }
 
 .container-payment {
-    margin-top: -150px;
+    margin-top: 150px;
+    margin-bottom: 50px;
     width: 100%;
     max-width: 1100px;
     position: relative;
@@ -276,7 +277,7 @@ span.bold {
 .summary-item {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 12px;
+    margin-bottom: 5.5px;
     font-size: 14px;
 }
 
@@ -410,7 +411,7 @@ span.bold {
     transition: border 0.2s;
 }
 .payment-option input[type="radio"]:checked ~ .custom-radio {
-    border: 6px solid #252525;
+    background-color: #000;
 }
 
 .btn-paynow {
