@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="/public/assets/img/Background.png" alt="Diamond Online Banner" width="80%" />
+  <img src="/public/assets/img/demo.png" alt="Diamond Online Banner" width="80%" />
 </p>
 
 <h1 align="center">💎 Diamond Online - Hệ thống đặt phòng khách sạn</h1>
@@ -81,14 +81,14 @@ private $password = '';
 
 ### 3. Truy cập hệ thống
 
-- Trang người dùng: `http://localhost/diamond-online`
-- Trang admin: `http://localhost/diamond-online/admin`
+- Trang người dùng: `http://localhost/hotel_booking_online/public/`
+- Trang admin: `http://localhost/hotel_booking_online/public//dashboard`
 
 **Tài khoản mặc định:**
 
 ```
-Username: admin
-Password: 123456
+Username: minhtld1451@ut.edu.vn
+Password: 123
 ```
 
 ---
