@@ -84,7 +84,7 @@
                             <img src="<?= $this->configs->config['pathAssets'] ?>/icon/find.svg" alt="Search" id="find-btn"
                                 style="cursor: pointer;" />
                             <input type="text" id="search-input" name="citizenId"
-                                placeholder="Enter Citizen ID to find your reservation" required />
+                                placeholder="Enter Citizen ID to find your history booking" required />
                             <div class="clear-btn" id="clear-btn">
                                 <img src="<?= $this->configs->config['pathAssets'] ?>/icon/x.svg" alt="Clear" />
                             </div>

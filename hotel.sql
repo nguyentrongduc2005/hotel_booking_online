@@ -108,7 +108,17 @@ INSERT INTO `guest` (`guest_id`, `full_name`, `cccd`, `email`, `sdt`, `created_a
 (2, 'Nguyễn Quang Linh', '086205001452', 'linh2712nha@gmail.com', '0971815720', '2025-06-03 14:00:00'),
 (3, 'Nguyễn Trọng Đức', '086205001453', 'nguyentrongduc447@gmail.com', '0866225534', '2025-06-05 09:45:00'),
 (4, 'Huỳnh Đại Hà', '086205001454', 'huynhdaihafc@gmail.com', '0903348270', '2025-06-06 11:20:00'),
-(5, 'Lê Trường Thịnh', '086205001455', 'thinhlt1681@ut.edu.vn', '0365574437', '2025-06-07 08:15:00');
+(5, 'Lê Trường Thịnh', '086205001455', 'thinhlt1681@ut.edu.vn', '0365574437', '2025-06-07 08:15:00'),
+(6, 'Phạm Thị Ánh', '086205001456', 'phamthianh@gmail.com', '0911223344', '2025-06-08 10:10:00'),
+(7, 'Trần Văn Khải', '086205001457', 'tranvankhai@yahoo.com', '0909988776', '2025-06-09 09:40:00'),
+(8, 'Nguyễn Thị Bích', '086205001458', 'nguyenthibich@outlook.com', '0967112334', '2025-06-10 13:25:00'),
+(9, 'Lê Quang Huy', '086205001459', 'lequanghuy@gmail.com', '0356227711', '2025-06-11 14:50:00'),
+(10, 'Bùi Diệu Linh', '086205001460', 'buidieulinh@gmail.com', '0388456789', '2025-06-12 08:30:00'),
+(11, 'Đặng Ngọc Minh', '086205001461', 'dangngocminh@ut.edu.vn', '0911888222', '2025-06-13 11:00:00'),
+(12, 'Võ Trần Hoàng Long', '086205001462', 'votranhoanglong@gmail.com', '0378992211', '2025-06-14 16:20:00'),
+(13, 'Hoàng Phương Anh', '086205001463', 'hoangphuonganh@gmail.com', '0932445566', '2025-06-15 10:45:00'),
+(14, 'Ngô Kiến Phát', '086205001464', 'ngokienphat@gmail.com', '0855223344', '2025-06-16 09:15:00'),
+(15, 'Trần Hoàng My', '086205001465', 'tranhoangmy@ut.edu.vn', '0922113344', '2025-06-17 14:10:00');
 
 -- --------------------------------------------------------
 
@@ -137,7 +147,17 @@ INSERT INTO `historybooking` (`id_history`, `id_room`, `transaction_id`, `check_
 (3, 2, 2, '2025-06-11 15:00:00', '2025-06-13 12:00:00', 'pending', '2025-06-08 18:29:36', NULL, 2),
 (4, 3, 3, '2025-06-12 14:00:00', '2025-06-14 12:00:00', '', '2025-06-08 18:29:36', 3, NULL),
 (5, 4, 4, '2025-06-13 15:00:00', '2025-06-15 12:00:00', 'cancelled', '2025-06-08 18:29:36', NULL, 4),
-(6, 5, 5, '2025-06-14 14:00:00', '2025-06-16 12:00:00', 'confirmed', '2025-06-08 18:29:36', 5, NULL);
+(6, 5, 5, '2025-06-14 14:00:00', '2025-06-16 12:00:00', 'confirmed', '2025-06-08 18:29:36', 5, NULL),
+(7, 2, 6, '2025-06-15 13:00:00', '2025-06-17 11:00:00', 'completed', '2025-06-08 18:30:00', 2, NULL),
+(8, 3, 7, '2025-06-16 14:00:00', '2025-06-18 12:00:00', 'confirmed', '2025-06-08 18:30:00', NULL, 5),
+(9, 4, 8, '2025-06-17 15:00:00', '2025-06-19 12:00:00', 'pending', '2025-06-08 18:30:00', 6, NULL),
+(10, 5, 9, '2025-06-18 14:00:00', '2025-06-20 12:00:00', 'cancelled', '2025-06-08 18:30:00', NULL, 6),
+(11, 1, 10, '2025-06-19 13:00:00', '2025-06-21 11:00:00', 'confirmed', '2025-06-08 18:30:00', 7, NULL),
+(12, 2, 11, '2025-06-20 14:00:00', '2025-06-22 12:00:00', 'completed', '2025-06-08 18:30:00', NULL, 7),
+(13, 3, 12, '2025-06-21 15:00:00', '2025-06-23 12:00:00', 'pending', '2025-06-08 18:30:00', 8, NULL),
+(14, 4, 13, '2025-06-22 14:00:00', '2025-06-24 12:00:00', 'confirmed', '2025-06-08 18:30:00', NULL, 8),
+(15, 5, 14, '2025-06-23 13:00:00', '2025-06-25 11:00:00', 'cancelled', '2025-06-08 18:30:00', 9, NULL),
+(16, 1, 15, '2025-06-24 14:00:00', '2025-06-26 12:00:00', 'completed', '2025-06-08 18:30:00', NULL, 9);
 
 -- --------------------------------------------------------
 
@@ -348,6 +368,7 @@ INSERT INTO `transaction` (`transaction_id`, `total_amount`, `payment_status`, `
 (6, 100.00, 'pending', 'credit card', '2025-06-25 15:22:26'),
 (7, 100.00, 'pending', 'credit card', '2025-06-25 15:24:08');
 
+
 -- --------------------------------------------------------
 
 --
@@ -375,8 +396,17 @@ INSERT INTO `user` (`user_id`, `email`, `sdt`, `cccd`, `pass`, `full_name`, `cre
 (2, 'linh2712nha@gmail.com', '0971815720', '086205001452', '$2y$10$WHDY6gcvNiLL.1fJtx1zAO5Ns2Uk/ZP/UV1xewVhUljszGKl51fZu', 'Nguyễn Quang Linh', '2025-06-02 09:30:00', 1, 'user'),
 (3, 'nguyentrongduc447@gmail.com', '0866225534', '086205001453', '$2y$10$WHDY6gcvNiLL.1fJtx1zAO5Ns2Uk/ZP/UV1xewVhUljszGKl51fZu', 'Nguyễn Trọng Đức', '2025-06-03 11:45:00', 0, 'user'),
 (4, 'huynhdaihafc@gmail.com', '0903348270', '086205001454', '$2y$10$WHDY6gcvNiLL.1fJtx1zAO5Ns2Uk/ZP/UV1xewVhUljszGKl51fZu', 'Huỳnh Đại Hà', '2025-06-04 08:20:00', 2, 'user'),
-(5, 'thinhlt1681@ut.edu.vn', '0365574437', '086205001455', '$2y$10$WHDY6gcvNiLL.1fJtx1zAO5Ns2Uk/ZP/UV1xewVhUljszGKl51fZu', 'Lê Trường Thịnh', '2025-06-05 14:15:00', 3, 'user');
-
+(5, 'thinhlt1681@ut.edu.vn', '0365574437', '086205001455', '$2y$10$WHDY6gcvNiLL.1fJtx1zAO5Ns2Uk/ZP/UV1xewVhUljszGKl51fZu', 'Lê Trường Thịnh', '2025-06-05 14:15:00', 3, 'user'),
+(6, 'phamthianh@gmail.com', '0911223344', '086205001456', '$2y$10$WHDY6gcvNiLL.1fJtx1zAO5Ns2Uk/ZP/UV1xewVhUljszGKl51fZu', 'Phạm Thị Ánh', '2025-06-06 09:10:00', 4, 'user'),
+(7, 'tranvankhai@yahoo.com', '0909988776', '086205001457', '$2y$10$WHDY6gcvNiLL.1fJtx1zAO5Ns2Uk/ZP/UV1xewVhUljszGKl51fZu', 'Trần Văn Khải', '2025-06-07 10:45:00', 1, 'user'),
+(8, 'nguyenthibich@outlook.com', '0967112334', '086205001458', '$2y$10$WHDY6gcvNiLL.1fJtx1zAO5Ns2Uk/ZP/UV1xewVhUljszGKl51fZu', 'Nguyễn Thị Bích', '2025-06-08 13:00:00', 2, 'user'),
+(9, 'lequanghuy@gmail.com', '0356227711', '086205001459', '$2y$10$WHDY6gcvNiLL.1fJtx1zAO5Ns2Uk/ZP/UV1xewVhUljszGKl51fZu', 'Lê Quang Huy', '2025-06-09 08:55:00', 0, 'user'),
+(10, 'buidieulinh@gmail.com', '0388456789', '086205001460', '$2y$10$WHDY6gcvNiLL.1fJtx1zAO5Ns2Uk/ZP/UV1xewVhUljszGKl51fZu', 'Bùi Diệu Linh', '2025-06-10 15:40:00', 5, 'user'),
+(11, 'dangngocminh@ut.edu.vn', '0911888222', '086205001461', '$2y$10$WHDY6gcvNiLL.1fJtx1zAO5Ns2Uk/ZP/UV1xewVhUljszGKl51fZu', 'Đặng Ngọc Minh', '2025-06-11 11:20:00', 3, 'user'),
+(12, 'votranhoanglong@gmail.com', '0378992211', '086205001462', '$2y$10$WHDY6gcvNiLL.1fJtx1zAO5Ns2Uk/ZP/UV1xewVhUljszGKl51fZu', 'Võ Trần Hoàng Long', '2025-06-12 17:30:00', 2, 'user'),
+(13, 'hoangphuonganh@gmail.com', '0932445566', '086205001463', '$2y$10$WHDY6gcvNiLL.1fJtx1zAO5Ns2Uk/ZP/UV1xewVhUljszGKl51fZu', 'Hoàng Phương Anh', '2025-06-13 09:05:00', 1, 'user'),
+(14, 'ngokienphat@gmail.com', '0855223344', '086205001464', '$2y$10$WHDY6gcvNiLL.1fJtx1zAO5Ns2Uk/ZP/UV1xewVhUljszGKl51fZu', 'Ngô Kiến Phát', '2025-06-14 12:00:00', 0, 'user'),
+(15, 'tranhoangmy@ut.edu.vn', '0922113344', '086205001465', '$2y$10$WHDY6gcvNiLL.1fJtx1zAO5Ns2Uk/ZP/UV1xewVhUljszGKl51fZu', 'Trần Hoàng My', '2025-06-15 14:25:00', 4, 'user');
 --
 -- Indexes for dumped tables
 --

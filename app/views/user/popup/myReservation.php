@@ -69,7 +69,7 @@
                     </div>
                 </div>
                 <div class="sidebar-logout <?php if (!$isLoggedIn)
-                                                echo 'hidden'; ?>">
+                    echo 'hidden'; ?>">
                     <a href="<?= $this->configs->config['basePath'] ?>/logout" class="sidebar-logout">
                         <img src="<?= $this->configs->config['pathAssets'] ?>/icon/logout.svg" alt="Logout"
                             class="logout-icon" />
