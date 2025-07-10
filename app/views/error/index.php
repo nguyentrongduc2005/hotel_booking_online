@@ -42,7 +42,7 @@
         <button onclick="redirectNow()">Back</button>
         <div class="sidebar-home">
             <a href="<?= $this->configs->config['basePath'] ?>/" class="sidebar-home-link">
-                <img src="<?= $this->configs->config['pathAssets'] ?>/icon/diamond_logo_small.png" alt="Home" class="home-icon" />
+
                 Về trang chủ
             </a>
         </div>

@@ -9,7 +9,7 @@ class AdminAccountController extends Controller
 {
     private $model;
 
-    public     function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->model = new AdminAccountModel();
@@ -28,7 +28,7 @@ class AdminAccountController extends Controller
 
     public function privateAdmin($req, $res)
     {
-        $admin = $this->model->getAdminProfile(); 
+        $admin = $this->model->getAdminProfile();
 
         return $this->render('private', [
             'admin' => $admin

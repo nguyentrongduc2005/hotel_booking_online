@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 04, 2025 at 05:46 PM
+-- Generation Time: Jul 10, 2025 at 03:15 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -67,7 +67,7 @@ CREATE TABLE `booking` (
   `check_out` datetime NOT NULL,
   `status` enum('pending','confirmed','cancelled','completed') DEFAULT 'pending',
   `created_at` datetime DEFAULT current_timestamp(),
-  `transaction_id` int(11) NOT NULL,
+  `transaction_id` int(11) DEFAULT NULL,
   `id_room` int(11) DEFAULT NULL,
   `status_checkin` enum('pending','done') DEFAULT 'pending',
   `status_checkout` enum('pending','done') DEFAULT 'pending'
@@ -535,9 +535,9 @@ ALTER TABLE `user`
 -- Constraints for table `booking`
 --
 ALTER TABLE `booking`
-  ADD CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
-  ADD CONSTRAINT `booking_ibfk_2` FOREIGN KEY (`guest_id`) REFERENCES `guest` (`guest_id`),
-  ADD CONSTRAINT `booking_ibfk_3` FOREIGN KEY (`transaction_id`) REFERENCES `transaction` (`transaction_id`),
+  ADD CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `booking_ibfk_2` FOREIGN KEY (`guest_id`) REFERENCES `guest` (`guest_id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `booking_ibfk_3` FOREIGN KEY (`transaction_id`) REFERENCES `transaction` (`transaction_id`) ON DELETE SET NULL,
   ADD CONSTRAINT `booking_ibfk_4` FOREIGN KEY (`id_room`) REFERENCES `room` (`id_room`) ON DELETE SET NULL;
 
 --
