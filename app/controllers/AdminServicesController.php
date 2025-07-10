@@ -54,7 +54,7 @@ class AdminServicesController extends Controller
 
             if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
                 // Lưu path public để show lên web
-                $data['Path_img'] = '/public/public/assets/img/service' . $fileName;
+                $data['Path_img'] = '/img/service/' . $fileName;
             }
         }
 
@@ -112,7 +112,7 @@ class AdminServicesController extends Controller
             $success = $this->model->editService($data);
 
             if ($success) {
-                return $res->json(['success' => true]);
+                return $res->json(['success' => true])->send();
             }
 
             return $res->json(['error' => 'Cập nhật thất bại'], 400);

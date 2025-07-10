@@ -53,7 +53,7 @@ class AdminServicesModel
             'name' => $data['name'],
             'slug' => $slug,
             'description' => $data['description'] ?? '',
-            'Path_img' => $imagePath,
+            'Path_img' => $data['Path_img'] ?? null,
         ];
         $id = db::insert('services', $insertData);
         return $id ? true : false;
