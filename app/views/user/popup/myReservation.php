@@ -129,7 +129,7 @@
                                     <div class="timeline-left"></div>
                                     <div class="timeline-right"></div>
                                 </div>
-
+                            
                             </div>
                             <button class="cancel-btn" data-booking-id="<?= htmlspecialchars($reservation['id_booking']) ?>">
                                 Cancel

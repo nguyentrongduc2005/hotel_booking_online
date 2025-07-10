@@ -83,11 +83,13 @@ class PopUpController extends Controller
                 return;
             }
         }
-
         $this->renderPartial('user/popup/myReservation', [
             'reservations' => $data,
             'user' => $user
         ]);
+        // echo "<pre>";
+        // print_r($data);
+        // echo "</pre>";
     }
     function myReservationCancel($req, $res)
     {
