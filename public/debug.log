@@ -37,3 +37,45 @@ Array
         )
 
 )
+2025-07-10T10:52:33+02:00
+Array
+(
+    [image] => Array
+        (
+            [name] => Ảnh chụp màn hình 2025-03-22 113936.png
+            [full_path] => Ảnh chụp màn hình 2025-03-22 113936.png
+            [type] => image/png
+            [tmp_name] => D:\XAMPP\tmp\php86F3.tmp
+            [error] => 0
+            [size] => 29856
+        )
+
+)
+2025-07-10T10:56:36+02:00
+Array
+(
+    [image] => Array
+        (
+            [name] => Ảnh chụp màn hình 2025-03-22 113936.png
+            [full_path] => Ảnh chụp màn hình 2025-03-22 113936.png
+            [type] => image/png
+            [tmp_name] => D:\XAMPP\tmp\php3CA9.tmp
+            [error] => 0
+            [size] => 29856
+        )
+
+)
+2025-07-10T11:00:38+02:00
+Array
+(
+    [image] => Array
+        (
+            [name] => Ảnh chụp màn hình 2025-03-22 113936.png
+            [full_path] => Ảnh chụp màn hình 2025-03-22 113936.png
+            [type] => image/png
+            [tmp_name] => D:\XAMPP\tmp\phpEF91.tmp
+            [error] => 0
+            [size] => 29856
+        )
+
+)

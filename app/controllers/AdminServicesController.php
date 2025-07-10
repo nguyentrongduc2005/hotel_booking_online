@@ -54,7 +54,7 @@ class AdminServicesController extends Controller
 
             if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
                 // Lưu path public để show lên web
-                $data['Path_img'] = '/img/service/' . $fileName;
+                $data['Path_img'] = '/public/public/assets/img/service' . $fileName;
             }
         }
 
@@ -62,7 +62,7 @@ class AdminServicesController extends Controller
 
         if ($success) {
             // Trả về JSON thay vì redirect
-            return $res->json(['success' => true]);
+            return $res->json(['success' => true])->send();
         }
 
         return $res->json(['error' => 'Thêm dịch vụ thất bại'], 400);
