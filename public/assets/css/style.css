@@ -281,134 +281,91 @@ input[type=range]::-webkit-slider-thumb:hover {
   inset: 0;
   background: #111;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   transition: opacity 0.5s;
 }
 
-.preloader-capsule {
-  position: relative;
-  width: 980px;
-  height: 110px;
-  background: #131212; /* Đen nhạt hơn nền */
-  border-radius: 2px;
-  overflow: hidden;
+.preloader-content {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 32px rgba(0,0,0,0.15);
+  gap: 0;
+}
+
+.preloader-bar-wrap {
+  display: flex;
+  align-items: center;
+  height: 80px;
+  width: 3px;
+  position: relative;
+  background: transparent;
+  margin: 0 40px;
+  z-index: 2;
 }
 
 .preloader-bar {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  border-radius: 8px;
   position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 0;
-  background: #ffffffd7;
-  opacity: 0.92;
-  transition: width 1.2s cubic-bezier(.4,0,.2,1);
+  left: 0; top: 0; bottom: 0; right: 0;
+  transform-origin: top;
+  height: 0%;
+  animation: bar-grow-reverse 1.4s cubic-bezier(.4,0,.2,1) forwards;
   z-index: 1;
 }
 
-.preloader-text {
-  position: relative;
-  z-index: 2;
-  font-family: 'Inter', sans-serif;
-  font-size: 2.4rem;
-  color: #f1d8d8;
-  font-weight: 700;
-  letter-spacing: 2px;
-  mix-blend-mode: difference; /* Để chữ luôn nổi bật trên nền trắng hoặc đen */
-  text-align: center;
-  width: 100%;
-  user-select: none;
-
+@keyframes bar-grow-reverse {
+  0% { height: 100%; opacity: 1; }
+  90% { height: 0%; opacity: 1; }
+  100% { height: 0%; opacity: 1; }
 }
 
-
-
-.preloader-desc {
-  position: absolute;
-  bottom: 7%;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #d6cfc2;
-  font-family: 'Inter', sans-serif;
-  font-size: 1.1rem;
-  letter-spacing: 0.5px;
-  opacity: 0.85;
-  text-align: center;
-  width: 100%;
-  pointer-events: none;
-  user-select: none;
+.preloader-animate-text {
+  color: #fff;
+  font-size: 2.2rem;
+  font-weight: 600;
+  font-family: Montserrat, sans-serif;
+  opacity: 0;
+  transform: translateX(0);
+  transition: 
+      opacity 0.3s, 
+      transform 0.7s cubic-bezier(.4,0,.2,1);
+  z-index: 3;
+  white-space: nowrap;
 }
 
-/* Hiệu ứng mask fade out hình chữ nhật */
-@keyframes mask-fade-out {
-  0% {
-    mask-image: none;
-    -webkit-mask-image: none;
-    opacity: 1;
-  }
-  80% {
-    opacity: 1;
-  }
-  100% {
-    mask-image: radial-gradient(rectangle at 50% 50%, transparent 60%, black 100%);
-    -webkit-mask-image: radial-gradient(rectangle at 50% 50%, transparent 60%, black 100%);
-    opacity: 0;
-  }
-}
-.preloader-capsule.animate-out {
-  animation: capsule-shrink-fade 0.9s cubic-bezier(.4,0,.2,1) forwards;
-  z-index: 10;
+.preloader-left-text {
+  margin-right: 24px;
 }
 
-@keyframes capsule-shrink-fade {
-  0% {
-    transform: scale(1, 1);
-    opacity: 1;
-  }
-  30% {
-    opacity: 0.3;
-    transform: scale(0.7, 0.7);
-  }
-  60% {
-    opacity: 0;
-    transform: scale(0.7, 0.7);
-  }
-  80% {
-    opacity: 0.2;
-    transform: scale(0.7, 0.7);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(0.3, 0.3);
-  }
+.preloader-right-text {
+  margin-left: 24px;
 }
 
-/* Chữ Diamond Hotel mờ dần và scale nhỏ lại */
-.preloader-text.animate-out {
-  animation: text-fade-scale-out 0.7s cubic-bezier(.4,0,.2,1) forwards;
+/* Khi bắt đầu load: text tách ra hai bên */
+#preloader.split .preloader-left-text {
+  opacity: 1;
+  transform: translateX(-80px);
 }
-@keyframes text-fade-scale-out {
-  to {
-    opacity: 0;
-    transform: scale(0.7);
-  }
-}
-
-/* Dòng mô tả biến mất bình thường */
-.preloader-desc.animate-out {
-  animation: desc-fade-out 0.5s cubic-bezier(.4,0,.2,1) forwards;
-}
-@keyframes desc-fade-out {
-  to {
-    opacity: 0;
-  }
+#preloader.split .preloader-right-text {
+  opacity: 1;
+  transform: translateX(80px);
 }
 
-#preloader.animate-out {
+/* Khi loading xong: text thu về giữa và mờ dần */
+#preloader.unsplit .preloader-left-text,
+#preloader.unsplit .preloader-right-text {
+  opacity: 0;
+  transform: translateX(0);
+  transition: opacity 0.4s, transform 0.5s cubic-bezier(.4,0,.2,1);
+}
+
+/* Fade out preloader */
+#preloader.fadeout {
   animation: mask-fade-out 0.8s cubic-bezier(.4,0,.2,1) forwards;
 }
 @keyframes mask-fade-out {
@@ -421,8 +378,20 @@ input[type=range]::-webkit-slider-thumb:hover {
     opacity: 1;
   }
   100% {
-    mask-image: radial-gradient(rectangle at 50% 50%, transparent 60%, black 100%);
-    -webkit-mask-image: radial-gradient(rectangle at 50% 50%, transparent 60%, black 100%);
     opacity: 0;
+    mask-image: radial-gradient(circle at 50% 50%, transparent 60%, black 100%);
+    -webkit-mask-image: radial-gradient(circle at 50% 50%, transparent 60%, black 100%);
   }
+}
+
+.section-animate {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+  will-change: opacity, transform;
+}
+
+.section-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
