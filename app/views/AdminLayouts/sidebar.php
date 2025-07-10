@@ -58,3 +58,25 @@
     </ul>
   </nav>
 </aside>
+<script>
+// Hiệu ứng xổ/đóng submenu mượt bằng JS
+const sidebarItems = document.querySelectorAll('.sidebar-item');
+sidebarItems.forEach(item => {
+  const submenu = item.querySelector('.sidebar-submenu');
+  if (submenu) {
+    item.addEventListener('mouseenter', () => {
+      submenu.classList.add('open');
+    });
+    item.addEventListener('mouseleave', () => {
+      submenu.classList.remove('open');
+    });
+    // Hỗ trợ focus bằng bàn phím
+    item.addEventListener('focusin', () => {
+      submenu.classList.add('open');
+    });
+    item.addEventListener('focusout', () => {
+      submenu.classList.remove('open');
+    });
+  }
+});
+</script>
