@@ -1,3 +1,5 @@
+/*    user-select: none;
+ */
 body {
   font-family: "Poppins", sans-serif;
   margin: 0;
@@ -6,8 +8,9 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  /* position: relative; */
+  background: #f0f2f5;
 }
+
 body::before {
   content: "";
   position: absolute;
@@ -19,131 +22,127 @@ body::before {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  filter: blur(6px);
+  filter: blur(8px);
   z-index: -1;
 }
+
 .container {
-  width: 740px;
-  height: 540px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 760px;
+  height: 560px;
+  background-color: #fafafa;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
 }
 
 .header {
-  width: 100%;
-  height: 44px;
+  height: 50px;
   background-color: #ffffff;
-  border-bottom: 1px solid #e3e2e2;
+  border-bottom: 1px solid #e0e0e0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 12px;
-  box-sizing: border-box;
+  padding: 0 16px;
 }
 
 .header-left .back-button {
-  width: 24px;
-  height: 24px;
-  background-image: url("icon/back.svg");
+  width: 28px;
+  height: 28px;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
 .header-right {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .avatar {
-  width: 20px;
-  height: 20px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background-size: cover;
   background-position: center;
+  cursor: pointer;
+  border: 2px solid #ddd;
 }
 
 .user-name {
   font-size: 14px;
   color: #333;
+  font-weight: 500;
 }
 
 .content {
   display: flex;
-  height: 496px;
+  height: 510px;
 }
 
 .sidebar {
-  width: 191px;
+  width: 200px;
   background-color: #ffffff;
-  padding: 0 0px;
-  box-sizing: border-box;
-  display: flex;
   border-right: 1px solid #e3e2e2;
+  display: flex;
   flex-direction: column;
-  height: 100%;
   justify-content: space-between;
 }
+
 .sidebar-top {
-  display: flex;
-  flex-direction: column;
+  padding: 20px 10px;
 }
+
 .sidebar-title {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   text-align: center;
-  margin-top: 37px;
-  margin-bottom: 39px;
-  color: #333;
+  margin-bottom: 30px;
+  color: #222;
 }
 
 .sidebar-menu {
   display: flex;
   flex-direction: column;
-  gap: 0px;
+  gap: 5px;
 }
 
 .menu-item {
-  width: auto;
-  height: 40px;
-  border-radius: 6px;
-  background-color: #ffffff;
   display: flex;
   align-items: center;
-  padding-left: 10px;
-  gap: 5px;
-  font-size: 15px;
+  height: 42px;
+  padding: 0 10px;
+  font-size: 14px;
+  border-radius: 8px;
+  transition: background-color 0.25s;
   cursor: pointer;
-  text-decoration: none;
-  color: inherit;
-  transition: background-color 0.2s;
-}
-
-.menu-item.active {
-  background-color: #ebeaea;
+  color: #444;
+  gap: 5px;
 }
 
 .menu-item:hover {
-  background-color: #e0e0e0;
+  background-color: #f5f5f5;
 }
-.menu-icon {
-  width: 22px;
-  height: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.menu-item.active {
+  background-color: #fdf6e3;
+  color: #222;
+  font-weight: 600;
+  box-shadow: inset 2px 0 0 #d4af37;
+}
+.menu-icon img {
+  width: 20px;
+  height: 20px;
+  margin-top: 3px;
 }
 
 .sidebar-logout a {
   display: flex;
   align-items: center;
-  padding: 0 0 20px 10px;
-  font-size: 15px;
-  color: #c40e11;
-  cursor: pointer;
+  padding: 16px 10px;
+  font-size: 14px;
+  color: #d32f2f;
   gap: 8px;
   text-decoration: none;
 }
@@ -151,118 +150,115 @@ body::before {
 .logout-icon {
   width: 20px;
   height: 20px;
+}
+/* Cập nhật phần .main đẹp hơn */
+.main {
+  flex: 1;
+  padding: 40px 40px 30px;
+  box-sizing: border-box;
+  position: relative;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow-y: auto;
 }
 
 .profile-avatar-name {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 24px;
+  margin-bottom: 30px;
 }
 
+.profile-name {
+  font-size: 26px;
+  font-weight: 600;
+  color: #2b2b2b;
+}
+
+/* Giữ định dạng avatar ổn định */
 .avatar-wrapper {
-  position: relative;
-  width: 100px;
-  height: 100px;
-}
-
-.main {
-  flex: 1;
-  padding: 30px 30px 0 30px;
-  box-sizing: border-box;
-  position: relative;
-}
-
-.main-avatar {
   width: 100px;
   height: 100px;
   border-radius: 50%;
   overflow: hidden;
-  background-color: #aaa;
+  border: 2px solid #ddd;
+  background-color: #eee;
 }
 
 .main-avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 
-.profile-name {
-  font-size: 25px;
-  font-weight: 500;
-  color: #333;
-}
-
+/* Cải thiện giao diện form */
 .profile-form {
-  margin-top: 46px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 
 .form-row {
   display: flex;
   align-items: center;
-  gap: 50px;
+  justify-content: space-between;
+  gap: 20px;
 }
 
 .form-row label {
-  width: 100px;
-  font-size: 14px;
-  color: #333;
+  flex: 0 0 120px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #444;
 }
 
 .form-row input {
-  width: 290px;
-  height: 30px;
-  background-color: #fcfcfc;
-  border: 1px solid #e8e8e8;
-  border-radius: 7px;
-  padding: 0 10px;
+  flex: 1;
+  height: 36px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 0 12px;
   font-size: 14px;
-  color: #222;
+  background-color: #fff;
+  color: #333;
 }
 
+/* Cố định khoảng cách nút */
 .profile-actions {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 70px;
-  margin-right: 25px;
-  gap: 0;
-  flex-wrap: nowrap;
+  margin-top: 50px;
+  flex-wrap: wrap;
 }
 
 .change-password {
-  color: #224f82;
-  font-size: 14px;
+  font-size: 15px;
+  color: #1565c0;
   text-decoration: underline;
   cursor: pointer;
-  transition: color 0.2s ease;
-  margin-top: 20px;
+  transition: 0.2s;
 }
 
 .change-password:hover {
-  color: #0d6efd;
-  text-decoration: underline;
+  color: #0d47a1;
 }
 
+/* Nút hành động */
 .action-buttons {
   display: flex;
-  margin-left: 3px;
-  gap: 30px;
+  gap: 20px;
 }
 
 .save-btn,
 .cancel-btn {
-  width: 100px;
-  height: 35px;
-  font-size: 16px;
+  width: 110px;
+  height: 38px;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 8px;
   border: none;
-  border-radius: 6px;
   color: #fff;
   cursor: pointer;
 }
@@ -274,7 +270,42 @@ body::before {
 .cancel-btn {
   background-color: #6c757d;
 }
+
+/* Popup: luôn cố định ở giữa */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.popup-overlay.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Chỉ disable user select khi popup mở */
 .blur {
+  filter: blur(10px);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Popup box vẫn giữ nguyên vì đã đẹp */
+
+/* Popup styles */
+/* .blur {
   filter: blur(10px);
   pointer-events: none;
   user-select: none;
@@ -298,7 +329,7 @@ body::before {
 .popup-overlay.show {
   visibility: visible;
   opacity: 1;
-}
+} */
 
 .popup-box {
   width: 320px;

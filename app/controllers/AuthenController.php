@@ -35,7 +35,7 @@ class AuthenController extends Controller
     {
         $email = $req->post()['email'];
         $password = $req->post()['password'];
-        $user =  $this->model->findUserbyEmail($email);
+        $user = $this->model->findUserbyEmail($email);
         //xác thực tài khoản mật khẩu
         if (!$user) {
             $this->renderPartial('auth/login', ['message' => 'Invalid email or password.', 'email' => '', "password" => '']);
@@ -73,7 +73,7 @@ class AuthenController extends Controller
     function regisHandler($req, $res)
     {
         // xác thực các thông tin chưa tồn tại trong db
-        $user  = $req->post();
+        $user = $req->post();
 
         if ($this->model->findUserbyEmail($user['email'])) {
             $user['email'] = "";
@@ -105,14 +105,14 @@ class AuthenController extends Controller
         }
 
 
-        $_SESSION['user_id'] = $user['user_id'];
-        $secret = $this->getConfig("YOUR_SECRET_KEY");
-        $hash = hash_hmac('sha256', $user['user_id'], $secret);
-        $value = base64_encode($user['user_id'] . "|" . $hash);
-        setcookie("user_id", $value, time() + 86400 * 7, "/", "", false, true);
+        $_SESSION['user_id'] = $idUser;
 
+        $secret = $this->getConfig("YOUR_SECRET_KEY");
+        $hash = hash_hmac('sha256', $idUser, $secret);
+        $value = base64_encode($idUser . "|" . $hash);
+        setcookie("user_id", $value, time() + 86400 * 7, "/", "", false, true);
         $user['message'] = "Register successful. Redirecting... ";
-        $user['access'] =  $this->getConfig('basePath');
+        $user['access'] = $this->getConfig('basePath');
         $this->renderPartial('auth/regis', $user);
     }
 
@@ -120,8 +120,7 @@ class AuthenController extends Controller
     function logoutHandler($req, $res)
     {
         session_destroy();
-        setcookie("user_id", '', time() - 1, "/", "", false, true);
-
+        setcookie("user_id", '', time() - 100, "/", "", false, true);
         $this->redirect($this->getConfig('basePath'));
     }
 }
