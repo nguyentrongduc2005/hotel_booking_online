@@ -124,14 +124,18 @@
                                 } elseif ($statusCheckin === 'done') {
                                     $timelineClass = 'checkin-done';
                                 }
+                                $disable = '';
+                                if ($statusCheckin === 'done' || $statusCheckout === 'done') {
+                                    $disable = 'disabled';
+                                }
                                 ?>
                                 <div class="timeline-bar <?= $timelineClass ?>">
                                     <div class="timeline-left"></div>
                                     <div class="timeline-right"></div>
                                 </div>
-                            
+
                             </div>
-                            <button class="cancel-btn" data-booking-id="<?= htmlspecialchars($reservation['id_booking']) ?>">
+                            <button class="cancel-btn <?= $disable ?>" data-booking-id="<?= htmlspecialchars($reservation['id_booking']) ?>">
                                 Cancel
                             </button>
                         </div>
