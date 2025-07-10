@@ -53,13 +53,9 @@ class AdminBookingController extends Controller
         ];
 
         $historyBookings = $this->model->bookingFilter('historybooking', $filters);
-        echo '<pre>';
-        print_r($historyBookings);  
-        echo '</pre>';
-
-        // return $this->render('historyBookings', [
-        //     'historyBookings' =>$historyBookings,
-        //     'filters' => $filters
-        // ]);
+        return $this->render('historyBookings', [
+            'historyBookings' =>$historyBookings,
+            'filters' => $filters
+        ]);
     }
 }
