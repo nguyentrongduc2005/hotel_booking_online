@@ -98,7 +98,7 @@
 
 .sidebar-item.sidebar-dashboard:hover > .sidebar-submenu {
   display: block;
-  animation: fadeInSubmenu 0.2s;
+  animation: fadeInSubmenu 0.5s;
 }
 
 .sidebar-subitem a {
