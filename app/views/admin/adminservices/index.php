@@ -54,16 +54,16 @@
 <div id="addServiceModal" class="modal-add-room" style="display: none;">
     <div class="modal-add-room-content">
         <span class="close-add-room" onclick="closeAddServiceModal()">&times;</span>
-        <h3 class="add-room-title">Thêm dịch vụ mới</h3>
+        <h3 class="add-room-title">Add service</h3>
         <form id="addServiceForm" class="add-room-form" enctype="multipart/form-data">
-            <label class="add-room-label">Tên dịch vụ:</label>
+            <label class="add-room-label">Service:</label>
             <input type="text" name="name" id="add_service_name" style="width: 98%; font-family: 'SVN-Gilroy' !important;" required>
-            <label class="add-room-label">Mô tả:</label>
+            <label class="add-room-label">Description:</label>
             <textarea name="description" id="add_service_description" rows="4" cols="50" style="width: 98%; font-family: 'SVN-Gilroy' !important;"></textarea>
-            <label class="add-room-label">Chọn ảnh:</label>
+            <label class="add-room-label">Select images:</label>
             <input type="file" name="image" id="add_service_image_input" accept="image/*" required>
             <div id="add-service-image-preview" style="display: flex; gap: 8px; margin-bottom: 12px; justify-content: center;"></div>
-            <button type="submit" class="btn-add-room">Thêm dịch vụ</button>
+            <button type="submit" class="btn-add-room">Add</button>
         </form>
     </div>
 </div>
@@ -72,19 +72,19 @@
 <div id="editServiceModal" class="modal-add-room" style="display: none;">
     <div class="modal-add-room-content">
         <span class="close-add-room" onclick="closeEditServiceModal()">&times;</span>
-        <h3 class="add-room-title">Chỉnh sửa dịch vụ</h3>
+        <h3 class="add-room-title">Edit service</h3>
         <form id="editServiceForm" class="add-room-form" enctype="multipart/form-data">
             <input type="hidden" name="service_id" id="edit_service_id">
-            <label class="add-room-label">Tên dịch vụ:</label>
+            <label class="add-room-label">Service:</label>
             <input type="text" name="name" id="edit_service_name" style="width: 98%; font-family: 'SVN-Gilroy' !important;" required>
-            <label class="add-room-label">Mô tả:</label>
+            <label class="add-room-label">Description:</label>
             <textarea name="description" id="edit_service_description" rows="4" cols="50" style="width: 98%; font-family: 'SVN-Gilroy' !important;"></textarea>
-            <label class="add-room-label">Ảnh hiện tại:</label>
+            <label class="add-room-label">Current images:</label>
             <div id="edit-service-image-box" style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 10px;"></div>
-            <label class="add-room-label">Chọn ảnh mới (nếu muốn thay):</label>
+            <label class="add-room-label">New images:</label>
             <input type="file" name="image" id="edit_service_image_input" accept="image/*">
             <div id="edit-service-image-preview" style="display: flex; gap: 8px; margin-bottom: 12px; justify-content: center;"></div>
-            <button type="submit" class="btn-add-room">Lưu thay đổi</button>
+            <button type="submit" class="btn-add-room">Save</button>
         </form>
     </div>
 </div>
@@ -188,7 +188,7 @@ function closeEditServiceModal() {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                alert('Thêm dịch vụ thành công!');
+                alert('Adding new service successfully');
                 closeAddServiceModal();
                 window.location.reload();
             } else {
@@ -218,7 +218,7 @@ function closeEditServiceModal() {
                 return;
             }
             if (data.success) {
-                alert('Cập nhật dịch vụ thành công!');
+                alert('Update successfully');
                 closeEditServiceModal();
                 window.location.reload();
             } else {
@@ -231,14 +231,14 @@ function closeEditServiceModal() {
     };
 // Xóa dịch vụ
 function deleteService(id) {
-    if (!confirm('Bạn có chắc chắn muốn xóa dịch vụ này?')) return;
+    if (!confirm('Are you sure to delete this service?')) return;
     fetch('<?= $this->configs->config["basePath"] ?? "" ?>/admin/services/delete/' + id, {
         method: 'POST'
     })
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            alert('Xóa dịch vụ thành công!');
+            alert('Delete successfully');
             window.location.reload();
         } else {
             alert('Xóa dịch vụ thất bại: ' + (data.error || 'Lỗi không xác định'));

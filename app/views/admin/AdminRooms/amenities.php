@@ -22,8 +22,8 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>Tên tiện nghi</th>
-            <th>Mô tả</th>
+            <th>Amenity</th>
+            <th>Description</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -53,15 +53,15 @@
 <div id="addAmenityModal" class="modal-add-room" style="display: none;">
     <div class="modal-add-room-content">
         <span class="close-add-room" onclick="closeAddAmenityModal()">&times;</span>
-        <h3 class="add-room-title">Thêm tiện nghi mới</h3>
+        <h3 class="add-room-title">Adding new amenity</h3>
         <form class="add-room-form" method="post" action="<?= $this->configs->config['basePath'] ?>/admin/amenities/add" >
-            <label class="add-room-label">Tên tiện nghi:</label>
+            <label class="add-room-label">Amenity:</label>
             <input type="text" name="name" style="width: 98%; font-family: 'SVN-Gilroy' !important;" required>
 
-            <label class="add-room-label">Mô tả:</label>
+            <label class="add-room-label">Description:</label>
             <textarea name="description" rows="4" cols="50" style="width: 98%; font-family: 'SVN-Gilroy' !important;"></textarea>
 
-            <button type="submit" name="submit" class="btn-add-room">Thêm tiện nghi</button>
+            <button type="submit" name="submit" class="btn-add-room">Add</button>
         </form>
     </div>
 </div>
@@ -70,16 +70,16 @@
 <div id="editAmenityModal" class="modal-add-room" style="display: none;">
     <div class="modal-add-room-content">
         <span class="close-add-room" onclick="closeEditAmenityModal()">&times;</span>
-        <h3 class="add-room-title">Chỉnh sửa tiện nghi</h3>
+        <h3 class="add-room-title">Edit amenity:</h3>
         <form id="editAmenityForm" class="add-room-form" method="post" action="<?= $this->configs->config['basePath'] ?>/admin/amenities/edit">
             <input type="hidden" name="amenity_id" id="edit_amenity_id">
-            <label class="add-room-label">Tên tiện nghi:</label>
+            <label class="add-room-label">Amenity:</label>
             <input type="text" name="name" id="edit_amenity_name" style="width: 98%; font-family: 'SVN-Gilroy' !important;" required>
 
-            <label class="add-room-label">Mô tả:</label>
+            <label class="add-room-label">Description:</label>
             <textarea name="description" id="edit_amenity_description" rows="4" cols="50" style="width: 98%; font-family: 'SVN-Gilroy' !important;"></textarea>
 
-            <button type="submit" name="submit" class="btn-add-room">Lưu thay đổi</button>
+            <button type="submit" name="submit" class="btn-add-room">Save</button>
         </form>
     </div>
 </div>

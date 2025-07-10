@@ -91,7 +91,7 @@
 <div id="addRoomModal" class="modal-add-room" style="display: none;">
     <div class="modal-add-room-content">
         <span class="close-add-room" onclick="closeAddRoomModal()">&times;</span>
-        <h3 class="add-room-title">Thêm phòng mới</h3>
+        <h3 class="add-room-title">Adding new room</h3>
         <form class="add-room-form" method="post" enctype="multipart/form-data"
             action="<?= $this->configs->config['basePath'] ?>/admin/rooms/add">
             <label class="add-room-label">Slug:</label>
@@ -119,7 +119,7 @@
             <label class="add-room-label">Area (m²):</label>
             <input type="number" name="area" style="width: 98%;" required>
 
-            <label class="add-room-label">Capacity (người):</label>
+            <label class="add-room-label">Capacity:</label>
             <input type="number" name="capacity" style="width: 98%;" required>
 
             <label class="add-room-label">Room type:</label>
@@ -132,7 +132,7 @@
                 <option value="6">Single Room</option>
             </select>
 
-            <label class="add-room-label">Chọn tiện nghi (Amenity):</label>
+            <label class="add-room-label">Select Amenities:</label>
             <div class="amenities-group" style="width: 100%; margin-top: 8px;">
                 <table style="width: 100%; border-collapse: separate; border-spacing: 0 8px;">
                     <tbody>
@@ -161,12 +161,12 @@
                 </table>
             </div>
 
-            <label class="add-room-label">Upload nhiều ảnh:</label>
+            <label class="add-room-label">Upload images:</label>
             <input type="file" name="images[]" id="add_images_input" multiple>
             <div id="add-images-preview"
                 style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; justify-content: center;"></div>
 
-            <button type="submit" name="submit" class="btn-add-room">Thêm phòng</button>
+            <button type="submit" name="submit" class="btn-add-room">Add</button>
         </form>
     </div>
 </div>
@@ -174,7 +174,7 @@
 <div id="editRoomModal" class="modal-add-room" style="display: none;">
     <div class="modal-add-room-content">
         <span class="close-add-room" onclick="closeEditRoomModal()">&times;</span>
-        <h3 class="add-room-title">Chỉnh sửa phòng</h3>
+        <h3 class="add-room-title">Edit room</h3>
         <form id="editRoomForm" class="add-room-form" method="post" enctype="multipart/form-data"
             action="<?= $this->configs->config['basePath'] ?>/admin/rooms/edit">
             <input type="hidden" name="id_room" id="edit_id_room">
@@ -204,7 +204,7 @@
             <label class="add-room-label">Area (m²):</label>
             <input type="number" name="area" id="edit_area" style="width: 98%; font-family: 'SVN-Gilroy';" required>
 
-            <label class="add-room-label">Capacity (người):</label>
+            <label class="add-room-label">Capacity:</label>
             <input type="number" name="capacity" id="edit_capacity" style="width: 98%; font-family: 'SVN-Gilroy';"
                 required>
 
@@ -218,7 +218,7 @@
                 <option value="6">Single Room</option>
             </select>
 
-            <label class="add-room-label">Chọn tiện nghi (Amenity):</label>
+            <label class="add-room-label">Select Amenities:</label>
             <div class="amenities-group" style="width: 100%; margin-top: 8px;">
                 <table style="width: 100%; border-collapse: separate; border-spacing: 0 8px;">
                     <tbody>
@@ -247,15 +247,15 @@
                 </table>
             </div>
 
-            <label class="add-room-label">Ảnh hiện tại (Tick để xóa):</label>
+            <label class="add-room-label">Current images (Tick to delete):</label>
             <div id="edit-room-images" style="display: flex; flex-wrap: wrap; gap: 3px; margin-bottom: 5px; margin-top: 10px;"></div>
 
-            <label class="add-room-label">Upload nhiều ảnh (nếu muốn thay):</label>
+            <label class="add-room-label">Upload images (if you want to change):</label>
             <input type="file" name="new_images[]" id="edit_images_input" multiple>
             <div id="edit-images-preview"
                 style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; justify-content: center;"></div>
 
-            <button type="submit" name="submit" class="btn-add-room">Lưu thay đổi</button>
+            <button type="submit" name="submit" class="btn-add-room">Save</button>
         </form>
     </div>
 </div>

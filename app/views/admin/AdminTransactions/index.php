@@ -13,7 +13,7 @@
           <div class="search-bar-wrapper">
             <span class="search-icon"><i class="fa fa-search"></i></span>
             <input type="text" class="dashboard-search-input" name="search"
-              placeholder="Tìm kiếm theo tên..." value="<?= htmlspecialchars($search ?? '') ?>">
+              placeholder="Search by name..." value="<?= htmlspecialchars($search ?? '') ?>">
           </div>
         </form>
       </div>
@@ -49,7 +49,7 @@
             <?php endforeach; ?>
           <?php else: ?>
             <tr>
-              <td colspan="7" style="text-align:center;">Không có giao dịch nào.</td>
+              <td colspan="7" style="text-align:center;">No transactions.</td>
             </tr>
           <?php endif; ?>
         </tbody>
