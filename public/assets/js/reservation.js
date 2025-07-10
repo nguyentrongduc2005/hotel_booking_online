@@ -49,7 +49,9 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!bookingId) return;
 
       if (confirm("Bạn có chắc chắn muốn huỷ booking này không?")) {
+
         fetch("hotel_booking_online/public/user/reservations/cancel", {
+
           method: "POST",
           headers: {
             "Content-Type": "application/json",

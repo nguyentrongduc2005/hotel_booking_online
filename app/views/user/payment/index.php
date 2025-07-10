@@ -123,7 +123,32 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var lastSearch = JSON.parse(sessionStorage.getItem('lastSearch') || '{}');
+            // Hàm lấy ngày hôm nay và ngày mai theo định dạng yyyy-mm-dd
+            function getTodayTomorrow() {
+                const today = new Date();
+                const tomorrow = new Date();
+                tomorrow.setDate(today.getDate() + 1);
+
+                function format(date) {
+                    const y = date.getFullYear();
+                    const m = String(date.getMonth() + 1).padStart(2, '0');
+                    const d = String(date.getDate()).padStart(2, '0');
+                    return `${y}-${m}-${d}`;
+                }
+                return {
+                    checkIn: format(today),
+                    checkOut: format(tomorrow),
+                    diffDays: 1
+                };
+            }
+
+            // Lấy dữ liệu từ sessionStorage, nếu không có thì gán bằng cái hàm ở trên 
+            var lastSearch = JSON.parse(sessionStorage.getItem('lastSearch') || 'null');
+            if (!lastSearch) {
+                lastSearch = getTodayTomorrow();
+                sessionStorage.setItem('lastSearch', JSON.stringify(lastSearch));
+            }
+
             // Định dạng lại ngày nếu cần (ví dụ yyyy-mm-dd -> dd/mm/yyyy)
             function formatDate(dateStr) {
                 if (!dateStr) return '--';

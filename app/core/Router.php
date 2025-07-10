@@ -136,6 +136,7 @@ class Router
                         } else {
                             foreach ($middleware as $mid) {
                                 if (!$this->handlerMiddleware($mid, $request, $response)) {
+                                    echo $this->handlerMiddleware($mid, $request, $response) ? 'dug' : "loi";
                                     throw new AppException("Middleware $mid faild", 500);
                                 }
                             }

@@ -5,8 +5,9 @@ namespace app\middlewares;
 use app\core\db;
 use app\core\Controller;
 use app\core\AppException;
+use PSpell\Config;
 
-class AuthorMiddleware
+class AuthorMiddleware extends Controller
 {
 
 
@@ -23,10 +24,26 @@ class AuthorMiddleware
         db::connect();
 
         if (!isset($_SESSION['user_id'])) {
-            if (!isset($_COOKIE['user_id'])) {
+            $secret = $this->getConfig("YOUR_SECRET_KEY");
+
+            if (isset($_COOKIE['user_id'])) {
+                $decoded = base64_decode($_COOKIE['user_id']);
+
+                // Tách phần user_id và hash ra
+                list($user_id, $hash) = explode('|', $decoded);
+
+                // Tạo lại hash từ user_id để so sánh
+                $expected_hash = hash_hmac('sha256', $user_id, $secret);
+
+                if (hash_equals($expected_hash, $hash)) {
+
+                    $_SESSION['user_id'] = $user_id;
+                } else {
+                    throw new AppException('Cookie Forbidden', 403);
+                }
+            } else {
                 return true;
             }
-            $_SESSION['user_id'] = $_COOKIE['user_id'];
         }
 
         //nếu khớp tìm user của token
@@ -34,13 +51,14 @@ class AuthorMiddleware
         $user = db::getOne($sqlUser, ['id' => $_SESSION['user_id']]);
 
 
-
         if (isset($_SESSION['user_name']) && isset($_SESSION['role']) && isset($_SESSION['user_email']) && isset($_SESSION['level'])) return true;
+
         // set thông tin user vào token lấy role
         $_SESSION['user_name'] = isset($user['full_name']) ? $user['full_name'] : '';
         $_SESSION['role'] = isset($user['role']) ? $user['role'] : '';
         $_SESSION['user_email'] = isset($user['email']) ? $user['email'] : '';
         $_SESSION['level'] = $user['discount'] >= 5 ? ($user['discount'] > 10 ? "diamond" : "gold") : "silver";
+
         return true;
     }
 
@@ -74,14 +92,16 @@ class AuthorMiddleware
     }
     public function checkRoleUser($req, $res)
     {
+
         if (isset($_SESSION['role'])) {
             if ($_SESSION['role'] == 'user') {
+
                 return true;
             } else if ($_SESSION['role'] == 'admin') {
                 throw new AppException("Forbidden", 403);
             }
-        } else {
-            return true;
         }
+
+        return true;
     }
 }

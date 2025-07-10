@@ -23,7 +23,7 @@
                     <p style="margin-top: 16px; color: #fff; font-size: 1.1rem;">Please check your email for booking details.</p>
                     <div class="success-actions">
                         <a href="<?= $this->configs->config['basePath'] ?>listroom" class="btn-success-nav">Continue Booking</a>
-                        <a href="<?= $this->configs->config['basePath'] ?>/popup/myTransaction" class="btn-success-nav transaction-btn">View My Transactions</a>
+                        <a href="<?= $this->configs->config['basePath'] ?>user/reservations" class="btn-success-nav transaction-btn">View My Transactions</a>
                     </div>
                     <div class="success-social">
                         <div class="success-social-title">Let's connect!</div>

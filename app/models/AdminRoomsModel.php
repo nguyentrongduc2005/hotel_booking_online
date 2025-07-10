@@ -224,12 +224,12 @@ class AdminRoomsModel
         db::delete('room_amenity', "id_room = $id_room");
         // Xóa ảnh liên quan đến phòng (và file vật lý)
         $images = db::getAll("SELECT path FROM image_room WHERE id_room = :id_room", ['id_room' => $id_room]);
-        // foreach ($images as $image) {
-        //     $filePath = dirname(__DIR__, 2) . '/public/assets' . $image['path'];
-        //     if (file_exists($filePath)) {
-        //         unlink($filePath);
-        //     }
-        // }
+        foreach ($images as $image) {
+            $filePath = dirname(__DIR__, 2) . '/public/assets' . $image['path'];
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+        }
         db::delete('image_room', "id_room = $id_room");
         // Xóa phòng
         $row = db::delete('room', "id_room = $id_room");

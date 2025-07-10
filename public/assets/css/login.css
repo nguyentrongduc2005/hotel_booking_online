@@ -85,7 +85,6 @@
     border-radius: 20px;
     padding: 8px 24px;
     font-size: 1rem;
-    margin-bottom: 24px;
     cursor: pointer;
     align-self: flex-start;
     margin-top: 0;
@@ -94,16 +93,17 @@
 
 .login-title {
     font-family: SVN-Gilroy;
-    font-size: 2.1rem;
+    font-size: 1.8rem;
     font-weight: bold;
-    margin-bottom: 1.5vw;
+    margin-top: 0.7vw;
+    margin-bottom: 0.3vw;
     letter-spacing: 1px;
 }
 
 .login-sub {
     font-family: SVN-Gilroy;
     color: #888;
-    margin-bottom: 2vw;
+    margin-bottom: 0.8vw;
     font-size: 1.1rem;
 }
 
@@ -182,7 +182,6 @@
     padding: 0.9vw 0;
     font-size: 1.08rem;
     font-weight: bold;
-    margin-top: 1.5vw;
     cursor: pointer;
     transition: background 0.2s;
 }

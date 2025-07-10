@@ -50,81 +50,265 @@
   </div>
 </div>
 
-
-<div id="editServiceModal" class="modal-add-room" style="display: none;">
-    <div class="modal-add-room-content">
-        <span class="close-add-room" onclick="closeEditServiceModal()">&times;</span>
-        <h3 class="add-room-title">Chỉnh sửa dịch vụ</h3>
-        <form id="editServiceForm" class="add-room-form" onsubmit="submitEditForm(event)">
-            <input type="hidden" name="service_id" id="edit_service_id">
-            <label class="add-room-label">Tên dịch vụ:</label>
-            <input type="text" name="name" id="edit_service_name" style="width: 98%; font-family: 'SVN-Gilroy' !important;" required>
-            <label class="add-room-label">Mô tả:</label>
-            <textarea name="description" id="edit_service_description" rows="4" cols="50" style="width: 98%; font-family: 'SVN-Gilroy' !important;"></textarea>
-            <button type="submit" class="btn-add-room">Lưu thay đổi</button>
-        </form>
-    </div>
-</div>
-
+<!-- Popup Thêm dịch vụ -->
 <div id="addServiceModal" class="modal-add-room" style="display: none;">
     <div class="modal-add-room-content">
         <span class="close-add-room" onclick="closeAddServiceModal()">&times;</span>
         <h3 class="add-room-title">Thêm dịch vụ mới</h3>
-        <form id="addServiceForm" class="add-room-form" onsubmit="submitAddForm(event)">
+        <form id="addServiceForm" class="add-room-form" enctype="multipart/form-data">
             <label class="add-room-label">Tên dịch vụ:</label>
             <input type="text" name="name" id="add_service_name" style="width: 98%; font-family: 'SVN-Gilroy' !important;" required>
             <label class="add-room-label">Mô tả:</label>
             <textarea name="description" id="add_service_description" rows="4" cols="50" style="width: 98%; font-family: 'SVN-Gilroy' !important;"></textarea>
+            <label class="add-room-label">Chọn ảnh:</label>
+            <input type="file" name="image" id="add_service_image_input" accept="image/*" required>
+            <div id="add-service-image-preview" style="display: flex; gap: 8px; margin-bottom: 12px; justify-content: center;"></div>
             <button type="submit" class="btn-add-room">Thêm dịch vụ</button>
         </form>
     </div>
 </div>
 
+<!-- Popup Sửa dịch vụ -->
+<div id="editServiceModal" class="modal-add-room" style="display: none;">
+    <div class="modal-add-room-content">
+        <span class="close-add-room" onclick="closeEditServiceModal()">&times;</span>
+        <h3 class="add-room-title">Chỉnh sửa dịch vụ</h3>
+        <form id="editServiceForm" class="add-room-form" enctype="multipart/form-data">
+            <input type="hidden" name="service_id" id="edit_service_id">
+            <label class="add-room-label">Tên dịch vụ:</label>
+            <input type="text" name="name" id="edit_service_name" style="width: 98%; font-family: 'SVN-Gilroy' !important;" required>
+            <label class="add-room-label">Mô tả:</label>
+            <textarea name="description" id="edit_service_description" rows="4" cols="50" style="width: 98%; font-family: 'SVN-Gilroy' !important;"></textarea>
+            <label class="add-room-label">Ảnh hiện tại:</label>
+            <div id="edit-service-image-box" style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 10px;"></div>
+            <label class="add-room-label">Chọn ảnh mới (nếu muốn thay):</label>
+            <input type="file" name="image" id="edit_service_image_input" accept="image/*">
+            <div id="edit-service-image-preview" style="display: flex; gap: 8px; margin-bottom: 12px; justify-content: center;"></div>
+            <button type="submit" class="btn-add-room">Lưu thay đổi</button>
+        </form>
+    </div>
+</div>
+
 <script>
-    
+// Mở popup thêm
+function openAddServiceModal() {
+    document.getElementById('addServiceModal').style.display = 'flex';
+    document.getElementById('addServiceForm').reset();
+    document.getElementById('add-service-image-preview').innerHTML = '';
+}
+function closeAddServiceModal() {
+    document.getElementById('addServiceModal').style.display = 'none';
+}
+// Mở popup sửa
 function openEditServiceModal(service) {
     document.getElementById('edit_service_id').value = service.id_service;
     document.getElementById('edit_service_name').value = service.name;
     document.getElementById('edit_service_description').value = service.description;
+    // Hiện ảnh hiện tại
+    const imageBox = document.getElementById('edit-service-image-box');
+    imageBox.innerHTML = '';
+    if (service.Path_img) {
+        const imgBox = document.createElement('div');
+        imgBox.style.position = 'relative';
+        imgBox.style.display = 'inline-block';
+        imgBox.style.width = '90px';
+        imgBox.style.height = '70px';
+        imgBox.style.border = '1px solid #ccc';
+        imgBox.style.borderRadius = '6px';
+        imgBox.style.overflow = 'hidden';
+        imgBox.style.background = '#f8f8f8';
+        imgBox.style.marginRight = '6px';
+        imgBox.style.marginBottom = '6px';
+        const image = document.createElement('img');
+        image.src = '<?= $this->configs->config['pathAssets'] ?>' + service.Path_img;
+        image.style.width = '100%';
+        image.style.height = '100%';
+        image.style.objectFit = 'cover';
+        imgBox.appendChild(image);
+        imageBox.appendChild(imgBox);
+    }
+    document.getElementById('edit-service-image-preview').innerHTML = '';
+    document.getElementById('edit_service_image_input').value = '';
     document.getElementById('editServiceModal').style.display = 'flex';
 }
 function closeEditServiceModal() {
     document.getElementById('editServiceModal').style.display = 'none';
 }
-function submitEditForm(event) {
-    event.preventDefault();
-    const serviceId = document.getElementById('edit_service_id').value;
-    const name = document.getElementById('edit_service_name').value;
-    const description = document.getElementById('edit_service_description').value;
-
-    if (!name.trim()) {
-        alert('Vui lòng nhập tên dịch vụ!');
-        return;
-    }
-
-    const formData = new FormData();
-    formData.append('name', name);
-    formData.append('description', description);
-
-    const url = '<?= $this->configs->config["basePath"] ?? "" ?>/admin/services/update/' + serviceId;
-
-    fetch(url, {
-        method: 'POST',
-        body: formData
+// Preview ảnh khi chọn ở thêm dịch vụ
+    document.getElementById('add_service_image_input')?.addEventListener('change', function(e) {
+        const preview = document.getElementById('add-service-image-preview');
+        preview.innerHTML = '';
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                const img = document.createElement('img');
+                img.src = ev.target.result;
+                img.style.width = '90px';
+                img.style.height = '70px';
+                img.style.objectFit = 'cover';
+                img.style.border = '1px solid #ccc';
+                img.style.borderRadius = '6px';
+                img.style.marginRight = '6px';
+                preview.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+// Preview ảnh khi chọn ở sửa dịch vụ
+    document.getElementById('edit_service_image_input')?.addEventListener('change', function(e) {
+        const preview = document.getElementById('edit-service-image-preview');
+        preview.innerHTML = '';
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                const img = document.createElement('img');
+                img.src = ev.target.result;
+                img.style.width = '90px';
+                img.style.height = '70px';
+                img.style.objectFit = 'cover';
+                img.style.border = '1px solid #ccc';
+                img.style.borderRadius = '6px';
+                img.style.marginRight = '6px';
+                preview.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+// Submit form thêm dịch vụ
+    document.getElementById('addServiceForm').onsubmit = function(e) {
+        e.preventDefault();
+        const form = document.getElementById('addServiceForm');
+        const formData = new FormData(form);
+        fetch('<?= $this->configs->config["basePath"] ?? "" ?>/admin/services/create', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Thêm dịch vụ thành công!');
+                closeAddServiceModal();
+                window.location.reload();
+            } else {
+                alert('Thêm dịch vụ thất bại: ' + (data.error || 'Lỗi không xác định'));
+            }
+        })
+        .catch(error => {
+            alert('Lỗi hệ thống: ' + (error && error.message ? error.message : error));
+        });
+    };
+// Submit form sửa dịch vụ
+    document.getElementById('editServiceForm').onsubmit = function(e) {
+        e.preventDefault();
+        const form = document.getElementById('editServiceForm');
+        const serviceId = document.getElementById('edit_service_id').value;
+        const formData = new FormData(form);
+        fetch('<?= $this->configs->config["basePath"] ?? "" ?>/admin/services/update/' + serviceId, {
+            method: 'POST',
+            body: formData
+        })
+        .then(async response => {
+            let data;
+            try {
+                data = await response.json();
+            } catch (err) {
+                alert('Lỗi hệ thống: ' + (err && err.message ? err.message : err));
+                return;
+            }
+            if (data.success) {
+                alert('Cập nhật dịch vụ thành công!');
+                closeEditServiceModal();
+                window.location.reload();
+            } else {
+                alert('Cập nhật dịch vụ thất bại: ' + (data.error || 'Lỗi không xác định'));
+            }
+        })
+        .catch(error => {
+            alert('Lỗi hệ thống: ' + (error && error.message ? error.message : error));
+        });
+    };
+// Xóa dịch vụ
+function deleteService(id) {
+    if (!confirm('Bạn có chắc chắn muốn xóa dịch vụ này?')) return;
+    fetch('<?= $this->configs->config["basePath"] ?? "" ?>/admin/services/delete/' + id, {
+        method: 'POST'
     })
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            alert('Cập nhật dịch vụ thành công!');
-            closeEditServiceModal();
+            alert('Xóa dịch vụ thành công!');
             window.location.reload();
         } else {
-            alert('Cập nhật dịch vụ thất bại: ' + (data.error || 'Lỗi không xác định'));
+            alert('Xóa dịch vụ thất bại: ' + (data.error || 'Lỗi không xác định'));
         }
     })
     .catch(error => {
         console.error('Error:', error);
-        alert('Cập nhật dịch vụ thất bại! Vui lòng thử lại.');
+        alert('Xóa dịch vụ thất bại! Vui lòng thử lại.');
     });
 }
+// --- BẮT ĐẦU: Logic disable/enable nút submit khi không thay đổi nội dung (edit service) ---
+const editServiceForm = document.getElementById('editServiceForm');
+const editServiceSubmitBtn = editServiceForm.querySelector('button[type="submit"]');
+let originalServiceData = {};
+
+function getEditServiceFormData() {
+    return {
+        service_id: document.getElementById('edit_service_id').value,
+        name: document.getElementById('edit_service_name').value,
+        description: document.getElementById('edit_service_description').value,
+        // Chỉ kiểm tra file mới nếu có chọn
+        image: document.getElementById('edit_service_image_input').value
+    };
+}
+function isEditServiceChanged() {
+    const current = getEditServiceFormData();
+    for (let key in originalServiceData) {
+        if ((originalServiceData[key] || '') !== (current[key] || '')) return true;
+    }
+    // Nếu chọn ảnh mới thì cũng cho phép submit
+    if (current.image && current.image.length > 0) return true;
+    return false;
+}
+function updateEditServiceBtnState() {
+    if (isEditServiceChanged()) {
+        editServiceSubmitBtn.disabled = false;
+        editServiceSubmitBtn.style.background = '#007bff';
+        editServiceSubmitBtn.style.cursor = 'pointer';
+        editServiceSubmitBtn.style.opacity = '1';
+    } else {
+        editServiceSubmitBtn.disabled = true;
+        editServiceSubmitBtn.style.background = '#ccc';
+        editServiceSubmitBtn.style.cursor = 'not-allowed';
+        editServiceSubmitBtn.style.opacity = '0.7';
+    }
+}
+function attachEditServiceEvents() {
+    editServiceForm.querySelectorAll('input, textarea').forEach(el => {
+        el.addEventListener('input', updateEditServiceBtnState);
+        el.addEventListener('change', updateEditServiceBtnState);
+    });
+}
+const oldOpenEditServiceModal = openEditServiceModal;
+openEditServiceModal = function(service) {
+    oldOpenEditServiceModal(service);
+    originalServiceData = {
+        service_id: document.getElementById('edit_service_id').value,
+        name: document.getElementById('edit_service_name').value,
+        description: document.getElementById('edit_service_description').value,
+        image: ''
+    };
+    updateEditServiceBtnState();
+    attachEditServiceEvents();
+}
+if (editServiceSubmitBtn) {
+    editServiceSubmitBtn.disabled = true;
+    editServiceSubmitBtn.style.background = '#ccc';
+    editServiceSubmitBtn.style.cursor = 'not-allowed';
+    editServiceSubmitBtn.style.opacity = '0.7';
+}
+// --- KẾT THÚC: Logic disable/enable nút submit khi không thay đổi nội dung (edit service) ---
 </script>
+

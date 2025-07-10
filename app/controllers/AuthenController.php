@@ -50,9 +50,14 @@ class AuthenController extends Controller
         //     $this->renderPartial('auth/login', ['message' => "This account is already logged in on another device.", 'email' => '', "password" => '']);
         //     return;
         // }
-
         $_SESSION['user_id'] = $user['user_id'];
-        setcookie("user_id", $user['user_id'], time() + (86400 * 7), "/", "", false, true);
+        $secret = $this->getConfig("YOUR_SECRET_KEY");
+        $hash = hash_hmac('sha256', $user['user_id'], $secret);
+        $value = base64_encode($user['user_id'] . "|" . $hash);
+
+        setcookie("user_id", $value, time() + 86400 * 7, "/", "", false, true);
+
+
 
         $this->renderPartial('auth/login', [
             'message' => "Login successful. Redirecting...",
@@ -101,7 +106,11 @@ class AuthenController extends Controller
 
 
         $_SESSION['user_id'] = $idUser;
-        setcookie("user_id", $idUser, time() + (86400 * 7), "/", "", false, true);
+
+        $secret = $this->getConfig("YOUR_SECRET_KEY");
+        $hash = hash_hmac('sha256', $idUser, $secret);
+        $value = base64_encode($idUser . "|" . $hash);
+        setcookie("user_id", $value, time() + 86400 * 7, "/", "", false, true);
         $user['message'] = "Register successful. Redirecting... ";
         $user['access'] =  $this->getConfig('basePath');
         $this->renderPartial('auth/regis', $user);
@@ -111,8 +120,7 @@ class AuthenController extends Controller
     function logoutHandler($req, $res)
     {
         session_destroy();
-        setcookie("user_id", '', time() - 1, "/", "", false, true);
-
+        setcookie("user_id", '', time() - 100, "/", "", false, true);
         $this->redirect($this->getConfig('basePath'));
     }
 }

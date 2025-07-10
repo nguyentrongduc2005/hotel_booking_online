@@ -590,3 +590,36 @@ body {
 .hidden {
   display: none !important;
 }
+
+.timeline-bar {
+    width: 100%;
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    display: flex;
+    overflow: hidden;
+    margin: 8px 0;
+}
+.timeline-bar .timeline-left,
+.timeline-bar .timeline-right {
+    height: 100%;
+    transition: background 0.3s;
+}
+.timeline-bar .timeline-left {
+    width: 50%;
+    background: #e0e0e0;
+}
+.timeline-bar .timeline-right {
+    width: 50%;
+    background: #e0e0e0;
+}
+.timeline-bar.checkin-done .timeline-left {
+    background: #4caf50; /* xanh */
+}
+.timeline-bar.checkin-done .timeline-right {
+    background: #e0e0e0;
+}
+.timeline-bar.checkout-done .timeline-left,
+.timeline-bar.checkout-done .timeline-right {
+    background: #4caf50; /* xanh */
+}
