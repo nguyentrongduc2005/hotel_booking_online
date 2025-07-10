@@ -40,7 +40,7 @@ class PopUpModel
 
         if (!password_verify($payload["pass_old"], $user["pass"]))
             return false;
-        $passNew = password_hash($$payload["pass_new"], PASSWORD_DEFAULT);
+        $passNew = password_hash($payload["pass_new"], PASSWORD_DEFAULT);
         $row = db::update('user', [
 
             "pass" => $passNew
