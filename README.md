@@ -87,6 +87,10 @@ private $password = '';
 **Tài khoản mặc định:**
 
 ```
+Admin
+Username: minhtld1451@ut.edu.vn
+Password: 123
+User
 Username: minhtld1451@ut.edu.vn
 Password: 123
 ```
@@ -95,8 +99,12 @@ Password: 123
 
 ## 👨‍💻 Tác giả
 
-- **NAME** 
-- **GitHub:** [(https://github.com/yourusername)](https://github.com/nguyentrongduc2005/hotel_booking_online.git)
+| Công nghệ  | Mô tả                             |
+|------------|-----------------------------------|
+| PHP        | Xử lý logic backend               |
+| MySQL      | Lưu trữ và truy vấn dữ liệu       |
+| HTML/CSS   | Tạo giao diện người dùng          |
+| JavaScript | Tương tác client (form, filter...)|
 
 ---
 
