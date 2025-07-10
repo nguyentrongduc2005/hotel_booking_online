@@ -115,6 +115,14 @@ class AdminBookingModel
             $sql .= " AND {$table}.check_out <= :check_out";
             $params['check_out'] = $filters['check_out'];
         }
+        if (!empty($filters['status_not']) && is_string($filters['status_not'])) {
+            $sql .= " AND {$table}.status != :status_not";
+            $params['status_not'] = $filters['status_not'];
+        } elseif (!empty($filters['status_in']) && is_array($filters['status_in'])) {
+            $placeholders = implode(',', array_fill(0, count($filters['status_in']), '?'));
+            $sql .= " AND {$table}.status IN ({$placeholders})";
+            $params = array_merge($params, $filters['status_in']);
+        }   
 
         $sql .= " ORDER BY {$table}.created_at DESC";
 
