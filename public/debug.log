@@ -1,0 +1,81 @@
+2025-07-10T10:22:45+02:00
+Array
+(
+    [image] => Array
+        (
+            [name] => aaa3.png
+            [type] => image/png
+            [tmp_name] => C:\xampp\tmp\php3E0A.tmp
+            [error] => 0
+            [size] => 6079050
+        )
+
+)
+2025-07-10T10:26:07+02:00
+Array
+(
+    [image] => Array
+        (
+            [name] => aaa3.png
+            [type] => image/png
+            [tmp_name] => C:\xampp\tmp\php556D.tmp
+            [error] => 0
+            [size] => 6079050
+        )
+
+)
+2025-07-10T10:31:37+02:00
+Array
+(
+    [image] => Array
+        (
+            [name] => 486322276_968231468857996_1738716742621181108_n.png
+            [type] => image/png
+            [tmp_name] => C:\xampp\tmp\php5F97.tmp
+            [error] => 0
+            [size] => 5723610
+        )
+
+)
+2025-07-10T10:52:33+02:00
+Array
+(
+    [image] => Array
+        (
+            [name] => Ảnh chụp màn hình 2025-03-22 113936.png
+            [full_path] => Ảnh chụp màn hình 2025-03-22 113936.png
+            [type] => image/png
+            [tmp_name] => D:\XAMPP\tmp\php86F3.tmp
+            [error] => 0
+            [size] => 29856
+        )
+
+)
+2025-07-10T10:56:36+02:00
+Array
+(
+    [image] => Array
+        (
+            [name] => Ảnh chụp màn hình 2025-03-22 113936.png
+            [full_path] => Ảnh chụp màn hình 2025-03-22 113936.png
+            [type] => image/png
+            [tmp_name] => D:\XAMPP\tmp\php3CA9.tmp
+            [error] => 0
+            [size] => 29856
+        )
+
+)
+2025-07-10T11:00:38+02:00
+Array
+(
+    [image] => Array
+        (
+            [name] => Ảnh chụp màn hình 2025-03-22 113936.png
+            [full_path] => Ảnh chụp màn hình 2025-03-22 113936.png
+            [type] => image/png
+            [tmp_name] => D:\XAMPP\tmp\phpEF91.tmp
+            [error] => 0
+            [size] => 29856
+        )
+
+)
