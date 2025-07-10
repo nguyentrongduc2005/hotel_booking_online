@@ -35,7 +35,7 @@ class AuthenController extends Controller
     {
         $email = $req->post()['email'];
         $password = $req->post()['password'];
-        $user =  $this->model->findUserbyEmail($email);
+        $user = $this->model->findUserbyEmail($email);
         //xác thực tài khoản mật khẩu
         if (!$user) {
             $this->renderPartial('auth/login', ['message' => 'Invalid email or password.', 'email' => '', "password" => '']);
@@ -73,7 +73,7 @@ class AuthenController extends Controller
     function regisHandler($req, $res)
     {
         // xác thực các thông tin chưa tồn tại trong db
-        $user  = $req->post();
+        $user = $req->post();
 
         if ($this->model->findUserbyEmail($user['email'])) {
             $user['email'] = "";
@@ -112,7 +112,7 @@ class AuthenController extends Controller
         setcookie("user_id", $value, time() + 86400 * 7, "/", "", false, true);
 
         $user['message'] = "Register successful. Redirecting... ";
-        $user['access'] =  $this->getConfig('basePath');
+        $user['access'] = $this->getConfig('basePath');
         $this->renderPartial('auth/regis', $user);
     }
 
