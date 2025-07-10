@@ -35,36 +35,37 @@ class AdminServicesController extends Controller
 
     // Thêm
     public function create(Request $req, $res)
-   {
-    // Dữ liệu text từ form
-    $data = [
-        'name' => $req->post('name'),
-        'description' => $req->post('description'),
-    ];
+    {
+        $data = [
+            'name' => $req->post('name'),
+            'description' => $req->post('description'),
+        ];
 
-    // Xử lý file ảnh
-    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-        $uploadDir = 'uploads/services/';
-        if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0755, true);
+        // Xử lý file ảnh
+        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            $uploadDir = 'public/assets/img/service/';
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0755, true);
+            }
+
+            $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+            $fileName = uniqid('service_') . '.' . $ext;
+            $targetPath = $uploadDir . $fileName;
+
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
+                // Lưu path public để show lên web
+                $data['Path_img'] = '/img/service/' . $fileName;
+            }
         }
 
-        $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-        $fileName = uniqid('service_') . '.' . $ext;
-        $targetPath = $uploadDir . $fileName;
+        $success = $this->model->addService($data);
 
-        if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
-            $data['Path_img'] = $targetPath;
+        if ($success) {
+            // Trả về JSON thay vì redirect
+            return $res->json(['success' => true]);
         }
-    }
 
-    $success = $this->model->addService($data);
-
-    if ($success) {
-        return $res->redirect('services'); 
-    }
-
-    return $res->json(['error' => 'Thêm dịch vụ thất bại'], 400);
+        return $res->json(['error' => 'Thêm dịch vụ thất bại'], 400);
     }
 
 
@@ -84,15 +85,15 @@ class AdminServicesController extends Controller
 
             // Nếu tick xóa ảnh
             if ($req->post('delete_image')) {
-                if ($oldImg && file_exists($oldImg)) {
-                    @unlink($oldImg);
+                if ($oldImg && file_exists('public/assets' . $oldImg)) {
+                    @unlink('public/assets' . $oldImg);
                 }
                 $data['Path_img'] = null;
             }
 
             // Nếu upload ảnh mới thì thay thế ảnh cũ
             if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-                $uploadDir = 'uploads/services/';
+                $uploadDir = 'public/assets/img/service/';
                 if (!is_dir($uploadDir)) {
                     mkdir($uploadDir, 0755, true);
                 }
@@ -101,10 +102,10 @@ class AdminServicesController extends Controller
                 $targetPath = $uploadDir . $fileName;
                 if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
                     // Xóa file cũ nếu có
-                    if ($oldImg && file_exists($oldImg)) {
-                        @unlink($oldImg);
+                    if ($oldImg && file_exists('public/assets' . $oldImg)) {
+                        @unlink('public/assets' . $oldImg);
                     }
-                    $data['Path_img'] = $targetPath;
+                    $data['Path_img'] = '/img/service/' . $fileName;
                 }
             }
 
@@ -128,7 +129,7 @@ class AdminServicesController extends Controller
         $success = $this->model->deleteService($id);
 
         if ($success) {
-            return $res->json(['success' => true, 'message' => 'Xóa dịch vụ thành công']);
+            return $res->json(['success' => true, 'message' => 'Xóa dịch vụ thành công'])->send();
         }
 
         return $res->json(['error' => 'Xoá thất bại'], 400)->send();
