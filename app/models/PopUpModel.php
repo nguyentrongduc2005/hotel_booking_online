@@ -81,6 +81,7 @@ class PopUpModel
                 INNER JOIN room ON historybooking.id_room = room.id_room
                 WHERE (historybooking.status = 'completed' OR historybooking.status = 'cancelled') 
                 AND $condition";
+
         $data = db::getAll($sql, $filter);
         return $data ?? [];
     }

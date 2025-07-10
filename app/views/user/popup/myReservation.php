@@ -79,11 +79,11 @@
             </div>
             <div class="main">
                 <?php if (!$isLoggedIn): ?>
-                    <form action="your-target-page.php" method="GET" class="search-form" id="search-form">
+                    <form action="" method="POST" class="search-form" id="search-form">
                         <div class="search-bar custom-search">
                             <img src="<?= $this->configs->config['pathAssets'] ?>/icon/find.svg" alt="Search" id="find-btn"
                                 style="cursor: pointer;" />
-                            <input type="text" id="search-input" name="citizenId"
+                            <input type="text" id="search-input" name="cccd"
                                 placeholder="Enter Citizen ID to find your reservation" required />
                             <div class="clear-btn" id="clear-btn">
                                 <img src="<?= $this->configs->config['pathAssets'] ?>/icon/x.svg" alt="Clear" />

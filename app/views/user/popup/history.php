@@ -79,46 +79,46 @@
             </div>
             <div class="main">
                 <?php if (!$isLoggedIn): ?>
-                    <form action="your-target-page.php" method="GET" class="search-form" id="search-form">
-                        <div class="search-bar custom-search">
-                            <img src="<?= $this->configs->config['pathAssets'] ?>/icon/find.svg" alt="Search" id="find-btn"
-                                style="cursor: pointer;" />
-                            <input type="text" id="search-input" name="citizenId"
-                                placeholder="Enter Citizen ID to find your reservation" required />
-                            <div class="clear-btn" id="clear-btn">
-                                <img src="<?= $this->configs->config['pathAssets'] ?>/icon/x.svg" alt="Clear" />
-                            </div>
+                <form action="" method="POST" class="search-form" id="search-form">
+                    <div class="search-bar custom-search">
+                        <img src="<?= $this->configs->config['pathAssets'] ?>/icon/find.svg" alt="Search" id="find-btn"
+                            style="cursor: pointer;" />
+                        <input type="text" id="search-input" name="cccd"
+                            placeholder="Enter Citizen ID to find your reservation" required />
+                        <div class="clear-btn" id="clear-btn">
+                            <img src="<?= $this->configs->config['pathAssets'] ?>/icon/x.svg" alt="Clear" />
                         </div>
-                    </form>
+                    </div>
+                </form>
                 <?php endif; ?>
                 <?php if (!empty($history)): ?>
-                    <?php foreach ($history as $booking): ?>
-                        <div class="card">
-                            <div class="card-left">
-                                <div class="card-row">
-                                    <div class="hotel-name">
-                                        <?= htmlspecialchars($booking['name'] ?? 'N/A') ?>
-                                    </div>
-                                </div>
-                                <div class="transaction-line">
-                                    Booking ID:
-                                    <?= htmlspecialchars($booking['id_history'] ?? '-') ?>
-                                    / Room:
-                                    <?= htmlspecialchars($booking['slug'] ?? '-') ?>
-                                </div>
-                                <div class="transaction-line">
-                                    <?= isset($booking['check_in']) && isset($booking['check_out'])
-                                        ? date('d/m/Y', strtotime($booking['check_in'])) . ' - ' . date('d/m/Y', strtotime($booking['check_out']))
-                                        : '' ?>
-                                </div>
-                            </div>
-                            <div class="status <?= strtolower($booking['status'] ?? 'completed') ?>">
-                                <?= htmlspecialchars($booking['status'] ?? 'Completed') ?>
+                <?php foreach ($history as $booking): ?>
+                <div class="card">
+                    <div class="card-left">
+                        <div class="card-row">
+                            <div class="hotel-name">
+                                <?= htmlspecialchars($booking['name'] ?? 'N/A') ?>
                             </div>
                         </div>
-                    <?php endforeach; ?>
+                        <div class="transaction-line">
+                            Booking ID:
+                            <?= htmlspecialchars($booking['id_history'] ?? '-') ?>
+                            / Room:
+                            <?= htmlspecialchars($booking['slug'] ?? '-') ?>
+                        </div>
+                        <div class="transaction-line">
+                            <?= isset($booking['check_in']) && isset($booking['check_out'])
+                                        ? date('d/m/Y', strtotime($booking['check_in'])) . ' - ' . date('d/m/Y', strtotime($booking['check_out']))
+                                        : '' ?>
+                        </div>
+                    </div>
+                    <div class="status <?= strtolower($booking['status'] ?? 'completed') ?>">
+                        <?= htmlspecialchars($booking['status'] ?? 'Completed') ?>
+                    </div>
+                </div>
+                <?php endforeach; ?>
                 <?php else: ?>
-                    <div style="padding: 20px; color: #888;">No transactions found.</div>
+                <div style="padding: 20px; color: #888;">No transactions found.</div>
                 <?php endif; ?>
             </div>
         </div>
