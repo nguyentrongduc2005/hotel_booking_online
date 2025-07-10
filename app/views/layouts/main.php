@@ -22,7 +22,7 @@
     $isHome = $_SERVER['REQUEST_URI'] === '/' || $_SERVER['REQUEST_URI'] === '/hotel_booking_online/public/';
     if ($isHome):
     ?>
-        <div id="preloader" style="background: #111;">
+        <!-- <div id="preloader" style="background: #111;">
             <div class="preloader-content">
                 <div class="preloader-left-text preloader-animate-text">Welcome to<br> our Hotel</div>
                 <div class="preloader-bar-wrap">
@@ -30,7 +30,7 @@
                 </div>
                 <div class="preloader-right-text preloader-animate-text">Diamond <br> Hotel</div>
             </div>
-        </div>
+        </div> -->
     <?php endif; ?>
 
     <div id="khung">
@@ -38,7 +38,7 @@
         <div id="main">
             <?= $content; ?>
         </div>
-
+        <?= $this->renderPartial('layouts/footer'); ?>
     </div>
     <script src="<?= $this->configs->config['pathAssets'] ?>js/homepage.js?v=<?= time() ?>"></script>
     <?php if (isset($_SESSION["timer"])) {
