@@ -43,7 +43,24 @@
                   <td><?= htmlspecialchars($tran['user']['email'] ?? '') ?></td>
                   <td><?= htmlspecialchars($tran['total_amount'] ?? '') ?></td>
                   <td><?= htmlspecialchars($tran['payment_method'] ?? '') ?></td>
-                  <td><?= htmlspecialchars($tran['payment_status'] ?? '') ?></td>
+                  <td>
+                    <?php
+                      $status = $tran['payment_status'] ?? '';
+                      if ($status === 'pending') {
+                        echo '<p style="color: gray;">Pending</p>';
+                      } elseif ($status === 'refunded') {
+                        echo '<p style="color: orange;">Refunded</p>';
+                      } elseif ($status === 'cancelled') {
+                        echo '<p style="color: red;">Cancelled</p>';
+                      } elseif ($status === 'completed') {
+                        echo '<p style="color: darkgreen;">Completed</p>';
+                      } elseif ($status == 'failed') {
+                        echo '<p style="color: red;">Failed</p>';
+                      } else {
+                        echo htmlspecialchars($status);
+                      }
+                    ?>
+                  </td>
                 </tr>
               <?php endif; ?>
             <?php endforeach; ?>
