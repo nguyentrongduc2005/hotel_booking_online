@@ -359,16 +359,31 @@ input[type=range]::-webkit-slider-thumb:hover {
     opacity: 0;
   }
 }
-
-/* Viên thuốc phóng to và làm rõ background */
 .preloader-capsule.animate-out {
-  animation: capsule-scale-full 0.9s cubic-bezier(.4,0,.2,1) forwards;
+  animation: capsule-shrink-fade 0.9s cubic-bezier(.4,0,.2,1) forwards;
   z-index: 10;
 }
-@keyframes capsule-scale-full {
-  to {
-    transform: scale(12, 12);
+
+@keyframes capsule-shrink-fade {
+  0% {
+    transform: scale(1, 1);
     opacity: 1;
+  }
+  30% {
+    opacity: 0.3;
+    transform: scale(0.7, 0.7);
+  }
+  60% {
+    opacity: 0;
+    transform: scale(0.7, 0.7);
+  }
+  80% {
+    opacity: 0;
+    transform: scale(0.7, 0.7);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.3, 0.3);
   }
 }
 
@@ -395,4 +410,19 @@ input[type=range]::-webkit-slider-thumb:hover {
 
 #preloader.animate-out {
   animation: mask-fade-out 0.8s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes mask-fade-out {
+  0% {
+    opacity: 1;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    mask-image: radial-gradient(rectangle at 50% 50%, transparent 60%, black 100%);
+    -webkit-mask-image: radial-gradient(rectangle at 50% 50%, transparent 60%, black 100%);
+    opacity: 0;
+  }
 }
