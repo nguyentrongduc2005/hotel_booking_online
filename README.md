@@ -99,12 +99,9 @@ Password: 123
 
 ## 👨‍💻 Tác giả
 
-| Công nghệ  | Mô tả                             |
-|------------|-----------------------------------|
-| PHP        | Xử lý logic backend               |
-| MySQL      | Lưu trữ và truy vấn dữ liệu       |
-| HTML/CSS   | Tạo giao diện người dùng          |
-| JavaScript | Tương tác client (form, filter...)|
+# Our Team
+
+
 
 ---
 
