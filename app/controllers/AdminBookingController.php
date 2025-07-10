@@ -30,14 +30,14 @@ class AdminBookingController extends Controller
         ];
 
         $bookings = $this->model->bookingFilter('booking', $filters);
-        echo '<pre>';
-        print_r($bookings);
-        echo '</pre>';
+        // echo '<pre>';
+        // print_r($bookings);
+        // echo '</pre>';
 
-        // return $this->render('allBookings', [
-        //     'bookings' => $bookings,
-        //     'filters' => $filters
-        // ]);
+        return $this->render('allBookings', [
+            'bookings' => $bookings,
+            'filters' => $filters
+        ]);
     }
 
     // Hiển thị danh sách lịch sử booking
@@ -53,13 +53,13 @@ class AdminBookingController extends Controller
         ];
 
         $historyBookings = $this->model->bookingFilter('historybooking', $filters);
-        echo '<pre>';
-        print_r($historyBookings);  
-        echo '</pre>';
+        // echo '<pre>';
+        // print_r($historyBookings);  
+        // echo '</pre>';
 
-        // return $this->render('historyBookings', [
-        //     'historyBookings' =>$historyBookings,
-        //     'filters' => $filters
-        // ]);
+        return $this->render('historyBookings', [
+            'historyBookings' =>$historyBookings,
+            'filters' => $filters
+        ]);
     }
 }
