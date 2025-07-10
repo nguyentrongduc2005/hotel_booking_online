@@ -22,7 +22,7 @@
         <thead>
           <tr>
             <th>Booking ID</th>
-            <th>Guest Name</th>
+            <th>Name</th>
             <th>Room ID</th>
             <th>Room</th>
             <th>Check-in</th>
@@ -31,11 +31,16 @@
           </tr>
         </thead>
         <tbody>
-          <?php if (!empty($records)): ?>
-            <?php foreach ($records as $booking): ?>
+          <?php if (!empty($historyBookings)): ?>
+            <?php foreach ($historyBookings as $booking): ?>
               <tr>
-                <td><?= htmlspecialchars($booking['id_booking'] ?? '') ?></td>
-                <td><?= htmlspecialchars($booking['guest_name'] ?? '') ?></td>
+                <td><?= htmlspecialchars($booking['id_booking'] ?? $booking['id_history'] ?? '') ?></td>
+                <td><?php
+                  $name = $booking['user_name'] ?? null;
+                  if (empty($name)) $name = $booking['guest_name'] ?? '';
+                  if (empty($name) && !empty($booking['user_name'])) $name = $booking['user_name'];
+                  echo htmlspecialchars($name);
+                ?></td>
                 <td><?= htmlspecialchars($booking['id_room'] ?? '') ?></td>
                 <td><?= htmlspecialchars($booking['room_name'] ?? '') ?></td>
                 <td><?= htmlspecialchars($booking['check_in'] ?? $booking['checkin'] ?? '') ?></td>
@@ -44,13 +49,13 @@
                   <?php
                     $status = $booking['status'] ?? '';
                     if ($status === 'pending') {
-                      echo '<p style="color: gray;">Chưa xác nhận</p>';
+                      echo '<p style="color: gray;">Pending</p>';
                     } elseif ($status === 'confirmed') {
-                      echo '<p style="color: green;">Đã xác nhận</p>';
+                      echo '<p style="color: green;">Confirmed</p>';
                     } elseif ($status === 'cancelled') {
-                      echo '<p style="color: red;">Đã hủy</p>';
+                      echo '<p style="color: red;">Cancelled</p>';
                     } elseif ($status === 'completed') {
-                      echo '<p style="color: darkgreen;">Đã hoàn thành</p>';
+                      echo '<p style="color: darkgreen;">Completed</p>';
                     } else {
                       echo htmlspecialchars($status);
                     }
@@ -94,7 +99,7 @@
         <input type="date" name="check_out" value="<?= htmlspecialchars($_GET['check_out'] ?? '') ?>">
       </div>
       <div style="margin-top: 16px; text-align: center;">
-        <button type="submit" class="btn btn-filter">Lọc</button>
+        <button type="submit" class="btn btn-filter">Filter</button>
       </div>
     </form>
   </div>

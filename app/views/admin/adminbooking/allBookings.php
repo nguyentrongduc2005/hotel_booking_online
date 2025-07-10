@@ -57,13 +57,13 @@
                     $status = $booking['status'] ?? '';
 
                     if ($status === 'pending') {
-                      echo '<p style="color: gray;">Chưa xác nhận</p>';
+                      echo '<p style="color: gray;">Pending</p>';
                     } elseif ($status === 'confirmed') {
-                      echo '<p style="color: green;">Đã xác nhận</p>';
+                      echo '<p style="color: green;">Confirmed</p>';
                     } elseif ($status === 'cancelled') {
-                      echo '<p style="color: red;">Đã hủy</p>';
+                      echo '<p style="color: red;">Cancelled</p>';
                     } elseif ($status === 'completed') {
-                      echo '<p style="color: darkgreen;">Đã hoàn thành</p>';
+                      echo '<p style="color: darkgreen;">Completed</p>';
                     } elseif ($statusCheckout === 'done') {
                       echo htmlspecialchars($status);
                     } else {

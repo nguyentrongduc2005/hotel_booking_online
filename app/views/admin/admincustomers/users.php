@@ -8,7 +8,7 @@
             <form method="GET" action="<?= $this->configs->config['basePath'] ?? '' ?>/admin/customers/users" class="dashboard-search-form">
                 <div class="search-bar-wrapper">
                     <span class="search-icon"><i class="fa fa-search"></i></span>
-                    <input type="text" name="search" placeholder="Tìm kiếm theo tên user..." value="<?= htmlspecialchars($search ?? '') ?>" class="dashboard-search-input">
+                    <input type="text" name="search" placeholder="Search by user name..." value="<?= htmlspecialchars($search ?? '') ?>" class="dashboard-search-input">
                 </div>
             </form>
         </div>
@@ -57,7 +57,7 @@
 <script>
 window.BASE_PATH = '<?= $this->configs->config["basePath"] ?? "" ?>';
 function deleteUser(userId) {
-    if (confirm('Bạn có chắc muốn xóa user này?')) {
+    if (confirm('Are you sure to delete this user?')) {
         fetch(`${window.BASE_PATH}/admin/customers/users/delete/${userId}`, {
             method: 'POST',
             headers: {
@@ -76,7 +76,7 @@ function deleteUser(userId) {
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('Có lỗi xảy ra khi xóa user.');
+            alert('Error :<');
         });
     }
 }

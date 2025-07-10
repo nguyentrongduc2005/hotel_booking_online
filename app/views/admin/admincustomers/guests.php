@@ -9,7 +9,7 @@
                 class="dashboard-search-form">
                 <div class="search-bar-wrapper">
                     <span class="search-icon"><i class="fa fa-search"></i></span>
-                    <input type="text" name="search" placeholder="Tìm kiếm theo tên khách..."
+                    <input type="text" name="search" placeholder="Search by guest name..."
                         value="<?= htmlspecialchars($search ?? '') ?>" class="dashboard-search-input">
                 </div>
             </form>
@@ -61,7 +61,7 @@
     window.BASE_PATH = '<?= $this->configs->config["basePath"] ?? "" ?>';
 
     function deleteGuest(guestId) {
-        if (confirm('Bạn có chắc muốn xóa khách này?')) {
+        if (confirm('Are you sure to delete this guest?')) {
             fetch(`${window.BASE_PATH}/admin/customers/guests/delete/${guestId}`, {
                     method: 'POST',
                     headers: {
@@ -79,7 +79,7 @@
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('Có lỗi xảy ra khi xóa khách.');
+                    alert('Error :< ');
                 });
         }
     }
