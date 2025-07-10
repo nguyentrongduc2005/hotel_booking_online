@@ -121,3 +121,29 @@ Array
         )
 
 )
+2025-07-10T12:53:09+02:00
+Array
+(
+    [image] => Array
+        (
+            [name] => aaa2.png
+            [type] => image/png
+            [tmp_name] => C:\xampp\tmp\phpF1C3.tmp
+            [error] => 0
+            [size] => 4971380
+        )
+
+)
+2025-07-10T15:03:56+02:00
+Array
+(
+    [image] => Array
+        (
+            [name] => 20241218_110719.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpAEF0.tmp
+            [error] => 0
+            [size] => 2818802
+        )
+
+)
