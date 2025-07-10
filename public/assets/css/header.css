@@ -223,7 +223,7 @@
 /* Popup Login */
 .login-popup {
   position: fixed;
-  top: 70px; right: 30px;
+  top: 70px; right: 7%;
   background: rgba(0,0,0,0.2);
   z-index: 2000;
   display: flex;
