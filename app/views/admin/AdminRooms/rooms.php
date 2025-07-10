@@ -444,4 +444,96 @@
         });
     });
     window.BASE_PATH = '<?= $this->configs->config["basePath"] ?? "" ?>';
+
+    // --- BẮT ĐẦU: Logic disable/enable nút submit khi không thay đổi nội dung ---
+    const editRoomForm = document.getElementById('editRoomForm');
+    const editSubmitBtn = editRoomForm.querySelector('button[type="submit"]');
+    let originalEditData = {};
+
+    function getEditFormData() {
+        // Lấy dữ liệu hiện tại của form (không lấy ảnh mới)
+        return {
+            id_room: document.getElementById('edit_id_room').value,
+            slug: document.getElementById('edit_slug').value,
+            name: document.getElementById('edit_name').value,
+            description: document.getElementById('edit_description').value,
+            amount_bed: document.getElementById('edit_amount_bed').value,
+            price: document.getElementById('edit_price').value,
+            status: document.getElementById('edit_status').value,
+            area: document.getElementById('edit_area').value,
+            capacity: document.getElementById('edit_capacity').value,
+            id_room_type: document.getElementById('edit_id_room_type').value,
+            amenities: Array.from(document.querySelectorAll('.edit-amenity:checked')).map(cb => cb.value).sort(),
+            // Không so sánh ảnh mới upload, chỉ so sánh tick xóa ảnh cũ
+            delete_images: Array.from(document.querySelectorAll('#edit-room-images input[type="checkbox"]:checked')).map(cb => cb.value).sort(),
+        };
+    }
+
+    function isEditFormChanged() {
+        const current = getEditFormData();
+        // So sánh từng trường
+        for (let key in originalEditData) {
+            if (Array.isArray(originalEditData[key])) {
+                if (originalEditData[key].join(',') !== (current[key] || []).join(',')) return true;
+            } else {
+                if ((originalEditData[key] || '') !== (current[key] || '')) return true;
+            }
+        }
+        return false;
+    }
+
+    function updateEditSubmitBtnState() {
+        if (isEditFormChanged()) {
+            editSubmitBtn.disabled = false;
+            editSubmitBtn.style.background = '#007bff';
+            editSubmitBtn.style.cursor = 'pointer';
+            editSubmitBtn.style.opacity = '1';
+        } else {
+            editSubmitBtn.disabled = true;
+            editSubmitBtn.style.background = '#ccc';
+            editSubmitBtn.style.cursor = 'not-allowed';
+            editSubmitBtn.style.opacity = '0.7';
+        }
+    }
+
+    // Gắn sự kiện cho tất cả input trong form
+    function attachEditFormEvents() {
+        editRoomForm.querySelectorAll('input, textarea, select').forEach(el => {
+            el.addEventListener('input', updateEditSubmitBtnState);
+            el.addEventListener('change', updateEditSubmitBtnState);
+        });
+        // Checkbox xóa ảnh cũ
+        document.getElementById('edit-room-images').addEventListener('change', updateEditSubmitBtnState);
+    }
+
+    // Gọi lại khi mở popup edit
+    const oldOpenEditRoomModal = openEditRoomModal;
+    openEditRoomModal = function(room) {
+        oldOpenEditRoomModal(room);
+        // Lưu dữ liệu gốc
+        originalEditData = {
+            id_room: document.getElementById('edit_id_room').value,
+            slug: document.getElementById('edit_slug').value,
+            name: document.getElementById('edit_name').value,
+            description: document.getElementById('edit_description').value,
+            amount_bed: document.getElementById('edit_amount_bed').value,
+            price: document.getElementById('edit_price').value,
+            status: document.getElementById('edit_status').value,
+            area: document.getElementById('edit_area').value,
+            capacity: document.getElementById('edit_capacity').value,
+            id_room_type: document.getElementById('edit_id_room_type').value,
+            amenities: (room.amenities ? room.amenities.map(String).sort() : []),
+            delete_images: [],
+        };
+        updateEditSubmitBtnState();
+        attachEditFormEvents();
+    }
+    // Khi load trang, disable submit edit
+    if (editSubmitBtn) {
+        editSubmitBtn.disabled = true;
+        editSubmitBtn.style.background = '#ccc';
+        editSubmitBtn.style.cursor = 'not-allowed';
+        editSubmitBtn.style.opacity = '0.7';
+    }
+    // --- KẾT THÚC: Logic disable/enable nút submit khi không thay đổi nội dung ---
 </script>

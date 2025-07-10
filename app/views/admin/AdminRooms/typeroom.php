@@ -238,4 +238,61 @@
         });
     }
     window.BASE_PATH = '<?= $this->configs->config["basePath"] ?? "" ?>';
+
+    // --- BẮT ĐẦU: Logic disable/enable nút submit khi không thay đổi nội dung (edit type room) ---
+    const editTypeRoomForm = document.getElementById('editTypeRoomForm');
+    const editTypeRoomSubmitBtn = editTypeRoomForm.querySelector('button[type="submit"]');
+    let originalTypeRoomData = {};
+
+    function getEditTypeRoomFormData() {
+        return {
+            id_type_room: document.getElementById('edit_id_type_room').value,
+            name_type_room: document.getElementById('edit_name_type_room').value,
+            description: document.getElementById('edit_description_type_room').value,
+        };
+    }
+    function isEditTypeRoomChanged() {
+        const current = getEditTypeRoomFormData();
+        for (let key in originalTypeRoomData) {
+            if ((originalTypeRoomData[key] || '') !== (current[key] || '')) return true;
+        }
+        return false;
+    }
+    function updateEditTypeRoomBtnState() {
+        if (isEditTypeRoomChanged()) {
+            editTypeRoomSubmitBtn.disabled = false;
+            editTypeRoomSubmitBtn.style.background = '#007bff';
+            editTypeRoomSubmitBtn.style.cursor = 'pointer';
+            editTypeRoomSubmitBtn.style.opacity = '1';
+        } else {
+            editTypeRoomSubmitBtn.disabled = true;
+            editTypeRoomSubmitBtn.style.background = '#ccc';
+            editTypeRoomSubmitBtn.style.cursor = 'not-allowed';
+            editTypeRoomSubmitBtn.style.opacity = '0.7';
+        }
+    }
+    function attachEditTypeRoomEvents() {
+        editTypeRoomForm.querySelectorAll('input, textarea').forEach(el => {
+            el.addEventListener('input', updateEditTypeRoomBtnState);
+            el.addEventListener('change', updateEditTypeRoomBtnState);
+        });
+    }
+    const oldOpenEditTypeRoomModal = openEditTypeRoomModal;
+    openEditTypeRoomModal = function(type) {
+        oldOpenEditTypeRoomModal(type);
+        originalTypeRoomData = {
+            id_type_room: document.getElementById('edit_id_type_room').value,
+            name_type_room: document.getElementById('edit_name_type_room').value,
+            description: document.getElementById('edit_description_type_room').value,
+        };
+        updateEditTypeRoomBtnState();
+        attachEditTypeRoomEvents();
+    }
+    if (editTypeRoomSubmitBtn) {
+        editTypeRoomSubmitBtn.disabled = true;
+        editTypeRoomSubmitBtn.style.background = '#ccc';
+        editTypeRoomSubmitBtn.style.cursor = 'not-allowed';
+        editTypeRoomSubmitBtn.style.opacity = '0.7';
+    }
+    // --- KẾT THÚC: Logic disable/enable nút submit khi không thay đổi nội dung (edit type room) ---
 </script>
