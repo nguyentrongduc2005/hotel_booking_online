@@ -249,5 +249,66 @@ function deleteService(id) {
         alert('Xóa dịch vụ thất bại! Vui lòng thử lại.');
     });
 }
+// --- BẮT ĐẦU: Logic disable/enable nút submit khi không thay đổi nội dung (edit service) ---
+const editServiceForm = document.getElementById('editServiceForm');
+const editServiceSubmitBtn = editServiceForm.querySelector('button[type="submit"]');
+let originalServiceData = {};
+
+function getEditServiceFormData() {
+    return {
+        service_id: document.getElementById('edit_service_id').value,
+        name: document.getElementById('edit_service_name').value,
+        description: document.getElementById('edit_service_description').value,
+        // Chỉ kiểm tra file mới nếu có chọn
+        image: document.getElementById('edit_service_image_input').value
+    };
+}
+function isEditServiceChanged() {
+    const current = getEditServiceFormData();
+    for (let key in originalServiceData) {
+        if ((originalServiceData[key] || '') !== (current[key] || '')) return true;
+    }
+    // Nếu chọn ảnh mới thì cũng cho phép submit
+    if (current.image && current.image.length > 0) return true;
+    return false;
+}
+function updateEditServiceBtnState() {
+    if (isEditServiceChanged()) {
+        editServiceSubmitBtn.disabled = false;
+        editServiceSubmitBtn.style.background = '#007bff';
+        editServiceSubmitBtn.style.cursor = 'pointer';
+        editServiceSubmitBtn.style.opacity = '1';
+    } else {
+        editServiceSubmitBtn.disabled = true;
+        editServiceSubmitBtn.style.background = '#ccc';
+        editServiceSubmitBtn.style.cursor = 'not-allowed';
+        editServiceSubmitBtn.style.opacity = '0.7';
+    }
+}
+function attachEditServiceEvents() {
+    editServiceForm.querySelectorAll('input, textarea').forEach(el => {
+        el.addEventListener('input', updateEditServiceBtnState);
+        el.addEventListener('change', updateEditServiceBtnState);
+    });
+}
+const oldOpenEditServiceModal = openEditServiceModal;
+openEditServiceModal = function(service) {
+    oldOpenEditServiceModal(service);
+    originalServiceData = {
+        service_id: document.getElementById('edit_service_id').value,
+        name: document.getElementById('edit_service_name').value,
+        description: document.getElementById('edit_service_description').value,
+        image: ''
+    };
+    updateEditServiceBtnState();
+    attachEditServiceEvents();
+}
+if (editServiceSubmitBtn) {
+    editServiceSubmitBtn.disabled = true;
+    editServiceSubmitBtn.style.background = '#ccc';
+    editServiceSubmitBtn.style.cursor = 'not-allowed';
+    editServiceSubmitBtn.style.opacity = '0.7';
+}
+// --- KẾT THÚC: Logic disable/enable nút submit khi không thay đổi nội dung (edit service) ---
 </script>
 

@@ -117,4 +117,61 @@
         });
     }
     window.BASE_PATH = '<?= $this->configs->config["basePath"] ?? "" ?>';
+
+    // --- BẮT ĐẦU: Logic disable/enable nút submit khi không thay đổi nội dung (edit amenity) ---
+    const editAmenityForm = document.getElementById('editAmenityForm');
+    const editAmenitySubmitBtn = editAmenityForm.querySelector('button[type="submit"]');
+    let originalAmenityData = {};
+
+    function getEditAmenityFormData() {
+        return {
+            amenity_id: document.getElementById('edit_amenity_id').value,
+            name: document.getElementById('edit_amenity_name').value,
+            description: document.getElementById('edit_amenity_description').value,
+        };
+    }
+    function isEditAmenityChanged() {
+        const current = getEditAmenityFormData();
+        for (let key in originalAmenityData) {
+            if ((originalAmenityData[key] || '') !== (current[key] || '')) return true;
+        }
+        return false;
+    }
+    function updateEditAmenityBtnState() {
+        if (isEditAmenityChanged()) {
+            editAmenitySubmitBtn.disabled = false;
+            editAmenitySubmitBtn.style.background = '#007bff';
+            editAmenitySubmitBtn.style.cursor = 'pointer';
+            editAmenitySubmitBtn.style.opacity = '1';
+        } else {
+            editAmenitySubmitBtn.disabled = true;
+            editAmenitySubmitBtn.style.background = '#ccc';
+            editAmenitySubmitBtn.style.cursor = 'not-allowed';
+            editAmenitySubmitBtn.style.opacity = '0.7';
+        }
+    }
+    function attachEditAmenityEvents() {
+        editAmenityForm.querySelectorAll('input, textarea').forEach(el => {
+            el.addEventListener('input', updateEditAmenityBtnState);
+            el.addEventListener('change', updateEditAmenityBtnState);
+        });
+    }
+    const oldOpenEditAmenityModal = openEditAmenityModal;
+    openEditAmenityModal = function(amenity) {
+        oldOpenEditAmenityModal(amenity);
+        originalAmenityData = {
+            amenity_id: document.getElementById('edit_amenity_id').value,
+            name: document.getElementById('edit_amenity_name').value,
+            description: document.getElementById('edit_amenity_description').value,
+        };
+        updateEditAmenityBtnState();
+        attachEditAmenityEvents();
+    }
+    if (editAmenitySubmitBtn) {
+        editAmenitySubmitBtn.disabled = true;
+        editAmenitySubmitBtn.style.background = '#ccc';
+        editAmenitySubmitBtn.style.cursor = 'not-allowed';
+        editAmenitySubmitBtn.style.opacity = '0.7';
+    }
+    // --- KẾT THÚC: Logic disable/enable nút submit khi không thay đổi nội dung (edit amenity) ---
 </script>
