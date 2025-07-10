@@ -29,7 +29,7 @@ html {
 }
 
 .service-img {
-  margin-left: 400px;
+  margin-left: 160px;
   display: flex;
   justify-content: flex-start;
 }
@@ -45,13 +45,14 @@ html {
   display: flex;
   gap: 25px;
   justify-content: center;
+  margin-right: 500px;
 }
 
 .ser-img-container img {
   width: 400px;
   height: 400px;
-  object-fit: cover;      /* luôn lấp đầy, không viền trắng, không méo */
-  object-position: center;/* crop chính giữa */
+  object-fit: cover;    
+  object-position: center;
   display: block;
 }
 
