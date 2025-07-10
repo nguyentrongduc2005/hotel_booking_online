@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // 1. Đổi class trạng thái
   document.querySelectorAll(".status").forEach((el) => {
     const status = el.dataset.status?.toLowerCase();
-    el.classList.remove("completed", "pending", "failed");
-    if (["completed", "pending", "failed"].includes(status)) {
+    el.classList.remove("completed", "pending", "failed", "refunded");
+    if (["completed", "pending", "failed", "refunded"].includes(status)) {
       el.classList.add(status);
     }
   });

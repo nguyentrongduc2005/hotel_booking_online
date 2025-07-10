@@ -69,7 +69,7 @@
                     </div>
                 </div>
                 <div class="sidebar-logout <?php if (!$isLoggedIn)
-                    echo 'hidden'; ?>">
+                                                echo 'hidden'; ?>">
                     <a href="<?= $this->configs->config['basePath'] ?>/logout" class="sidebar-logout">
                         <img src="<?= $this->configs->config['pathAssets'] ?>/icon/logout.svg" alt="Logout"
                             class="logout-icon" />
@@ -131,18 +131,9 @@
                                 </div>
 
                             </div>
-                            <form method="POST" action="<?= $this->configs->config['basePath'] ?>/reservation/cancel"
-                                style="display: inline">
-                                <input type="hidden" name="booking_id"
-                                    value="<?= htmlspecialchars($reservation['id_booking'] ?? '') ?>" />
-                                <button type="submit" class="cancel-btn"
-                                    data-booking-id="<?= htmlspecialchars($reservation['id_booking']) ?>">
-                                    Cancel
-                                </button>
-                            </form>
-
-
-
+                            <button class="cancel-btn" data-booking-id="<?= htmlspecialchars($reservation['id_booking']) ?>">
+                                Cancel
+                            </button>
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>
@@ -150,6 +141,8 @@
                 <?php endif; ?>
             </div>
         </div>
+        <!-- lấy basePath từ php  -->
+        <input type="hidden" id="basePath" value="<?= $this->getConfig('basePath') ?>">
         <script src="<?= $this->configs->config['pathAssets'] ?>/js/reservation.js?v=<?= time() ?>"></script>
 
 </body>

@@ -229,6 +229,11 @@ body {
   border: 1px solid #40b159;
   color: #2e7d32;
 }
+.status.refunded {
+  background-color: #e6f4ea;
+  border: 1px solid #40b159;
+  color: #2e7d32;
+}
 
 .status.pending {
   background-color: #fff8e1;
