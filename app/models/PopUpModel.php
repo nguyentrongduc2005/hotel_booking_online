@@ -91,13 +91,19 @@ class PopUpModel
         $row = db::update('booking', ["status" => "cancelled"], "id_booking = $id_booking");
         if (!$row)
             return false;
-        $sql = "SELECT booking.transaction_id FROM `booking` Where id_booking = :id";
+        $sql = "SELECT booking.transaction_id, booking.id_room, booking.check_in, booking.check_out,booking.status, booking.user_id, booking.guest_id FROM `booking` Where id_booking = :id";
         $booking = db::getOne($sql, ["id" => $id_booking]);
         if (!$booking)
             return false;
+
         $rowT = db::update('transaction', ["payment_status" => "refunded"], "transaction_id = {$booking['transaction_id']}");
         if (!$rowT)
             return false;
+        $rowD = db::delete("booking", "id_booking = $id_booking");
+        if (!$rowD) return false;
+        $idH = db::insert('historybooking', $booking);
+        if (!isset($idH)) return false;
+
         return true;
     }
 
