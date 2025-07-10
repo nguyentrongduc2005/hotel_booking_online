@@ -20,6 +20,10 @@
   background-color: #0C0B0E;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .welcome-hotel {
   display: flex;
   align-items: center;

@@ -71,49 +71,53 @@ class AdminServicesController extends Controller
     // Cập nhật
     public function update(Request $req, $res)
     {
-        $data = [
-            'id_service' => $req->param('id'),
-            'name' => $req->post('name'),
-            'description' => $req->post('description'),
-        ];
+        try {
+            $data = [
+                'id_service' => $req->param('id'),
+                'name' => $req->post('name'),
+                'description' => $req->post('description'),
+            ];
 
-        // Lấy service hiện tại để biết ảnh cũ
-        $service = $this->model->getServiceById($data['id_service']);
-        $oldImg = $service['Path_img'] ?? null;
+            // Lấy service hiện tại để biết ảnh cũ
+            $service = $this->model->getServiceById($data['id_service']);
+            $oldImg = $service['Path_img'] ?? null;
 
-        // Nếu tick xóa ảnh
-        if ($req->post('delete_image')) {
-            if ($oldImg && file_exists($oldImg)) {
-                @unlink($oldImg);
-            }
-            $data['Path_img'] = null;
-        }
-
-        // Nếu upload ảnh mới thì thay thế ảnh cũ
-        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-            $uploadDir = 'uploads/services/';
-            if (!is_dir($uploadDir)) {
-                mkdir($uploadDir, 0755, true);
-            }
-            $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-            $fileName = uniqid('service_') . '.' . $ext;
-            $targetPath = $uploadDir . $fileName;
-            if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
-                // Xóa file cũ nếu có
+            // Nếu tick xóa ảnh
+            if ($req->post('delete_image')) {
                 if ($oldImg && file_exists($oldImg)) {
                     @unlink($oldImg);
                 }
-                $data['Path_img'] = $targetPath;
+                $data['Path_img'] = null;
             }
+
+            // Nếu upload ảnh mới thì thay thế ảnh cũ
+            if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+                $uploadDir = 'uploads/services/';
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0755, true);
+                }
+                $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+                $fileName = uniqid('service_') . '.' . $ext;
+                $targetPath = $uploadDir . $fileName;
+                if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
+                    // Xóa file cũ nếu có
+                    if ($oldImg && file_exists($oldImg)) {
+                        @unlink($oldImg);
+                    }
+                    $data['Path_img'] = $targetPath;
+                }
+            }
+
+            $success = $this->model->editService($data);
+
+            if ($success) {
+                return $res->json(['success' => true]);
+            }
+
+            return $res->json(['error' => 'Cập nhật thất bại'], 400);
+        } catch (\Throwable $e) {
+            return $res->json(['error' => $e->getMessage()], 500);
         }
-
-        $success = $this->model->editService($data);
-
-        if ($success) {
-            return $res->json(['success' => true]);
-        }
-
-        return $res->json(['error' => 'Cập nhật thất bại'], 400);
     }
 
 
