@@ -26,17 +26,18 @@ class AdminBookingController extends Controller
             'id_room'    => $req->query('id_room'),
             'check_in'   => $req->query('check_in'),
             'check_out'  => $req->query('check_out'),
+            'status_not' => 'Cancelled',
         ];
 
         $bookings = $this->model->bookingFilter('booking', $filters);
-        // echo '<pre>';
-        // print_r($bookings);
-        // echo '</pre>';
+        echo '<pre>';
+        print_r($bookings);
+        echo '</pre>';
 
-        return $this->render('allBookings', [
-            'bookings' => $bookings,
-            'filters' => $filters
-        ]);
+        // return $this->render('allBookings', [
+        //     'bookings' => $bookings,
+        //     'filters' => $filters
+        // ]);
     }
 
     // Hiển thị danh sách lịch sử booking
@@ -48,16 +49,17 @@ class AdminBookingController extends Controller
             'id_room'    => $req->query('id_room'),
             'check_in'   => $req->query('check_in'),
             'check_out'  => $req->query('check_out'),
+            'status_in'  => ['Cancelled', 'Completed'],
         ];
 
         $historyBookings = $this->model->bookingFilter('historybooking', $filters);
-        // echo '<pre>';
-        // print_r($historyBookings);  
-        // echo '</pre>';
+        echo '<pre>';
+        print_r($historyBookings);  
+        echo '</pre>';
 
-        return $this->render('historyBookings', [
-            'historyBookings' =>$historyBookings,
-            'filters' => $filters
-        ]);
+        // return $this->render('historyBookings', [
+        //     'historyBookings' =>$historyBookings,
+        //     'filters' => $filters
+        // ]);
     }
 }
