@@ -378,7 +378,7 @@ input[type=range]::-webkit-slider-thumb:hover {
     transform: scale(0.7, 0.7);
   }
   80% {
-    opacity: 0;
+    opacity: 0.2;
     transform: scale(0.7, 0.7);
   }
   100% {
