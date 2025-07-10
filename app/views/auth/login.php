@@ -50,7 +50,7 @@ $password = $password ?? '';
   <?php endif; ?>
 
   <div class="login-form-row">
-    <label class="login-remember"><input type="checkbox" name="remember"> Remember me</label>
+    <label class="login-remember"><input type="checkbox" name="remember" id="remember"> Remember me</label>
     <a href="#" class="login-forgot">Forgot password?</a>
   </div>
   <button type="submit" class="login-submit-btn">Login</button>
@@ -70,6 +70,9 @@ $password = $password ?? '';
   <div class="login-right"
     style="background-image: url('<?= $this->configs->config['pathAssets'] ?>/img/bg-login.png')"></div>
 </div>
+<?php
+  
+?>
 
 <script src="<?= $this->configs->config['pathAssets'] ?>js/login.js?v=<?= time() ?>"></script>
 <script>
@@ -82,4 +85,6 @@ $password = $password ?? '';
       });
     }
   });
+
+
 </script>
