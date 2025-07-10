@@ -87,6 +87,10 @@ class AdminServicesModel
     // Xoá
     public function deleteService($id_service)
     {
+        $service = $this->getServiceById($id_service);
+        if ($service && $service['Path_img'] && file_exists($service['Path_img'])) {
+            @unlink($service['Path_img']);
+        }
         $row = db::delete('services', "id_service = $id_service");
         return $row ? true : false;
     }
