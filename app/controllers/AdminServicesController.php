@@ -54,7 +54,7 @@ class AdminServicesController extends Controller
 
             if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
                 // Lưu path public để show lên web
-                $data['Path_img'] = '/img/service/' . $fileName;
+                $data['Path_img'] = '/public/img/service/' . $fileName;
             }
         }
 
@@ -105,7 +105,7 @@ class AdminServicesController extends Controller
                     if ($oldImg && file_exists('public/assets' . $oldImg)) {
                         @unlink('public/assets' . $oldImg);
                     }
-                    $data['Path_img'] = '/img/service/' . $fileName;
+                    $data['Path_img'] = '/public/img/service/' . $fileName;
                 }
             }
 
