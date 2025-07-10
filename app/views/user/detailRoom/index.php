@@ -58,20 +58,4 @@
             </div>
         </div>
     </main>
-    <script>
-        let zoom = document.querySelector('.main-image');
-        let zoomImg = zoom.querySelector('img:nth-child(2)');
-        zoom.addEventListener('mousemove', (e) => {
-            let rect = zoom.getBoundingClientRect();
-            let positionPX = e.clientX - rect.left;
-            let positionPY = e.clientY - rect.top;
-            let positionX = 100 * positionPX / zoom.offsetWidth;
-            let positionY = 100 * positionPY / zoom.offsetHeight;
-            zoom.style.setProperty('--zoom-x', positionX + '%');
-            zoom.style.setProperty('--zoom-y', positionY + '%');
-            zoomImg.style.display = 'block';
-        });
-        zoom.addEventListener('mouseleave', () => {
-            zoomImg.style.display = 'none';
-        });
-    </script>
+    <script src="<?= $this->configs->config['pathAssets'] ?>js/detailRoom.js?v=<?= time() ?>"></script>
