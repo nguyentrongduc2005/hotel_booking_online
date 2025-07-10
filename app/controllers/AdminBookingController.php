@@ -49,7 +49,7 @@ class AdminBookingController extends Controller
             'id_room'    => $req->query('id_room'),
             'check_in'   => $req->query('check_in'),
             'check_out'  => $req->query('check_out'),
-            'status_in'  => ['Cancelled', 'Completed'],
+            'status_not'  => 'Pending',
         ];
 
         $historyBookings = $this->model->bookingFilter('historybooking', $filters);

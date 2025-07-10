@@ -59,7 +59,7 @@ class AdminBookingModel
             LEFT JOIN transaction ON historybooking.transaction_id = transaction.transaction_id
             LEFT JOIN user ON historybooking.user_id = user.user_id
             LEFT JOIN guest ON historybooking.guest_id = guest.guest_id
-            WHERE historybooking.status IN ('Cancelled', 'Completed')
+            WHERE historybooking.status != 'Pending'
             ORDER BY historybooking.created_at DESC";
 
     return db::getAll($sql);
@@ -119,11 +119,7 @@ class AdminBookingModel
             $sql .= " AND {$table}.status != :status_not";
             $params['status_not'] = $filters['status_not'];
         } 
-        if (!empty($filters['status_in']) && is_array($filters['status_in'])) {
-            $placeholders = implode(',', array_fill(0, count($filters['status_in']), '?'));
-            $sql .= " AND {$table}.status IN ({$placeholders})";
-            $params = array_merge($params, $filters['status_in']);
-        }   
+         
 
         $sql .= " ORDER BY {$table}.created_at DESC";
 
