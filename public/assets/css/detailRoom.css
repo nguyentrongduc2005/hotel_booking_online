@@ -25,7 +25,7 @@ main.room-details {
 h1 {
   color: white;
   font-family: SVN-Gilroy;
-  font-style: bold;
+  font-weight: bold;
 }
 
 h3 {
@@ -36,7 +36,7 @@ li {
   list-style: none;
   color: white;
   font-family: SVN-Gilroy;
-  font-style: normal;
+  font-weight: normal;
 }
 
 
