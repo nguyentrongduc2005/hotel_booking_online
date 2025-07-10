@@ -96,7 +96,7 @@ Password: 123
 ## 👨‍💻 Tác giả
 
 - **NAME** 
-- **GitHub:** [(https://github.com/yourusername)](https://github.com/nguyentrongduc2005/hotel_booking_online.git)
+- **GitHub:** [(https://github.com/DIAMOND HOTEL)](https://github.com/nguyentrongduc2005/hotel_booking_online.git)
 
 ---
 
