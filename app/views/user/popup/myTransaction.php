@@ -11,7 +11,6 @@
   <link rel="stylesheet"
     href="<?php echo $this->configs->config['pathAssets']; ?>css/transaction.css?v=<?php echo time(); ?>" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
-
 </head>
 
 <body>
