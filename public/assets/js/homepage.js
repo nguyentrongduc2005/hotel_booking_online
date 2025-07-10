@@ -98,3 +98,21 @@ document.addEventListener("DOMContentLoaded", function () {
   // Khởi tạo carousel
   updateCarousel();
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+  const sections = document.querySelectorAll('.section-animate');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      } else {
+        entry.target.classList.remove('visible');
+      }
+    });
+  }, {
+    threshold: 0.15 // 15% section vào viewport là hiện, ra ngoài thì ẩn
+  });
+
+  sections.forEach(section => observer.observe(section));
+});

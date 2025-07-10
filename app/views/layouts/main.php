@@ -22,15 +22,15 @@
     $isHome = $_SERVER['REQUEST_URI'] === '/' || $_SERVER['REQUEST_URI'] === '/hotel_booking_online/public/';
     if ($isHome):
     ?>
-        <div id="preloader">
-            <div class="preloader-capsule">
-                <span class="preloader-text">Diamond Hotel</span>
-                <div class="preloader-bar"></div>
+        <!-- <div id="preloader" style="background: #111;">
+            <div class="preloader-content">
+                <div class="preloader-left-text preloader-animate-text">Welcome to<br> our Hotel</div>
+                <div class="preloader-bar-wrap">
+                    <div class="preloader-bar"></div>
+                </div>
+                <div class="preloader-right-text preloader-animate-text">Diamond <br> Hotel</div>
             </div>
-            <div class="preloader-desc">
-                Bringing you comfort, joy, and memorable experiences at Diamond Hotel.
-            </div>
-        </div>
+        </div> -->
     <?php endif; ?>
 
     <div id="khung">
@@ -38,13 +38,7 @@
         <div id="main">
             <?= $content; ?>
         </div>
-
-        <!-- Hide footer on payment page (do bug quá) -->
-        <?php if (!str_contains($_SERVER['REQUEST_URI'], 'payment')): ?>
-            <div id="footer">
-                <?= $this->renderPartial('layouts/footer'); ?>
-            </div>
-        <?php endif; ?>
+        <?= $this->renderPartial('layouts/footer'); ?>
     </div>
     <script src="<?= $this->configs->config['pathAssets'] ?>js/homepage.js?v=<?= time() ?>"></script>
     <?php if (isset($_SESSION["timer"])) {
@@ -61,33 +55,30 @@
         }
     } ?>
     <script>
-        window.addEventListener('DOMContentLoaded', function() {
-            const bar = document.querySelector('.preloader-bar');
-            const capsule = document.querySelector('.preloader-capsule');
-            const text = document.querySelector('.preloader-text');
-            const desc = document.querySelector('.preloader-desc');
+        window.addEventListener('load', function() {
             const preloader = document.getElementById('preloader');
+            // Bắt đầu: text tách ra hai bên
+            setTimeout(() => {
+                if (preloader) preloader.classList.add('split');
+            }, 500);
 
-            if (bar) {
-                setTimeout(() => {
-                    bar.style.width = '50%';
-                }, 200);
+            // Khi gần hết loading: text thu về giữa và mờ dần
+            setTimeout(() => {
+                if (preloader) {
+                    preloader.classList.remove('split');
+                    preloader.classList.add('unsplit');
+                }
+            }, 1400);
 
-                setTimeout(() => {
-                    bar.style.width = '100%';
-                }, 1100);
+            // Sau 1.4s: fade out preloader
+            setTimeout(() => {
+                if (preloader) preloader.classList.add('fadeout');
+            }, 1600);
 
-                setTimeout(() => {
-                    if (capsule) capsule.classList.add('animate-out');
-                    if (text) text.classList.add('animate-out');
-                    if (desc) desc.classList.add('animate-out');
-                    if (preloader) preloader.classList.add('animate-out');
-                }, 2000);
-
-                setTimeout(() => {
-                    if (preloader) preloader.style.display = 'none';
-                }, 3200);
-            }
+            // Sau 2.2s: ẩn hẳn preloader
+            setTimeout(() => {
+                if (preloader) preloader.style.display = 'none';
+            }, 2400);
         });
     </script>
 
