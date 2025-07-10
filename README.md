@@ -87,6 +87,10 @@ private $password = '';
 **Tài khoản mặc định:**
 
 ```
+Admin
+Username: minhtld1451@ut.edu.vn
+Password: 123
+User
 Username: minhtld1451@ut.edu.vn
 Password: 123
 ```
