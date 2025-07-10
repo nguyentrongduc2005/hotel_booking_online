@@ -43,8 +43,8 @@ class AdminServicesController extends Controller
 
         // Xử lý file ảnh
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-            $uploadDir = 'public/assets/img/service/';
-            if (!is_dir($uploadDir)) {
+            $uploadDir = __DIR__ . '/../../public/assets/img/service/';
+        if (!is_dir($uploadDir)) {
                 mkdir($uploadDir, 0755, true);
             }
 
@@ -93,8 +93,8 @@ class AdminServicesController extends Controller
 
             // Nếu upload ảnh mới thì thay thế ảnh cũ
             if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-                $uploadDir = 'public/assets/img/service/';
-                if (!is_dir($uploadDir)) {
+                $uploadDir = __DIR__ . '/../../public/assets/img/service/';
+            if (!is_dir($uploadDir)) {
                     mkdir($uploadDir, 0755, true);
                 }
                 $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);

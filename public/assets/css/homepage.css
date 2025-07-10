@@ -478,6 +478,7 @@ html {
   height: 90vh;
   position: relative;
   overflow: hidden;
+  margin-top: 100px;
 }
 
 .testimonials-bg {

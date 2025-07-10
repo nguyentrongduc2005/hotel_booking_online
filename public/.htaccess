@@ -1,9 +1,0 @@
-RewriteEngine On
-
-# Nếu là file thật hoặc thư mục thật thì không rewrite (để Apache xử lý)
-RewriteCond %{REQUEST_FILENAME} -f [OR]
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^ - [L]
-
-# Các request còn lại sẽ vào index.php
-RewriteRule ^ index.php [QSA,L]

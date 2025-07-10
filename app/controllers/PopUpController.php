@@ -83,11 +83,13 @@ class PopUpController extends Controller
                 return;
             }
         }
-
         $this->renderPartial('user/popup/myReservation', [
             'reservations' => $data,
             'user' => $user
         ]);
+        // echo "<pre>";
+        // print_r($data);
+        // echo "</pre>";
     }
     function myReservationCancel($req, $res)
     {
@@ -103,19 +105,7 @@ class PopUpController extends Controller
         ];
         $res->json($data)->send();
     }
-    // function myReservationCancel($req, $res)
-    // {
-    //     // Đọc JSON từ body
-    //     $json = json_decode(file_get_contents('php://input'), true);
-    //     if (!isset($json['id_booking'])) {
-    //         throw new AppException("Bad request", 400, $this->getConfig('basePath') . "/user/reservations");
-    //     }
 
-    //     $id_booking = $json['id_booking'];
-    //     $check = $this->model->cancelBooking($id_booking);
-
-    //     return $res->json(["statusApi" => $check])->send();
-    // }
 
 
     function historyHandler($req, $res)
@@ -138,8 +128,6 @@ class PopUpController extends Controller
             'user' => $user
         ]);
     }
-
-
     function getTransaction($req, $res)
     {
         $data = [];

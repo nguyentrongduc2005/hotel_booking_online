@@ -35,15 +35,17 @@
 
           <?php if (!empty($transactions)): ?>
             <?php foreach ($transactions as $tran): ?>
-              <tr>
-                <td><?= htmlspecialchars($tran['transaction_id'] ?? '') ?></td>
-                <td><?= htmlspecialchars($tran['id_booking'] ?? '') ?></td>
-                <td><?= htmlspecialchars($tran['user']['name'] ?? '') ?></td>
-                <td><?= htmlspecialchars($tran['user']['email'] ?? '') ?></td>
-                <td><?= htmlspecialchars($tran['total_amount'] ?? '') ?></td>
-                <td><?= htmlspecialchars($tran['payment_method'] ?? '') ?></td>
-                <td><?= htmlspecialchars($tran['payment_status'] ?? '') ?></td>
-              </tr>
+              <?php if (!empty($tran['id_booking'])): ?>
+                <tr>
+                  <td><?= htmlspecialchars($tran['transaction_id'] ?? '') ?></td>
+                  <td><?= htmlspecialchars($tran['id_booking'] ?? '') ?></td>
+                  <td><?= htmlspecialchars($tran['user']['name'] ?? '') ?></td>
+                  <td><?= htmlspecialchars($tran['user']['email'] ?? '') ?></td>
+                  <td><?= htmlspecialchars($tran['total_amount'] ?? '') ?></td>
+                  <td><?= htmlspecialchars($tran['payment_method'] ?? '') ?></td>
+                  <td><?= htmlspecialchars($tran['payment_status'] ?? '') ?></td>
+                </tr>
+              <?php endif; ?>
             <?php endforeach; ?>
           <?php else: ?>
             <tr>
