@@ -297,6 +297,13 @@ backdrop-filter: blur(10px);
   font-size: 0.9rem;
   margin-bottom: 10px;
   font-weight: 300;
+  max-width: 370px;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 100px;
+  word-break: break-word;
+  overflow-y: hidden;
 }
 .room-meta {
   color: #e0e0e0;
