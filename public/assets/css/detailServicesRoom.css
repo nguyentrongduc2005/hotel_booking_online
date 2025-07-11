@@ -46,6 +46,11 @@
     font-display: swap;
 }
 
+
+img.ser-pic {
+    margin-bottom: 30px;
+}
+
 .ser-pic {
     width: 1100px;
     height: 500px;

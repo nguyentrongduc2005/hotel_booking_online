@@ -8,7 +8,7 @@
     <div class="dashboard-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
       <div class="dashboard-title">History Bookings</div>
       <div class="dashboard-actions" style="display: flex; gap: 8px; align-items: center;">
-        <!-- search bar căn phải nhỏ nhỏ vì t chỉnh width cho dài ra giống trong figma nhưng mà css qua lại nó vẫn lệch nên để nhỏ nha-->
+        <!-- search bar căn phải nhỏ nhỏ vì t chỉnh width cho dài ra giống trong figma nhưng mà css qua lại nó vẫn lệch nên để nhỏ nha hihi-->
         <form class="search-bar" method="get" style="display: flex; align-items: center;">
           <input type="text" class="search-bar" name="guest_name" placeholder="Search by guest name..." value="<?= htmlspecialchars($_GET['guest_name'] ?? '') ?>">
           <button type="submit" style="background: none; border: none; cursor: pointer; margin-left: 4px;"><i class="fa fa-search"></i></button>
