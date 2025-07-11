@@ -199,6 +199,21 @@ function onDateChange() {
 checkIn.addEventListener('change', onDateChange);
 checkOut.addEventListener('change', onDateChange);
 
+// Gắn sự kiện cho button search
+document.addEventListener('DOMContentLoaded', function() {
+  const searchBtn = document.querySelector('.search-btn');
+  if (searchBtn) {
+    searchBtn.addEventListener('click', function(e) {
+      // Lưu session khi click nút search
+      sessionStorage.setItem('lastSearch', JSON.stringify({
+        checkIn: checkIn.value,
+        checkOut: checkOut.value,
+        diffDays: getDiffDays(checkIn.value, checkOut.value),
+      }));
+    });
+  }
+});
+
 // Khi vào trang listroom, nếu chưa có lastSearch thì set mặc định hôm nay và ngày mai
 if (!sessionStorage.getItem('lastSearch')) {
   sessionStorage.setItem('lastSearch', JSON.stringify({
